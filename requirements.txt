@@ -1,0 +1,4 @@
+flask
+bayesian
+numpy
+matplotlib
