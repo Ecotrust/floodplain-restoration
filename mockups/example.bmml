@@ -1,0 +1,98 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1529" measuredH="842" mockupW="1235" mockupH="721">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::VerticalTabBar" x="301" y="230" w="1213" h="572" measuredW="200" measuredH="422" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <markup>true</markup>
+        <selectedIndex>1</selectedIndex>
+        <text>Step%201%3A%20Map%20your%20property%0AStep%202%3A%20Threats%20to%20Other%20Areas%0AStep%203%3A%20Cost%20Benefit%0AStep%204%3A%20Relationship%20to%20Protected%20Areas%0AStep%205%3A%20Biotic%20Conditions%0AStep%206%3A%20Abiotic%20Conditions%0AStep%207%3A%20Geomorphic%20Controls%0AStep%208%3A%20Floodplain%20Characteristics%0AStep%209%3A%20Pit%20Restorability%0AStep%2010%3A%20Property-level%20restorability%0AStep%2011%3A%20Pit%20to%20River%20Hydraulics%0AStep%2012%3A%20Final%20Assessment</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="294" y="121" w="1235" h="721" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Floodplain%20DST%0Ahttp%3A//gravel.ecotrust.org</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="294" y="190" w="1235" h="44" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <color>16777215</color>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::SubTitle" x="311" y="202" w="-1" h="-1" measuredW="423" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Floodplain%20Gravel%20Mine%20Restoration%20Tool</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="1405" y="202" w="-1" h="-1" measuredW="104" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Joe%20User%27s%20Profile</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Label" x="1266" y="202" w="-1" h="-1" measuredW="88" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Documentation</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::Webcam" x="1369" y="197" w="36" h="30" measuredW="177" measuredH="146" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::SubTitle" x="572" y="264" w="273" h="-1" measuredW="253" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Threats%20to%20downstream</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::SubTitle" x="572" y="291" w="329" h="-1" measuredW="316" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>or%20surrounding%20infrastructure</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Image" x="1085" y="249" w="370" h="517" measuredW="825" measuredH="1153" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <crop>0%2C0%2C1000%2C904</crop>
+        <src>http%3A//www.riverdesigngroup.com/images/gallery/Will1.jpg</src>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::ProgressBar" x="350" y="685" w="-1" h="-1" measuredW="100" measuredH="20" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <scrollBarValue>23</scrollBarValue>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Label" x="350" y="664" w="-1" h="-1" measuredW="53" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Progress</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="__group__" x="572" y="460" w="485" h="225" measuredW="485" measuredH="225" zOrder="12" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::FieldSet" x="0" y="0" w="485" h="225" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="47">
+          <controlProperties>
+            <text>Threats</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="37" y="54" w="-1" h="-1" measuredW="410" measuredH="105" zOrder="1" locked="false" isInGroup="47">
+          <controlProperties>
+            <text>%28%20%29%20Absolutely%20no%20threats%20exist%0A%28o%29%20Not%20likely%20to%20be%20any%20substantial%20threats%20or%20threats%20can%20be%20mitigated%0A%28%20%29%20Not%20sure%0A%28%20%29%20Likely%20to%20be%20substantial%20threats%0A%28%20%29%20Substaintial%20threats%20exist%20that%20can%20not%20be%20mitigated</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::Paragraph" x="572" y="341" w="485" h="112" measuredW="200" measuredH="80" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>12</size>
+        <text>Sand%20and%20gravel%20extraction%20is%20the%20most%20common%20form%20of%20mining%20in%20the%20state.%0ABecause%20sand%20and%20gravel%20is%20relatively%20inexpensive%20to%20mine%20but%20expensive%20to%0Atransport%2C%20most%20operations%20are%20located%20close%20to%20where%20the%20resource%20will%20be%20used.%0AAs%20a%20result%2C%20gravel%20pits%20have%20been%20developed%20in%20every%20county.</text>
+      </controlProperties>
+    </control>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::ButtonBar" x="901" y="670" w="-1" h="-1" measuredW="148" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>1</selectedIndex>
+        <text>%3C%3C%20Back%2C%20Next%20%3E%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::StickyNote" x="963" y="160" w="109" h="78" measuredW="109" measuredH="123" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>16</size>
+        <text>DRAFT</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
