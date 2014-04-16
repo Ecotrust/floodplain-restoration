@@ -101,7 +101,7 @@ def query_CPT():
         )
     )
     prob = net.query()[('restore', True)]
-    return jsonify({'restore': round(prob * 100, 2)})
+    return jsonify({'restore': round(prob * 100, 0)})
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(host="0.0.0.0", debug = True)
