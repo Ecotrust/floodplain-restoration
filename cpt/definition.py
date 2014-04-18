@@ -58,10 +58,9 @@ suitability = {
         'Practical property-level restorability': {
             'Continuing property access': None,
             'Fill material availability': None,
-            'Site accessability': None,
+            'Site accessibility': None,
         },
         'Pit restorability': {
-            'Pit importance': None,
             'Contamination': None,
             'Substrate': None,
             'Slope distance to river': None,
@@ -86,16 +85,18 @@ def expand(node, decision):
     if not node:
         return
     keys = node.keys()
-    print "\n" * 5
     print ','.join(keys + [decision])
     aa = itertools.product(*[LEVELS] * len(keys))
     for bb in aa:
         print ','.join([str(x) for x in bb] + ["50"])
+        
+    print "\n" * 5
 
     for key in keys:
         res = expand(node[key], key)
         if res:
             print res
+
 
 expand(suitability, 'Suitability')
 #import ipdb; ipdb.set_trace()
