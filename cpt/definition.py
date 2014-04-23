@@ -43,7 +43,7 @@ suitability = {
             'Contamination or Hazardous waste|Clean,Contaminated': None,
             'Property value|Costly,Inexpensive': None,
         },
-        'Threats to other areas or Permittability': {
+        'Threats to other areas or Permittability|Threatened,Not Threatened': {
             'Surrounding ownership|Ammenable,Unfriendly': None,
             'Surrounding land use|Ammenable,Unfriendly': None,
             'Water rights|Threatened,No threats': None,
@@ -103,7 +103,7 @@ def expand(node, decision):
 
     rowx = 0
     headings = keynames + [decision]
-    heading_fmt = xlwt.easyxf('font: bold on; align: wrap on, vert centre, horiz center')
+    heading_fmt = xlwt.easyxf('font: bold on; align: wrap off, vert centre, horiz center')
     for colx, value in enumerate(headings):
         sheet.write(rowx, colx, value, heading_fmt)
 
@@ -229,7 +229,7 @@ end_template = """
 
 if __name__ == "__main__":
     user_data = {
-%s}
+        %s}
 
     print main(user_data)
 """
