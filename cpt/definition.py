@@ -1,4 +1,5 @@
 import itertools
+import xlwt
 
 suitability = {
     'Landscape': {
@@ -38,10 +39,10 @@ suitability = {
     'Socio-Economic': {
         'Cost benefit|Costly,Inexpensive': {
             'Public perception|Supportive,Unfavorable': None,
-            'Contamination/Hazardous waste|Clean,Contaminated': None,
+            'Contamination or Hazardous waste|Clean,Contaminated': None,
             'Property value|Costly,Inexpensive': None,
         },
-        'Threats to other areas/Permittability': {
+        'Threats to other areas or Permittability': {
             'Surrounding ownership|Ammenable,Unfriendly': None,
             'Surrounding land use|Ammenable,Unfriendly': None,
             'Water rights|Threatened,No threats': None,
@@ -84,13 +85,14 @@ suitability = {
 DEFAULT_LEVELS = ['Suitable', 'Unsuitable']
 
 def expand(node, decision):
-    """ recursive """
+    """ recursively build excel file """
     if not node:
         return
     keys = node.keys()
     levels = []
     keynames = []
     decision = decision.split('|')[0]
+    sheet = BOOK.add_sheet(decision[:24])
     for key in keys:
         ks = key.split("|")
         keynames.append(ks[0])
@@ -99,19 +101,29 @@ def expand(node, decision):
         else:
             levels.append(ks[1].split(","))
 
-    print ','.join(keynames + [decision])
+    rowx = 0
+    headings = keynames + [decision]
+    heading_fmt = xlwt.easyxf('font: bold on; align: wrap on, vert centre, horiz center')
+    for colx, value in enumerate(headings):
+        sheet.write(rowx, colx, value, heading_fmt)
+
     aa = itertools.product(*levels)
 
     for bb in aa:
-        print ','.join([str(x) for x in bb] + ["50"])
-        
-    print "\n" * 5
+        row = [str(x) for x in bb] + ["50"]
+        rowx += 1
+        for colx, value in enumerate(row):
+            sheet.write(rowx, colx, value)
 
+    for i in range(len(row)):
+        sheet.col(i).width =  0x0d00 + 100
+        
     for key in keys:
         res = expand(node[key], key)
         if res:
             print res
 
 
+BOOK = xlwt.Workbook()
 expand(suitability, 'Suitability')
-#import ipdb; ipdb.set_trace()
+BOOK.save('test.xls')
