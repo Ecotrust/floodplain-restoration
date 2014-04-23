@@ -1,5 +1,6 @@
 import itertools
 import xlwt
+import random 
 
 suitability = {
     'Landscape': {
@@ -64,7 +65,7 @@ suitability = {
         'Pit restorability': {
             'Water quality threat': {
                 'Contamination': None,
-                'Substrate': None,
+                'Restorable Substrate': None,
             },
             'Practical restorability': {
                 'Adjacent river depth': None,
@@ -78,7 +79,6 @@ suitability = {
                 'Depth': None,
             },
         },
-
     }
 }
 
@@ -123,7 +123,119 @@ def expand(node, decision):
         if res:
             print res
 
-
 BOOK = xlwt.Workbook()
 expand(suitability, 'Suitability')
 BOOK.save('test.xls')
+
+
+def slugify(word):
+    return word.lower().replace(' ', "_").replace("-","_")
+
+
+def expand_py(node, decision):
+    """ recursively build python file """
+
+    terminalnode_template = """
+    def f_%(key)s(%(key)s):
+        if %(key)s:
+            return prob['%(key)s']
+        else:
+            return 1.0 - prob['%(key)s']
+    """
+            
+    template = """
+    def f_%(decision)s(%(varlist)s, %(decision)s):
+        cpt = {
+%(levelsrows)s
+        }
+        p = cpt[(%(varlist)s)]
+        if %(decision)s:
+            return p
+        else:
+            return 1.0 - p
+    """
+    if not node:
+        return
+    keys = node.keys()
+    levels = []
+    keynames = []
+    decision = slugify(decision.split('|')[0])
+
+    for key in keys:
+        ks = key.split("|")
+        keynames.append(ks[0])
+        if len(ks) == 1:
+            levels.append(DEFAULT_LEVELS)
+        else:
+            levels.append(ks[1].split(","))
+
+    headings = keynames + [decision]
+
+    aa = itertools.product(*levels)
+    tf = list(itertools.product(*([(True, False)] * len(keys))))  # assume first level == True
+
+    levelsrows = ""
+    for i, bb in enumerate(aa):
+        com = "            # %s" % (', '.join(["%s" % x for x in bb]))
+        #row = "            (%s): %s" % (', '.join(["'%s'" % x for x in tf[i]]), "50")
+        row = "            (%s): %s" % (', '.join([str(x) for x in tf[i]]),  "0.5,")  # str(random.random()) + ",") 
+        levelsrows += com + "\n" + row + "\n\n"
+
+    varlist = ', '.join([slugify(x) for x in keynames])
+    print template % locals()
+
+    NODELIST.append(decision)
+
+    for key in keys:
+        if node[key]:
+            res = expand_py(node[key], key)
+        else:
+            newkey = slugify(key.split('|')[0])
+            NODELIST.append(newkey)
+            TERMLIST.append(newkey)
+            print terminalnode_template % {'key': newkey}
+
+
+print """from bayesian.bbn import build_bbn
+
+def main(user_data=None):
+    if not user_data:
+        user_data = {}
+"""
+
+NODELIST = []
+TERMLIST = []
+expand_py(suitability, 'suitability')
+
+end_template = """
+    levels = [True, False]
+    net = build_bbn(
+        %s
+
+        # assume simple binary
+        domains=dict(
+            %s
+        )
+    )
+
+    prob = dict(
+    %s)
+
+    for k,v in user_data.items():
+        if prob.has_key(k):
+            prob[k] = v
+
+    return net.query()[('suitability', True)]
+
+if __name__ == "__main__":
+    user_data = {
+%s}
+
+    print main(user_data)
+"""
+print end_template % (
+    '\n        '.join(["f_" + x + "," for x in NODELIST]),
+    '\n            '.join(["%s = levels," % x for x in NODELIST]),
+    '\n        '.join([x + " = 0.5," for x in TERMLIST]),
+    '\n        '.join(["'" + x + "': 0.5," for x in TERMLIST]),
+)
