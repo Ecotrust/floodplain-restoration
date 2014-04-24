@@ -1,6 +1,8 @@
 import itertools
 import xlwt
-import random 
+import os
+
+CPT_XLS = "cpt.xls"
 
 suitability = {
     'Landscape': {
@@ -38,21 +40,21 @@ suitability = {
         }
     },
     'Socio-Economic': {
-        'Cost benefit|Costly,Inexpensive': {
+        'Cost benefit|Beneficial,Costly': {
             'Public perception|Supportive,Unfavorable': None,
             'Contamination or Hazardous waste|Clean,Contaminated': None,
-            'Property value|Costly,Inexpensive': None,
+            'Property value|Good Deal,Costly': None,
         },
-        'Threats to other areas or Permittability|Threatened,Not Threatened': {
+        'Threats to other areas or Permittability|No threats,Threatened': {
             'Surrounding ownership|Ammenable,Unfriendly': None,
             'Surrounding land use|Ammenable,Unfriendly': None,
-            'Water rights|Threatened,No threats': None,
-            'Infrastructure|Threatened,No threats': {
-                'Levies|Threatened,No threats': None,
-                'Dams|Threatened,No threats': None,
-                'Structures|Threatened,No threats': None,
-                'Bridges|Threatened,No threats': None,
-                'Road crossings|Threatened,No threats': None,
+            'Water rights|No threats,Threatened': None,
+            'Infrastructure|No threats,Threatened': {
+                'Levies|No threats,Threatened': None,
+                'Dams|No threats,Threatened': None,
+                'Structures|No threats,Threatened': None,
+                'Bridges|No threats,Threatened': None,
+                'Road crossings|No threats,Threatened': None,
             }
         },
     },
@@ -83,7 +85,7 @@ suitability = {
 }
 
 DEFAULT_LEVELS = ['Suitable', 'Unsuitable']
-
+MAX_SHEETNAME_WIDTH = 25
 def expand(node, decision):
     """ recursively build excel file """
     if not node:
@@ -91,8 +93,8 @@ def expand(node, decision):
     keys = node.keys()
     levels = []
     keynames = []
-    decision = decision.split('|')[0]
-    sheet = BOOK.add_sheet(decision[:24])
+    decision = decision.split('|')[0][:MAX_SHEETNAME_WIDTH]
+    sheet = BOOK.add_sheet(decision)
     for key in keys:
         ks = key.split("|")
         keynames.append(ks[0])
@@ -107,10 +109,12 @@ def expand(node, decision):
     for colx, value in enumerate(headings):
         sheet.write(rowx, colx, value, heading_fmt)
 
-    aa = itertools.product(*levels)
+    actual_levels = itertools.product(*levels)
+    tf_levels = list(itertools.product(*([(True, False)] * len(keys))))  # assume first level == True
+    levels = zip(actual_levels, tf_levels)
 
-    for bb in aa:
-        row = [str(x) for x in bb] + ["50"]
+    for bb, tf in levels:
+        row = [str(x) for x in bb] + [int(100 * (sum(tf)/float(len(tf))))]
         rowx += 1
         for colx, value in enumerate(row):
             sheet.write(rowx, colx, value)
@@ -123,9 +127,10 @@ def expand(node, decision):
         if res:
             print res
 
-BOOK = xlwt.Workbook()
-expand(suitability, 'Suitability')
-BOOK.save('test.xls')
+if not os.path.exists(CPT_XLS):
+    BOOK = xlwt.Workbook()
+    expand(suitability, 'suitability')
+    BOOK.save(CPT_XLS)
 
 
 def slugify(word):
@@ -159,6 +164,7 @@ def expand_py(node, decision):
     keys = node.keys()
     levels = []
     keynames = []
+    decision_xls = decision.split('|')[0][:MAX_SHEETNAME_WIDTH]
     decision = slugify(decision.split('|')[0])
 
     for key in keys:
@@ -171,14 +177,17 @@ def expand_py(node, decision):
 
     headings = keynames + [decision]
 
-    aa = itertools.product(*levels)
-    tf = list(itertools.product(*([(True, False)] * len(keys))))  # assume first level == True
+    actual_levels = list(itertools.product(*levels))
+    tf_levels = list(itertools.product(*([(True, False)] * len(keys))))  # assume first level == True
+    level_dict = dict(zip(actual_levels, tf_levels))
 
     levelsrows = ""
-    for i, bb in enumerate(aa):
-        com = "            # %s" % (', '.join(["%s" % x for x in bb]))
-        #row = "            (%s): %s" % (', '.join(["'%s'" % x for x in tf[i]]), "50")
-        row = "            (%s): %s" % (', '.join([str(x) for x in tf[i]]),  "0.5,")  # str(random.random()) + ",") 
+    for actual, tf in level_dict.items():
+        com = "            # %s" % (', '.join(["%s" % x for x in actual]))
+      # row = "            (%s): %s" % (', '.join([str(x) for x in tf[i]]),  "0.5,")
+        row = "            (%s): CPT['%s'][(%s)]," % (', '.join([str(x) for x in tf]), 
+                                                    decision_xls,
+                                                    ', '.join(["'%s'" % x for x in actual]))
         levelsrows += com + "\n" + row + "\n\n"
 
     varlist = ', '.join([slugify(x) for x in keynames])
@@ -197,11 +206,51 @@ def expand_py(node, decision):
 
 
 print """from bayesian.bbn import build_bbn
+from bayes_xls import read_cpt
+from flask import Flask, jsonify, redirect, request, render_template
 
-def main(user_data=None):
+app = Flask(__name__)
+
+def chunks(lst, n):
+    for i in xrange(0, len(lst), n):
+        yield lst[i:i+n]
+
+@app.route('/', methods = ['GET'])
+def main():
+    items = USER_DATA.items()
+    items.sort()
+    length = len(items)
+    n = 11
+    b = range(0, length, n)
+    return render_template("sliders.html", 
+        user_data1=items[b[0]:b[0]+n],
+        user_data2=items[b[1]:b[1]+n],
+        user_data3=items[b[2]:b[2]+n],
+        user_data4=items[b[3]:b[3]+n]
+    )
+
+@app.route('/query', methods = ['GET'])
+def prob_json():
+    print "#" * 80
+    user_data = USER_DATA.copy()
+    for k, v in request.args.items():
+        newval = float(v) / 100.0
+        if user_data[k] != newval:
+            print k, v
+        user_data[k] = newval
+
+    prob = query_cpt(user_data)
+    print "!!!!!!", prob
+    print "#" * 80
+    return jsonify({'restore': round(prob * 100, 2)})
+
+def query_cpt(user_data=None):
     if not user_data:
         user_data = {}
-"""
+
+    CPT = read_cpt('%s')
+
+""" % CPT_XLS
 
 NODELIST = []
 TERMLIST = []
@@ -227,15 +276,16 @@ end_template = """
 
     return net.query()[('suitability', True)]
 
-if __name__ == "__main__":
-    user_data = {
-        %s}
+USER_DATA = {
+    %s}
 
-    print main(user_data)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug = True)
+    #print query_cpt(USER_DATA)
 """
 print end_template % (
     '\n        '.join(["f_" + x + "," for x in NODELIST]),
     '\n            '.join(["%s = levels," % x for x in NODELIST]),
-    '\n        '.join([x + " = 0.5," for x in TERMLIST]),
-    '\n        '.join(["'" + x + "': 0.5," for x in TERMLIST]),
+    '\n        '.join([x + " = 1.0," for x in TERMLIST]),
+    '\n     '.join(["'" + x + "': 1.0," for x in TERMLIST]),
 )

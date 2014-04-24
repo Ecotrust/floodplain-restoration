@@ -8,7 +8,6 @@ app = Flask(__name__)
 def main():
     return redirect("/static/main.html")
 
-#@app.route('/climate/<lon>/<lat>', methods = ['GET'])
 @app.route('/query', methods = ['GET'])
 def query_CPT():
     args = dict([(k, float(v)/100.0) for k, v in request.args.items()])
