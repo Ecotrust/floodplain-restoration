@@ -10,11 +10,8 @@ suitability = {
             'Relationship to protected areas|Connected,Disconnected': None,
             'Identified in conservation plan|Identified,Not Identified': None,
             'Biotic conditions|Suitable,Unsuitable': {
-                'Habitat features|Suitable,Unsuitable': {
-                    'Cold water refugia|Exists,Does not exist': None,
-                    'Intact floodplain forest|Intact,Missing': None,
-                    'Other|Suitable,Not Suitable': None
-                },
+                'Habitat features|Suitable,Unsuitable': None,
+                'Intact floodplain forest|Intact,Missing': None,
                 'Species of interest|Present,Not Present': None
             }
         },
@@ -49,13 +46,7 @@ suitability = {
             'Surrounding ownership|Ammenable,Unfriendly': None,
             'Surrounding land use|Ammenable,Unfriendly': None,
             'Water rights|No threats,Threatened': None,
-            'Infrastructure|No threats,Threatened': {
-                'Levies|No threats,Threatened': None,
-                'Dams|No threats,Threatened': None,
-                'Structures|No threats,Threatened': None,
-                'Bridges|No threats,Threatened': None,
-                'Road crossings|No threats,Threatened': None,
-            }
+            'Infrastructure|No threats,Threatened': None
         },
     },
     'Site': {
@@ -73,10 +64,11 @@ suitability = {
                 'Adjacent river depth': None,
                 'Pit-adjacent levees': None,
                 'Slope distance to river': None,
+                'Bedrock Constraints': None
             },
             'Pit geometry': {
                 'Surface area': None,
-                'Circumference': None,
+                'Complexity': None,
                 'Bank slope': None,
                 'Depth': None,
             },
@@ -211,9 +203,6 @@ from flask import Flask, jsonify, redirect, request, render_template
 
 app = Flask(__name__)
 
-def chunks(lst, n):
-    for i in xrange(0, len(lst), n):
-        yield lst[i:i+n]
 
 @app.route('/', methods = ['GET'])
 def main():
@@ -244,11 +233,11 @@ def prob_json():
     print "#" * 80
     return jsonify({'restore': round(prob * 100, 2)})
 
+CPT = read_cpt('%s')
+
 def query_cpt(user_data=None):
     if not user_data:
         user_data = {}
-
-    CPT = read_cpt('%s')
 
 """ % CPT_XLS
 
