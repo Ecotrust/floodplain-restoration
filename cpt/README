@@ -1,0 +1,4 @@
+1. Edit definition.py
+2. python definition.py > runit.py
+3. edit cpt.xls (generated in step 2 if it wasn't present)
+4. python runit.py
