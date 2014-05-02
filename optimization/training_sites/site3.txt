@@ -1,0 +1,3 @@
+suitability,0.3
+identified_in_conservation_plan,0
+location_in_floodplain,0

@@ -1,0 +1,2 @@
+contamination,0
+suitability,0.80
