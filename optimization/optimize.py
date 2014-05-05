@@ -1181,7 +1181,7 @@ if __name__ == "__main__":
             cond = random.choice(CPT[var].keys())
             val = CPT[var][cond]
             newval = val + random.choice([0.05, -0.05])
-            if newval >= 0.0 or newval <= 1.0:
+            if newval >= 0.0 and newval <= 1.0:
                 valid_move = True
 
         CPT[var][cond] = newval
