@@ -2,9 +2,9 @@ from bayesian.bbn import build_bbn
 from bayes_xls import read_cpt
 import numpy as np
 
-CPT = read_cpt('TNC_CPT_master.xls')
 
-def query_cpt(user_data=None):
+
+def query_cpt(user_data, CPT):
     if not user_data:
         user_data = {}
 
@@ -1119,11 +1119,12 @@ def query_cpt(user_data=None):
 
     #return net.query()[('suitability', True)]
     nq = net.query()
-    return ( 
+    res = ( 
         nq[('socio_economic', True)],
         nq[('site', True)],
         nq[('landscape', True)],
     )
+    return res
 
 USER_DATA = {
     'water_rights': 1.0,
@@ -1166,17 +1167,13 @@ USER_DATA = {
 
 if __name__ == "__main__":
 
+
     import glob
     import random
     import copy
 
-    orig_cpt = copy.deepcopy(CPT)
-    best_error = float('inf')
-    prev_cpt = copy.deepcopy(CPT)
-    best_cpt = copy.deepcopy(CPT)
-    stuck = 0
-
     training_sites = {}
+    user_datas = {}
     for training_site in glob.glob("training_sites/*.txt"):
         user_data = USER_DATA.copy()
         socio_economic = site = landscape = None
@@ -1201,48 +1198,60 @@ if __name__ == "__main__":
             import ipdb; ipdb.set_trace()
             raise Exception("Need socio_economic, site, landscape for each training site")
         training_sites[training_site] = suitability
+        user_datas[training_site] = user_data
 
-    while stuck < 200:
-        error = 0
+    CPT = read_cpt('TNC_CPT_master.xls')
+
+
+    state = copy.deepcopy(CPT)
+    import pprint
+    pprint.pprint(state)
+    sys.exit()
+    
+    def energy(state):
+        """
+        Calculate RMSE
+        $$
+        \textrm{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+        $$
+
+        """
         errors = []
+        for training_site, suitability in training_sites.items():
+            prob = np.array(query_cpt(user_datas[training_site], state))
+            diff = prob - suitability
+            errors.extend(list(diff))
 
-        # move
+        error = (np.array(errors) ** 2).mean() ** 0.5
+        return error * 100
+
+    def move(state):
         valid_move = False
         while not valid_move:
-            var = random.choice(CPT.keys())
-            cond = random.choice(CPT[var].keys())
-            val = CPT[var][cond]
+            var = random.choice(state.keys())
+            cond = random.choice(state[var].keys())
+            val = state[var][cond]
             newval = val + random.choice([0.05, -0.05])
             if newval >= 0.0 and newval <= 1.0:
                 valid_move = True
+        #print var, cond, newval
 
-        CPT[var][cond] = newval
-
-        for training_site in glob.glob("training_sites/*.txt"):
-            suitability = training_sites[training_site]
-
-            prob = np.array(query_cpt(user_data))
-            diff = prob - suitability
-            errors.append(np.absolute(diff).sum())
-            #print trainging_site, "Got", round(prob, 2), "Expected", suitability
+        state[var][cond] = newval
 
 
-        error = sum(errors)
-        if error < best_error:
-            best_error = error
-            print "\naccept new lowest error:", best_error, # "stuck=", stuck
-            best_cpt = copy.deepcopy(CPT)
-            prev_cpt = copy.deepcopy(CPT)
-            stuck = 0
-        else:
-            #print error, "reject it...", "best", best_error, hash(str(best_cpt))
-            print ".", 
-            CPT = copy.deepcopy(prev_cpt)
-            stuck += 1
+    from anneal import Annealer
+    annealer = Annealer(energy, move)
+    # schedule = annealer.auto(state, minutes=60.0, steps=20)
+    # print schedule
+    
+    schedule = {'steps': 80000.0, 'tmax': 0.33, 'tmin': 6.7e-14}
+    #schedule = {'steps': 16000.0, 'tmax': 0.004, 'tmin': 0.000001}
+    state, e = annealer.anneal(state, schedule['tmax'], schedule['tmin'], 
+                                schedule['steps'], updates=schedule['steps']/10)
 
     import cPickle
-    with open('optimal_cpt.pickle', 'w') as fh:
-        fh.write(cPickle.dumps(best_cpt))
+    with open('optimal_cpt_try3.pickle', 'w') as fh:
+        fh.write(cPickle.dumps(state))
 
     import pprint
-    pprint.pprint(best_cpt)
+    pprint.pprint(state)

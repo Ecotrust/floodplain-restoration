@@ -38,4 +38,4 @@ def read_cpt(xls):
 
 if __name__ == "__main__":
     import pprint 
-    pprint.pprint(read_cpt('test.xls'))
+    pprint.pprint(read_cpt('TNC_CPT_master.xls'))

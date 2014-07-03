@@ -1,0 +1,4 @@
+contamination,0
+socio_economic,0.80
+site,1.0
+landscape,1.0

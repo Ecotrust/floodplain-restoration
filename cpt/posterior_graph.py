@@ -1,12 +1,49 @@
 from bayesian.bbn import build_bbn
 from bayes_xls import read_cpt
-import numpy as np
+from flask import Flask, jsonify, redirect, request, render_template
 
-CPT = read_cpt('TNC_CPT_master.xls')
+app = Flask(__name__)
+
+def chunks(lst, n):
+    for i in xrange(0, len(lst), n):
+        yield lst[i:i+n]
+
+@app.route('/', methods = ['GET'])
+def main():
+    items = USER_DATA.items()
+    items.sort()
+    length = len(items)
+    n = 11
+    b = range(0, length, n)
+    return render_template("sliders.html", 
+        user_data1=items[b[0]:b[0]+n],
+        user_data2=items[b[1]:b[1]+n],
+        user_data3=items[b[2]:b[2]+n],
+        user_data4=items[b[3]:b[3]+n]
+    )
+
+@app.route('/query', methods = ['GET'])
+def prob_json():
+    print "#" * 80
+    user_data = USER_DATA.copy()
+    for k, v in request.args.items():
+        newval = float(v) / 100.0
+        if user_data[k] != newval:
+            print k, v
+        user_data[k] = newval
+
+    prob = query_cpt(user_data)
+    print "!!!!!!", prob
+    print "#" * 80
+    return jsonify({'restore': round(prob * 100, 2)})
 
 def query_cpt(user_data=None):
     if not user_data:
         user_data = {}
+
+    CPT = read_cpt('cpt.xls')
+
+
 
     def f_suitability(socio_economic, site, landscape, suitability):
         cpt = {
@@ -139,11 +176,146 @@ def query_cpt(user_data=None):
             return 1.0 - prob['surrounding_ownership']
     
 
-    def f_infrastructure(infrastructure):
+    def f_infrastructure(structures, dams, road_crossings, levies, bridges, infrastructure):
+        cpt = {
+            # No threats, Threatened, Threatened, No threats, No threats
+            (True, False, False, True, True): CPT['Infrastructure'][('No threats', 'Threatened', 'Threatened', 'No threats', 'No threats')],
+
+            # Threatened, Threatened, No threats, Threatened, No threats
+            (False, False, True, False, True): CPT['Infrastructure'][('Threatened', 'Threatened', 'No threats', 'Threatened', 'No threats')],
+
+            # Threatened, No threats, No threats, Threatened, Threatened
+            (False, True, True, False, False): CPT['Infrastructure'][('Threatened', 'No threats', 'No threats', 'Threatened', 'Threatened')],
+
+            # No threats, No threats, No threats, Threatened, Threatened
+            (True, True, True, False, False): CPT['Infrastructure'][('No threats', 'No threats', 'No threats', 'Threatened', 'Threatened')],
+
+            # Threatened, No threats, No threats, No threats, No threats
+            (False, True, True, True, True): CPT['Infrastructure'][('Threatened', 'No threats', 'No threats', 'No threats', 'No threats')],
+
+            # No threats, Threatened, Threatened, Threatened, Threatened
+            (True, False, False, False, False): CPT['Infrastructure'][('No threats', 'Threatened', 'Threatened', 'Threatened', 'Threatened')],
+
+            # No threats, Threatened, No threats, No threats, Threatened
+            (True, False, True, True, False): CPT['Infrastructure'][('No threats', 'Threatened', 'No threats', 'No threats', 'Threatened')],
+
+            # Threatened, Threatened, Threatened, No threats, Threatened
+            (False, False, False, True, False): CPT['Infrastructure'][('Threatened', 'Threatened', 'Threatened', 'No threats', 'Threatened')],
+
+            # Threatened, No threats, No threats, No threats, Threatened
+            (False, True, True, True, False): CPT['Infrastructure'][('Threatened', 'No threats', 'No threats', 'No threats', 'Threatened')],
+
+            # Threatened, No threats, No threats, Threatened, No threats
+            (False, True, True, False, True): CPT['Infrastructure'][('Threatened', 'No threats', 'No threats', 'Threatened', 'No threats')],
+
+            # No threats, No threats, Threatened, Threatened, Threatened
+            (True, True, False, False, False): CPT['Infrastructure'][('No threats', 'No threats', 'Threatened', 'Threatened', 'Threatened')],
+
+            # Threatened, No threats, Threatened, Threatened, No threats
+            (False, True, False, False, True): CPT['Infrastructure'][('Threatened', 'No threats', 'Threatened', 'Threatened', 'No threats')],
+
+            # Threatened, Threatened, Threatened, Threatened, Threatened
+            (False, False, False, False, False): CPT['Infrastructure'][('Threatened', 'Threatened', 'Threatened', 'Threatened', 'Threatened')],
+
+            # Threatened, No threats, Threatened, No threats, No threats
+            (False, True, False, True, True): CPT['Infrastructure'][('Threatened', 'No threats', 'Threatened', 'No threats', 'No threats')],
+
+            # Threatened, Threatened, Threatened, Threatened, No threats
+            (False, False, False, False, True): CPT['Infrastructure'][('Threatened', 'Threatened', 'Threatened', 'Threatened', 'No threats')],
+
+            # No threats, No threats, No threats, Threatened, No threats
+            (True, True, True, False, True): CPT['Infrastructure'][('No threats', 'No threats', 'No threats', 'Threatened', 'No threats')],
+
+            # No threats, No threats, Threatened, Threatened, No threats
+            (True, True, False, False, True): CPT['Infrastructure'][('No threats', 'No threats', 'Threatened', 'Threatened', 'No threats')],
+
+            # No threats, Threatened, Threatened, Threatened, No threats
+            (True, False, False, False, True): CPT['Infrastructure'][('No threats', 'Threatened', 'Threatened', 'Threatened', 'No threats')],
+
+            # Threatened, No threats, Threatened, Threatened, Threatened
+            (False, True, False, False, False): CPT['Infrastructure'][('Threatened', 'No threats', 'Threatened', 'Threatened', 'Threatened')],
+
+            # Threatened, Threatened, No threats, Threatened, Threatened
+            (False, False, True, False, False): CPT['Infrastructure'][('Threatened', 'Threatened', 'No threats', 'Threatened', 'Threatened')],
+
+            # No threats, No threats, No threats, No threats, Threatened
+            (True, True, True, True, False): CPT['Infrastructure'][('No threats', 'No threats', 'No threats', 'No threats', 'Threatened')],
+
+            # No threats, No threats, Threatened, No threats, No threats
+            (True, True, False, True, True): CPT['Infrastructure'][('No threats', 'No threats', 'Threatened', 'No threats', 'No threats')],
+
+            # No threats, Threatened, Threatened, No threats, Threatened
+            (True, False, False, True, False): CPT['Infrastructure'][('No threats', 'Threatened', 'Threatened', 'No threats', 'Threatened')],
+
+            # No threats, No threats, Threatened, No threats, Threatened
+            (True, True, False, True, False): CPT['Infrastructure'][('No threats', 'No threats', 'Threatened', 'No threats', 'Threatened')],
+
+            # No threats, No threats, No threats, No threats, No threats
+            (True, True, True, True, True): CPT['Infrastructure'][('No threats', 'No threats', 'No threats', 'No threats', 'No threats')],
+
+            # Threatened, Threatened, No threats, No threats, No threats
+            (False, False, True, True, True): CPT['Infrastructure'][('Threatened', 'Threatened', 'No threats', 'No threats', 'No threats')],
+
+            # Threatened, Threatened, Threatened, No threats, No threats
+            (False, False, False, True, True): CPT['Infrastructure'][('Threatened', 'Threatened', 'Threatened', 'No threats', 'No threats')],
+
+            # No threats, Threatened, No threats, Threatened, No threats
+            (True, False, True, False, True): CPT['Infrastructure'][('No threats', 'Threatened', 'No threats', 'Threatened', 'No threats')],
+
+            # No threats, Threatened, No threats, Threatened, Threatened
+            (True, False, True, False, False): CPT['Infrastructure'][('No threats', 'Threatened', 'No threats', 'Threatened', 'Threatened')],
+
+            # Threatened, No threats, Threatened, No threats, Threatened
+            (False, True, False, True, False): CPT['Infrastructure'][('Threatened', 'No threats', 'Threatened', 'No threats', 'Threatened')],
+
+            # No threats, Threatened, No threats, No threats, No threats
+            (True, False, True, True, True): CPT['Infrastructure'][('No threats', 'Threatened', 'No threats', 'No threats', 'No threats')],
+
+            # Threatened, Threatened, No threats, No threats, Threatened
+            (False, False, True, True, False): CPT['Infrastructure'][('Threatened', 'Threatened', 'No threats', 'No threats', 'Threatened')],
+
+
+        }
+        p = cpt[(structures, dams, road_crossings, levies, bridges)]
         if infrastructure:
-            return prob['infrastructure']
+            return p
         else:
-            return 1.0 - prob['infrastructure']
+            return 1.0 - p
+    
+
+    def f_structures(structures):
+        if structures:
+            return prob['structures']
+        else:
+            return 1.0 - prob['structures']
+    
+
+    def f_dams(dams):
+        if dams:
+            return prob['dams']
+        else:
+            return 1.0 - prob['dams']
+    
+
+    def f_road_crossings(road_crossings):
+        if road_crossings:
+            return prob['road_crossings']
+        else:
+            return 1.0 - prob['road_crossings']
+    
+
+    def f_levies(levies):
+        if levies:
+            return prob['levies']
+        else:
+            return 1.0 - prob['levies']
+    
+
+    def f_bridges(bridges):
+        if bridges:
+            return prob['bridges']
+        else:
+            return 1.0 - prob['bridges']
     
 
     def f_surrounding_land_use(surrounding_land_use):
@@ -267,7 +439,7 @@ def query_cpt(user_data=None):
             return 1.0 - p
     
 
-    def f_pit_geometry(depth, complexity, surface_area, bank_slope, pit_geometry):
+    def f_pit_geometry(depth, circumference, surface_area, bank_slope, pit_geometry):
         cpt = {
             # Unsuitable, Unsuitable, Unsuitable, Unsuitable
             (False, False, False, False): CPT['Pit geometry'][('Unsuitable', 'Unsuitable', 'Unsuitable', 'Unsuitable')],
@@ -319,7 +491,7 @@ def query_cpt(user_data=None):
 
 
         }
-        p = cpt[(depth, complexity, surface_area, bank_slope)]
+        p = cpt[(depth, circumference, surface_area, bank_slope)]
         if pit_geometry:
             return p
         else:
@@ -333,11 +505,11 @@ def query_cpt(user_data=None):
             return 1.0 - prob['depth']
     
 
-    def f_complexity(complexity):
-        if complexity:
-            return prob['complexity']
+    def f_circumference(circumference):
+        if circumference:
+            return prob['circumference']
         else:
-            return 1.0 - prob['complexity']
+            return 1.0 - prob['circumference']
     
 
     def f_surface_area(surface_area):
@@ -391,59 +563,35 @@ def query_cpt(user_data=None):
             return 1.0 - prob['contamination']
     
 
-    def f_practical_restorability(slope_distance_to_river, bedrock_constraints, adjacent_river_depth, pit_adjacent_levees, practical_restorability):
+    def f_practical_restorability(slope_distance_to_river, adjacent_river_depth, pit_adjacent_levees, practical_restorability):
         cpt = {
-            # Unsuitable, Unsuitable, Unsuitable, Unsuitable
-            (False, False, False, False): CPT['Practical restorability'][('Unsuitable', 'Unsuitable', 'Unsuitable', 'Unsuitable')],
+            # Suitable, Suitable, Suitable
+            (True, True, True): CPT['Practical restorability'][('Suitable', 'Suitable', 'Suitable')],
 
-            # Unsuitable, Suitable, Suitable, Unsuitable
-            (False, True, True, False): CPT['Practical restorability'][('Unsuitable', 'Suitable', 'Suitable', 'Unsuitable')],
+            # Unsuitable, Suitable, Unsuitable
+            (False, True, False): CPT['Practical restorability'][('Unsuitable', 'Suitable', 'Unsuitable')],
 
-            # Unsuitable, Suitable, Unsuitable, Unsuitable
-            (False, True, False, False): CPT['Practical restorability'][('Unsuitable', 'Suitable', 'Unsuitable', 'Unsuitable')],
+            # Suitable, Suitable, Unsuitable
+            (True, True, False): CPT['Practical restorability'][('Suitable', 'Suitable', 'Unsuitable')],
 
-            # Suitable, Unsuitable, Unsuitable, Unsuitable
-            (True, False, False, False): CPT['Practical restorability'][('Suitable', 'Unsuitable', 'Unsuitable', 'Unsuitable')],
+            # Unsuitable, Unsuitable, Suitable
+            (False, False, True): CPT['Practical restorability'][('Unsuitable', 'Unsuitable', 'Suitable')],
 
-            # Suitable, Suitable, Suitable, Unsuitable
-            (True, True, True, False): CPT['Practical restorability'][('Suitable', 'Suitable', 'Suitable', 'Unsuitable')],
+            # Unsuitable, Suitable, Suitable
+            (False, True, True): CPT['Practical restorability'][('Unsuitable', 'Suitable', 'Suitable')],
 
-            # Suitable, Suitable, Unsuitable, Unsuitable
-            (True, True, False, False): CPT['Practical restorability'][('Suitable', 'Suitable', 'Unsuitable', 'Unsuitable')],
+            # Suitable, Unsuitable, Unsuitable
+            (True, False, False): CPT['Practical restorability'][('Suitable', 'Unsuitable', 'Unsuitable')],
 
-            # Suitable, Suitable, Unsuitable, Suitable
-            (True, True, False, True): CPT['Practical restorability'][('Suitable', 'Suitable', 'Unsuitable', 'Suitable')],
+            # Unsuitable, Unsuitable, Unsuitable
+            (False, False, False): CPT['Practical restorability'][('Unsuitable', 'Unsuitable', 'Unsuitable')],
 
-            # Suitable, Suitable, Suitable, Suitable
-            (True, True, True, True): CPT['Practical restorability'][('Suitable', 'Suitable', 'Suitable', 'Suitable')],
-
-            # Suitable, Unsuitable, Unsuitable, Suitable
-            (True, False, False, True): CPT['Practical restorability'][('Suitable', 'Unsuitable', 'Unsuitable', 'Suitable')],
-
-            # Suitable, Unsuitable, Suitable, Unsuitable
-            (True, False, True, False): CPT['Practical restorability'][('Suitable', 'Unsuitable', 'Suitable', 'Unsuitable')],
-
-            # Unsuitable, Unsuitable, Suitable, Suitable
-            (False, False, True, True): CPT['Practical restorability'][('Unsuitable', 'Unsuitable', 'Suitable', 'Suitable')],
-
-            # Unsuitable, Unsuitable, Unsuitable, Suitable
-            (False, False, False, True): CPT['Practical restorability'][('Unsuitable', 'Unsuitable', 'Unsuitable', 'Suitable')],
-
-            # Unsuitable, Suitable, Suitable, Suitable
-            (False, True, True, True): CPT['Practical restorability'][('Unsuitable', 'Suitable', 'Suitable', 'Suitable')],
-
-            # Unsuitable, Unsuitable, Suitable, Unsuitable
-            (False, False, True, False): CPT['Practical restorability'][('Unsuitable', 'Unsuitable', 'Suitable', 'Unsuitable')],
-
-            # Unsuitable, Suitable, Unsuitable, Suitable
-            (False, True, False, True): CPT['Practical restorability'][('Unsuitable', 'Suitable', 'Unsuitable', 'Suitable')],
-
-            # Suitable, Unsuitable, Suitable, Suitable
-            (True, False, True, True): CPT['Practical restorability'][('Suitable', 'Unsuitable', 'Suitable', 'Suitable')],
+            # Suitable, Unsuitable, Suitable
+            (True, False, True): CPT['Practical restorability'][('Suitable', 'Unsuitable', 'Suitable')],
 
 
         }
-        p = cpt[(slope_distance_to_river, bedrock_constraints, adjacent_river_depth, pit_adjacent_levees)]
+        p = cpt[(slope_distance_to_river, adjacent_river_depth, pit_adjacent_levees)]
         if practical_restorability:
             return p
         else:
@@ -455,13 +603,6 @@ def query_cpt(user_data=None):
             return prob['slope_distance_to_river']
         else:
             return 1.0 - prob['slope_distance_to_river']
-    
-
-    def f_bedrock_constraints(bedrock_constraints):
-        if bedrock_constraints:
-            return prob['bedrock_constraints']
-        else:
-            return 1.0 - prob['bedrock_constraints']
     
 
     def f_adjacent_river_depth(adjacent_river_depth):
@@ -902,36 +1043,59 @@ def query_cpt(user_data=None):
             return 1.0 - prob['relationship_to_protected_areas']
     
 
-    def f_biotic_conditions(intact_floodplain_forest, habitat_features, species_of_interest, biotic_conditions):
+    def f_biotic_conditions(habitat_features, species_of_interest, biotic_conditions):
         cpt = {
-            # Missing, Unsuitable, Not Present
-            (False, False, False): CPT['Biotic conditions'][('Missing', 'Unsuitable', 'Not Present')],
+            # Unsuitable, Present
+            (False, True): CPT['Biotic conditions'][('Unsuitable', 'Present')],
 
-            # Missing, Unsuitable, Present
-            (False, False, True): CPT['Biotic conditions'][('Missing', 'Unsuitable', 'Present')],
+            # Unsuitable, Not Present
+            (False, False): CPT['Biotic conditions'][('Unsuitable', 'Not Present')],
 
-            # Missing, Suitable, Not Present
-            (False, True, False): CPT['Biotic conditions'][('Missing', 'Suitable', 'Not Present')],
+            # Suitable, Present
+            (True, True): CPT['Biotic conditions'][('Suitable', 'Present')],
 
-            # Intact, Suitable, Present
-            (True, True, True): CPT['Biotic conditions'][('Intact', 'Suitable', 'Present')],
-
-            # Intact, Unsuitable, Not Present
-            (True, False, False): CPT['Biotic conditions'][('Intact', 'Unsuitable', 'Not Present')],
-
-            # Intact, Unsuitable, Present
-            (True, False, True): CPT['Biotic conditions'][('Intact', 'Unsuitable', 'Present')],
-
-            # Intact, Suitable, Not Present
-            (True, True, False): CPT['Biotic conditions'][('Intact', 'Suitable', 'Not Present')],
-
-            # Missing, Suitable, Present
-            (False, True, True): CPT['Biotic conditions'][('Missing', 'Suitable', 'Present')],
+            # Suitable, Not Present
+            (True, False): CPT['Biotic conditions'][('Suitable', 'Not Present')],
 
 
         }
-        p = cpt[(intact_floodplain_forest, habitat_features, species_of_interest)]
+        p = cpt[(habitat_features, species_of_interest)]
         if biotic_conditions:
+            return p
+        else:
+            return 1.0 - p
+    
+
+    def f_habitat_features(intact_floodplain_forest, cold_water_refugia, other, habitat_features):
+        cpt = {
+            # Intact, Exists, Not Suitable
+            (True, True, False): CPT['Habitat features'][('Intact', 'Exists', 'Not Suitable')],
+
+            # Missing, Does not exist, Suitable
+            (False, False, True): CPT['Habitat features'][('Missing', 'Does not exist', 'Suitable')],
+
+            # Missing, Exists, Suitable
+            (False, True, True): CPT['Habitat features'][('Missing', 'Exists', 'Suitable')],
+
+            # Missing, Exists, Not Suitable
+            (False, True, False): CPT['Habitat features'][('Missing', 'Exists', 'Not Suitable')],
+
+            # Intact, Does not exist, Not Suitable
+            (True, False, False): CPT['Habitat features'][('Intact', 'Does not exist', 'Not Suitable')],
+
+            # Intact, Does not exist, Suitable
+            (True, False, True): CPT['Habitat features'][('Intact', 'Does not exist', 'Suitable')],
+
+            # Intact, Exists, Suitable
+            (True, True, True): CPT['Habitat features'][('Intact', 'Exists', 'Suitable')],
+
+            # Missing, Does not exist, Not Suitable
+            (False, False, False): CPT['Habitat features'][('Missing', 'Does not exist', 'Not Suitable')],
+
+
+        }
+        p = cpt[(intact_floodplain_forest, cold_water_refugia, other)]
+        if habitat_features:
             return p
         else:
             return 1.0 - p
@@ -944,11 +1108,18 @@ def query_cpt(user_data=None):
             return 1.0 - prob['intact_floodplain_forest']
     
 
-    def f_habitat_features(habitat_features):
-        if habitat_features:
-            return prob['habitat_features']
+    def f_cold_water_refugia(cold_water_refugia):
+        if cold_water_refugia:
+            return prob['cold_water_refugia']
         else:
-            return 1.0 - prob['habitat_features']
+            return 1.0 - prob['cold_water_refugia']
+    
+
+    def f_other(other):
+        if other:
+            return prob['other']
+        else:
+            return 1.0 - prob['other']
     
 
     def f_species_of_interest(species_of_interest):
@@ -966,6 +1137,11 @@ def query_cpt(user_data=None):
         f_water_rights,
         f_surrounding_ownership,
         f_infrastructure,
+        f_structures,
+        f_dams,
+        f_road_crossings,
+        f_levies,
+        f_bridges,
         f_surrounding_land_use,
         f_cost_benefit,
         f_property_value,
@@ -975,7 +1151,7 @@ def query_cpt(user_data=None):
         f_pit_restorability,
         f_pit_geometry,
         f_depth,
-        f_complexity,
+        f_circumference,
         f_surface_area,
         f_bank_slope,
         f_water_quality_threat,
@@ -983,7 +1159,6 @@ def query_cpt(user_data=None):
         f_contamination,
         f_practical_restorability,
         f_slope_distance_to_river,
-        f_bedrock_constraints,
         f_adjacent_river_depth,
         f_pit_adjacent_levees,
         f_practical_property_level_restorability,
@@ -1011,8 +1186,10 @@ def query_cpt(user_data=None):
         f_identified_in_conservation_plan,
         f_relationship_to_protected_areas,
         f_biotic_conditions,
-        f_intact_floodplain_forest,
         f_habitat_features,
+        f_intact_floodplain_forest,
+        f_cold_water_refugia,
+        f_other,
         f_species_of_interest,
 
         # assume simple binary
@@ -1023,6 +1200,11 @@ def query_cpt(user_data=None):
             water_rights = levels,
             surrounding_ownership = levels,
             infrastructure = levels,
+            structures = levels,
+            dams = levels,
+            road_crossings = levels,
+            levies = levels,
+            bridges = levels,
             surrounding_land_use = levels,
             cost_benefit = levels,
             property_value = levels,
@@ -1032,7 +1214,7 @@ def query_cpt(user_data=None):
             pit_restorability = levels,
             pit_geometry = levels,
             depth = levels,
-            complexity = levels,
+            circumference = levels,
             surface_area = levels,
             bank_slope = levels,
             water_quality_threat = levels,
@@ -1040,7 +1222,6 @@ def query_cpt(user_data=None):
             contamination = levels,
             practical_restorability = levels,
             slope_distance_to_river = levels,
-            bedrock_constraints = levels,
             adjacent_river_depth = levels,
             pit_adjacent_levees = levels,
             practical_property_level_restorability = levels,
@@ -1068,28 +1249,33 @@ def query_cpt(user_data=None):
             identified_in_conservation_plan = levels,
             relationship_to_protected_areas = levels,
             biotic_conditions = levels,
-            intact_floodplain_forest = levels,
             habitat_features = levels,
+            intact_floodplain_forest = levels,
+            cold_water_refugia = levels,
+            other = levels,
             species_of_interest = levels,
         )
     )
 
     prob = dict(
-        water_rights = 1.0,
+    water_rights = 1.0,
         surrounding_ownership = 1.0,
-        infrastructure = 1.0,
+        structures = 1.0,
+        dams = 1.0,
+        road_crossings = 1.0,
+        levies = 1.0,
+        bridges = 1.0,
         surrounding_land_use = 1.0,
         property_value = 1.0,
         contamination_or_hazardous_waste = 1.0,
         public_perception = 1.0,
         depth = 1.0,
-        complexity = 1.0,
+        circumference = 1.0,
         surface_area = 1.0,
         bank_slope = 1.0,
         restorable_substrate = 1.0,
         contamination = 1.0,
         slope_distance_to_river = 1.0,
-        bedrock_constraints = 1.0,
         adjacent_river_depth = 1.0,
         pit_adjacent_levees = 1.0,
         fill_material_availability = 1.0,
@@ -1110,37 +1296,35 @@ def query_cpt(user_data=None):
         identified_in_conservation_plan = 1.0,
         relationship_to_protected_areas = 1.0,
         intact_floodplain_forest = 1.0,
-        habitat_features = 1.0,
+        cold_water_refugia = 1.0,
+        other = 1.0,
         species_of_interest = 1.0,)
 
     for k,v in user_data.items():
         if prob.has_key(k):
             prob[k] = v
 
-    #return net.query()[('suitability', True)]
-    nq = net.query()
-    return ( 
-        nq[('socio_economic', True)],
-        nq[('site', True)],
-        nq[('landscape', True)],
-    )
+    return net.query()[('suitability', True)]
 
 USER_DATA = {
     'water_rights': 1.0,
      'surrounding_ownership': 1.0,
-     'infrastructure': 1.0,
+     'structures': 1.0,
+     'dams': 1.0,
+     'road_crossings': 1.0,
+     'levies': 1.0,
+     'bridges': 1.0,
      'surrounding_land_use': 1.0,
      'property_value': 1.0,
      'contamination_or_hazardous_waste': 1.0,
      'public_perception': 1.0,
      'depth': 1.0,
-     'complexity': 1.0,
+     'circumference': 1.0,
      'surface_area': 1.0,
      'bank_slope': 1.0,
      'restorable_substrate': 1.0,
      'contamination': 1.0,
      'slope_distance_to_river': 1.0,
-     'bedrock_constraints': 1.0,
      'adjacent_river_depth': 1.0,
      'pit_adjacent_levees': 1.0,
      'fill_material_availability': 1.0,
@@ -1161,88 +1345,73 @@ USER_DATA = {
      'identified_in_conservation_plan': 1.0,
      'relationship_to_protected_areas': 1.0,
      'intact_floodplain_forest': 1.0,
-     'habitat_features': 1.0,
+     'cold_water_refugia': 1.0,
+     'other': 1.0,
      'species_of_interest': 1.0,}
 
+import signal
+
+class GracefulInterruptHandler(object):
+    def __init__(self, sig=signal.SIGINT):
+        self.sig = sig
+
+    def __enter__(self):
+        self.interrupted = False
+        self.released = False
+        self.original_handler = signal.getsignal(self.sig)
+
+        def handler(signum, frame):
+            self.release()
+            self.interrupted = True
+
+        signal.signal(self.sig, handler)
+        return self
+
+    def __exit__(self, type, value, tb):
+        self.release()
+
+    def release(self):
+        if self.released:
+            return False
+        signal.signal(self.sig, self.original_handler)
+        self.released = True
+        return True
+
+
 if __name__ == "__main__":
-
-    import glob
     import random
-    import copy
+    import json
+    import matplotlib.pyplot as plt
+    import numpy as np
 
-    orig_cpt = copy.deepcopy(CPT)
-    best_error = float('inf')
-    prev_cpt = copy.deepcopy(CPT)
-    best_cpt = copy.deepcopy(CPT)
-    stuck = 0
+    user_data = USER_DATA.copy()
 
-    training_sites = {}
-    for training_site in glob.glob("training_sites/*.txt"):
-        user_data = USER_DATA.copy()
-        socio_economic = site = landscape = None
-        with open(training_site, 'r') as fh:
-            for line in fh.readlines():
-                key, val = line.split(',')
-                val = float(val)
-                if key == 'socio_economic':
-                    socio_economic = val
-                elif key == 'site':
-                    site = val
-                elif key == 'landscape':
-                    landscape = val
-                # elif key == 'suitability':
-                #     suitability = val
-                else:
-                    user_data[key] = val
+    try:
+        fh = open('vals.json', 'r')
+        vals = json.loads(fh.read())
+        fh.close()
+    except IOError:
+        vals = []
 
-        if None not in [socio_economic, site, landscape]:
-            suitability = np.array([socio_economic, site, landscape])
-        else:
-            import ipdb; ipdb.set_trace()
-            raise Exception("Need socio_economic, site, landscape for each training site")
-        training_sites[training_site] = suitability
+    with GracefulInterruptHandler() as h:
+        for i in xrange(9000000000):
+            for k, v in user_data.items():
+                user_data[k] = random.choice([0.25, 0.95, 0.99, 1.0])
 
-    while stuck < 200:
-        error = 0
-        errors = []
+            vals.append(query_cpt(user_data))
+            #print "%.3f" % vals[-1], "(%.3f" % min(vals), "to", "%.3f)" % max(vals)
+            if float(i) % 50 == 0:
+                print len(vals)
+            if h.interrupted:
+                break
 
-        # move
-        valid_move = False
-        while not valid_move:
-            var = random.choice(CPT.keys())
-            cond = random.choice(CPT[var].keys())
-            val = CPT[var][cond]
-            newval = val + random.choice([0.05, -0.05])
-            if newval >= 0.0 and newval <= 1.0:
-                valid_move = True
+    with open('vals.json', 'w') as fh:
+        fh.write(json.dumps(vals))
 
-        CPT[var][cond] = newval
+    mu, sigma = 100, 15
+    hist, bins = np.histogram(vals, bins=20)
+    width = 0.7 * (bins[1] - bins[0])
+    center = (bins[:-1] + bins[1:]) / 2
+    plt.bar(center, hist, align='center', width=width)
+    plt.show()
 
-        for training_site in glob.glob("training_sites/*.txt"):
-            suitability = training_sites[training_site]
-
-            prob = np.array(query_cpt(user_data))
-            diff = prob - suitability
-            errors.append(np.absolute(diff).sum())
-            #print trainging_site, "Got", round(prob, 2), "Expected", suitability
-
-
-        error = sum(errors)
-        if error < best_error:
-            best_error = error
-            print "\naccept new lowest error:", best_error, # "stuck=", stuck
-            best_cpt = copy.deepcopy(CPT)
-            prev_cpt = copy.deepcopy(CPT)
-            stuck = 0
-        else:
-            #print error, "reject it...", "best", best_error, hash(str(best_cpt))
-            print ".", 
-            CPT = copy.deepcopy(prev_cpt)
-            stuck += 1
-
-    import cPickle
-    with open('optimal_cpt.pickle', 'w') as fh:
-        fh.write(cPickle.dumps(best_cpt))
-
-    import pprint
-    pprint.pprint(best_cpt)

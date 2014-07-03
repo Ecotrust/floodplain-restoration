@@ -1,0 +1,48 @@
+Sum of Errors 0.69405
+0.69405 accept it..
+Floodplain characteristic (u'Strategic', u'Suitable', u'Suitable', u'Outside') 0.0 0.1
+
+Sum of Errors 0.69405
+0.69405 reject it...
+Cost benefit (u'Costly', u'Clean', u'Supportive') 0.5 0.4
+
+Sum of Errors 0.69405
+0.69405 reject it...
+suitability (u'Unsuitable', u'Suitable', u'Unsuitable') 0.05 0.15
+
+Sum of Errors 0.69405
+0.69405 reject it...
+Biotic conditions (u'Intact', u'Unsuitable', u'Present') 0.8 0.7
+
+Sum of Errors 0.69405
+0.69405 reject it...
+Geomorphic Controls (u'Unavailable', u'Not mobile', u'Unsuitable', u'Suitable') 0.25 0.15
+
+Sum of Errors 0.69405
+0.69405 reject it...
+Biotic conditions (u'Missing', u'Suitable', u'Not Present') 0.4 0.3
+
+Sum of Errors 0.69405
+0.69405 reject it...
+Conservation value (u'Identified', u'Connected', u'Suitable') 1.0 0.9
+
+Sum of Errors 0.6776125
+0.6776125 accept it..
+Biotic conditions (u'Missing', u'Unsuitable', u'Not Present') 0.3 0.2
+
+Sum of Errors 0.6776125
+0.6776125 reject it...
+Socio-Economic (u'No threats', u'Beneficial') 1.0 1.0
+
+Sum of Errors 0.6776125
+0.6776125 reject it...
+Abiotic conditions (u'High Quality', u'Disconnected') 0.2 0.3
+
+Sum of Errors 0.6822125
+0.6822125 reject it...
+Threats to other areas or (u'Threatened', u'Unfriendly', u'No threats', u'Ammenable') 0.5 0.6
+
+Sum of Errors 0.6822125
+0.6822125 reject it...
+Connectivity barriers (u'Connected', u'Disconnected', u'Connected') 0.7 0.6
+

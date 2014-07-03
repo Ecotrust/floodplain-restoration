@@ -1,12 +1,46 @@
 from bayesian.bbn import build_bbn
 from bayes_xls import read_cpt
-import numpy as np
+from flask import Flask, jsonify, redirect, request, render_template
 
-CPT = read_cpt('TNC_CPT_master.xls')
+app = Flask(__name__)
+
+
+@app.route('/', methods = ['GET'])
+def main():
+    items = USER_DATA.items()
+    items.sort()
+    length = len(items)
+    n = 11
+    b = range(0, length, n)
+    return render_template("sliders.html", 
+        user_data1=items[b[0]:b[0]+n],
+        user_data2=items[b[1]:b[1]+n],
+        user_data3=items[b[2]:b[2]+n],
+        user_data4=items[b[3]:b[3]+n]
+    )
+
+@app.route('/query', methods = ['GET'])
+def prob_json():
+    print "#" * 80
+    user_data = USER_DATA.copy()
+    for k, v in request.args.items():
+        newval = float(v) / 100.0
+        if user_data[k] != newval:
+            print k, v
+        user_data[k] = newval
+
+    prob = query_cpt(user_data)
+    print "!!!!!!", prob
+    print "#" * 80
+    return jsonify({'restore': round(prob * 100, 2)})
+
+CPT = read_cpt('cpt.xls')
 
 def query_cpt(user_data=None):
     if not user_data:
         user_data = {}
+
+
 
     def f_suitability(socio_economic, site, landscape, suitability):
         cpt = {
@@ -1075,7 +1109,7 @@ def query_cpt(user_data=None):
     )
 
     prob = dict(
-        water_rights = 1.0,
+    water_rights = 1.0,
         surrounding_ownership = 1.0,
         infrastructure = 1.0,
         surrounding_land_use = 1.0,
@@ -1117,13 +1151,7 @@ def query_cpt(user_data=None):
         if prob.has_key(k):
             prob[k] = v
 
-    #return net.query()[('suitability', True)]
-    nq = net.query()
-    return ( 
-        nq[('socio_economic', True)],
-        nq[('site', True)],
-        nq[('landscape', True)],
-    )
+    return net.query()[('suitability', True)]
 
 USER_DATA = {
     'water_rights': 1.0,
@@ -1165,84 +1193,6 @@ USER_DATA = {
      'species_of_interest': 1.0,}
 
 if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug = True)
+    #print query_cpt(USER_DATA)
 
-    import glob
-    import random
-    import copy
-
-    orig_cpt = copy.deepcopy(CPT)
-    best_error = float('inf')
-    prev_cpt = copy.deepcopy(CPT)
-    best_cpt = copy.deepcopy(CPT)
-    stuck = 0
-
-    training_sites = {}
-    for training_site in glob.glob("training_sites/*.txt"):
-        user_data = USER_DATA.copy()
-        socio_economic = site = landscape = None
-        with open(training_site, 'r') as fh:
-            for line in fh.readlines():
-                key, val = line.split(',')
-                val = float(val)
-                if key == 'socio_economic':
-                    socio_economic = val
-                elif key == 'site':
-                    site = val
-                elif key == 'landscape':
-                    landscape = val
-                # elif key == 'suitability':
-                #     suitability = val
-                else:
-                    user_data[key] = val
-
-        if None not in [socio_economic, site, landscape]:
-            suitability = np.array([socio_economic, site, landscape])
-        else:
-            import ipdb; ipdb.set_trace()
-            raise Exception("Need socio_economic, site, landscape for each training site")
-        training_sites[training_site] = suitability
-
-    while stuck < 200:
-        error = 0
-        errors = []
-
-        # move
-        valid_move = False
-        while not valid_move:
-            var = random.choice(CPT.keys())
-            cond = random.choice(CPT[var].keys())
-            val = CPT[var][cond]
-            newval = val + random.choice([0.05, -0.05])
-            if newval >= 0.0 and newval <= 1.0:
-                valid_move = True
-
-        CPT[var][cond] = newval
-
-        for training_site in glob.glob("training_sites/*.txt"):
-            suitability = training_sites[training_site]
-
-            prob = np.array(query_cpt(user_data))
-            diff = prob - suitability
-            errors.append(np.absolute(diff).sum())
-            #print trainging_site, "Got", round(prob, 2), "Expected", suitability
-
-
-        error = sum(errors)
-        if error < best_error:
-            best_error = error
-            print "\naccept new lowest error:", best_error, # "stuck=", stuck
-            best_cpt = copy.deepcopy(CPT)
-            prev_cpt = copy.deepcopy(CPT)
-            stuck = 0
-        else:
-            #print error, "reject it...", "best", best_error, hash(str(best_cpt))
-            print ".", 
-            CPT = copy.deepcopy(prev_cpt)
-            stuck += 1
-
-    import cPickle
-    with open('optimal_cpt.pickle', 'w') as fh:
-        fh.write(cPickle.dumps(best_cpt))
-
-    import pprint
-    pprint.pprint(best_cpt)

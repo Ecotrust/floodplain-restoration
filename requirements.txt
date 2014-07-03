@@ -2,3 +2,4 @@ flask
 bayesian
 numpy
 matplotlib
+django

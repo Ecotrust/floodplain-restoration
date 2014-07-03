@@ -1,0 +1,5 @@
+identified_in_conservation_plan,0
+location_in_floodplain,0
+socio_economic,1.0
+site,1.0
+landscape,0.0
