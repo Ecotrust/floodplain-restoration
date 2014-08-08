@@ -1,5 +1,6 @@
-flask
 bayesian
-numpy
-matplotlib
-django
+pillow
+-e git+https://github.com/django/django.git@stable/1.7.x#egg=django17
+djangorestframework
+jsonfield
+djangorestframework-gis

@@ -1206,7 +1206,7 @@ if __name__ == "__main__":
     state = copy.deepcopy(CPT)
     import pprint
     pprint.pprint(state)
-    sys.exit()
+    #sys.exit()
     
     def energy(state):
         """
@@ -1249,9 +1249,9 @@ if __name__ == "__main__":
     state, e = annealer.anneal(state, schedule['tmax'], schedule['tmin'], 
                                 schedule['steps'], updates=schedule['steps']/10)
 
-    import cPickle
-    with open('optimal_cpt_try3.pickle', 'w') as fh:
-        fh.write(cPickle.dumps(state))
+    #import cPickle
+    #with open('optimal_cpt_try3.pickle', 'w') as fh:
+    #    fh.write(cPickle.dumps(state))
 
     import pprint
     pprint.pprint(state)

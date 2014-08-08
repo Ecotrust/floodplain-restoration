@@ -34,3 +34,7 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+dst/dst/media
+dst/dst/static
+dst/dst/db.sqlite3
