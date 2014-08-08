@@ -28,6 +28,7 @@ class GravelSite(BaseModel):
         return self.geometry.area
 
 
+
 class Pit(BaseModel):
     site = models.ForeignKey(GravelSite)
     geometry = models.PolygonField(srid=3857)
@@ -49,13 +50,12 @@ class Question(models.Model):
     # contextual info to help use answer the question
     image = models.ImageField(blank=True)
     supplement = models.FileField(blank=True)
-    layers = models.ManyToManyField(MapLayer, blank=True)
+    layers = models.ManyToManyField(MapLayer, blank=True, related_name="layers")
     
     # Many-To-Many with a through table is painful.
     # "The Django Way" for this problem sucks, just use a JSONField instead!
     # TODO Validate
-    choices = JSONField(default="""{
-    "choices": [
+    choices = JSONField(default="""[
         {
           "choice": "high",
           "value": 1.0
@@ -63,8 +63,7 @@ class Question(models.Model):
         {
           "choice": "low",
           "value": 0.0
-        }
-    ]\n}""")
+        }\n]""")
 
     def __str__(self):
         return "{}: `{}`".format(self.name, self.question)

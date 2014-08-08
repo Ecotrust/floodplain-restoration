@@ -4,7 +4,7 @@ from rest_framework import permissions
 from rest_framework.decorators import link
 from rest_framework.response import Response
 
-from bbn.models import GravelSite, Pit, InputNode
+from bbn.models import GravelSite, Pit, InputNode, Question
 from bbn import serializers
 from bbn.permissions import IsOwnerOrShared
 
@@ -68,3 +68,8 @@ class InputNodeViewSet(viewsets.ModelViewSet):
 
     def pre_save(self, obj):
         obj.user = self.request.user
+
+class QuestionViewSet(viewsets.ReadOnlyModelViewSet):
+    """Questions (Read only)"""
+    queryset = Question.objects.all().order_by('order')
+    serializer_class = serializers.QuestionSerializer

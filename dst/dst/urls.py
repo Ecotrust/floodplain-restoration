@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^api/', include('bbn.urls')),
-    url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/', include('allauth.urls')),
+
 )

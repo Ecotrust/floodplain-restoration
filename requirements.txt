@@ -4,3 +4,4 @@ pillow
 djangorestframework
 jsonfield
 djangorestframework-gis
+django-allauth
