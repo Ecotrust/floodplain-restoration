@@ -7,15 +7,17 @@ class InputNodeSerializer(serializers.ModelSerializer):
         model = models.InputNode
 
 
-class GravelSiteSerializer(GeoFeatureModelSerializer):
-    class Meta:
-        model = models.GravelSite
-        geo_field = "geometry"
-
-
 class PitSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = models.Pit
+        geo_field = "geometry"
+
+
+class GravelSiteSerializer(GeoFeatureModelSerializer):
+    inputnode_set = InputNodeSerializer(many=True)
+    pit_set = PitSerializer(many=True)
+    class Meta:
+        model = models.GravelSite
         geo_field = "geometry"
 
 
@@ -26,7 +28,7 @@ class MapLayerSerializer(serializers.ModelSerializer):
 
 class QuestionSerializer(serializers.ModelSerializer):
     def transform_choices(self, obj, value):
-        return obj.choices
+        return obj.choices  # represent as json, not string
     layers = MapLayerSerializer(many=True)
     class Meta:
         model = models.Question

@@ -45,9 +45,12 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
+    'silk'  # TODO remove or make debug=True only
 )
 
 MIDDLEWARE_CLASSES = (
+    'silk.middleware.SilkyMiddleware',   # TODO remove or make debug=True only
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,3 +129,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'dst', 'dst/media')
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = "/api/"
+
+SESSION_ENGINE = 'redis_sessions.session'
+
+CACHES = {
+    "default": {
+        "BACKEND": "redis_cache.cache.RedisCache",
+        "LOCATION": "127.0.0.1:6379:1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "redis_cache.client.DefaultClient",
+        }
+    }
+}

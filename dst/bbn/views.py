@@ -27,10 +27,10 @@ class GravelSiteViewSet(viewsets.ModelViewSet):
         IsOwnerOrShared,
     )
 
-    @link(renderer_classes=[renderers.StaticHTMLRenderer])
-    def area(self, request, *args, **kwargs):
+    @link(renderer_classes=[renderers.JSONRenderer])
+    def status(self, request, *args, **kwargs):
         obj = self.get_object()
-        return Response(obj.area)
+        return Response(obj.status)
 
     def pre_save(self, obj):
         obj.user = self.request.user

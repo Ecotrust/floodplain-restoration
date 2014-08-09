@@ -27,6 +27,25 @@ class GravelSite(BaseModel):
     def area(self):
         return self.geometry.area
 
+    @property
+    def missing_questions(self):
+        completed = [x.question.id for x in self.inputnode_set.all()]
+        return Question.objects.exclude(id__in=completed)
+
+    @property
+    def status(self):
+        status = {
+            'missing_questions' : [x.id for x in self.missing_questions],
+            'n_pits': len([x.id for x in self.pit_set.all()])
+        }
+
+        if len(status['missing_questions']) > 0 or status['npits'] == 0:
+            status['complete'] = False
+        else:
+            status['complete'] = True
+
+        return status
+
 
 
 class Pit(BaseModel):
