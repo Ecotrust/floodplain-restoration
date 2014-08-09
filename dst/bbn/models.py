@@ -2,6 +2,7 @@ from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from jsonfield import JSONField
 from django.core.validators import MaxValueValidator, MinValueValidator
+from silk.profiling.profiler import silk_profile #TODO remove
 
 class BaseModel(models.Model):
     name = models.CharField(max_length=80)
@@ -33,6 +34,7 @@ class GravelSite(BaseModel):
         return Question.objects.exclude(id__in=completed)
 
     @property
+    @silk_profile(name='Check Status')
     def status(self):
         status = {
             'missing_questions' : [x.id for x in self.missing_questions],

@@ -64,3 +64,24 @@ rm db.sqlite3
 spatialite db.sqlite3 "SELECT InitSpatialMetaData();"
 python manage.py migrate
 
+
+
+from silk.profiling.profiler import silk_profile
+@silk_profile(name='View Blog Post')
+```
+
+#TODO
+* Populate with questions
+* cpt.py
+* unit tests against web api
+* auth
+* caching
+* django pipeline
+* angular integration
+* flatblocks
+
+
+Maybe not
+*   django-secure
+*   celery
+*    django admin2 or xadmin or ???

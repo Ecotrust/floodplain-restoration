@@ -7,4 +7,3 @@ djangorestframework-gis
 django-allauth
 django-redis-sessions
 django-redis
-django-silk
