@@ -116,18 +116,18 @@ class Annealer:
             
             elapsed = time.time() - start
             if step == 0:
-                print ' Temperature        Energy    Accept   Improve     Elapsed   Remaining'
-                print '%12.6f  %12.2f                      %s            ' % \
-                    (T, E, time_string(elapsed) )
+                print(' Temperature        Energy    Accept   Improve     Elapsed   Remaining')
+                print('%12.6f  %12.2f                      %s            ' % \
+                    (T, E, time_string(elapsed) ))
             else:
                 remain = ( steps - step ) * ( elapsed / step )
-                print '%12.6f  %12.2f  %7.2f%%  %7.2f%%  %s  %s' % \
+                print('%12.6f  %12.2f  %7.2f%%  %7.2f%%  %s  %s' % \
                     (T, E, 100.0*acceptance, 100.0*improvement,
-                        time_string(elapsed), time_string(remain))
+                        time_string(elapsed), time_string(remain)))
         
         # Precompute factor for exponential cooling from Tmax to Tmin
         if Tmin <= 0.0:
-            print 'Exponential cooling requires a minimum temperature greater than zero.'
+            print('Exponential cooling requires a minimum temperature greater than zero.')
             sys.exit()
         Tfactor = -math.log( float(Tmax) / Tmin )
         
@@ -217,7 +217,7 @@ class Annealer:
         step = 0
         start = time.time()
         
-        print 'Attempting automatic simulated anneal...'
+        print('Attempting automatic simulated anneal...')
         
         # Find an initial guess for temperature
         T = 0.0
@@ -227,14 +227,14 @@ class Annealer:
             self.move(state)
             T = abs( self.energy(state) - E )
         
-        print 'Exploring temperature landscape:'
-        print ' Temperature        Energy    Accept   Improve     Elapsed'
+        print('Exploring temperature landscape:')
+        print(' Temperature        Energy    Accept   Improve     Elapsed')
         def update(T, E, acceptance, improvement):
             """Prints the current temperature, energy, acceptance rate,
             improvement rate, and elapsed time."""
             elapsed = time.time() - start
-            print '%12.6f  %12.2f  %7.2f%%  %7.2f%%  %s' % \
-                (T, E, 100.0*acceptance, 100.0*improvement, time_string(elapsed))
+            print('%12.6f  %12.2f  %7.2f%%  %7.2f%%  %s' % \
+                (T, E, 100.0*acceptance, 100.0*improvement, time_string(elapsed)))
         
         # Search for Tmax - a temperature that gives 98% acceptance
         state, E, acceptance, improvement = run(state, T, steps)
@@ -304,7 +304,7 @@ if __name__ == '__main__':
         return e
     
     # Start with the cities listed in random order
-    state = cities.keys()
+    state = list(cities.keys())
     random.shuffle(state)
     
     # Minimize the distance to be traveled by simulated annealing with a
@@ -313,17 +313,17 @@ if __name__ == '__main__':
     state, e = annealer.anneal(state, 10000000, 0.01, 18000*len(state), 9)
     while state[0] != 'New York City':
         state = state[1:] + state[:1]  # rotate NYC to start
-    print "%i mile route:" % route_energy(state)
+    print("%i mile route:" % route_energy(state))
     for city in state:
-        print "\t", city
+        print("\t", city)
     
     # Minimize the distance to be traveled by simulated annealing with an
     # automatically chosen temperature schedule
     state, e = annealer.auto(state, 4)
     while state[0] != 'New York City':
         state = state[1:] + state[:1]  # rotate NYC to start
-    print "%i mile route:" % route_energy(state)
+    print("%i mile route:" % route_energy(state))
     for city in state:
-        print "\t", city
+        print("\t", city)
     
     sys.exit()
