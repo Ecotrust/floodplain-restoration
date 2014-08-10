@@ -1,4 +1,4 @@
-bayesian
+-e git+https://github.com/Ecotrust/bayesian-belief-networks.git@master#egg=bayesian
 pillow
 -e git+https://github.com/django/django.git@stable/1.7.x#egg=django17
 djangorestframework
@@ -7,3 +7,5 @@ djangorestframework-gis
 django-allauth
 django-redis-sessions
 django-redis
+xlrd
+xlwt-future

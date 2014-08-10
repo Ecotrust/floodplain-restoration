@@ -41,7 +41,7 @@ class GravelSite(BaseModel):
             'n_pits': len([x.id for x in self.pit_set.all()])
         }
 
-        if len(status['missing_questions']) > 0 or status['npits'] == 0:
+        if len(status['missing_questions']) > 0 or status['n_pits'] == 0:
             status['complete'] = False
         else:
             status['complete'] = True
@@ -60,6 +60,8 @@ class MapLayer(models.Model):
     name = models.CharField(max_length=200)
     url_template = models.TextField()
 
+    def __str__(self):
+        return "Layer: {}".format(self.name)
  
 class Question(models.Model):
     name = models.CharField(max_length=80)  # TODO must correspond to the CPT

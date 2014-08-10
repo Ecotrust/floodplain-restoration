@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'bbn',
     'rest_framework',
-    'rest_framework_swagger',
 
     'django.contrib.sites',
     'allauth',
@@ -122,9 +121,9 @@ STATIC_URL = '/static/'
 
 
 #######
-STATIC_ROOT = os.path.join(BASE_DIR, 'dst', 'dst/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'dst', 'static')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'dst', 'dst/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'dst', 'media')
 
 SITE_ID = 1
 
