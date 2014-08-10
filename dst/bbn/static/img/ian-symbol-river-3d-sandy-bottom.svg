@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="220px" width="502px" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<title>River 3D: sandy bottom</title>
+<desc xmlns:ian_image_library="http://ian.umces.edu/imagelibrary/">
+      <ian_image_library:title>River 3D: sandy bottom</ian_image_library:title>
+      <ian_image_library:descr>Illustration of river base with sandy bottom</ian_image_library:descr>
+      <ian_image_library:scene>
+		<ian_image_library:contains>symbol,vector,illustration,diagram,template,base,ecosystem,aquatic,freshwater,river,stream,tributary,sandy,bottom,banks,sediment,deposition</ian_image_library:contains>
+        <ian_image_library:when>2005-07-28</ian_image_library:when> 
+	  </ian_image_library:scene>
+   </desc>
+    <metadata
+		id="metadata-iil-1b58a096f39f3584fdc6e5ed779db295">
+      <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+        <dc:title>River 3D: sandy bottom</dc:title>
+		<dc:date>2005-07-28</dc:date>
+        <dc:creator>
+			<cc:Agent>
+				<dc:title>Tracey Saxby</dc:title>
+			</cc:Agent>	
+		</dc:creator>   
+		<dc:rights>
+          <cc:Agent>
+            <dc:title>Tracey Saxby, Integration and Application Network</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Integration and Application Network</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+		<dc:identifier>http://ian.umces.edu/imagelibrary/displayimage-6211.html</dc:identifier>
+        <dc:source>http://ian.umces.edu/imagelibrary/displayimage-6211.html</dc:source>
+        <dc:language>en-US</dc:language>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>symbol,vector,illustration,diagram,template,base,ecosystem,aquatic,freshwater,river,stream,tributary,sandy,bottom,banks,sediment,deposition</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:coverage></dc:coverage>
+        <dc:description>Illustration of river base with sandy bottom</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title></dc:title>
+          </cc:Agent>
+        </dc:contributor>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+	
+ <defs></defs>
+ <linearGradient id="ian_symbols_2956ec3d18b958b435b64cdf9188948a" y2="86.794" gradientUnits="userSpaceOnUse" x2="286.68" y1="86.794" x1=".876">
+  <stop stop-color="#89AC7B" offset=".0056"/>
+  <stop stop-color="#C3BD92" offset="1"/>
+ </linearGradient>
+ <path stroke="#231F20" stroke-width=".5" d="m206.53 11.563c-4.563-1.915-7.686-3.427-13.021-2.928-5.688.532-11.045.984-16.898.984-6.941 0 .358.629-6.548-.004-8.967-.822-9.033-1.94-18.423-1.94-12.992 0-6.294-.016-19.283 0-8.129.009-13.29 1.165-21.577-1.432-7.709-2.413-29.771-3.281-34.694-1.895-4.925 1.383-4.66 15.988-12.934 23.749-8.276 7.76-18.33 44.28-30.314 67.866-5.553 10.924-9.964 22.166-14.928 33.363-2.876 6.501-5.209 4.999-7.263 11.483-.783 2.477-3.289 10.743-5.057 13.122-1.364 1.836-4.717 3.526-4.717 3.526s75.875 7.757 75.875 10.563 203.18 3.888 209.5.485c6.316-3.4-58.814-46.645-44.232-58.793 14.582-12.147 43.262-16.521 40.83-32.556-2.431-16.033-50.064-7.289-80.202-20.407-30.136-13.121 35.968-19.437 34.513-27.698-1.459-8.26-37.913-7.288-41.802-11.174-3.9-3.883 11.17-6.312 11.17-6.312z" fill="url(#ian_symbols_2956ec3d18b958b435b64cdf9188948a)"/>
+ <linearGradient id="ian_symbols_d8439846a9815ce4b973cc8bab66726b" y2="84.378" gradientUnits="userSpaceOnUse" x2="500.88" y1="84.378" x1="194.12">
+  <stop stop-color="#89AC7B" offset=".0056"/>
+  <stop stop-color="#C3BD92" offset="1"/>
+ </linearGradient>
+ <path stroke="#231F20" stroke-width=".5" d="m365.02 2.467c-6.835 0-18.017-3.431-25.473-1.757-7.455 1.67-4.155-1.024-20.256 1.065s-42.505 2.833-51.256 3.096c-8.748.26-33.264 1.202-36.627 1.411-3.365.207-14.055 1.563-16.489 1.983-2.433.417-5.748 2.867-5.748 2.867l-7.018 2.375s-8.364 1.7-6.316 5.101c2.044 3.399 52.005-.243 41.314 13.848-6.32 5.831-55.896 13.119-39.858 23.325 16.042 10.202 99.645 12.146 87.979 24.779-11.667 12.634-36.942 20.409-32.08 38.872 4.858 18.464 109.36 46.646 109.36 46.646s7.66.211 11.18 0c3.521-.209 8.773-.487 13.124-.487 4.349 0 24.479 2.916 31.108 2.916 5.163 0 74.333-11.327 82.906-11.048 0 0-14.241-26.36-17.709-37.296-3.469-10.935-19.642-26.265-24.313-33.905-4.674-7.64-36.506-28.617-41.37-39.511-4.865-10.891-8.625-17.176-13.183-25.089-4.561-7.909-13.396-16.178-17.482-17.997-4.07-1.814-17.21-1.191-21.78-1.191z" fill="url(#ian_symbols_d8439846a9815ce4b973cc8bab66726b)"/>
+ <linearGradient id="ian_symbols_22d2c2ef92518bf4c54ec01984aa7a77" y2="140.32" gradientUnits="userSpaceOnUse" x2="457.58" y1="140.32" x1="258.05">
+  <stop stop-color="#F0DDAE" offset="0"/>
+  <stop stop-color="#F8F0B9" offset="1"/>
+ </linearGradient>
+ <path stroke="#957966" stroke-width=".5" d="m457.58 159.52c-10.693-5.706-23.171-9.986-34.474-11.721-8.387-1.288-17.603-.24-26.04-1.887-8.243-1.608-19.887-5.758-28.312-6.245-5.229-.299-12.518-1.771-18.836-1.771-6.321 0-14.097-3.255-20.414-3.887-6.321-.632-14.37-1.092-22.848-4.706-6.995-2.983-46.932-8.807-48.606-17.158v6.793l42.775 26.588 140.48 23 16.28-8.99z" fill="url(#ian_symbols_22d2c2ef92518bf4c54ec01984aa7a77)"/>
+ <linearGradient id="ian_symbols_8796f704ba4c3d7485718a4c3d931e1c" y2="66.951" gradientUnits="userSpaceOnUse" x2="309.69" y1="66.951" x1="194.38">
+  <stop stop-color="#F0DDAE" offset="0"/>
+  <stop stop-color="#F8F0B9" offset="1"/>
+ </linearGradient>
+ <path stroke="#957966" stroke-width=".5" d="m198.75 51.401c3.89 1.461 7.184 2.053 10.671 2.188 4.347.172 7.989 1.472 12.179 1.942 4.556.513 9.605.823 14.202.732 5.173-.105 8.722-1.593 13.646-1.457 3.676.101 7.454.992 10.926 2.048 5.775 1.757 11.182.078 17.171.383 6.3.317 49.041 4.369 24.737 25.262l-107.91-25.262 4.37-5.836z" fill="url(#ian_symbols_8796f704ba4c3d7485718a4c3d931e1c)"/>
+ <linearGradient id="ian_symbols_07e7a5878ef7cc24cdb5ec1489236d10" y2="83.265" gradientUnits="userSpaceOnUse" x2="241.88" y1="165.59" x1="241.88">
+  <stop stop-color="#F2E1B0" offset="0"/>
+  <stop stop-color="#F8F0B9" offset="1"/>
+ </linearGradient>
+ <path stroke="#957966" stroke-width=".5" d="m241.04 163.65c-.114-4.166.091-5.814-1.481-9.1-1.247-2.598-9.824-11.729-11.867-13.712-8.281-8.043-20.433-20.919-14.599-28.209 5.832-7.287 23.685-15.808 27.487-17.018 5.32-1.689 25.196-12.546 30.935-12.341 5.737.206-26.586 58.999-26.586 58.999l11.18 23.322-15.07-1.94z" fill="url(#ian_symbols_07e7a5878ef7cc24cdb5ec1489236d10)"/>
+ <linearGradient id="ian_symbols_54d7f139b099dfc43963a2a9fb9b8963" y2="48.335" gradientUnits="userSpaceOnUse" x2="235.7" y1="48.335" x1="182.3">
+  <stop stop-color="#F0DDAE" offset="0"/>
+  <stop stop-color="#F8F0B9" offset="1"/>
+ </linearGradient>
+ <path stroke="#957966" stroke-width=".5" d="m198.03 65.495c-7.78-2.429-17.009-7.7-15.581-14.104 1.853-8.292 7.294-13.905 14.014-15.266 5.739-1.164 11.694-2.521 17.134-3.667 6.051-1.278 15.909-1.462 22.103-1.462l-41.802 14.092c0-.001 11.91 22.836 4.14 20.407z" fill="url(#ian_symbols_54d7f139b099dfc43963a2a9fb9b8963)"/>
+ <linearGradient id="ian_symbols_ca1fcb6137ab2734fdbd4558f9921b41" y2="28.216" gradientUnits="userSpaceOnUse" x2="245.89" y1="28.216" x1="196.81">
+  <stop stop-color="#F0DDAE" offset="0"/>
+  <stop stop-color="#F8F0B9" offset="1"/>
+ </linearGradient>
+ <path stroke="#957966" stroke-width=".5" d="m231.33 39.06c2.679.194 8.25-.774 12.623-5.877 7.291-9.962-7.533-14.092-19.201-14.577-5.112-.212-9.337-1.11-14.362-1.215-4.521-.094-9.059 0-13.585 0 0 0 7.547 3.079 15.094 4.48 5.461 1.016 11.321.296 16.196 1.155 4.875.861 8.759 3.302 10.267 4.81 5.11 5.105-17.73 10.449-7.03 11.224z" fill="url(#ian_symbols_ca1fcb6137ab2734fdbd4558f9921b41)"/>
+ <linearGradient id="ian_symbols_ee17faa947e987d46d58bcb7c7ba7b38" y2="6.9038" gradientUnits="userSpaceOnUse" x2="310.71" y1="175.86" x1="316.61">
+  <stop stop-color="#94CDE9" offset=".0056"/>
+  <stop stop-color="#00A2CF" offset="1"/>
+ </linearGradient>
+ <path stroke="#007198" stroke-width=".5" d="m443.97 166.08c-.206-1.449-1.978-6.585-16.383-10.293-15.693-4.043-49.58-6.661-58.957-7.929-17.984-2.427-37.184-7.529-52.738-11.416-14.178-3.543-34.022-9.232-43.747-19.68-6.316-6.802 12.19-15.148 15.542-17.951 7.303-6.103 11.106-8.923 15.988-18.489 3.926-7.692 4.597-12.41-1.393-15.307-12.049-5.829-21.969-3.843-35.482-4.861-5.958-.447-15.511-3.572-21.141-3.245-5.629.326-11.267.776-17.257.829-3.74.032-8.935-.751-12.659-.975-3.667-.217-13.081-1.454-14.808-4.625-2.002-3.694 3.892-7.046 8.998-8.115 5.108-1.069 20.273-4.336 17.979-4.276 0 0 14.217-2.242 15.557-8.988 1.807-9.112-10.692-9.96-16.514-10.446-5.822-.487-26.749-1.458-27.961-3.889-1.215-2.43 6.074-.728 11.42-5.833l-5.345.003c-6.804 2.915-17.46 2.592-10.105 9.23 2.997 2.707 4.515 2.673 13.749 4.131 9.236 1.457 25.512.57 26.006 4.616.52 4.264-27.313 5.616-35.144 8.745-7.652 3.062-13.552 5.689-14.923 14.578-.969 6.317 12.729 14.7 20.416 15.063 8.569.406 23.818 4.374 23.818 4.374s33.66 1.34 38.886 5.83c7.91 6.798-17.933 16.007-26.465 20.636-8.531 4.631-30.783 12.87-24.52 25.393 6.262 12.519 21.515 20.93 28.137 29.769 5.928 7.91 9.966 19.197 3.889 25.272l195.12-12.15z" fill="url(#ian_symbols_ee17faa947e987d46d58bcb7c7ba7b38)"/>
+ <linearGradient id="ian_symbols_3425d9c1c5c54334a500683cfa73e67d" y2="213.45" gradientUnits="userSpaceOnUse" x2="348.56" y1="160.73" x1="348.56">
+  <stop stop-color="#94CDE9" offset=".0056"/>
+  <stop stop-color="#00A2CF" offset="1"/>
+ </linearGradient>
+ <path stroke="#007198" stroke-width=".5" d="m448.17 163.39c-6.385.988-10.85-2.66-10.85-2.66s-2.548 2.906-6.666 2.799c-4.119-.145-6.411-2.543-6.411-2.543s-3.269 2.398-6.372 2.65c-3.084.232-6.726-2.906-6.726-2.906s-2.065 2.654-6.184 2.854c-4.121.16-6.723-2.708-6.723-2.708s-3.364 2.255-6.205 2.761c-2.828.487-6.892-2.814-6.892-2.814s-1.993 1.876-5.56 2.707c-3.526.774-7.533-2.598-7.533-2.598s-2.862 2.199-6.207 2.705c-3.361.487-6.854-2.814-6.854-2.814s-2.842 2.453-6.313 2.814c-3.494.344-6.781-2.814-6.781-2.814s-2.457 2.383-6.239 2.762c-3.808.344-6.726-2.708-6.726-2.708s-3.27 2.202-6.188 2.708c-2.9.486-6.797-2.652-6.797-2.652s-2.878 2.598-6.244 2.761c-3.358.177-6.905-2.761-6.905-2.761s-2.385 2.598-6.335 2.705c-3.955.107-6.577-2.814-6.577-2.814s-2.842 2.184-6.072 2.762c-3.216.54-7.112-2.708-7.112-2.708s-2.679 2.455-6.315 2.708c-3.624.231-6.521-2.652-6.521-2.652s-1.812 1.569-2.014 1.569c-.166 0-.441.884-4.175 1.136-3.749.232-6.835-2.507-6.835-2.507s-4.693 2.222-5.893 2.96v49.364h199.22v-50.07z" fill="url(#ian_symbols_3425d9c1c5c54334a500683cfa73e67d)"/>
+ <linearGradient id="ian_symbols_b7ce25daf4b756a431f8fa82166ed33a" y2="152.85" gradientUnits="userSpaceOnUse" x2="250.88" y1="218.79" x1="250.88">
+  <stop stop-color="#967D5F" offset="0"/>
+  <stop stop-color="#D7BD9C" offset="1"/>
+ </linearGradient>
+ <path stroke="#967D5F" stroke-width=".5" d="m500.88 218.79h-500v-61.334s26.783-.128 42.339-2.559c4.576-.713 22.448 3.001 45.69 2.488 12.178-.267 25.833-2.894 39.823-3.39 17.747-.635 36.034.358 52.529.085 29.995-.494 30.733-1.817 34.872-.944 11.624 2.456 20.78 3.763 25.227 5.582 4.448 1.822 16.098 7.303 19.974 9.92 3.881 2.622 18.146 4.356 22.59 6.817 4.442 2.46 14.815 9.759 21.516 12.946 6.705 3.188 12.038 6.668 17.804 9.803 5.769 3.138 16.708 1.855 25.798 4.326 9.086 2.469 23.089 1.216 27.784.01 4.698-1.198 11.262-7.146 15.459-8.313 4.199-1.167 13.894-1.94 18.713-4.229 4.818-2.289 7.834-4.898 9.891-8.376 2.061-3.474 14.942-16.154 19.201-16.519.81-.073 8.935-6.839 11.422-7.534 2.629-.73 9.706.024 13.608-1.211 5.888-1.869 5.357-.886 13.368-1.461 8.008-.574 22.393 2.559 22.393 2.559v61.32z" fill="url(#ian_symbols_b7ce25daf4b756a431f8fa82166ed33a)"/>
+ <linearGradient id="ian_symbols_9245a7323bc79154ed05205fe6012fe4" y2="157.31" gradientUnits="userSpaceOnUse" x2="347.25" y1="210.04" x1="347.25">
+  <stop stop-color="#E9CBA4" offset=".0056"/>
+  <stop stop-color="#F8F0B9" offset="1"/>
+ </linearGradient>
+ <path stroke="#957966" stroke-width=".5" d="m241.36 158.72c4.457 5.252 17.941 16.246 23.988 19.504 4.415 2.166 9.996 1.682 13.902 3.185 6.88 2.647 11.627 6.863 17.565 9.703 4.886 2.339 9.592 7.339 14.341 9.127 9.269 3.489 18.706 5.846 29.995 6.735 6.82.539 14.319 3.969 22.866 2.832 6.832-.82 16.289-1.034 26.023-3.688 5.706-1.555 7.86-3.626 13.281-6.117 10.007-4.591 22.366-10.605 26.8-17.403 1.458-2.187 5.835-3.643 8.75-5.83 5.834-5.103 7.292-13.849 13.853-18.951.169-.169.363-.34.553-.509-.697.054-1.305.136-1.768.263-2.487.695-10.612 7.461-11.422 7.534-4.259.364-17.141 13.045-19.201 16.519-2.057 3.478-5.072 6.087-9.891 8.376s-14.514 3.063-18.713 4.229c-4.197 1.168-10.761 7.115-15.459 8.313-4.695 1.206-18.698 2.459-27.784-.01-9.09-2.471-20.029-1.188-25.798-4.326-5.766-3.135-11.099-6.615-17.804-9.803-6.7-3.188-17.073-10.486-21.516-12.946-4.443-2.461-18.709-4.195-22.59-6.817-2.831-1.912-14.367-8.503-14.367-8.503s-6.81-2.8-5.61-1.39z" fill="url(#ian_symbols_9245a7323bc79154ed05205fe6012fe4)"/>
+</svg>
