@@ -67,15 +67,11 @@ Decision support tool for floodplain gravel mine restoration
 
 
 ## TODO
-* generate.py script to create from definition.json
-	cpt.py (with query_cpt, mimics runit_try2) 
-	cpt_orig.xls and cpt.xls (identical at first)
-	questions.json (fixture)
 * bayes_xls cptdict2xls function
 * optimize.py script to use query_cpt() and cptdict2xls()
 * file location refactoring
 	from bbn.cpt.xls import xls2cptdict, ...
-	from bbn.cpt import query_cpt  # defined in cpt.py but imported in __init__
+	from bbn.cpt.cpt import query_cpt 
 	# scripts dir with generate and optimize
 * load CPT in settings
 * suitability @property/@link using cpt.query_cpt(settings.CPT, inputnodes, )

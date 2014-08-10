@@ -1,10 +1,18 @@
 import itertools
 import xlwt
+from os.path import abspath, join, dirname
 import os
 import json
 
-CPT_XLS = "cpt.xls"
-DEFINITION = 'definition.json'
+# OUTPUT FILES
+DATA_DIR = abspath(join(dirname(__file__), '..', 'data'))
+CPT_XLS = join(DATA_DIR, "cpt_orig.xls")
+CPT_PY = join(DATA_DIR, "cpt.py")
+QUESTIONS_JSON = join(DATA_DIR, "questions.json")
+
+# INPUTS
+DEFINITION = join(DATA_DIR, 'definition.json')
+
 DEFAULT_LEVELS = ['Suitable', 'Unsuitable']
 MAX_SHEETNAME_WIDTH = 25
 
@@ -50,20 +58,12 @@ def expand(node, decision):
         if res:
             print(res)
 
-with open(DEFINITION, 'r') as fh:
-    suitability = json.loads(fh.read())
-    
-if not os.path.exists(CPT_XLS):
-    BOOK = xlwt.Workbook()
-    expand(suitability, 'suitability')
-    BOOK.save(CPT_XLS)
-
 
 def slugify(word):
     return word.lower().replace(' ', "_").replace("-","_")
 
 
-def expand_py(node, decision):
+def expand_py(node, decision, fh):
     """ recursively build python file """
 
     terminalnode_template = """
@@ -77,7 +77,7 @@ def expand_py(node, decision):
     template = """
     def f_%(decision)s(%(varlist)s, %(decision)s):
         cpt = {
-%(levelsrows)s
+ %(levelsrows)s
         }
         p = cpt[(%(varlist)s)]
         if %(decision)s:
@@ -117,69 +117,103 @@ def expand_py(node, decision):
         levelsrows += com + "\n" + row + "\n\n"
 
     varlist = ', '.join([slugify(x) for x in keynames])
-    print(template % locals())
+    fh.write(template % locals())
 
     NODELIST.append(decision)
 
     for key in keys:
         if node[key]:
-            res = expand_py(node[key], key)
+            res = expand_py(node[key], key, fh)
         else:
             newkey = slugify(key.split('~')[0])
             NODELIST.append(newkey)
             TERMLIST.append(newkey)
-            print(terminalnode_template % {'key': newkey})
+            fh.write(terminalnode_template % {'key': newkey})
 
 
-print("""from bayesian.bbn import build_bbn
-from bayes_xls import read_cpt
-from flask import Flask, jsonify, redirect, request, render_template
+def expand_questions(node, fh):
+    """ recursively build json file of questions """
 
-app = Flask(__name__)
+    global QUESTION_PK
+    terminalnode_template = """
+{
+  "pk": %d,
+  "fields": {
+    "order": %d,
+    "choices": "[
+       {\\\"value\\\":1.0,\\\"choice\\\":\\\"%s\\\"},
+       {\\\"value\\\":0.5,\\\"choice\\\":\\\"Not Sure\\\"},
+       {\\\"value\\\":0.0,\\\"choice\\\":\\\"%s\\\"}
+    ]",
+    "supplement": "",
+    "detail": "Detail about %s",
+    "title": "%s",
+    "image": "",
+    "name": "%s",
+    "question": "%s?",
+    "layers": []
+  },
+  "model": "bbn.question"
+}
+"""
+
+    if not node:
+        return
+    keys = node.keys()
+
+    for key in keys:
+        if node[key]:
+            res = expand_questions(node[key], fh)
+        else:
+            try:
+                name, levels = key.split("~")
+                levels = levels.split(",")
+            except:
+                name = key
+                levels = ['Suitable', 'Unsuitable']
+
+            QUESTION_PK += 1
+            fh.write(terminalnode_template % (
+                QUESTION_PK,
+                QUESTION_PK * 100.0,
+                levels[0],
+                levels[-1],
+                name,
+                name,
+                name,
+                name
+            ))
 
 
-@app.route('/', methods = ['GET'])
-def main():
-    items = USER_DATA.items()
-    items.sort()
-    length = len(items)
-    n = 11
-    b = range(0, length, n)
-    return render_template("sliders.html", 
-        user_data1=items[b[0]:b[0]+n],
-        user_data2=items[b[1]:b[1]+n],
-        user_data3=items[b[2]:b[2]+n],
-        user_data4=items[b[3]:b[3]+n]
-    )
+if __name__ == "__main__":
 
-@app.route('/query', methods = ['GET'])
-def prob_json():
-    print "#" * 80
-    user_data = USER_DATA.copy()
-    for k, v in request.args.items():
-        newval = float(v) / 100.0
-        if user_data[k] != newval:
-            print k, v
-        user_data[k] = newval
 
-    prob = query_cpt(user_data)
-    print "!!!!!!", prob
-    print "#" * 80
-    return jsonify({'restore': round(prob * 100, 2)})
+    with open(DEFINITION, 'r') as fh:
+        suitability = json.loads(fh.read())
 
-CPT = read_cpt('%s')
+    QUESTION_PK = 0
+    with open(QUESTIONS_JSON, 'w') as fh:
+        fh.write("[\n")
+        expand_questions(suitability, fh)
+        fh.write("\n]")
+        
+    BOOK = xlwt.Workbook()
+    expand(suitability, 'suitability')
+    BOOK.save(CPT_XLS)
 
-def query_cpt(user_data=None):
-    if not user_data:
-        user_data = {}
 
-""" % CPT_XLS)
+    with open(CPT_PY, 'w') as fh:
+        fh.write("""from bayesian.bbn import build_bbn
+########################## REMOVE ME ????
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'dst')))
+#########################################
+from bbn.cpt.xls import xls2cptdict
 
-NODELIST = []
-TERMLIST = []
-expand_py(suitability, 'suitability')
+def query_cpt(CPT, user_data=None, output_nodes=('suitability',)):
+""")
 
-end_template = """
+        end_template = """
     levels = [True, False]
     net = build_bbn(
         %s
@@ -193,22 +227,56 @@ end_template = """
     prob = dict(
     %s)
 
+    if not user_data:
+        user_data = {}
+
     for k,v in user_data.items():
-        if prob.has_key(k):
+        if k in prob:
             prob[k] = v
 
-    return net.query()[('suitability', True)]
+    nq = net.query()
+    res = []
+    for onode in output_nodes:
+        res.append(nq[(onode, True)])
 
-USER_DATA = {
-    %s}
+    return res
+
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug = True)
-    #print query_cpt(USER_DATA)
-"""
-print(end_template % (
-    '\n        '.join(["f_" + x + "," for x in NODELIST]),
-    '\n            '.join(["%s = levels," % x for x in NODELIST]),
-    '\n        '.join([x + " = 1.0," for x in TERMLIST]),
-    '\n     '.join(["'" + x + "': 1.0," for x in TERMLIST]),
-))
+    inputnodes = {
+        'water_rights': 0.7,
+        'surrounding_ownership': 1.0,
+        'identified_in_conservation_plan': 1.0,
+        'relationship_to_protected_areas': 1.0,
+        'intact_floodplain_forest': 1.0,
+        'habitat_features': 1.0,
+        'species_of_interest': 1.0,}
+
+    CPT = xls2cptdict('%s')
+
+    import random
+    for i in range(10):
+        k = random.choice(list(inputnodes.keys()))
+        inputnodes[k] = random.random()
+
+        val = query_cpt(CPT, inputnodes, output_nodes=(
+            'suitability',
+            'socio_economic',
+            'site',
+            'landscape')
+        )
+        print(val)
+
+        """
+
+        NODELIST = []
+        TERMLIST = []
+        expand_py(suitability, 'suitability', fh)
+
+        fh.write(end_template % (
+            '\n        '.join(["f_" + x + "," for x in NODELIST]),
+            '\n            '.join(["%s = levels," % x for x in NODELIST]),
+            '\n        '.join([x + " = 1.0," for x in TERMLIST]),
+            CPT_XLS
+            #'\n     '.join(["'" + x + "': 1.0," for x in TERMLIST]),
+        ))
