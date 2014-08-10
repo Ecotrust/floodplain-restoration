@@ -97,8 +97,15 @@ Image credits:
 Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
 
 
-## process (needs to be edited)
+## process
 1. Edit definition.json
-2. python generate.py > runit.py
-3. edit cpt.xls (generated in step 2 if it wasn't present)
-4. python runit.py
+2. python generate.py; creates
+	cpt.py
+	cpt.xls
+	questions.json
+3. optimize/edit cpt.xls
+4. copy cpt* to dst/bbn/cpt/ and copy questions.json to dst/bbn/fixtures
+
+
+
+http://textik.com/#6cbb27a529229ac2

@@ -49,7 +49,6 @@ class GravelSite(BaseModel):
         return status
 
 
-
 class Pit(BaseModel):
     site = models.ForeignKey(GravelSite)
     geometry = models.PolygonField(srid=3857)
