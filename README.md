@@ -96,3 +96,10 @@ Decision support tool for floodplain gravel mine restoration
 
 Image credits:
 Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
+
+
+## process (needs to be edited)
+1. Edit definition.json
+2. python generate.py > runit.py
+3. edit cpt.xls (generated in step 2 if it wasn't present)
+4. python runit.py
