@@ -67,13 +67,13 @@ Decision support tool for floodplain gravel mine restoration
 
 
 ## TODO
-* bayes_xls cptdict2xls function
 * optimize.py script to use query_cpt() and cptdict2xls()
-* file location refactoring
-	from bbn.cpt.xls import xls2cptdict, ...
-	from bbn.cpt.cpt import query_cpt 
-	# scripts dir with generate and optimize
 * load CPT in settings
+* pit vs property-specific questions/inputnodes
+* tying inputnodes back to questions so the client side knows when to post/put
+* /api/site/1/status > 
+   (if there is a next questions) /api/question/:next: > 
+   (if question has an answer node) /api/node/:answer:  (then populate UI)
 * suitability @property/@link using cpt.query_cpt(settings.CPT, inputnodes, )
 * system_check function/mgmt command to make sure CPT matches questions
 * setup routine to create test data
@@ -83,6 +83,8 @@ Decision support tool for floodplain gravel mine restoration
 * django pipeline
 * angular integration
 * flatblocks
+* report generation
+* public sharing
 
 
 ## Test

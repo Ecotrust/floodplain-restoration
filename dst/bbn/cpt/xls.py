@@ -1,4 +1,5 @@
 import xlrd
+import xlwt
 
 def expand(node, decision):
     """ recursively build excel file """
@@ -48,7 +49,7 @@ def defn2xls(defn):
     expand(suitability, 'suitability')
     BOOK.save(CPT_XLS)
  
-def xls2cptdict(xls):
+def xls2cptdict(xls, add_tilde=False):
     workbook = xlrd.open_workbook(xls)
     cptdict = {}
     for sheetname in workbook.sheet_names():
@@ -70,9 +71,10 @@ def xls2cptdict(xls):
                 value = float(rowdict[sheetname]) / 100.0
                 key = []
                 for state in states:
-                    # TODO tilde delimited ? 
-                    #key.append("{}~{}".format(state, rowdict[state]))
-                    key.append("{}".format(rowdict[state]))
+                    if add_tilde:
+                        key.append("{}~{}".format(state, rowdict[state]))
+                    else:
+                        key.append("{}".format(rowdict[state]))
                 key = tuple(key)
                 rows[key] = value
 
@@ -85,26 +87,37 @@ def xls2cptdict(xls):
     return cptdict
 
 def cptdict2xls(cptdict, xls):
+    book = xlwt.Workbook()
+
     for sheetname, sheetdata in cptdict.items():
         # TODO create new sheet
 
         # columns should all be the same
         cols = [x.split("~")[0] for x in list(sheetdata.keys())[0]]
-        print(sheetname)
-        print(cols)
-        print()
-        print(sheetdata)
-        print()
-        print()
-        print()
-        # TODO write sheetdata to rows
-        #  renamed headers accd to cols
+        cols.append(sheetname)
 
-        #print("{}\n\t{}".format(sheetname, sheetdata))
+        sheet = book.add_sheet(sheetname)
+
+        rowx = 0
+        heading_fmt = xlwt.easyxf('font: bold on; align: wrap off, vert centre, horiz center')
+        for colx, value in enumerate(cols):
+            sheet.write(rowx, colx, value, heading_fmt)
+
+        for k, v in sheetdata.items():
+            row = []
+            for oldkey in k:
+                row.append(oldkey.split("~")[1])
+            row.append(v)
+            rowx += 1
+            for colx, value in enumerate(row):
+                sheet.write(rowx, colx, value)
+
+    book.save(xls)
+    return xls
         
 
 
 if __name__ == "__main__":
-    cptd = xls2cptdict('cpt.xls')
-    cptdict2xls(cptd, 'cpt_out.xls')
+    cptd = xls2cptdict('../../../data/cpt_orig.xls', add_tilde=True)
+    cptdict2xls(cptd, '/tmp/cpt_out.xls')
     
