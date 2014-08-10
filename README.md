@@ -68,10 +68,19 @@ Decision support tool for floodplain gravel mine restoration
 
 
 ## TODO
-* Populate with questions (fixture) (create from cpt)
-* cpt.py
-* suitability @property using cpt
-* system_check function to make sure CPT matches questions
+* generate.py script to create from definition.json
+	cpt.py (with query_cpt, mimics runit_try2) 
+	cpt_orig.xls and cpt.xls (identical at first)
+	questions.json (fixture)
+* bayes_xls cptdict2xls function
+* optimize.py script to use query_cpt() and cptdict2xls()
+* file location refactoring
+	from bbn.cpt.xls import xls2cptdict, ...
+	from bbn.cpt import query_cpt  # defined in cpt.py but imported in __init__
+	# scripts dir with generate and optimize
+* load CPT in settings
+* suitability @property using cpt.query_cpt(settings.CPT, inputnodes, )
+* system_check function/mgmt command to make sure CPT matches questions
 * setup routine to create test data
 * unit tests against web api
 * auth
@@ -87,7 +96,7 @@ Maybe not
 *    django admin2 or xadmin or ???
 
 ## Test
-* Ensure Unique nodes for each site/question
+* Ensure unique inputnodes for each site/question
 * status after nodes and pits
 
 Image credits:
