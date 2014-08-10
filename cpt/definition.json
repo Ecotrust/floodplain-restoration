@@ -1,0 +1,71 @@
+{
+  "Socio-Economic": {
+    "Threats to other areas or Permittability~No threats,Threatened": {
+      "Infrastructure~No threats,Threatened": null,
+      "Surrounding land use~Ammenable,Unfriendly": null,
+      "Surrounding ownership~Ammenable,Unfriendly": null,
+      "Water rights~No threats,Threatened": null
+    },
+    "Cost benefit~Beneficial,Costly": {
+      "Property value~Good Deal,Costly": null,
+      "Contamination or Hazardous waste~Clean,Contaminated": null,
+      "Public perception~Supportive,Unfavorable": null
+    }
+  },
+  "Landscape": {
+    "Floodplain characteristics": {
+      "Gradient~Suitable,Unsuitable": null,
+      "Within X-year floodplain~Within,Outside": null,
+      "Width~Suitable,Unsuitable": null,
+      "Location in floodplain~Strategic,Ineffective": null
+    },
+    "Abiotic conditions": {
+      "Connectivity barriers~Connected,Disconnected": {
+        "Upstream~Connected,Disconnected": null,
+        "On property~Connected,Disconnected": null,
+        "Downstream~Connected,Disconnected": null
+      },
+      "Water quality~High Quality,Low Quality": null
+    },
+    "Conservation value": {
+      "Biotic conditions~Suitable,Unsuitable": {
+        "Intact floodplain forest~Intact,Missing": null,
+        "Species of interest~Present,Not Present": null,
+        "Habitat features~Suitable,Unsuitable": null
+      },
+      "Identified in conservation plan~Identified,Not Identified": null,
+      "Relationship to protected areas~Connected,Disconnected": null
+    },
+    "Geomorphic Controls": {
+      "Material availability~Available,Unavailable": null,
+      "Substrate~Suitable,Unsuitable": null,
+      "Infrastructure constraints~No restrictions,Unsuitable": null,
+      "Channel mobility~Mobile,Not mobile": null
+    }
+  },
+  "Site": {
+    "Pit restorability": {
+      "Water quality threat": {
+        "Contamination": null,
+        "Restorable Substrate": null
+      },
+      "Practical restorability": {
+        "Slope distance to river": null,
+        "Pit-adjacent levees": null,
+        "Bedrock Constraints": null,
+        "Adjacent river depth": null
+      },
+      "Pit geometry": {
+        "Bank slope": null,
+        "Complexity": null,
+        "Depth": null,
+        "Surface area": null
+      }
+    },
+    "Practical property-level restorability": {
+      "Continuing property access": null,
+      "Fill material availability~Available,Unavailable": null,
+      "Site accessibility~Accessible,Inaccessible": null
+    }
+  }
+}

@@ -1,83 +1,14 @@
 import itertools
 import xlwt
 import os
+import json
 
 CPT_XLS = "cpt.xls"
-
-suitability = {
-    'Landscape': {
-        'Conservation value': {
-            'Relationship to protected areas|Connected,Disconnected': None,
-            'Identified in conservation plan|Identified,Not Identified': None,
-            'Biotic conditions|Suitable,Unsuitable': {
-                'Habitat features|Suitable,Unsuitable': None,
-                'Intact floodplain forest|Intact,Missing': None,
-                'Species of interest|Present,Not Present': None
-            }
-        },
-        'Abiotic conditions': {
-            'Water quality|High Quality,Low Quality': None,
-            'Connectivity barriers|Connected,Disconnected': {
-                'Upstream|Connected,Disconnected': None,
-                'Downstream|Connected,Disconnected': None,
-                'On property|Connected,Disconnected': None,
-            }
-        },
-        'Geomorphic Controls': {
-            'Channel mobility|Mobile,Not mobile': None,
-            'Material availability|Available,Unavailable': None,
-            'Substrate|Suitable,Unsuitable': None,
-            'Infrastructure constraints|No restrictions,Unsuitable': None,
-        },
-        'Floodplain characteristics': {
-            'Gradient|Suitable,Unsuitable': None,
-            'Width|Suitable,Unsuitable': None,
-            'Within X-year floodplain|Within,Outside': None,
-            'Location in floodplain|Strategic,Ineffective': None,
-        }
-    },
-    'Socio-Economic': {
-        'Cost benefit|Beneficial,Costly': {
-            'Public perception|Supportive,Unfavorable': None,
-            'Contamination or Hazardous waste|Clean,Contaminated': None,
-            'Property value|Good Deal,Costly': None,
-        },
-        'Threats to other areas or Permittability|No threats,Threatened': {
-            'Surrounding ownership|Ammenable,Unfriendly': None,
-            'Surrounding land use|Ammenable,Unfriendly': None,
-            'Water rights|No threats,Threatened': None,
-            'Infrastructure|No threats,Threatened': None
-        },
-    },
-    'Site': {
-        'Practical property-level restorability': {
-            'Continuing property access': None,
-            'Fill material availability|Available,Unavailable': None,
-            'Site accessibility|Accessible,Inaccessible': None,
-        },
-        'Pit restorability': {
-            'Water quality threat': {
-                'Contamination': None,
-                'Restorable Substrate': None,
-            },
-            'Practical restorability': {
-                'Adjacent river depth': None,
-                'Pit-adjacent levees': None,
-                'Slope distance to river': None,
-                'Bedrock Constraints': None
-            },
-            'Pit geometry': {
-                'Surface area': None,
-                'Complexity': None,
-                'Bank slope': None,
-                'Depth': None,
-            },
-        },
-    }
-}
-
+DEFINITION = 'definition.json'
 DEFAULT_LEVELS = ['Suitable', 'Unsuitable']
 MAX_SHEETNAME_WIDTH = 25
+
+
 def expand(node, decision):
     """ recursively build excel file """
     if not node:
@@ -85,10 +16,10 @@ def expand(node, decision):
     keys = node.keys()
     levels = []
     keynames = []
-    decision = decision.split('|')[0][:MAX_SHEETNAME_WIDTH]
+    decision = decision.split('~')[0][:MAX_SHEETNAME_WIDTH]
     sheet = BOOK.add_sheet(decision)
     for key in keys:
-        ks = key.split("|")
+        ks = key.split("~")
         keynames.append(ks[0])
         if len(ks) == 1:
             levels.append(DEFAULT_LEVELS)
@@ -117,8 +48,11 @@ def expand(node, decision):
     for key in keys:
         res = expand(node[key], key)
         if res:
-            print res
+            print(res)
 
+with open(DEFINITION, 'r') as fh:
+    suitability = json.loads(fh.read())
+    
 if not os.path.exists(CPT_XLS):
     BOOK = xlwt.Workbook()
     expand(suitability, 'suitability')
@@ -156,11 +90,11 @@ def expand_py(node, decision):
     keys = node.keys()
     levels = []
     keynames = []
-    decision_xls = decision.split('|')[0][:MAX_SHEETNAME_WIDTH]
-    decision = slugify(decision.split('|')[0])
+    decision_xls = decision.split('~')[0][:MAX_SHEETNAME_WIDTH]
+    decision = slugify(decision.split('~')[0])
 
     for key in keys:
-        ks = key.split("|")
+        ks = key.split("~")
         keynames.append(ks[0])
         if len(ks) == 1:
             levels.append(DEFAULT_LEVELS)
@@ -183,7 +117,7 @@ def expand_py(node, decision):
         levelsrows += com + "\n" + row + "\n\n"
 
     varlist = ', '.join([slugify(x) for x in keynames])
-    print template % locals()
+    print(template % locals())
 
     NODELIST.append(decision)
 
@@ -191,13 +125,13 @@ def expand_py(node, decision):
         if node[key]:
             res = expand_py(node[key], key)
         else:
-            newkey = slugify(key.split('|')[0])
+            newkey = slugify(key.split('~')[0])
             NODELIST.append(newkey)
             TERMLIST.append(newkey)
-            print terminalnode_template % {'key': newkey}
+            print(terminalnode_template % {'key': newkey})
 
 
-print """from bayesian.bbn import build_bbn
+print("""from bayesian.bbn import build_bbn
 from bayes_xls import read_cpt
 from flask import Flask, jsonify, redirect, request, render_template
 
@@ -239,7 +173,7 @@ def query_cpt(user_data=None):
     if not user_data:
         user_data = {}
 
-""" % CPT_XLS
+""" % CPT_XLS)
 
 NODELIST = []
 TERMLIST = []
@@ -272,9 +206,9 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", debug = True)
     #print query_cpt(USER_DATA)
 """
-print end_template % (
+print(end_template % (
     '\n        '.join(["f_" + x + "," for x in NODELIST]),
     '\n            '.join(["%s = levels," % x for x in NODELIST]),
     '\n        '.join([x + " = 1.0," for x in TERMLIST]),
     '\n     '.join(["'" + x + "': 1.0," for x in TERMLIST]),
-)
+))
