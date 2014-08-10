@@ -9,3 +9,8 @@ django-redis-sessions
 django-redis
 xlrd
 xlwt-future
+pytest
+ipdb
+ipython
+django-silk
+

@@ -9,7 +9,6 @@ Decision support tool for floodplain gravel mine restoration
 	sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev python3-dev 
 	sudo apt-get install redis-server
 	pip install -r requirements.txt
-	pip install -r requirements-dev.txt
 
 	django-admin.py startproject dst
 	cd dst  # just a container
