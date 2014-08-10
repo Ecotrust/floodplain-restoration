@@ -79,7 +79,7 @@ Decision support tool for floodplain gravel mine restoration
 	from bbn.cpt import query_cpt  # defined in cpt.py but imported in __init__
 	# scripts dir with generate and optimize
 * load CPT in settings
-* suitability @property using cpt.query_cpt(settings.CPT, inputnodes, )
+* suitability @property/@link using cpt.query_cpt(settings.CPT, inputnodes, )
 * system_check function/mgmt command to make sure CPT matches questions
 * setup routine to create test data
 * unit tests against web api
@@ -89,11 +89,6 @@ Decision support tool for floodplain gravel mine restoration
 * angular integration
 * flatblocks
 
-
-Maybe not
-*   django-secure
-*   celery
-*    django admin2 or xadmin or ???
 
 ## Test
 * Ensure unique inputnodes for each site/question

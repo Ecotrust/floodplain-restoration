@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Test</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" 
+        href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  <style>
+  #main {
+     width: 600px; 
+     margin-top:46px;
+  }
+  #main::after {
+  background-image: url(ian-symbol-river-3d-sediment-layers.svg);
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity: 0.4;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;  
+  }
+  .topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  z-index: 1000;
+    height: 46px;
+
+  }
+  </style>
+</head>
+<body>
+
+  <div class="topnav">
+    <h4>TNC Gravel Mine DST</h4>
+  </div>
+
+  <div id="main">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+  
+          <h3> A site evaluation tool to support gravel mine 
+          restoration in the floodplains of the Willamette Valley.</h3>
+        
+          <a href="/api/" class="btn btn-primary btn-lg "> Get Started </a>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+
+</body>
+</html>
