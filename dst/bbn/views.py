@@ -32,6 +32,11 @@ class GravelSiteViewSet(viewsets.ModelViewSet):
         obj = self.get_object()
         return Response(obj.status)
 
+    @link(renderer_classes=[renderers.JSONRenderer])
+    def suitability(self, request, *args, **kwargs):
+        obj = self.get_object()
+        return Response(obj.suitability)
+
     def pre_save(self, obj):
         obj.user = self.request.user
 

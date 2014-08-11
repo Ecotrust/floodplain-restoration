@@ -106,8 +106,8 @@ Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
 3. optimize/edit cpt.xls
 4. copy cpt* to dst/bbn/cpt/ and copy questions.json to dst/bbn/fixtures
     cd dst
-	cp ../data/cpt_OPTIMIZED.xls bbn/cpt.xls
-	cp ../data/cpt.py bbn/cpt.py
+	cp ../data/cpt.xls bbn/cpt/cpt.xls
+	cp ../data/cpt.py bbn/cpt/cpt.py
 	cp ../data/questions.json bbn/fixtures/questions.json
 5. load fixtures
     python manage.py loaddata bbn/fixtures/questions.json

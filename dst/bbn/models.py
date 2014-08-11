@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 from jsonfield import JSONField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from silk.profiling.profiler import silk_profile #TODO remove
@@ -48,6 +49,25 @@ class GravelSite(BaseModel):
 
         return status
 
+    @property
+    @silk_profile(name='Check Suitability')
+    def suitability(self):
+        from bbn.cpt.cpt import query_cpt
+
+        input_nodes = dict(
+            [(x.question.slug, x.value) for x in self.inputnode_set.all()]
+        )
+
+        output_nodes = (
+            'suitability',
+            'socio_economic',
+            'site',
+            'landscape',
+        )
+
+        vals = query_cpt(settings.CPT, input_nodes, output_nodes)
+
+        return dict(zip(output_nodes, vals))
 
 class Pit(BaseModel):
     site = models.ForeignKey(GravelSite)
@@ -63,7 +83,7 @@ class MapLayer(models.Model):
         return "Layer: {}".format(self.name)
  
 class Question(models.Model):
-    name = models.CharField(max_length=80)  # TODO must correspond to the CPT
+    name = models.CharField(max_length=80)  # TODO slug correspond to the CPT
     title = models.CharField(max_length=80)
     question = models.CharField(max_length=250)
     detail = models.TextField()  # TODO HTML
@@ -86,6 +106,10 @@ class Question(models.Model):
           "choice": "low",
           "value": 0.0
         }\n]""")
+
+    @property
+    def slug(self):
+        return self.name.lower().replace(' ', "_").replace("-","_")
 
     def __str__(self):
         return "{}: `{}`".format(self.name, self.question)
