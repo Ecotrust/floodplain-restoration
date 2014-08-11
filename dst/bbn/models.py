@@ -128,6 +128,9 @@ class InputNode(BaseModel):
         ]
     )
 
+    class Meta:
+        unique_together = (('site', 'question', 'user'),)
+
     def __str__(self):   
         return "{} `{}` for {}".format(self.__class__.__name__,
                                       self.question.name,

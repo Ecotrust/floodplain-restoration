@@ -67,11 +67,12 @@ Decision support tool for floodplain gravel mine restoration
 
 
 ## TODO
-* load CPT in settings
-* suitability @property/@link using cpt.query_cpt(settings.CPT, inputnodes, )
 * system_check function/mgmt command to make sure CPT matches questions
 
+* Ensure unique inputnodes for each site/question
+
 * pit vs property-specific questions/inputnodes
+
 * tying inputnodes back to questions so the client side knows when to post/put
 * /api/site/1/status > 
    (if there is a next questions) /api/question/:next: > 
@@ -79,6 +80,7 @@ Decision support tool for floodplain gravel mine restoration
 
 * translate cpt_edited to our new ~format
 * setup routine to create test data
+* seperate db for silk
 * unit tests against web api
 * auth
 * caching
@@ -90,7 +92,7 @@ Decision support tool for floodplain gravel mine restoration
 
 
 ## Test
-* Ensure unique inputnodes for each site/question
+* ensure unique input nodes
 * status after nodes and pits
 
 Image credits:
