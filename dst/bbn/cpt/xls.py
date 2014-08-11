@@ -1,5 +1,7 @@
 import xlrd
 import xlwt
+from collections import OrderedDict
+import json 
 
 def expand(node, decision):
     """ recursively build excel file """
@@ -51,7 +53,7 @@ def defn2xls(defn):
  
 def xls2cptdict(xls, add_tilde=False):
     workbook = xlrd.open_workbook(xls)
-    cptdict = {}
+    cptdict = OrderedDict()
     for sheetname in workbook.sheet_names():
         sheet = workbook.sheet_by_name(sheetname)
         header = [x.value for x in sheet.row(0)]
@@ -62,7 +64,7 @@ def xls2cptdict(xls, add_tilde=False):
             states.append(item)
 
         rowsleft = True
-        rows = {}
+        rows = OrderedDict()
         rownum = 1
         while rowsleft:
             try:
@@ -87,10 +89,10 @@ def xls2cptdict(xls, add_tilde=False):
     return cptdict
 
 def cptdict2xls(cptdict, xls):
+
     book = xlwt.Workbook()
 
     for sheetname, sheetdata in cptdict.items():
-        # TODO create new sheet
 
         # columns should all be the same
         cols = [x.split("~")[0] for x in list(sheetdata.keys())[0]]
@@ -106,7 +108,8 @@ def cptdict2xls(cptdict, xls):
         for k, v in sheetdata.items():
             row = []
             for oldkey in k:
-                row.append(oldkey.split("~")[1])
+                # row.append(oldkey.split("~")[1])
+                row.append(oldkey)
             row.append(v)
             rowx += 1
             for colx, value in enumerate(row):
@@ -118,6 +121,6 @@ def cptdict2xls(cptdict, xls):
 
 
 if __name__ == "__main__":
-    cptd = xls2cptdict('../../../data/cpt_orig.xls', add_tilde=True)
+    cptd = xls2cptdict('../../../data/cpt.xls', add_tilde=True)
     cptdict2xls(cptd, '/tmp/cpt_out.xls')
     

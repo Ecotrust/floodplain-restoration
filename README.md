@@ -67,15 +67,17 @@ Decision support tool for floodplain gravel mine restoration
 
 
 ## TODO
-* optimize.py script to use query_cpt() and cptdict2xls()
 * load CPT in settings
+* suitability @property/@link using cpt.query_cpt(settings.CPT, inputnodes, )
+* system_check function/mgmt command to make sure CPT matches questions
+
 * pit vs property-specific questions/inputnodes
 * tying inputnodes back to questions so the client side knows when to post/put
 * /api/site/1/status > 
    (if there is a next questions) /api/question/:next: > 
    (if question has an answer node) /api/node/:answer:  (then populate UI)
-* suitability @property/@link using cpt.query_cpt(settings.CPT, inputnodes, )
-* system_check function/mgmt command to make sure CPT matches questions
+
+* translate cpt_edited to our new ~format
 * setup routine to create test data
 * unit tests against web api
 * auth
@@ -95,7 +97,7 @@ Image credits:
 Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
 
 
-## process
+## process for *Initial* creation
 1. Edit definition.json
 2. python generate.py; creates
 	cpt.py
@@ -103,7 +105,19 @@ Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
 	questions.json
 3. optimize/edit cpt.xls
 4. copy cpt* to dst/bbn/cpt/ and copy questions.json to dst/bbn/fixtures
+    cd dst
+	cp ../data/cpt_OPTIMIZED.xls bbn/cpt.xls
+	cp ../data/cpt.py bbn/cpt.py
+	cp ../data/questions.json bbn/fixtures/questions.json
+5. load fixtures
+    python manage.py loaddata bbn/fixtures/questions.json
 
+
+
+## process for updating
+1. Edit definition.json
+2. generate
+3. ???
 
 
 http://textik.com/#6cbb27a529229ac2

@@ -6,7 +6,7 @@ import json
 
 # OUTPUT FILES
 DATA_DIR = abspath(join(dirname(__file__), '..', 'data'))
-CPT_XLS = join(DATA_DIR, "cpt_orig.xls")
+CPT_XLS = join(DATA_DIR, "cpt.xls")
 CPT_PY = join(DATA_DIR, "cpt.py")
 QUESTIONS_JSON = join(DATA_DIR, "questions.json")
 
@@ -28,11 +28,15 @@ def expand(node, decision):
     sheet = BOOK.add_sheet(decision)
     for key in keys:
         ks = key.split("~")
-        keynames.append(ks[0])
+        # keynames.append(ks[0])
+        keynames.append(key)  # don't split!!!
         if len(ks) == 1:
-            levels.append(DEFAULT_LEVELS)
+            level_iter = zip([ks[0]] * len(DEFAULT_LEVELS), DEFAULT_LEVELS)
         else:
-            levels.append(ks[1].split(","))
+            tls = ks[1].split(",")
+            level_iter = zip([ks[0]] * len(tls), tls)
+
+        levels.append(["~".join(x) for x in level_iter])
 
     rowx = 0
     headings = keynames + [decision]
@@ -96,10 +100,14 @@ def expand_py(node, decision, fh):
     for key in keys:
         ks = key.split("~")
         keynames.append(ks[0])
+
         if len(ks) == 1:
-            levels.append(DEFAULT_LEVELS)
+            level_iter = zip([ks[0]] * len(DEFAULT_LEVELS), DEFAULT_LEVELS)
         else:
-            levels.append(ks[1].split(","))
+            tls = ks[1].split(",")
+            level_iter = zip([ks[0]] * len(tls), tls)
+
+        levels.append(["~".join(x) for x in level_iter])
 
     headings = keynames + [decision]
 
@@ -131,7 +139,7 @@ def expand_py(node, decision, fh):
             fh.write(terminalnode_template % {'key': newkey})
 
 
-def expand_questions(node, fh):
+def expand_questions(node):
     """ recursively build json file of questions """
 
     global QUESTION_PK
@@ -140,11 +148,7 @@ def expand_questions(node, fh):
   "pk": %d,
   "fields": {
     "order": %d,
-    "choices": "[
-       {\\\"value\\\":1.0,\\\"choice\\\":\\\"%s\\\"},
-       {\\\"value\\\":0.5,\\\"choice\\\":\\\"Not Sure\\\"},
-       {\\\"value\\\":0.0,\\\"choice\\\":\\\"%s\\\"}
-    ]",
+    "choices": "[{\\\"value\\\":1.0,\\\"choice\\\":\\\"%s\\\"}, {\\\"value\\\":0.5,\\\"choice\\\":\\\"Not Sure\\\"}, {\\\"value\\\":0.0,\\\"choice\\\":\\\"%s\\\"} ]",
     "supplement": "",
     "detail": "Detail about %s",
     "title": "%s",
@@ -154,8 +158,7 @@ def expand_questions(node, fh):
     "layers": []
   },
   "model": "bbn.question"
-}
-"""
+}"""
 
     if not node:
         return
@@ -163,7 +166,7 @@ def expand_questions(node, fh):
 
     for key in keys:
         if node[key]:
-            res = expand_questions(node[key], fh)
+            res = expand_questions(node[key])
         else:
             try:
                 name, levels = key.split("~")
@@ -173,7 +176,7 @@ def expand_questions(node, fh):
                 levels = ['Suitable', 'Unsuitable']
 
             QUESTION_PK += 1
-            fh.write(terminalnode_template % (
+            QUESTIONS_LIST.append(terminalnode_template % (
                 QUESTION_PK,
                 QUESTION_PK * 100.0,
                 levels[0],
@@ -192,9 +195,11 @@ if __name__ == "__main__":
         suitability = json.loads(fh.read())
 
     QUESTION_PK = 0
+    QUESTIONS_LIST = []
+    expand_questions(suitability)
     with open(QUESTIONS_JSON, 'w') as fh:
         fh.write("[\n")
-        expand_questions(suitability, fh)
+        fh.write(",\n".join(QUESTIONS_LIST))
         fh.write("\n]")
         
     BOOK = xlwt.Workbook()

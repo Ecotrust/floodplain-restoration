@@ -1,11 +1,12 @@
 from bayesian.bbn import build_bbn
 import os
 
+print("Note... using cpt.py and cpt.xls in /data!")
+
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'dst')))
-from bbn.cpt.xls import xls2cptdict 
+from bbn.cpt.xls import xls2cptdict, cptdict2xls
 
-print("Note... using cpt.py and cpt.xls in /data!")
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data')))
 from cpt import query_cpt
 import numpy as np
@@ -15,6 +16,10 @@ from anneal import Annealer
 
 CPT_XLS = os.path.abspath(os.path.join(os.path.dirname(__file__),
     '..', 'data', 'cpt.xls'))
+
+OUTPUT_CPT_XLS = os.path.abspath(os.path.join(os.path.dirname(__file__),
+    '..', 'data', 'cpt_OPTIMIZED.xls'))
+
 
 USER_DATA = {
     'water_rights': 1.0,
@@ -91,13 +96,9 @@ if __name__ == "__main__":
         training_sites[training_site] = suitability
         user_datas[training_site] = user_data
 
-    CPT = xls2cptdict(CPT_XLS)
-
+    CPT = xls2cptdict(CPT_XLS)  # , add_tilde=True)
 
     state = copy.deepcopy(CPT)
-    import pprint
-    pprint.pprint(state)
-    #sys.exit()
     
     def energy(state):
         """
@@ -108,7 +109,8 @@ if __name__ == "__main__":
         """
         errors = []
         for training_site, suitability in training_sites.items():
-            import ipdb; ipdb.set_trace()
+            #import ipdb; ipdb.set_trace()
+            #print(training_site)
             res = query_cpt(
                 state, 
                 user_datas[training_site],
@@ -144,12 +146,12 @@ if __name__ == "__main__":
     # schedule = annealer.auto(state, minutes=60.0, steps=20)
     # print schedule
     
-    schedule = {'steps': 80000.0, 'tmax': 0.33, 'tmin': 6.7e-14}
+    schedule = {'steps': 800.0, 'tmax': 0.33, 'tmin': 6.7e-14}
     #schedule = {'steps': 16000.0, 'tmax': 0.004, 'tmin': 0.000001}
     state, e = annealer.anneal(state, schedule['tmax'], schedule['tmin'], 
-                                schedule['steps'], updates=schedule['steps']/10)
+                                schedule['steps'], updates=schedule['steps']/5)
 
 
-    # TODO output to xls
-    import pprint
-    pprint.pprint(state)
+    cptdict2xls(state, OUTPUT_CPT_XLS)
+    print()
+    print(OUTPUT_CPT_XLS)
