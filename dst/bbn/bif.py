@@ -1,10 +1,89 @@
+from __future__ import print_function
 import itertools
 import re
+from bayesian.bbn import build_bbn
+
+def test(* args):
+    for arg in args:
+        print(arg)
 
 class BeliefNetwork:
     def __init__(self, variables, probabilities):
         self.variables = variables
         self.probabilities = probabilities
+
+    @property 
+    def is_valid(self):
+        if sorted(self.variables.keys()) != sorted(self.probabilities.keys()):
+            return (False, 'variables and probabilities must have same keys')
+
+    def query(self,  inputnodes=None, outputnodes=None):
+        net = self.net(inputnodes)
+        return net.query()
+
+    def net(self, inputnodes=None):
+        function_list = list(self.functions(inputnodes=inputnodes))
+        net = build_bbn(
+            function_list,
+            domains=self.variables
+        )
+        return net
+
+    def functions(self, inputnodes=None):
+        if inputnodes is None:
+            inputnodes = []
+
+        for name, prob in self.probabilities.items():
+
+            cpt = prob['cpt'].copy()
+
+            # Set inputnodes 
+            # (only applies to variables without conditional tables)
+            for varname, inv in inputnodes.items():
+                if varname != name:
+                    continue
+                if prob['given']:
+                    raise Exception(
+                     "Can't specify nodes with conditionals; {}".format(varname))
+                state = inv[0]
+                assert state in self.variables[varname]
+                value = inv[1]
+                assert value <= 1.0
+                cpt[(state,)] = value
+
+                # aportion the rest to remaining states
+                totalleft = 1.0 - value
+                remaining = [v for v in self.variables[varname] if v != state]
+                for rv in remaining:
+                    cpt[(rv,)] = totalleft/len(remaining)
+            
+            if prob['given']:
+                given = prob['given']
+            else:
+                given = []
+            argspec = given + [name]
+
+            # evaling a function string? yep I'm going there
+            # alternatively, i could make cpt a closure ...
+            # but didn't have much luck with this method
+            # def func(*args):
+            #     print(cpt)
+            #     print(args)
+            #     return cpt[args]
+            funcstr = """def f_{name}(*args):
+    data = {cpt}
+    return data[args]
+            """.format(
+                name=name,
+                # args=", ".join(argspec),
+                cpt=cpt
+            )
+            exec(funcstr)
+
+            func = locals()["f_{}".format(name)]
+            func.argspec = argspec
+            yield func
+
 
     def pprint(self):
         """
@@ -36,11 +115,13 @@ class BeliefNetwork:
                   'given': ['Cancer']}}"""
 
         import pprint
+        print("Variables\n----------------------")
         pprint.pprint(self.variables)  
+        print("Probabilities\n----------------------")
         pprint.pprint(self.probabilities)
 
-    @staticmethod
-    def from_bif(bif):
+    @classmethod
+    def from_bif(cls, bif):
         variable_pattern = re.compile(
             r"  type discrete \[ \d+ \] \{ (.+) \};\s*")
         prior_probability_pattern_1 = re.compile(
@@ -85,8 +166,8 @@ class BeliefNetwork:
 
                 if in_prior:
                     match = prior_probability_pattern_2.match(line)
-                    dd = str(dict(zip(variables[in_prior],
-                                  map(float, match.group(1).split(", ")))))
+                    dd = dict(zip([(x,) for x in variables[in_prior]],
+                                  map(float, match.group(1).split(", "))))
                     dictionary[in_prior] = {'cpt': dd, 'given': None}
                     in_prior = False
                     continue
@@ -121,7 +202,7 @@ class BeliefNetwork:
                         dictionary[in_cond]['cpt'][tuple(given_values + [value])] = prob
 
 
-        bn = BeliefNetwork(variables, dictionary)
+        bn = cls(variables, dictionary)
         return bn
 
 
@@ -130,7 +211,18 @@ class BeliefNetwork:
 
 if __name__ == "__main__":
     bn = BeliefNetwork.from_bif('cancer.bif')
-    bn.pprint()
+
+    for i in range(1,10):
+
+        res = bn.query(inputnodes={
+            'Pollution': ('polluted', 1.0/i)
+        })
+
+        from pprint import pprint as print
+        print(res[('Cancer', 'cancer')])
+
+      
+
 
  
 
