@@ -67,16 +67,15 @@ Decision support tool for floodplain gravel mine restoration
 
 
 ## TODO
-* system_check function/mgmt command to make sure CPT matches questions
-
-* Ensure unique inputnodes for each site/question
-
-* pit vs property-specific questions/inputnodes
-
 * tying inputnodes back to questions so the client side knows when to post/put
 * /api/site/1/status > 
    (if there is a next questions) /api/question/:next: > 
    (if question has an answer node) /api/node/:answer:  (then populate UI)
+
+
+* system_check function/mgmt command to make sure CPT matches questions
+
+* pit vs property-specific questions/inputnodes
 
 * translate cpt_edited to our new ~format
 * setup routine to create test data
@@ -92,6 +91,7 @@ Decision support tool for floodplain gravel mine restoration
 
 
 ## Test
+* system check
 * ensure unique input nodes
 * status after nodes and pits
 
