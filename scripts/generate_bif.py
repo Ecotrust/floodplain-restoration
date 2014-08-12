@@ -99,7 +99,7 @@ def expand_questions(node):
     "question": "%s?",
     "layers": []
   },
-  "model": "bbn.question"
+  "model": "survey.question"
 }"""
 
     if not node:
@@ -112,10 +112,10 @@ def expand_questions(node):
         else:
             try:
                 name, levels = key.split("~")
-                levels = levels.split(",")
+                levels = [slugify(x) for x in levels.split(",")]
             except:
                 name = key
-                levels = ['Suitable', 'Unsuitable']
+                levels = ['suitable', 'unsuitable']
 
             QUESTION_PK += 1
             QUESTIONS_LIST.append(terminalnode_template % (
@@ -125,7 +125,7 @@ def expand_questions(node):
                 levels[-1],
                 name,
                 name,
-                name,
+                slugify(name),
                 name
             ))
 

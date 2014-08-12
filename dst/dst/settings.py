@@ -140,3 +140,5 @@ CACHES = {
         }
     }
 }
+
+BBN_BIF = os.path.join(BASE_DIR, 'dst', 'data', 'bbn.bif')

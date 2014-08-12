@@ -5,10 +5,9 @@ from jsonfield import JSONField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from silk.profiling.profiler import silk_profile #TODO remove
 
+
 from bbn import BeliefNetwork
-BBN = BeliefNetwork.from_bif('/home/mperry/src/floodplain-restoration/dst/bbn/cancer.bif')
-
-
+BBN = BeliefNetwork.from_bif(settings.BBN_BIF)
 
 
 class BaseModel(models.Model):
@@ -58,25 +57,21 @@ class GravelSite(BaseModel):
     @property
     @silk_profile(name='Check Suitability')
     def suitability(self):
+        input_nodes = dict(
+            [(x.question.name, 
+                (BBN.variables[x.question.name][0], # assume first level is 1.0
+                 x.value)) 
+                for x in self.inputnode_set.all()])
+        nodes_of_interest = (
+            'suitability',
+            'socio_economic',
+            'site',
+            'landscape',
+        )
+        output_nodes = [(x, BBN.variables[x][0]) for x in nodes_of_interest]
+        vals = BBN.query(inputnodes=input_nodes, outputnodes=output_nodes)
+        return dict(zip(nodes_of_interest, vals))
 
-        res = BBN.query(inputnodes={
-            'Smoker': ('smoker', 1.0),
-            'Pollution': ('polluted', 1.0)
-        })
-
-        # input_nodes = dict(
-        #     [(x.question.slug, x.value) for x in self.inputnode_set.all()]
-        # )
-        # output_nodes = (
-        #     'suitability',
-        #     'socio_economic',
-        #     'site',
-        #     'landscape',
-        # )
-        # vals = query_cpt(settings.CPT, input_nodes, output_nodes)
-        # return dict(zip(output_nodes, vals))
-
-        return res[('Cancer', 'cancer')]
 
 class Pit(BaseModel):
     site = models.ForeignKey(GravelSite)

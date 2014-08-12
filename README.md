@@ -71,13 +71,11 @@ Decision support tool for floodplain gravel mine restoration
 * /api/site/1/status > 
    (if there is a next questions) /api/question/:next: > 
    (if question has an answer node) /api/node/:answer:  (then populate UI)
-
-
-* system_check function/mgmt command to make sure CPT matches questions
-
+* system_check function/mgmt command 
+    - make sure the terminal nodes of the belief network matches questions
+    - make sure we can construct and query the network from the bif 
 * pit vs property-specific questions/inputnodes
-
-* translate cpt_edited to our new ~format
+* translate cpt_edited to our new bif format
 * setup routine to create test data
 * seperate db for silk
 * unit tests against web api
@@ -107,30 +105,3 @@ Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
 	- `survey/fixtures/questions.json`
 3. Optimize and/or edit `data/bbn.bif`
 4. load fixtures with `python manage.py loaddata survey/fixtures/questions.json`
-
-# OLD STUFF vvvvvvvv
-
-## process for *Initial* creation
-1. Edit definition.json
-2. python generate.py; creates
-	cpt.py
-	cpt.xls
-	questions.json
-3. optimize/edit cpt.xls
-4. copy cpt* to dst/bbn/cpt/ and copy questions.json to dst/bbn/fixtures
-    cd dst
-	cp ../data/cpt.xls bbn/cpt/cpt.xls
-	cp ../data/cpt.py bbn/cpt/cpt.py
-	cp ../data/questions.json bbn/fixtures/questions.json
-5. load fixtures
-    python manage.py loaddata bbn/fixtures/questions.json
-
-
-
-## process for updating
-1. Edit definition.json
-2. generate
-3. ???
-
-
-http://textik.com/#6cbb27a529229ac2

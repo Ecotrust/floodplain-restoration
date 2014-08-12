@@ -16,8 +16,16 @@ class BeliefNetwork:
 
     def query(self,  inputnodes=None, outputnodes=None):
         net = self.net(inputnodes)
-        return net.query()
+        qr = net.query()
+        if outputnodes:
+            res = []
+            for onode in outputnodes:
+                res.append(qr[onode])
+        else:
+            res = qr
 
+        return res
+        
     def net(self, inputnodes=None):
         function_list = list(self.functions(inputnodes=inputnodes))
         net = build_bbn(
