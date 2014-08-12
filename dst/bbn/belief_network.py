@@ -3,9 +3,6 @@ import itertools
 import re
 from bayesian.bbn import build_bbn
 
-def test(* args):
-    for arg in args:
-        print(arg)
 
 class BeliefNetwork:
     def __init__(self, variables, probabilities):
@@ -206,25 +203,16 @@ class BeliefNetwork:
         return bn
 
 
-
-
-
 if __name__ == "__main__":
     bn = BeliefNetwork.from_bif('cancer.bif')
 
     for i in range(1,10):
 
         res = bn.query(inputnodes={
-            'Pollution': ('polluted', 1.0/i)
+            'Smoker': ('smoker', i/10.0),
+            'Pollution': ('polluted', i/10.0)
         })
 
         from pprint import pprint as print
+        print(i/10.0)
         print(res[('Cancer', 'cancer')])
-
-      
-
-
- 
-
-
-

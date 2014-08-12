@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
-    'bbn',
+    'survey',
     'rest_framework',
 
     'django.contrib.sites',
@@ -140,7 +140,3 @@ CACHES = {
         }
     }
 }
-
-CPT_XLS = os.path.join(BASE_DIR, 'bbn', 'cpt', 'cpt.xls')
-from bbn.cpt.xls import xls2cptdict
-CPT = xls2cptdict(CPT_XLS)

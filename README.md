@@ -39,11 +39,11 @@ Decision support tool for floodplain gravel mine restoration
 
 ### setup
 	python manage.py migrate
-	python manage.py startapp bbn 
+	python manage.py startapp survey 
 
 	# create models.py 
 
-	python manage.py makemigrations bbn
+	python manage.py makemigrations survey
 
 	python manage.py migrate
 
@@ -52,7 +52,7 @@ Decision support tool for floodplain gravel mine restoration
 	# https://docs.djangoproject.com/en/dev/ref/contrib/gis/tutorial/#geographic-admin
 
 ### To reset migrations during early dev
-	rm bbn/migrations/000*.py 
+	rm survey/migrations/000*.py 
 	python manage.py makemigrations
 	rm dst/db.sqlite3
 	spatialite dst/db.sqlite3 "SELECT InitSpatialMetaData();"
@@ -98,6 +98,17 @@ Decision support tool for floodplain gravel mine restoration
 Image credits:
 Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
 
+
+# Process
+0. cd dst
+1. Create or edit `dst/data/definition.json`
+2. run `python ../scripts/generate_bif.py`; this will create and *overwrite*
+	- `dst/data/bbn.bif`
+	- `survey/fixtures/questions.json`
+3. Optimize and/or edit `data/bbn.bif`
+4. load fixtures with `python manage.py loaddata survey/fixtures/questions.json`
+
+# OLD STUFF vvvvvvvv
 
 ## process for *Initial* creation
 1. Edit definition.json

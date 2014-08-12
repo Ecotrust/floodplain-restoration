@@ -5,6 +5,12 @@ from jsonfield import JSONField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from silk.profiling.profiler import silk_profile #TODO remove
 
+from bbn import BeliefNetwork
+BBN = BeliefNetwork.from_bif('/home/mperry/src/floodplain-restoration/dst/bbn/cancer.bif')
+
+
+
+
 class BaseModel(models.Model):
     name = models.CharField(max_length=80)
     notes = models.TextField(default='', blank=True)
@@ -52,22 +58,25 @@ class GravelSite(BaseModel):
     @property
     @silk_profile(name='Check Suitability')
     def suitability(self):
-        from bbn.cpt.cpt import query_cpt
 
-        input_nodes = dict(
-            [(x.question.slug, x.value) for x in self.inputnode_set.all()]
-        )
+        res = BBN.query(inputnodes={
+            'Smoker': ('smoker', 1.0),
+            'Pollution': ('polluted', 1.0)
+        })
 
-        output_nodes = (
-            'suitability',
-            'socio_economic',
-            'site',
-            'landscape',
-        )
+        # input_nodes = dict(
+        #     [(x.question.slug, x.value) for x in self.inputnode_set.all()]
+        # )
+        # output_nodes = (
+        #     'suitability',
+        #     'socio_economic',
+        #     'site',
+        #     'landscape',
+        # )
+        # vals = query_cpt(settings.CPT, input_nodes, output_nodes)
+        # return dict(zip(output_nodes, vals))
 
-        vals = query_cpt(settings.CPT, input_nodes, output_nodes)
-
-        return dict(zip(output_nodes, vals))
+        return res[('Cancer', 'cancer')]
 
 class Pit(BaseModel):
     site = models.ForeignKey(GravelSite)

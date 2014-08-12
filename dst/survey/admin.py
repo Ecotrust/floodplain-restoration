@@ -1,5 +1,5 @@
 from django.contrib.gis import admin
-from bbn.models import GravelSite, Pit, InputNode, Question, MapLayer
+from survey.models import GravelSite, Pit, InputNode, Question, MapLayer
 
 admin.site.register(GravelSite, admin.GeoModelAdmin)
 admin.site.register(Pit, admin.GeoModelAdmin)

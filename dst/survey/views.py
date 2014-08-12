@@ -4,9 +4,9 @@ from rest_framework import permissions
 from rest_framework.decorators import link
 from rest_framework.response import Response
 
-from bbn.models import GravelSite, Pit, InputNode, Question
-from bbn import serializers
-from bbn.permissions import IsOwnerOrShared
+from survey.models import GravelSite, Pit, InputNode, Question
+from survey import serializers
+from survey.permissions import IsOwnerOrShared
 
 
 class GravelSiteViewSet(viewsets.ModelViewSet):
