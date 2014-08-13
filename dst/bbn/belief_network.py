@@ -4,6 +4,13 @@ import re
 from bayesian.bbn import build_bbn
 
 
+def format_p(x, round=False):
+    if round:
+        return "%0.2f" % x
+    else:
+        return str(x)
+
+
 class BeliefNetwork:
     """
     Example usage
@@ -108,7 +115,7 @@ class BeliefNetwork:
             func.argspec = argspec
             yield func
   
-    def to_bif(self, path):
+    def to_bif(self, path, round=False):
         with open(path, 'w') as fh:
             fh.write("network unknown {\n}\n")
 
@@ -128,7 +135,7 @@ class BeliefNetwork:
                     prob_str = """probability ( %s ) {
   table %s;
 }
-""" % (pname, ", ".join([str(x) for x in priors]))
+""" % (pname, ", ".join([format_p(x, round=round) for x in priors]))
 
                 else:
                     # conditional
@@ -147,7 +154,8 @@ class BeliefNetwork:
                         for dlevel in self.variables[pname]:
                             k = tuple(list(given) + [dlevel])
                             vals.append(prob['cpt'][k])
-                        prob_str += "%s;\n" % (', '.join([str(x) for x in vals]))
+                        prob_str += "%s;\n" % (', '.join([format_p(x, round=round)
+                                                          for x in vals]))
 
                     prob_str += "}\n"
                 fh.write(prob_str)
