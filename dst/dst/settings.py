@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
     'django_nose',
 
     'silk'  # TODO remove or make debug=True only
@@ -154,4 +155,7 @@ NOSE_ARGS = [
     # '--ipdb-failures',
     '--verbosity=2',
     '--cover-package=bbn,survey',
+    # '--cover-erase',
+    '--cover-html',
+    '--cover-html-dir=.coverage_html',
 ]

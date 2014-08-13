@@ -38,3 +38,5 @@ nosetests.xml
 dst/dst/media
 dst/dst/static
 dst/dst/db.sqlite3
+dst/.coverage_html
+
