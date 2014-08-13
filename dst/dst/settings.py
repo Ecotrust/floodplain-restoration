@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'django_nose',
 
     'silk'  # TODO remove or make debug=True only
 )
@@ -142,3 +143,15 @@ CACHES = {
 }
 
 BBN_BIF = os.path.join(BASE_DIR, 'dst', 'data', 'bbn.bif')
+
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on specific apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--ipdb',
+    '--ipdb-failures',
+    '--verbosity=2',
+    '--cover-package=bbn,survey',
+]

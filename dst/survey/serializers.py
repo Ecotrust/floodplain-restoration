@@ -14,8 +14,10 @@ class PitSerializer(GeoFeatureModelSerializer):
 
 
 class GravelSiteSerializer(GeoFeatureModelSerializer):
-    inputnode_set = InputNodeSerializer(many=True)
-    pit_set = PitSerializer(many=True)
+    inputnode_set = InputNodeSerializer(many=True, read_only=True)
+    pit_set = PitSerializer(many=True, read_only=True)
+    user = serializers.IntegerField(read_only=True)
+    
     class Meta:
         model = models.GravelSite
         geo_field = "geometry"

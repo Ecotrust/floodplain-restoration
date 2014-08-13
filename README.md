@@ -77,14 +77,14 @@ Decision support tool for floodplain gravel mine restoration
 * pit vs property-specific questions/inputnodes
 * translate cpt_edited to our new bif format
 * setup routine to create test data
-* seperate db for silk
+* seperate db for silk?
 * unit tests against web api
 * auth
 * caching
 * django pipeline
 * angular integration
 * flatblocks
-* report generation
+* report generation (word, pdf, html)
 * public sharing
 
 

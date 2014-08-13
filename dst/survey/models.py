@@ -31,10 +31,6 @@ class GravelSite(BaseModel):
     shared_with_public = models.BooleanField(default=False)
 
     @property
-    def area(self):
-        return self.geometry.area
-
-    @property
     def missing_questions(self):
         completed = [x.question.id for x in self.inputnode_set.all()]
         return Question.objects.exclude(id__in=completed)
