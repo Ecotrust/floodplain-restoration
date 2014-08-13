@@ -5,9 +5,27 @@ from bayesian.bbn import build_bbn
 
 
 class BeliefNetwork:
+    """
+    Example usage
+
+    >>> bn = BeliefNetwork.from_bif('cancer.bif')
+    >>> res = bn.query(inputnodes={
+    ...     'Smoker': ('smoker', i/10.0),
+    ...     'Pollution': ('polluted', i/10.0)
+    ... }, outputnodes=(
+    ...     ('Cancer', 'True')
+    ... ))
+    """
+
     def __init__(self, variables, probabilities):
         self.variables = variables
         self.probabilities = probabilities
+
+    def __eq__(self, other): 
+        return (
+            self.variables == other.variables and
+            self.probabilities == other.probabilities
+        )
 
     @property 
     def is_valid(self):
@@ -89,9 +107,62 @@ class BeliefNetwork:
             func = locals()["f_{}".format(name)]
             func.argspec = argspec
             yield func
+  
+    def to_bif(self, path):
+        with open(path, 'w') as fh:
+            fh.write("network unknown {\n}\n")
+
+            for vname, vlevels in self.variables.items():
+                fh.write("""variable %s {
+  type discrete [ %d ] { %s };
+})
+""" % (vname, len(vlevels), ', '.join(vlevels)))
+
+            for pname, prob in self.probabilities.items():
+                if not prob['given']:
+                    # prior
+                    priors = []
+                    for level in self.variables[pname]:
+                        priors.append(prob['cpt'][(level,)])
+
+                    prob_str = """probability ( %s ) {
+  table %s;
+}
+""" % (pname, ", ".join([str(x) for x in priors]))
+
+                else:
+                    # conditional
+                    prob_str = "probability ( %s | %s ) {\n" % (
+                        pname,
+                        ", ".join(prob['given'])
+                    )
+
+                    given_levels = list(itertools.product(*[
+                        self.variables[x] for x in prob['given']
+                    ]))
+
+                    for given in given_levels:
+                        prob_str += "  (%s) " % (', '.join(given), )
+                        vals = []
+                        for dlevel in self.variables[pname]:
+                            k = tuple(list(given) + [dlevel])
+                            vals.append(prob['cpt'][k])
+                        prob_str += "%s;\n" % (', '.join([str(x) for x in vals]))
+
+                    prob_str += "}\n"
+                fh.write(prob_str)
+        return path
+
+
 
     @classmethod
     def from_bif(cls, bif):
+        """ Parts of this method derived from 
+        https://raw.githubusercontent.com/eBay/bayesian-belief-networks/master/bayesian/examples/bif/bif_parser.py
+
+        Copyright 2013 eBay Software Foundation
+        Under the apache license (http://www.apache.org/licenses/LICENSE-2.0)
+        """
         variable_pattern = re.compile(
             r"  type discrete \[ \d+ \] \{ (.+) \};\s*")
         prior_probability_pattern_1 = re.compile(
@@ -171,21 +242,5 @@ class BeliefNetwork:
                             map(float, match.group(2).split(", "))):
                         dictionary[in_cond]['cpt'][tuple(given_values + [value])] = prob
 
-
         bn = cls(variables, dictionary)
         return bn
-
-
-if __name__ == "__main__":
-    bn = BeliefNetwork.from_bif('cancer.bif')
-
-    for i in range(1,10):
-
-        res = bn.query(inputnodes={
-            'Smoker': ('smoker', i/10.0),
-            'Pollution': ('polluted', i/10.0)
-        })
-
-        from pprint import pprint as print
-        print(i/10.0)
-        print(res[('Cancer', 'cancer')])
