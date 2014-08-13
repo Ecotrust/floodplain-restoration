@@ -13,6 +13,7 @@ class BeliefNetwork:
     def is_valid(self):
         if sorted(self.variables.keys()) != sorted(self.probabilities.keys()):
             return (False, 'variables and probabilities must have same keys')
+        return (True, 'valid')
 
     def query(self,  inputnodes=None, outputnodes=None):
         net = self.net(inputnodes)
@@ -25,7 +26,7 @@ class BeliefNetwork:
             res = qr
 
         return res
-        
+
     def net(self, inputnodes=None):
         function_list = list(self.functions(inputnodes=inputnodes))
         net = build_bbn(
@@ -88,42 +89,6 @@ class BeliefNetwork:
             func = locals()["f_{}".format(name)]
             func.argspec = argspec
             yield func
-
-
-    def pprint(self):
-        """
-        {'Cancer': ['True', 'False'],
-         'Dyspnoea': ['True', 'False'],
-         'Pollution': ['low', 'high'],
-         'Smoker': ['True', 'False'],
-         'Xray': ['positive', 'negative']}
-        {'Cancer': {'cpt': {('high', 'False', 'False'): 0.98,
-                            ('high', 'False', 'True'): 0.02,
-                            ('high', 'True', 'False'): 0.95,
-                            ('high', 'True', 'True'): 0.05,
-                            ('low', 'False', 'False'): 0.999,
-                            ('low', 'False', 'True'): 0.001,
-                            ('low', 'True', 'False'): 0.97,
-                            ('low', 'True', 'True'): 0.03},
-                    'given': ['Pollution', 'Smoker']},
-         'Dyspnoea': {'cpt': {('False', 'False'): 0.7,
-                              ('False', 'True'): 0.3,
-                              ('True', 'False'): 0.35,
-                              ('True', 'True'): 0.65},
-                      'given': ['Cancer']},
-         'Pollution': {'cpt': "{'high': 0.1, 'low': 0.9}", 'given': None},
-         'Smoker': {'cpt': "{'True': 0.3, 'False': 0.7}", 'given': None},
-         'Xray': {'cpt': {('False', 'negative'): 0.8,
-                          ('False', 'positive'): 0.2,
-                          ('True', 'negative'): 0.1,
-                          ('True', 'positive'): 0.9},
-                  'given': ['Cancer']}}"""
-
-        import pprint
-        print("Variables\n----------------------")
-        pprint.pprint(self.variables)  
-        print("Probabilities\n----------------------")
-        pprint.pprint(self.probabilities)
 
     @classmethod
     def from_bif(cls, bif):

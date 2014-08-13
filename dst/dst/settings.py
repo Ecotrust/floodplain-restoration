@@ -150,8 +150,8 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # Tell nose to measure coverage on specific apps
 NOSE_ARGS = [
     '--with-coverage',
-    '--ipdb',
-    '--ipdb-failures',
+    # '--ipdb',
+    # '--ipdb-failures',
     '--verbosity=2',
     '--cover-package=bbn,survey',
 ]

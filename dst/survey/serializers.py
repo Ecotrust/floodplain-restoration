@@ -3,11 +3,13 @@ from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from survey import models
 
 class InputNodeSerializer(serializers.ModelSerializer):
+    user = serializers.IntegerField(read_only=True)
     class Meta:
         model = models.InputNode
 
 
 class PitSerializer(GeoFeatureModelSerializer):
+    user = serializers.IntegerField(read_only=True)
     class Meta:
         model = models.Pit
         geo_field = "geometry"

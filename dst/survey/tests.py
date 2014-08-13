@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-
+from survey.models import Question
 """
 status.HTTP_100_CONTINUE                         status.HTTP_409_CONFLICT
 status.HTTP_101_SWITCHING_PROTOCOLS              status.HTTP_410_GONE
@@ -35,11 +35,27 @@ status.HTTP_408_REQUEST_TIMEOUT
 """
 
 MULTIPOLY = """MULTIPOLYGON (((-401141.5244410000159405 273728.5500730000203475, -587036.3772299999836832 68183.1278420000016922, -489196.9810249999864027 -39441.7579719999994268, -117407.2754459999996470 87752.4768060000060359, -401141.5244410000159405 273728.5500730000203475)))"""
+POLY = """POLYGON ((-401141.5244410000159405 273728.5500730000203475, -587036.3772299999836832 68183.1278420000016922, -489196.9810249999864027 -39441.7579719999994268, -117407.2754459999996470 87752.4768060000060359, -401141.5244410000159405 273728.5500730000203475))"""
+SITE1 = {
+    'name': 'GravelSite1',
+    'notes': 'Notes on Site 1',
+    'geometry': MULTIPOLY,
+}
+USER1 = dict(username="user1", password="user1")
+USER2 = dict(username="user2", password="user2")
 
-class WebAPISurveyTests(APITestCase):
+
+class WebAPIIntegrationTests(APITestCase):
+    """ These are not `unit` tests; they test the public HTTP interface
+    and simulate actual workflows on the client side. Minimal use of the 
+    python API will be employed, ensuring that these tests remain as
+    the canonical (testable) example of API usage """
+
+    fixtures = ['questions']
 
     def setUp(self):
-        self.user1 = User.objects.create_user(username="user1", password="user1")
+        self.user1 = User.objects.create_user(**USER1)
+        self.user2 = User.objects.create_user(**USER2)
 
     def test_site_unauth(self):
         """ site view not visible to unauthenticated user """
@@ -49,33 +65,121 @@ class WebAPISurveyTests(APITestCase):
 
     def test_site_auth(self):
         """ site view visible to authenticated user """
-        self.client.login(username="user1", password="user1")
+        self.client.login(**USER1)
         url = '/api/site.json'
         res = self.client.get(url)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
     def test_create_view_site(self):
-        """ site view visible to authenticated user """
-        self.client.login(username="user1", password="user1")
-        url = '/api/site'
-        res = self.client.post(url, {
-            'name': 'GravelSite1',
-            'notes': '',
-            'geometry': MULTIPOLY,
-            #'user': 1,
-            }, format="json"
-        )
+        """ create a set and get it's geojson back """
+        self.client.login(**USER1)
+        res = self.client.post('/api/site', SITE1, format="json")
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
         url = '/api/site/{:d}.json'.format(res.data['id'])
         res = self.client.get(url)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data['type'], 'Feature')
-        
+
         url = '/api/site.json'
         res = self.client.get(url)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        # import ipdb; ipdb.set_trace()
         self.assertEqual(res.data['type'], 'FeatureCollection')
         self.assertEqual(len(res.data['features']), 1)
 
+    def test_site_private(self):
+        """ site1 is not visible to anyone but user """
+        self.client.login(**USER1)
+        res = self.client.post('/api/site', SITE1, format="json")
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        url = '/api/site/{:d}.json'.format(res.data['id'])
+        self.client.logout()
+
+        self.client.login(**USER2)
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_site_suitability(self):
+        """ query belief network of the site """
+        self.client.login(**USER1)
+        res = self.client.post('/api/site', SITE1, format='json')
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        site_id = res.data['id']
+
+        url = '/api/site/{:d}/suitability'.format(site_id)
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        baseline = res.data['suitability']
+
+        question_id = Question.objects.get(name='infrastructure_constraints').pk
+
+        # post an input node
+        url = '/api/node'
+        data = {
+            'name': 'na',
+            'notes': 'Notes about this answer',
+            'site': site_id,
+            'question': question_id,
+            'value': 0.0 
+        }
+        res = self.client.post(url, data)
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+
+        # Query suitability again and ensure it changed
+        url = '/api/site/{:d}/suitability.json'.format(site_id)
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        newsuitability = res.data['suitability']
+        self.assertNotEqual(baseline, newsuitability)
+
+    def test_site_status(self):
+        """ Complete workflow to completed site status """
+        self.client.login(**USER1)
+        res = self.client.post('/api/site', SITE1, format='json')
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        site_id = res.data['id']
+
+        url = '/api/site/{:d}/status.json'.format(site_id)
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        baseline = res.data['complete']
+        self.assertEqual(baseline, False)
+
+        missing_questions = res.data['missing_questions']
+        import random
+        for question_id in missing_questions:
+            # loop through missing quesitons and post an input node
+            url = '/api/node'
+            data = {
+                'name': 'na',
+                'notes': 'Notes about this answer',
+                'site': site_id,
+                'question': question_id,
+                'value': random.random()
+            }
+            res = self.client.post(url, data)
+            self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+
+        # Query status again and ensure missing questions is None
+        url = '/api/site/{:d}/status'.format(site_id)
+        res = self.client.get(url)
+        step2 = res.data['complete']
+        missing_questions = res.data['missing_questions']
+        self.assertEqual(step2, False)  # still need pits
+        self.assertEqual(len(missing_questions), 0)
+
+        # Need to add a pit
+        url = '/api/pit'
+        data = {
+            'name': 'testpit',
+            'site': site_id,
+            'geometry': POLY
+        }
+        res = self.client.post(url, data)
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+
+        # Query status again and ensure complete
+        url = '/api/site/{:d}/status'.format(site_id)
+        res = self.client.get(url)
+        step2 = res.data['complete']
+        self.assertEqual(step2, True)

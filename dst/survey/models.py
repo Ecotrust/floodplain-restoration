@@ -8,6 +8,9 @@ from silk.profiling.profiler import silk_profile #TODO remove
 
 from bbn import BeliefNetwork
 BBN = BeliefNetwork.from_bif(settings.BBN_BIF)
+valid = BBN.is_valid
+if not valid[0]:
+    raise Exception("BBN from {} is not valid:\n  {}".format(settings.BBN_BIF, valid[1]))
 
 
 class BaseModel(models.Model):
@@ -36,7 +39,7 @@ class GravelSite(BaseModel):
         return Question.objects.exclude(id__in=completed)
 
     @property
-    @silk_profile(name='Check Status')
+    #@silk_profile(name='Check Status')
     def status(self):
         status = {
             'missing_questions' : [x.id for x in self.missing_questions],
@@ -51,7 +54,7 @@ class GravelSite(BaseModel):
         return status
 
     @property
-    @silk_profile(name='Check Suitability')
+    #@silk_profile(name='Check Suitability')
     def suitability(self):
         input_nodes = dict(
             [(x.question.name, 
