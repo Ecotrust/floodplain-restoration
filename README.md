@@ -3,6 +3,10 @@ floodplain-restoration
 
 Decision support tool for floodplain gravel mine restoration
 
+This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other versions. 
+
+# Quickstart
+
 ### Setup
 	virtualenv --python /usr/bin/python3.4 ~/env/tnc
 	source ~/env/tnc/bin/activate
@@ -10,48 +14,22 @@ Decision support tool for floodplain gravel mine restoration
 	sudo apt-get install redis-server
 	pip install -r requirements.txt
 
-	django-admin.py startproject dst
 	cd dst  # just a container
 
-### create db
+### create a spatialite db
 	spatialite dst/db.sqlite3 "SELECT InitSpatialMetaData();"
 
-### settings
-	vim dst/settings.py
-
-	INSTALLED_APPS = (
-	    ...
-	    'django.contrib.gis',
-	)
-	DATABASES = {
-	    'default': {
-	        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
-	        'NAME': os.path.join(BASE_DIR, 'dst', db.sqlite3'),
-	    }
-	}
-
-	STATIC_ROOT = "dst/static"
-	MEDIA_ROOT = "dst/media"
 
 ### create dirs
 	mkdir dst/static
 	mkdir dst/media
 
-### setup
+### Initialize the application
 	python manage.py migrate
-	python manage.py startapp survey 
-
-	# create models.py 
-
-	python manage.py makemigrations survey
-
-	python manage.py migrate
-
 	python manage.py createsuperuser
+	python manage.py loaddata survey/fixtures/questions.json
 
-	# https://docs.djangoproject.com/en/dev/ref/contrib/gis/tutorial/#geographic-admin
-
-### To reset migrations during early dev
+### To reset migrations during early development (Use with caution)
 	rm survey/migrations/000*.py 
 	python manage.py makemigrations
 	rm dst/db.sqlite3
@@ -59,14 +37,20 @@ Decision support tool for floodplain gravel mine restoration
 	python manage.py migrate
 
 
-### Profiling
-	from silk.profiling.profiler import silk_profile
-	@silk_profile(name='Some function I want to profile')
-	def some_func():
-		...
+# Process for Creating/Updating the Bayesian Belief Network
+
+The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](http://www.cs.cmu.edu/~fgcozman/Research/InterchangeFormat/Old/xmlbif02.html). By default, the canonical bbn for the project resides at `dst/data/bbn.bif`. Creating or updating this file goes as follows:
+
+0. cd dst
+1. Create or edit `dst/data/definition.json`; this is a json representation of the hierarchical conceptual model. 
+2. run `python ../scripts/generate_bif.py`; this will create and *overwrite*
+	- `dst/data/bbn.bif`
+	- `survey/fixtures/questions.json`
+3. Either a) optimize using `../scripts/optimize.py` and/or edit `dst/data/bbn.bif` directly with a text editor. 
+4. reload question fixtures with `python manage.py loaddata survey/fixtures/questions.json` (*warning: this will destroy all questions in the database and requires though about data migration*)
 
 
-## TODO
+# TODO
 * tying inputnodes back to questions so the client side knows when to post/put
 * /api/site/1/status > 
    (if there is a next questions) /api/question/:next: > 
@@ -86,22 +70,8 @@ Decision support tool for floodplain gravel mine restoration
 * flatblocks
 * report generation (word, pdf, html)
 * public sharing
+* testing: ensure unique input nodes
+* Add image credits
+	Image credits:
+	Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
 
-
-## Test
-* system check
-* ensure unique input nodes
-* status after nodes and pits
-
-Image credits:
-Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
-
-
-# Process
-0. cd dst
-1. Create or edit `dst/data/definition.json`
-2. run `python ../scripts/generate_bif.py`; this will create and *overwrite*
-	- `dst/data/bbn.bif`
-	- `survey/fixtures/questions.json`
-3. Optimize and/or edit `data/bbn.bif`
-4. load fixtures with `python manage.py loaddata survey/fixtures/questions.json`
