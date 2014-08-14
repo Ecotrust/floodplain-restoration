@@ -17,28 +17,19 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 
 	cd dst  # just a container
 
-### create a spatialite db
+### Initialize
+
 	spatialite dst/db.sqlite3 "SELECT InitSpatialMetaData();"
-
-
-### create dirs
-	mkdir dst/static
-	mkdir dst/media
-
-### Initialize the application
 	python manage.py migrate
 	python manage.py createsuperuser
 	python manage.py loaddata survey/fixtures/questions.json
 	python manage.py systemcheck
 
-### To reset migrations during early development (Use with caution)
+### To reset migrations during early development (use with caution)
 	rm survey/migrations/000*.py 
 	python manage.py makemigrations
 	rm dst/db.sqlite3
-	spatialite dst/db.sqlite3 "SELECT InitSpatialMetaData();"
-	python manage.py migrate
-	python manage.py loaddata survey/fixtures/questions.json
-	python manage.py systemcheck
+	# follow steps in `Initialize` above
 
 # Process for Creating/Updating the Bayesian Belief Network
 
