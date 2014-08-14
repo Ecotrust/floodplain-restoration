@@ -4,11 +4,12 @@ import os
 import json
 
 DATA_DIR = abspath(join(dirname(__file__), '..', 'dst', 'dst', 'data'))
-FIXTURE_DIR = abspath(join(dirname(__file__), '..', 'dst', 'survey', 'fixtures'))
+FIXTURE_DIR = abspath(
+    join(dirname(__file__), '..', 'dst', 'survey', 'fixtures'))
 
 # OUTPUT FILES
 QUESTIONS_JSON = join(FIXTURE_DIR, "questions.json")
-OUT_BIF = join(DATA_DIR, "bbn.bif") 
+OUT_BIF = join(DATA_DIR, "bbn.bif")
 
 # INPUTS
 DEFINITION = join(DATA_DIR, 'definition.json')
@@ -19,7 +20,8 @@ from pprint import pprint
 
 
 def slugify(word):
-    return word.lower().replace(' ', "_").replace("-","_")
+    return word.lower().replace(' ', "_").replace("-", "_")
+
 
 def expand_bif(node, decision):
     """ recursively build bif file """
@@ -57,8 +59,9 @@ def expand_bif(node, decision):
 
     headings = keynames + [decision_slug]
     actual_levels = list(itertools.product(*levels))
-    tf_levels = list(itertools.product(*([(True, False)] * len(keys))))  # assume first level == True
-    levels = zip(actual_levels, tf_levels)  
+    # assume first level == True
+    tf_levels = list(itertools.product(*([(True, False)] * len(keys))))
+    levels = zip(actual_levels, tf_levels)
 
     prob_str = "probability ( %s | %s ) {\n" % (
         decision_slug,
@@ -66,10 +69,11 @@ def expand_bif(node, decision):
     )
 
     for bb, tf in levels:
-        val = sum(tf)/float(len(tf))
+        val = sum(tf) / float(len(tf))
         prob_str += "  (%s) %s;\n" % (
             ', '.join(bb),
-            ', '.join(["%0.2f" % x for x in [val, 1.0 - val]])  # WARNING assumes 2 levels !!!!
+            # WARNING assumes 2 levels !!!!
+            ', '.join(["%0.2f" % x for x in [val, 1.0 - val]])
         )
 
     prob_str += "}"
@@ -80,6 +84,7 @@ def expand_bif(node, decision):
         # if res:
         #     print(key)
     #print(dict(zip(keynames, levels)))
+
 
 def expand_questions(node):
     """ recursively build json file of questions """
@@ -132,7 +137,6 @@ def expand_questions(node):
 
 if __name__ == "__main__":
 
-
     with open(DEFINITION, 'r') as fh:
         suitability = json.loads(fh.read())
 
@@ -143,7 +147,7 @@ if __name__ == "__main__":
         fh.write("[\n")
         fh.write(",\n".join(QUESTIONS_LIST))
         fh.write("\n]")
-        
+
     VARIABLE_LIST = ["""variable suitability {
   type discrete [ 2 ] { suitable, unsuitable };
 }"""]
@@ -158,4 +162,3 @@ if __name__ == "__main__":
         fh.write("\n".join(VARIABLE_LIST))
         fh.write("\n")
         fh.write("\n".join(PROB_LIST))
-

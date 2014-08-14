@@ -59,4 +59,3 @@ for sheetname, scores in scoring.items():
         for x in zip("socio_economic site landscape".split(), scores):
             print "\t", x
             fh.write("%s,%s\n" % x)
-

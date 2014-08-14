@@ -8,29 +8,33 @@ current_p = 0.5
 future_p = 0.5
 site_p = 0.5
 
+
 def f_landscape(landscape):
     if landscape:
         return landscape_p
     else:
-        return 1 - landscape_p 
+        return 1 - landscape_p
+
 
 def f_current(current):
     if current:
         return current_p
     else:
-        return 1 - current_p 
+        return 1 - current_p
+
 
 def f_future(future):
     if future:
         return future_p
     else:
-        return 1 - future_p 
+        return 1 - future_p
+
 
 def f_site(site):
     if site:
         return site_p
     else:
-        return 1 - site_p 
+        return 1 - site_p
 
 
 def generate_html():
@@ -40,7 +44,7 @@ def generate_html():
     for bb in aa:
         html += "<tr>"
         for cc in bb:
-            html += '<td class="' + str(cc) + '"> ' + str(cc)  + '</td>'
+            html += '<td class="' + str(cc) + '"> ' + str(cc) + '</td>'
         html += "</tr>\n"
     html += "</table>\n"
     print html
@@ -52,23 +56,23 @@ def f_restore(landscape, site, current, future, restore):
      for bb in aa: print bb
     """
     cpt = {
-    #landscape, site, current, future) : restore
-     (True, True, True, True): 0.8,
-     (True, True, True, False): 0.0,
-     (True, True, False, True): 1.0,
-     (True, True, False, False): 0.1,
-     (True, False, True, True): 0.3,
-     (True, False, True, False): 0.0,
-     (True, False, False, True): 0.5,
-     (True, False, False, False): 0.1,
-     (False, True, True, True): 0.0,
-     (False, True, True, False): 0.0,
-     (False, True, False, True): 0.0,
-     (False, True, False, False): 0.0,
-     (False, False, True, True): 0.0,
-     (False, False, True, False): 0.0,
-     (False, False, False, True): 0.0,
-     (False, False, False, False): 0.0
+        # landscape, site, current, future) : restore
+        (True, True, True, True): 0.8,
+        (True, True, True, False): 0.0,
+        (True, True, False, True): 1.0,
+        (True, True, False, False): 0.1,
+        (True, False, True, True): 0.3,
+        (True, False, True, False): 0.0,
+        (True, False, False, True): 0.5,
+        (True, False, False, False): 0.1,
+        (False, True, True, True): 0.0,
+        (False, True, True, False): 0.0,
+        (False, True, False, True): 0.0,
+        (False, True, False, False): 0.0,
+        (False, False, True, True): 0.0,
+        (False, False, True, False): 0.0,
+        (False, False, False, True): 0.0,
+        (False, False, False, False): 0.0
     }
     p = cpt[(landscape, site, current, future)]
     if restore:
@@ -95,12 +99,12 @@ if __name__ == '__main__':
         )
     )
 
-    import itertools 
+    import itertools
     prod = itertools.product(
-        xrange(0, 101, 25), # landscape metric
-        xrange(0, 101, 25), # site metric
-        xrange(0, 101, 25), # current metric
-        xrange(0, 101, 25), # potential metric
+        xrange(0, 101, 25),  # landscape metric
+        xrange(0, 101, 25),  # site metric
+        xrange(0, 101, 25),  # current metric
+        xrange(0, 101, 25),  # potential metric
     )
     results = []
     for x in prod:
@@ -121,4 +125,5 @@ if __name__ == '__main__':
     plt.bar(center, hist, align='center', width=width)
     plt.show()
 
-    import ipdb; ipdb.set_trace()
+    import ipdb
+    ipdb.set_trace()
