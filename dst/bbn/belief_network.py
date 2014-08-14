@@ -15,13 +15,16 @@ class BeliefNetwork:
     """
     Example usage
 
-    >>> bn = BeliefNetwork.from_bif('cancer.bif')
-    >>> res = bn.query(inputnodes={
-    ...     'Smoker': ('smoker', i/10.0),
-    ...     'Pollution': ('polluted', i/10.0)
-    ... }, outputnodes=(
-    ...     ('Cancer', 'True')
-    ... ))
+    bn = BeliefNetwork.from_bif('cancer.bif')
+    res = bn.query(
+        inputnodes={
+            'Smoker': ('smoker', 1.0),
+            'Pollution': ('polluted', 1.0)
+        }, 
+        outputnodes=(
+            ('Cancer', 'True')
+        )
+    )
     """
 
     def __init__(self, variables, probabilities):

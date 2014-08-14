@@ -8,9 +8,6 @@ from silk.profiling.profiler import silk_profile #TODO remove
 
 from bbn import BeliefNetwork
 BBN = BeliefNetwork.from_bif(settings.BBN_BIF)
-valid = BBN.is_valid
-if not valid[0]:
-    raise Exception("BBN from {} is not valid:\n  {}".format(settings.BBN_BIF, valid[1]))
 
 
 class BaseModel(models.Model):

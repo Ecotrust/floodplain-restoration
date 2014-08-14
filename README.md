@@ -12,6 +12,7 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 	source ~/env/tnc/bin/activate
 	sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev python3-dev 
 	sudo apt-get install redis-server
+    sudo service redis-server start
 	pip install -r requirements.txt
 
 	cd dst  # just a container
@@ -28,6 +29,7 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 	python manage.py migrate
 	python manage.py createsuperuser
 	python manage.py loaddata survey/fixtures/questions.json
+	python manage.py systemcheck
 
 ### To reset migrations during early development (Use with caution)
 	rm survey/migrations/000*.py 
@@ -35,7 +37,8 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 	rm dst/db.sqlite3
 	spatialite dst/db.sqlite3 "SELECT InitSpatialMetaData();"
 	python manage.py migrate
-
+	python manage.py loaddata survey/fixtures/questions.json
+	python manage.py systemcheck
 
 # Process for Creating/Updating the Bayesian Belief Network
 
@@ -46,8 +49,10 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 2. run `python ../scripts/generate_bif.py`; this will create and *overwrite*
 	- `dst/data/bbn.bif`
 	- `survey/fixtures/questions.json`
-3. Either a) optimize using `../scripts/optimize.py` and/or edit `dst/data/bbn.bif` directly with a text editor. 
-4. reload question fixtures with `python manage.py loaddata survey/fixtures/questions.json` (*warning: this will destroy all questions in the database and requires though about data migration*)
+3. Optimize using `../scripts/optimize.py` which will generate a new bif file; copy to `dst/data/bbn.bif` if you want to use it.
+4. Edit `dst/data/bbn.bif` by hand if necessary.
+5. Reload question fixtures with `python manage.py loaddata survey/fixtures/questions.json` (*warning: this will destroy all questions in the database and requires careful thought about data migration*)
+6. Check system integrity with `python manage.py systemcheck`
 
 
 # TODO
@@ -55,14 +60,9 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 * /api/site/1/status > 
    (if there is a next questions) /api/question/:next: > 
    (if question has an answer node) /api/node/:answer:  (then populate UI)
-* system_check function/mgmt command 
-    - make sure the terminal nodes of the belief network matches questions
-    - make sure we can construct and query the network from the bif 
 * pit vs property-specific questions/inputnodes
-* translate cpt_edited to our new bif format
 * setup routine to create test data
 * seperate db for silk?
-* unit tests against web api
 * auth
 * caching
 * django pipeline
@@ -70,7 +70,12 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 * flatblocks
 * report generation (word, pdf, html)
 * public sharing
-* testing: ensure unique input nodes
+* testing
+    - ensure unique input nodes
+    - ensure public sharing works
+    - reports
+    - bad values and expected HTTP errors
+
 * Add image credits
 	Image credits:
 	Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
