@@ -47,6 +47,8 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 
 
 # TODO
+* travis
+* ansible deploy
 * tying inputnodes back to questions so the client side knows when to post/put
 * /api/site/1/status > 
    (if there is a next questions) /api/question/:next: > 

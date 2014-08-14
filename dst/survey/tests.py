@@ -183,3 +183,15 @@ class WebAPIIntegrationTests(APITestCase):
         res = self.client.get(url)
         step2 = res.data['complete']
         self.assertEqual(step2, True)
+
+class SurveyUnitTests(TestCase):
+    fixtures = ['questions']
+
+    def test_systemcheck(self):
+        from survey.validate import systemcheck, SystemCheckError
+        # should not raise anything
+        systemcheck()
+
+        Question.objects.get(name='infrastructure_constraints').delete()
+        self.assertRaises(SystemCheckError, systemcheck)
+
