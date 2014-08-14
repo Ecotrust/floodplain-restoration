@@ -2,6 +2,7 @@ from rest_framework import permissions
 
 
 class IsOwnerOrShared(permissions.BasePermission):
+
     """
     Custom permission to only allow owners of an object to see it.
     """

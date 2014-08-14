@@ -45,6 +45,7 @@ USER2 = dict(username="user2", password="user2")
 
 
 class WebAPIIntegrationTests(APITestCase):
+
     """ These are not `unit` tests; they test the public HTTP interface
     and simulate actual workflows on the client side. Minimal use of the 
     python API will be employed, ensuring that these tests remain as
@@ -110,7 +111,8 @@ class WebAPIIntegrationTests(APITestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         baseline = res.data['suitability']
 
-        question_id = Question.objects.get(name='infrastructure_constraints').pk
+        question_id = Question.objects.get(
+            name='infrastructure_constraints').pk
 
         # post an input node
         url = '/api/node'
@@ -119,7 +121,7 @@ class WebAPIIntegrationTests(APITestCase):
             'notes': 'Notes about this answer',
             'site': site_id,
             'question': question_id,
-            'value': 0.0 
+            'value': 0.0
         }
         res = self.client.post(url, data)
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
@@ -183,6 +185,7 @@ class WebAPIIntegrationTests(APITestCase):
         step2 = res.data['complete']
         self.assertEqual(step2, True)
 
+
 class SurveyUnitTests(TestCase):
     fixtures = ['questions']
 
@@ -193,4 +196,3 @@ class SurveyUnitTests(TestCase):
 
         Question.objects.get(name='infrastructure_constraints').delete()
         self.assertRaises(SystemCheckError, systemcheck)
-

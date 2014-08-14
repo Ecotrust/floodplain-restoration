@@ -12,6 +12,6 @@ router.register(r'questions', views.QuestionViewSet)
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browseable API.
 urlpatterns = patterns('',
-    url(r'^', include(router.urls)),
-    #url(r'^auth/', include('rest_framework.urls', namespace='rest_framework'))
-)
+                       url(r'^', include(router.urls)),
+                       #url(r'^auth/', include('rest_framework.urls', namespace='rest_framework'))
+                       )

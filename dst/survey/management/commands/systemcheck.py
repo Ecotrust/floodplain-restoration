@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from survey.validate import systemcheck, SystemCheckError
 
+
 class Command(BaseCommand):
     help = 'Checks the current system for data integrity'
 

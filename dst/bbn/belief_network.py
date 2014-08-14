@@ -12,6 +12,7 @@ def format_p(x, round=False):
 
 
 class BeliefNetwork:
+
     """
     Example usage
 
@@ -31,13 +32,13 @@ class BeliefNetwork:
         self.variables = variables
         self.probabilities = probabilities
 
-    def __eq__(self, other): 
+    def __eq__(self, other):
         return (
             self.variables == other.variables and
             self.probabilities == other.probabilities
         )
 
-    @property 
+    @property
     def is_valid(self):
         if sorted(self.variables.keys()) != sorted(self.probabilities.keys()):
             return (False, 'variables and probabilities must have same keys')
@@ -71,14 +72,14 @@ class BeliefNetwork:
 
             cpt = prob['cpt'].copy()
 
-            # Set inputnodes 
+            # Set inputnodes
             # (only applies to variables without conditional tables)
             for varname, inv in inputnodes.items():
                 if varname != name:
                     continue
                 if prob['given']:
                     raise Exception(
-                     "Can't specify nodes with conditionals; {}".format(varname))
+                        "Can't specify nodes with conditionals; {}".format(varname))
                 state = inv[0]
                 assert state in self.variables[varname]
                 value = inv[1]
@@ -89,8 +90,8 @@ class BeliefNetwork:
                 totalleft = 1.0 - value
                 remaining = [v for v in self.variables[varname] if v != state]
                 for rv in remaining:
-                    cpt[(rv,)] = totalleft/len(remaining)
-            
+                    cpt[(rv,)] = totalleft / len(remaining)
+
             if prob['given']:
                 given = prob['given']
             else:
@@ -117,7 +118,7 @@ class BeliefNetwork:
             func = locals()["f_{}".format(name)]
             func.argspec = argspec
             yield func
-  
+
     def to_bif(self, path, round=False):
         with open(path, 'w') as fh:
             fh.write("network unknown {\n}\n")
@@ -164,8 +165,6 @@ class BeliefNetwork:
                 fh.write(prob_str)
         return path
 
-
-
     @classmethod
     def from_bif(cls, bif):
         """ Parts of this method derived from 
@@ -185,7 +184,6 @@ class BeliefNetwork:
         conditional_probability_pattern_2 = re.compile(
             r"  \((.+)\) (.+);\s*")
 
-
         variables = {}
         dictionary = {}
 
@@ -195,7 +193,7 @@ class BeliefNetwork:
             in_prior = False
             in_network = False
             given = False
-            for line in fh: 
+            for line in fh:
                 if line.startswith("network"):
                     in_network = True
                     continue
@@ -211,7 +209,7 @@ class BeliefNetwork:
                     variables[in_var] = levels
                     in_var = False
                     continue
-        
+
                 if line.startswith('variable'):
                     in_var = line.split(" ")[1]
                     continue
@@ -228,7 +226,6 @@ class BeliefNetwork:
                 if match:
                     in_prior = match.group(1)
                     continue
-
 
                 match = conditional_probability_pattern_1.match(line)
                 if match:
@@ -251,7 +248,8 @@ class BeliefNetwork:
                     for value, prob in zip(
                             variables[in_cond],
                             map(float, match.group(2).split(", "))):
-                        dictionary[in_cond]['cpt'][tuple(given_values + [value])] = prob
+                        dictionary[in_cond]['cpt'][
+                            tuple(given_values + [value])] = prob
 
         bn = cls(variables, dictionary)
         return bn

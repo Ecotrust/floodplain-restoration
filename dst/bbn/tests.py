@@ -5,9 +5,9 @@ from bbn import BeliefNetwork
 import random
 
 # Example from http://www.bnlearn.com/bnrepository/
-# Copyright 2013 Marco Scutari. 
-# The contents of this page are licensed under the Creative 
-# Commons Attribution-Share Alike License. 
+# Copyright 2013 Marco Scutari.
+# The contents of this page are licensed under the Creative
+# Commons Attribution-Share Alike License.
 # ( http://creativecommons.org/licenses/by-sa/3.0/ )
 
 
@@ -26,10 +26,10 @@ class BBNUnitTests(TestCase):
     def test_from_bif(self):
         bn = BeliefNetwork.from_bif(self.bif)
         self.assertEquals(
-            sorted(list(bn.variables.keys())), 
+            sorted(list(bn.variables.keys())),
             ['Cancer', 'Dyspnoea', 'Pollution', 'Smoker', 'Xray'])
         self.assertEquals(
-            sorted(list(bn.probabilities.keys())), 
+            sorted(list(bn.probabilities.keys())),
             ['Cancer', 'Dyspnoea', 'Pollution', 'Smoker', 'Xray'])
 
     def test_to_bif(self):
@@ -38,4 +38,3 @@ class BBNUnitTests(TestCase):
 
         bn2 = BeliefNetwork.from_bif(self.outbif)
         self.assertEquals(bn2, bn)
-

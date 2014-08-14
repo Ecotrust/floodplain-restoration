@@ -10,6 +10,7 @@ from survey.permissions import IsOwnerOrShared
 
 
 class GravelSiteViewSet(viewsets.ModelViewSet):
+
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
     `update` and `destroy` actions.
@@ -18,6 +19,7 @@ class GravelSiteViewSet(viewsets.ModelViewSet):
     """
     #queryset = GravelSite.objects.all()
     model = GravelSite
+
     def get_queryset(self):
         return GravelSite.objects.filter(user=self.request.user)
 
@@ -42,9 +44,11 @@ class GravelSiteViewSet(viewsets.ModelViewSet):
 
 
 class PitViewSet(viewsets.ModelViewSet):
+
     """Pits """
     #queryset = Pit.objects.all()
     model = Pit
+
     def get_queryset(self):
         return Pit.objects.filter(user=self.request.user)
 
@@ -59,9 +63,11 @@ class PitViewSet(viewsets.ModelViewSet):
 
 
 class InputNodeViewSet(viewsets.ModelViewSet):
+
     """InputNode """
     #queryset = InputNode.objects.all()
     model = InputNode
+
     def get_queryset(self):
         return InputNode.objects.filter(user=self.request.user)
 
@@ -74,7 +80,9 @@ class InputNodeViewSet(viewsets.ModelViewSet):
     def pre_save(self, obj):
         obj.user = self.request.user
 
+
 class QuestionViewSet(viewsets.ReadOnlyModelViewSet):
+
     """Questions (Read only)"""
     queryset = Question.objects.all().order_by('order')
     serializer_class = serializers.QuestionSerializer
