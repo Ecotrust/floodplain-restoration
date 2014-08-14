@@ -1,10 +1,9 @@
 from django.test import TestCase
-from django.test import Client
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from survey.models import Question
+
 """
 status.HTTP_100_CONTINUE                         status.HTTP_409_CONFLICT
 status.HTTP_101_SWITCHING_PROTOCOLS              status.HTTP_410_GONE
@@ -31,7 +30,7 @@ status.HTTP_404_NOT_FOUND                        status.is_redirect
 status.HTTP_405_METHOD_NOT_ALLOWED               status.is_server_error
 status.HTTP_406_NOT_ACCEPTABLE                   status.is_success
 status.HTTP_407_PROXY_AUTHENTICATION_REQUIRED    status.unicode_literals
-status.HTTP_408_REQUEST_TIMEOUT                  
+status.HTTP_408_REQUEST_TIMEOUT
 """
 
 MULTIPOLY = """MULTIPOLYGON (((-401141.5244410000159405 273728.5500730000203475, -587036.3772299999836832 68183.1278420000016922, -489196.9810249999864027 -39441.7579719999994268, -117407.2754459999996470 87752.4768060000060359, -401141.5244410000159405 273728.5500730000203475)))"""
