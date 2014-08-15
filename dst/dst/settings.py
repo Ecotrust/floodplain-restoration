@@ -147,15 +147,8 @@ BBN_BIF = os.path.join(BASE_DIR, 'dst', 'data', 'bbn.bif')
 
 # Use nose to run all tests
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-# Tell nose to measure coverage on specific apps
 NOSE_ARGS = [
-    '--with-coverage',
     # '--ipdb',
     # '--ipdb-failures',
     '--verbosity=2',
-    '--cover-package=bbn,survey',
-    # '--cover-erase',
-    '--cover-html',
-    '--cover-html-dir=.coverage_html',
 ]

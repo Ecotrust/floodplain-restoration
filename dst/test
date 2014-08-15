@@ -1,1 +1,1 @@
-python -W ignore manage.py test
+coverage run --include=bbn*,survey* manage.py test && coverage report -m && coverage html --directory=.coverage_html
