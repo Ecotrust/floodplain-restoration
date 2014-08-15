@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
-from survey.models import Question
+from survey.models import Question, GravelSite
 
 """
 status.HTTP_100_CONTINUE                         status.HTTP_409_CONFLICT
@@ -185,9 +185,20 @@ class WebAPIIntegrationTests(APITestCase):
         step2 = res.data['complete']
         self.assertEqual(step2, True)
 
+    def test_site_questions_workflow(self):
+        self.client.login(**USER1)
+        res = self.client.post('/api/site', SITE1, format='json')
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        site_id = res.data['id']
+
+                
+
 
 class SurveyUnitTests(TestCase):
     fixtures = ['questions']
+
+    def setUp(self):
+        self.user1 = User.objects.create_user(**USER1)
 
     def test_systemcheck(self):
         from survey.validate import systemcheck, SystemCheckError
@@ -196,3 +207,7 @@ class SurveyUnitTests(TestCase):
 
         Question.objects.get(name='infrastructure_constraints').delete()
         self.assertRaises(SystemCheckError, systemcheck)
+
+    def test_site_create(self):
+        gs = GravelSite.objects.create(user=self.user1, **SITE1)
+        self.assertFalse(gs.status['complete'])
