@@ -16,6 +16,7 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 	pip install -r requirements.txt
 
 	cd dst  # just a container
+	./test
 
 ### Initialize
 
@@ -50,9 +51,10 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 * travis
 * ansible deploy
 * tying inputnodes back to questions so the client side knows when to post/put
-* /api/site/1/status > 
-   (if there is a next questions) /api/question/:next: > 
-   (if question has an answer node) /api/node/:answer:  (then populate UI)
+* API flow
+   GET /api/site/{{id}}/status > 
+   (if there is a next question) GET /api/questions.json?site={{id}}
+
 * pit vs property-specific questions/inputnodes
 * setup routine to create test data
 * seperate db for silk?
@@ -61,6 +63,7 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 * django pipeline
 * angular integration
 * flatblocks
+* complete coverage unit testing
 * report generation (word, pdf, html)
 * public sharing
 * testing
