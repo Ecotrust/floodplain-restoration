@@ -75,7 +75,4 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
     - reports
     - bad values and expected HTTP errors
 
-* Add image credits
-	Image credits:
-	Tracey Saxby, IAN Image Library (ian.umces.edu/imagelibrary/)
 
