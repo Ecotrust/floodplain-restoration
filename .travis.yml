@@ -1,0 +1,18 @@
+language: python
+
+python:
+  - 3.4
+
+before_install:
+  - sudo apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev python3-dev  
+  - sudo apt-get install redis-server
+
+install:
+  - pip install -r requirements.txt --use-mirrors
+  - python setup.py install
+
+script:
+  - "coverage run --include=bbn*,survey* manage.py test"
+
+after_success:
+  - coveralls
