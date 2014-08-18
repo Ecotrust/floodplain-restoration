@@ -48,31 +48,3 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 4. Edit `dst/data/bbn.bif` by hand if necessary.
 5. Reload question fixtures with `python manage.py loaddata survey/fixtures/questions.json` (*warning: this will destroy all questions in the database and requires careful thought about data migration*)
 6. Check system integrity with `python manage.py systemcheck`
-
-
-# TODO
-* travis
-* ansible deploy
-* tying inputnodes back to questions so the client side knows when to post/put
-* API flow
-   GET /api/site/{{id}}/status > 
-   (if there is a next question) GET /api/questions.json?site={{id}}
-
-* pit vs property-specific questions/inputnodes
-* setup routine to create test data
-* seperate db for silk?
-* auth
-* caching
-* django pipeline
-* angular integration
-* flatblocks
-* complete coverage unit testing
-* report generation (word, pdf, html)
-* public sharing
-* testing
-    - ensure unique input nodes
-    - ensure public sharing works
-    - reports
-    - bad values and expected HTTP errors
-
-
