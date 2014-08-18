@@ -1,6 +1,9 @@
 floodplain-restoration
 ======================
 
+<img src="https://api.travis-ci.org/Ecotrust/floodplain-restoration.png">
+<img src="https://coveralls.io/repos/perrygeo/python-raster-stats/badge.png">
+
 Decision support tool for floodplain gravel mine restoration
 
 This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other versions. 
