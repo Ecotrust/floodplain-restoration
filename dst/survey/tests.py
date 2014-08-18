@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
-from survey.models import Question, GravelSite
+from survey.models import GravelSite, Pit, InputNode, Question, MapLayer
 
 """
 status.HTTP_100_CONTINUE                         status.HTTP_409_CONFLICT
@@ -133,19 +133,23 @@ class WebAPIIntegrationTests(APITestCase):
         newsuitability = res.data['suitability']
         self.assertNotEqual(baseline, newsuitability)
 
-    def test_site_status(self):
-        """ Complete workflow to completed site status """
+    def test_complete_workflow(self):
+        """ Complete workflow; end-to-end integration test"""
         self.client.login(**USER1)
+
+        # Create site
         res = self.client.post('/api/site', SITE1, format='json')
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         site_id = res.data['id']
 
+        # Not complete yet
         url = '/api/site/{:d}/status.json'.format(site_id)
         res = self.client.get(url)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         baseline = res.data['complete']
         self.assertEqual(baseline, False)
 
+        # Post answers
         missing_questions = res.data['missing_questions']
         import random
         for question_id in missing_questions:
@@ -161,6 +165,10 @@ class WebAPIIntegrationTests(APITestCase):
             res = self.client.post(url, data)
             self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
+            ########################
+            # TODO query for next missing question?
+            ########################
+
         # Query status again and ensure missing questions is None
         url = '/api/site/{:d}/status'.format(site_id)
         res = self.client.get(url)
@@ -169,7 +177,11 @@ class WebAPIIntegrationTests(APITestCase):
         self.assertEqual(step2, False)  # still need pits
         self.assertEqual(len(missing_questions), 0)
 
-        # Need to add a pit
+        ########################
+        # TODO pit-specific questions?
+        ########################
+
+        # Add a pit
         url = '/api/pit'
         data = {
             'name': 'testpit',
@@ -185,13 +197,16 @@ class WebAPIIntegrationTests(APITestCase):
         step2 = res.data['complete']
         self.assertEqual(step2, True)
 
-    def test_site_questions_workflow(self):
-        self.client.login(**USER1)
-        res = self.client.post('/api/site', SITE1, format='json')
-        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        site_id = res.data['id']
+        # Query suitability
+        url = '/api/site/{:d}/suitability.json'.format(site_id)
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        suitability = res.data['suitability']
+        self.assertTrue(0.0 <= suitability <= 1.0)
 
-                
+        ########################
+        # TODO generate report
+        ########################
 
 
 class SurveyUnitTests(TestCase):

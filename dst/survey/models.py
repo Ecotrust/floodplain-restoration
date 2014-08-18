@@ -75,6 +75,9 @@ class Pit(BaseModel):
     geometry = models.PolygonField(srid=3857)
     objects = models.GeoManager()
 
+    def __str__(self):
+        return "Pit: {}".format(self.name)
+
 
 class MapLayer(models.Model):
     name = models.CharField(max_length=200)
@@ -109,10 +112,6 @@ class Question(models.Model):
           "choice": "low",
           "value": 0.0
         }\n]""")
-
-    @property
-    def slug(self):
-        return self.name.lower().replace(' ', "_").replace("-", "_")
 
     def __str__(self):
         return "{}: `{}`".format(self.name, self.question)
