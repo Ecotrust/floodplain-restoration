@@ -1,8 +1,7 @@
 floodplain-restoration
 ======================
 
-[![Build Status](https://api.travis-ci.org/Ecotrust/floodplain-restoration.svg)](https://travis-ci.org/Ecotrust/floodplain-restoration)
-
+[![Build Status](https://api.travis-ci.org/Ecotrust/floodplain-restoration.svg)](https://travis-ci.org/Ecotrust/floodplain-restoration) 
 [![Coverage Status](https://img.shields.io/coveralls/Ecotrust/floodplain-restoration.svg)](https://coveralls.io/r/Ecotrust/floodplain-restoration)
 
 Decision support tool for floodplain gravel mine restoration
