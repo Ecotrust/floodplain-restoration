@@ -1,8 +1,9 @@
 floodplain-restoration
 ======================
 
-<img src="https://api.travis-ci.org/Ecotrust/floodplain-restoration.png">
-<img src="https://coveralls.io/repos/perrygeo/python-raster-stats/badge.png">
+[![Build Status](https://api.travis-ci.org/Ecotrust/floodplain-restoration.svg)](https://travis-ci.org/Ecotrust/floodplain-restoration)
+
+[![Coverage Status](https://img.shields.io/coveralls/Ecotrust/floodplain-restoration.svg)](https://coveralls.io/r/Ecotrust/floodplain-restoration)
 
 Decision support tool for floodplain gravel mine restoration
 
