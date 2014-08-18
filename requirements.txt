@@ -7,8 +7,6 @@ djangorestframework-gis
 django-allauth
 django-redis-sessions
 django-redis
-xlrd
-xlwt-future
 django-silk
 
 # Testing
