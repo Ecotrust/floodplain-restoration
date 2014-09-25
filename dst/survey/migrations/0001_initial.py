@@ -2,10 +2,10 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django.core.validators
-from django.conf import settings
-import django.contrib.gis.db.models.fields
 import jsonfield.fields
+from django.conf import settings
+import django.core.validators
+import django.contrib.gis.db.models.fields
 
 
 class Migration(migrations.Migration):
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GravelSite',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=80)),
                 ('notes', models.TextField(default='', blank=True)),
                 ('date_created', models.DateTimeField(auto_now_add=True)),
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='InputNode',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=80)),
                 ('notes', models.TextField(default='', blank=True)),
                 ('date_created', models.DateTimeField(auto_now_add=True)),
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='MapLayer',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=200)),
                 ('url_template', models.TextField()),
             ],
@@ -62,12 +62,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Pit',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=80)),
                 ('notes', models.TextField(default='', blank=True)),
                 ('date_created', models.DateTimeField(auto_now_add=True)),
                 ('date_modified', models.DateTimeField(auto_now=True)),
                 ('geometry', django.contrib.gis.db.models.fields.PolygonField(srid=3857)),
+                ('contamination', models.FloatField(validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
+                ('substrate', models.FloatField(validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
+                ('adjacent_river_depth', models.FloatField(validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
+                ('slope_dist', models.FloatField(validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
+                ('pit_levies', models.FloatField(validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
+                ('bedrock', models.FloatField(validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
+                ('bank_slope', models.FloatField(validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
+                ('pit_depth', models.FloatField(validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
+                ('surface_area', models.FloatField(validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
+                ('complexity', models.FloatField(validators=[django.core.validators.MinValueValidator(0.0), django.core.validators.MaxValueValidator(1.0)])),
                 ('site', models.ForeignKey(to='survey.GravelSite')),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
@@ -79,7 +89,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Question',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=80)),
                 ('title', models.CharField(max_length=80)),
                 ('question', models.CharField(max_length=250)),
@@ -88,7 +98,7 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(upload_to='', blank=True)),
                 ('supplement', models.FileField(upload_to='', blank=True)),
                 ('choices', jsonfield.fields.JSONField(default='[\n        {\n          "choice": "high",\n          "value": 1.0\n        },\n        {\n          "choice": "low",\n          "value": 0.0\n        }\n]')),
-                ('layers', models.ManyToManyField(blank=True, to='survey.MapLayer')),
+                ('layers', models.ManyToManyField(to='survey.MapLayer', blank=True)),
             ],
             options={
             },

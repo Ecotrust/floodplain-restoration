@@ -40,6 +40,22 @@ SITE1 = {
     'notes': 'Notes on Site 1',
     'geometry': MULTIPOLY,
 }
+PIT1 = {
+    'name': 'testpit',
+    'geometry': POLY,
+    # pit-specific attrs
+    'contamination': 0.5,
+    'substrate': 0.5,
+    'adjacent_river_depth': 0.5,
+    'slope_dist': 0.5,
+    'pit_levies': 0.5,
+    'bedrock': 0.5,
+    'bank_slope': 0.5,
+    'pit_depth': 0.5,
+    'surface_area': 0.5,
+    'complexity': 0.5,
+    # site (with site id) is also required, filled in when needed
+}
 USER1 = dict(username="user1", password="user1")
 USER2 = dict(username="user2", password="user2")
 
@@ -86,6 +102,29 @@ class WebAPIIntegrationTests(APITestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data['type'], 'FeatureCollection')
         self.assertEqual(len(res.data['features']), 1)
+
+    def test_create_pit(self):
+        self.client.login(**USER1)
+        res = self.client.post('/api/site', SITE1, format="json")
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        site_id = res.data['id']
+
+        pitdata = PIT1.copy()
+        pitdata['site'] = site_id
+        res = self.client.post('/api/pit', pitdata, format="json")
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        pit_id = res.data['id']
+
+        url = '/api/pit.json'
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data['type'], 'FeatureCollection')
+        self.assertEqual(len(res.data['features']), 1)
+
+        url = '/api/site/{:d}.json'.format(site_id)
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(res.data['properties']['pit_set']), 1)
 
     def test_site_private(self):
         """ site1 is not visible to anyone but user """
@@ -183,12 +222,9 @@ class WebAPIIntegrationTests(APITestCase):
 
         # Add a pit
         url = '/api/pit'
-        data = {
-            'name': 'testpit',
-            'site': site_id,
-            'geometry': POLY
-        }
-        res = self.client.post(url, data)
+        pitdata = PIT1.copy()
+        pitdata['site'] = site_id
+        res = self.client.post(url, pitdata)
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
         # Query status again and ensure complete

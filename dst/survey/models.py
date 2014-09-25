@@ -73,6 +73,25 @@ class GravelSite(BaseModel):
 class Pit(BaseModel):
     site = models.ForeignKey(GravelSite)
     geometry = models.PolygonField(srid=3857)
+
+    # Pit-specific attributes
+
+    ## Water Quality Threat
+    contamination = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    substrate = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+
+    ## Practical Restorability
+    adjacent_river_depth = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    slope_dist = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    pit_levies = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    bedrock = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+
+    ## Pit Geometry
+    bank_slope = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    pit_depth = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    surface_area = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    complexity = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+
     objects = models.GeoManager()
 
     def __str__(self):
