@@ -59,6 +59,15 @@ class GravelSite(BaseModel):
                 (BBN.variables[x.question.name][0],  # assume first level is 1.0
                  x.value))
                 for x in self.inputnode_set.all()])
+
+        # !! Assume Overall pit score is the weighted average of all pits
+        total = sum(pit.score for pit in self.pit_set.all())
+        numpits = self.pit_set.all().count()
+        # !! Assume '__overall_pit_restorability' is the node of interest here
+        pitnode = '__overall_pit_restorability'
+        if numpits > 0:
+            input_nodes[pitnode] = (BBN.variables[pitnode][0], total / numpits)
+
         nodes_of_interest = (
             'suitability',
             'socio_economic',
@@ -93,6 +102,16 @@ class Pit(BaseModel):
     complexity = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
 
     objects = models.GeoManager()
+
+    @property
+    def score(self):
+        # TODO
+        attrs = ['contamination', 'substrate', 'adjacent_river_depth', 
+                 'slope_dist', 'pit_levies', 'bedrock', 'bank_slope',
+                 'pit_depth', 'surface_area', 'complexity']
+        total = sum(self.__dict__[attr] for attr in attrs)
+
+        return total/len(attrs)
 
     def __str__(self):
         return "Pit: {}".format(self.name)

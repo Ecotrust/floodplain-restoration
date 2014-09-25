@@ -39,6 +39,10 @@ class BeliefNetwork:
         )
 
     @property
+    def hidden_nodes(self):
+        return [x for x in self.variables.keys() if x.startswith("__")]
+
+    @property
     def is_valid(self):
         if sorted(self.variables.keys()) != sorted(self.probabilities.keys()):
             return (False, 'variables and probabilities must have same keys')
