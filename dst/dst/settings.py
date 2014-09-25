@@ -148,8 +148,11 @@ BBN_BIF = os.path.join(BASE_DIR, 'dst', 'data', 'bbn.bif')
 # Use nose to run all tests
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
-    # '--ipdb',
-    # '--ipdb-failures',
     '--logging-filter=survey,bbn',
     '--verbosity=2',
 ]
+
+try:
+    from .settings_local import *
+except ImportError:
+    pass

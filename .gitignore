@@ -39,4 +39,4 @@ dst/dst/media
 dst/dst/static
 dst/dst/db.sqlite3
 dst/.coverage_html
-
+dst/dst/settings_local.py
