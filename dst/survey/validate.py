@@ -15,6 +15,11 @@ def systemcheck():
         raise SystemCheckError("BBN from {} is not valid:\n  {}".format(
             settings.BBN_BIF, valid[1]))
 
+    # special case, contains a hidden terminal node for pit score
+    pitnode = '__overall_pit_restorability'
+    if pitnode not in bn.hidden_nodes:
+        raise SystemCheckError("Overall pit node `{}` required in bbn".format(pitnode))
+
     # the terminal nodes of the belief network match questions
     terminalnode_names = []
     for name, prob in bn.probabilities.items():
