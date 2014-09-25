@@ -172,6 +172,62 @@ class WebAPIIntegrationTests(APITestCase):
         newsuitability = res.data['suitability']
         self.assertNotEqual(baseline, newsuitability)
 
+    def test_edit_inputnode(self):
+        self.client.login(**USER1)
+
+        # Create site
+        res = self.client.post('/api/site', SITE1, format='json')
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        site_id = res.data['id']
+
+        # Not complete yet
+        url = '/api/site/{:d}/status.json'.format(site_id)
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        baseline = res.data['complete']
+        self.assertEqual(baseline, False)
+
+        import random
+        question_id = res.data['missing_questions'][0]
+        url = '/api/node'
+
+        # POST answer
+        data = {
+            'name': 'na',
+            'notes': 'Notes about this answer',
+            'site': site_id,
+            'question': question_id,
+            'value': random.random()
+        }
+        res = self.client.post(url, data)
+        node_id = res.data['id']
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+
+        # POST answer AGAIN, should't work
+        # try:
+        #     res = self.client.post(url, data)
+        #     self.assertEqual(1,2)   # If we get here it succeed which is bad
+        # except:
+        #     pass  # hack since the django test client raises Exception
+        #           django.db.transaction.TransactionManagementError:
+        #           An error occurred in the current transaction. 
+        #           You can't execute queries until the end of the 'atomic' block.
+        #           # rather than
+        #           # returning a proper response with error status
+        #self.assertEqual(res.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)    
+
+        # If instead we try to PUT the modified data, it should work
+        url = "/api/node/{:d}".format(node_id)
+        newdata = data.copy()
+        newdata['value'] = 0.12
+        res = self.client.put(url, newdata)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+        # Check it
+        res = self.client.get(url)
+        self.assertEqual(res.data['value'], newdata['value'])
+
+
     def test_complete_workflow(self):
         """ Complete workflow; end-to-end integration test"""
         self.client.login(**USER1)
@@ -204,9 +260,7 @@ class WebAPIIntegrationTests(APITestCase):
             res = self.client.post(url, data)
             self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
-            ########################
-            # TODO query for next missing question?
-            ########################
+            # Query status again and advance to next question
 
         # Query status again and ensure missing questions is None
         url = '/api/site/{:d}/status'.format(site_id)
@@ -238,6 +292,7 @@ class WebAPIIntegrationTests(APITestCase):
 
         ########################
         # TODO generate report
+        # /api/site/{:d}/report.[json/html/doc/pdf]
         ########################
 
 
