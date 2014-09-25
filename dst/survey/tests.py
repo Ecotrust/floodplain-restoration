@@ -216,11 +216,7 @@ class WebAPIIntegrationTests(APITestCase):
         self.assertEqual(step2, False)  # still need pits
         self.assertEqual(len(missing_questions), 0)
 
-        ########################
-        # TODO pit-specific questions?
-        ########################
-
-        # Add a pit
+        # Add a pit (contains pit-specific questions)
         url = '/api/pit'
         pitdata = PIT1.copy()
         pitdata['site'] = site_id
