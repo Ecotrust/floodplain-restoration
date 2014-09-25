@@ -150,5 +150,6 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
     # '--ipdb',
     # '--ipdb-failures',
+    '--logging-filter=survey,bbn',
     '--verbosity=2',
 ]
