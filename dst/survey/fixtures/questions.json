@@ -4,454 +4,6 @@
   "pk": 1,
   "fields": {
     "order": 100,
-    "choices": "[{\"value\":1.0,\"choice\":\"no_restrictions\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Infrastructure constraints",
-    "title": "Infrastructure constraints",
-    "image": "",
-    "name": "infrastructure_constraints",
-    "question": "Infrastructure constraints?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 2,
-  "fields": {
-    "order": 200,
-    "choices": "[{\"value\":1.0,\"choice\":\"available\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unavailable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Material availability",
-    "title": "Material availability",
-    "image": "",
-    "name": "material_availability",
-    "question": "Material availability?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 3,
-  "fields": {
-    "order": 300,
-    "choices": "[{\"value\":1.0,\"choice\":\"mobile\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"not_mobile\"} ]",
-    "supplement": "",
-    "detail": "Detail about Channel mobility",
-    "title": "Channel mobility",
-    "image": "",
-    "name": "channel_mobility",
-    "question": "Channel mobility?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 4,
-  "fields": {
-    "order": 400,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Substrate",
-    "title": "Substrate",
-    "image": "",
-    "name": "substrate",
-    "question": "Substrate?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 5,
-  "fields": {
-    "order": 500,
-    "choices": "[{\"value\":1.0,\"choice\":\"connected\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"disconnected\"} ]",
-    "supplement": "",
-    "detail": "Detail about Relationship to protected areas",
-    "title": "Relationship to protected areas",
-    "image": "",
-    "name": "relationship_to_protected_areas",
-    "question": "Relationship to protected areas?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 6,
-  "fields": {
-    "order": 600,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Habitat features",
-    "title": "Habitat features",
-    "image": "",
-    "name": "habitat_features",
-    "question": "Habitat features?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 7,
-  "fields": {
-    "order": 700,
-    "choices": "[{\"value\":1.0,\"choice\":\"intact\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"missing\"} ]",
-    "supplement": "",
-    "detail": "Detail about Intact floodplain forest",
-    "title": "Intact floodplain forest",
-    "image": "",
-    "name": "intact_floodplain_forest",
-    "question": "Intact floodplain forest?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 8,
-  "fields": {
-    "order": 800,
-    "choices": "[{\"value\":1.0,\"choice\":\"present\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"not_present\"} ]",
-    "supplement": "",
-    "detail": "Detail about Species of interest",
-    "title": "Species of interest",
-    "image": "",
-    "name": "species_of_interest",
-    "question": "Species of interest?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 9,
-  "fields": {
-    "order": 900,
-    "choices": "[{\"value\":1.0,\"choice\":\"identified\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"not_identified\"} ]",
-    "supplement": "",
-    "detail": "Detail about Identified in conservation plan",
-    "title": "Identified in conservation plan",
-    "image": "",
-    "name": "identified_in_conservation_plan",
-    "question": "Identified in conservation plan?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 10,
-  "fields": {
-    "order": 1000,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Gradient",
-    "title": "Gradient",
-    "image": "",
-    "name": "gradient",
-    "question": "Gradient?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 11,
-  "fields": {
-    "order": 1100,
-    "choices": "[{\"value\":1.0,\"choice\":\"within\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"outside\"} ]",
-    "supplement": "",
-    "detail": "Detail about Within X-year floodplain",
-    "title": "Within X-year floodplain",
-    "image": "",
-    "name": "within_x_year_floodplain",
-    "question": "Within X-year floodplain?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 12,
-  "fields": {
-    "order": 1200,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Width",
-    "title": "Width",
-    "image": "",
-    "name": "width",
-    "question": "Width?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 13,
-  "fields": {
-    "order": 1300,
-    "choices": "[{\"value\":1.0,\"choice\":\"strategic\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"ineffective\"} ]",
-    "supplement": "",
-    "detail": "Detail about Location in floodplain",
-    "title": "Location in floodplain",
-    "image": "",
-    "name": "location_in_floodplain",
-    "question": "Location in floodplain?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 14,
-  "fields": {
-    "order": 1400,
-    "choices": "[{\"value\":1.0,\"choice\":\"high_quality\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"low_quality\"} ]",
-    "supplement": "",
-    "detail": "Detail about Water quality",
-    "title": "Water quality",
-    "image": "",
-    "name": "water_quality",
-    "question": "Water quality?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 15,
-  "fields": {
-    "order": 1500,
-    "choices": "[{\"value\":1.0,\"choice\":\"connected\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"disconnected\"} ]",
-    "supplement": "",
-    "detail": "Detail about Downstream",
-    "title": "Downstream",
-    "image": "",
-    "name": "downstream",
-    "question": "Downstream?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 16,
-  "fields": {
-    "order": 1600,
-    "choices": "[{\"value\":1.0,\"choice\":\"connected\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"disconnected\"} ]",
-    "supplement": "",
-    "detail": "Detail about On property",
-    "title": "On property",
-    "image": "",
-    "name": "on_property",
-    "question": "On property?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 17,
-  "fields": {
-    "order": 1700,
-    "choices": "[{\"value\":1.0,\"choice\":\"connected\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"disconnected\"} ]",
-    "supplement": "",
-    "detail": "Detail about Upstream",
-    "title": "Upstream",
-    "image": "",
-    "name": "upstream",
-    "question": "Upstream?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 18,
-  "fields": {
-    "order": 1800,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Depth",
-    "title": "Depth",
-    "image": "",
-    "name": "depth",
-    "question": "Depth?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 19,
-  "fields": {
-    "order": 1900,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Bank slope",
-    "title": "Bank slope",
-    "image": "",
-    "name": "bank_slope",
-    "question": "Bank slope?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 20,
-  "fields": {
-    "order": 2000,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Complexity",
-    "title": "Complexity",
-    "image": "",
-    "name": "complexity",
-    "question": "Complexity?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 21,
-  "fields": {
-    "order": 2100,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Surface area",
-    "title": "Surface area",
-    "image": "",
-    "name": "surface_area",
-    "question": "Surface area?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 22,
-  "fields": {
-    "order": 2200,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Restorable Substrate",
-    "title": "Restorable Substrate",
-    "image": "",
-    "name": "restorable_substrate",
-    "question": "Restorable Substrate?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 23,
-  "fields": {
-    "order": 2300,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Contamination",
-    "title": "Contamination",
-    "image": "",
-    "name": "contamination",
-    "question": "Contamination?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 24,
-  "fields": {
-    "order": 2400,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Bedrock Constraints",
-    "title": "Bedrock Constraints",
-    "image": "",
-    "name": "bedrock_constraints",
-    "question": "Bedrock Constraints?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 25,
-  "fields": {
-    "order": 2500,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Adjacent river depth",
-    "title": "Adjacent river depth",
-    "image": "",
-    "name": "adjacent_river_depth",
-    "question": "Adjacent river depth?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 26,
-  "fields": {
-    "order": 2600,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Slope distance to river",
-    "title": "Slope distance to river",
-    "image": "",
-    "name": "slope_distance_to_river",
-    "question": "Slope distance to river?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 27,
-  "fields": {
-    "order": 2700,
-    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
-    "supplement": "",
-    "detail": "Detail about Pit-adjacent levees",
-    "title": "Pit-adjacent levees",
-    "image": "",
-    "name": "pit_adjacent_levees",
-    "question": "Pit-adjacent levees?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 28,
-  "fields": {
-    "order": 2800,
-    "choices": "[{\"value\":1.0,\"choice\":\"accessible\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"inaccessible\"} ]",
-    "supplement": "",
-    "detail": "Detail about Site accessibility",
-    "title": "Site accessibility",
-    "image": "",
-    "name": "site_accessibility",
-    "question": "Site accessibility?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 29,
-  "fields": {
-    "order": 2900,
     "choices": "[{\"value\":1.0,\"choice\":\"available\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unavailable\"} ]",
     "supplement": "",
     "detail": "Detail about Fill material availability",
@@ -465,9 +17,9 @@
 },
 
 {
-  "pk": 30,
+  "pk": 2,
   "fields": {
-    "order": 3000,
+    "order": 200,
     "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
     "supplement": "",
     "detail": "Detail about Continuing property access",
@@ -481,9 +33,25 @@
 },
 
 {
-  "pk": 31,
+  "pk": 3,
   "fields": {
-    "order": 3100,
+    "order": 300,
+    "choices": "[{\"value\":1.0,\"choice\":\"accessible\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"inaccessible\"} ]",
+    "supplement": "",
+    "detail": "Detail about Site accessibility",
+    "title": "Site accessibility",
+    "image": "",
+    "name": "site_accessibility",
+    "question": "Site accessibility?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 4,
+  "fields": {
+    "order": 400,
     "choices": "[{\"value\":1.0,\"choice\":\"ammenable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unfriendly\"} ]",
     "supplement": "",
     "detail": "Detail about Surrounding land use",
@@ -497,25 +65,9 @@
 },
 
 {
-  "pk": 32,
+  "pk": 5,
   "fields": {
-    "order": 3200,
-    "choices": "[{\"value\":1.0,\"choice\":\"no_threats\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"threatened\"} ]",
-    "supplement": "",
-    "detail": "Detail about Infrastructure",
-    "title": "Infrastructure",
-    "image": "",
-    "name": "infrastructure",
-    "question": "Infrastructure?",
-    "layers": []
-  },
-  "model": "survey.question"
-},
-
-{
-  "pk": 33,
-  "fields": {
-    "order": 3300,
+    "order": 500,
     "choices": "[{\"value\":1.0,\"choice\":\"ammenable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unfriendly\"} ]",
     "supplement": "",
     "detail": "Detail about Surrounding ownership",
@@ -529,9 +81,25 @@
 },
 
 {
-  "pk": 34,
+  "pk": 6,
   "fields": {
-    "order": 3400,
+    "order": 600,
+    "choices": "[{\"value\":1.0,\"choice\":\"no_threats\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"threatened\"} ]",
+    "supplement": "",
+    "detail": "Detail about Infrastructure",
+    "title": "Infrastructure",
+    "image": "",
+    "name": "infrastructure",
+    "question": "Infrastructure?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 7,
+  "fields": {
+    "order": 700,
     "choices": "[{\"value\":1.0,\"choice\":\"no_threats\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"threatened\"} ]",
     "supplement": "",
     "detail": "Detail about Water rights",
@@ -545,9 +113,25 @@
 },
 
 {
-  "pk": 35,
+  "pk": 8,
   "fields": {
-    "order": 3500,
+    "order": 800,
+    "choices": "[{\"value\":1.0,\"choice\":\"supportive\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unfavorable\"} ]",
+    "supplement": "",
+    "detail": "Detail about Public perception",
+    "title": "Public perception",
+    "image": "",
+    "name": "public_perception",
+    "question": "Public perception?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 9,
+  "fields": {
+    "order": 900,
     "choices": "[{\"value\":1.0,\"choice\":\"good_deal\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"costly\"} ]",
     "supplement": "",
     "detail": "Detail about Property value",
@@ -561,9 +145,9 @@
 },
 
 {
-  "pk": 36,
+  "pk": 10,
   "fields": {
-    "order": 3600,
+    "order": 1000,
     "choices": "[{\"value\":1.0,\"choice\":\"clean\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"contaminated\"} ]",
     "supplement": "",
     "detail": "Detail about Contamination or Hazardous waste",
@@ -577,16 +161,272 @@
 },
 
 {
-  "pk": 37,
+  "pk": 11,
   "fields": {
-    "order": 3700,
-    "choices": "[{\"value\":1.0,\"choice\":\"supportive\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unfavorable\"} ]",
+    "order": 1100,
+    "choices": "[{\"value\":1.0,\"choice\":\"no_restrictions\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
     "supplement": "",
-    "detail": "Detail about Public perception",
-    "title": "Public perception",
+    "detail": "Detail about Infrastructure constraints",
+    "title": "Infrastructure constraints",
     "image": "",
-    "name": "public_perception",
-    "question": "Public perception?",
+    "name": "infrastructure_constraints",
+    "question": "Infrastructure constraints?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 12,
+  "fields": {
+    "order": 1200,
+    "choices": "[{\"value\":1.0,\"choice\":\"mobile\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"not_mobile\"} ]",
+    "supplement": "",
+    "detail": "Detail about Channel mobility",
+    "title": "Channel mobility",
+    "image": "",
+    "name": "channel_mobility",
+    "question": "Channel mobility?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 13,
+  "fields": {
+    "order": 1300,
+    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
+    "supplement": "",
+    "detail": "Detail about Substrate",
+    "title": "Substrate",
+    "image": "",
+    "name": "substrate",
+    "question": "Substrate?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 14,
+  "fields": {
+    "order": 1400,
+    "choices": "[{\"value\":1.0,\"choice\":\"available\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unavailable\"} ]",
+    "supplement": "",
+    "detail": "Detail about Material availability",
+    "title": "Material availability",
+    "image": "",
+    "name": "material_availability",
+    "question": "Material availability?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 15,
+  "fields": {
+    "order": 1500,
+    "choices": "[{\"value\":1.0,\"choice\":\"strategic\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"ineffective\"} ]",
+    "supplement": "",
+    "detail": "Detail about Location in floodplain",
+    "title": "Location in floodplain",
+    "image": "",
+    "name": "location_in_floodplain",
+    "question": "Location in floodplain?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 16,
+  "fields": {
+    "order": 1600,
+    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
+    "supplement": "",
+    "detail": "Detail about Width",
+    "title": "Width",
+    "image": "",
+    "name": "width",
+    "question": "Width?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 17,
+  "fields": {
+    "order": 1700,
+    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
+    "supplement": "",
+    "detail": "Detail about Gradient",
+    "title": "Gradient",
+    "image": "",
+    "name": "gradient",
+    "question": "Gradient?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 18,
+  "fields": {
+    "order": 1800,
+    "choices": "[{\"value\":1.0,\"choice\":\"within\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"outside\"} ]",
+    "supplement": "",
+    "detail": "Detail about Within X-year floodplain",
+    "title": "Within X-year floodplain",
+    "image": "",
+    "name": "within_x_year_floodplain",
+    "question": "Within X-year floodplain?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 19,
+  "fields": {
+    "order": 1900,
+    "choices": "[{\"value\":1.0,\"choice\":\"high_quality\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"low_quality\"} ]",
+    "supplement": "",
+    "detail": "Detail about Water quality",
+    "title": "Water quality",
+    "image": "",
+    "name": "water_quality",
+    "question": "Water quality?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 20,
+  "fields": {
+    "order": 2000,
+    "choices": "[{\"value\":1.0,\"choice\":\"connected\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"disconnected\"} ]",
+    "supplement": "",
+    "detail": "Detail about Upstream",
+    "title": "Upstream",
+    "image": "",
+    "name": "upstream",
+    "question": "Upstream?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 21,
+  "fields": {
+    "order": 2100,
+    "choices": "[{\"value\":1.0,\"choice\":\"connected\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"disconnected\"} ]",
+    "supplement": "",
+    "detail": "Detail about Downstream",
+    "title": "Downstream",
+    "image": "",
+    "name": "downstream",
+    "question": "Downstream?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 22,
+  "fields": {
+    "order": 2200,
+    "choices": "[{\"value\":1.0,\"choice\":\"connected\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"disconnected\"} ]",
+    "supplement": "",
+    "detail": "Detail about On property",
+    "title": "On property",
+    "image": "",
+    "name": "on_property",
+    "question": "On property?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 23,
+  "fields": {
+    "order": 2300,
+    "choices": "[{\"value\":1.0,\"choice\":\"intact\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"missing\"} ]",
+    "supplement": "",
+    "detail": "Detail about Intact floodplain forest",
+    "title": "Intact floodplain forest",
+    "image": "",
+    "name": "intact_floodplain_forest",
+    "question": "Intact floodplain forest?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 24,
+  "fields": {
+    "order": 2400,
+    "choices": "[{\"value\":1.0,\"choice\":\"suitable\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"unsuitable\"} ]",
+    "supplement": "",
+    "detail": "Detail about Habitat features",
+    "title": "Habitat features",
+    "image": "",
+    "name": "habitat_features",
+    "question": "Habitat features?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 25,
+  "fields": {
+    "order": 2500,
+    "choices": "[{\"value\":1.0,\"choice\":\"present\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"not_present\"} ]",
+    "supplement": "",
+    "detail": "Detail about Species of interest",
+    "title": "Species of interest",
+    "image": "",
+    "name": "species_of_interest",
+    "question": "Species of interest?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 26,
+  "fields": {
+    "order": 2600,
+    "choices": "[{\"value\":1.0,\"choice\":\"identified\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"not_identified\"} ]",
+    "supplement": "",
+    "detail": "Detail about Identified in conservation plan",
+    "title": "Identified in conservation plan",
+    "image": "",
+    "name": "identified_in_conservation_plan",
+    "question": "Identified in conservation plan?",
+    "layers": []
+  },
+  "model": "survey.question"
+},
+
+{
+  "pk": 27,
+  "fields": {
+    "order": 2700,
+    "choices": "[{\"value\":1.0,\"choice\":\"connected\"}, {\"value\":0.5,\"choice\":\"Not Sure\"}, {\"value\":0.0,\"choice\":\"disconnected\"} ]",
+    "supplement": "",
+    "detail": "Detail about Relationship to protected areas",
+    "title": "Relationship to protected areas",
+    "image": "",
+    "name": "relationship_to_protected_areas",
+    "question": "Relationship to protected areas?",
     "layers": []
   },
   "model": "survey.question"

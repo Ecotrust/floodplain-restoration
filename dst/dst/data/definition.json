@@ -44,24 +44,7 @@
     }
   },
   "Site": {
-    "Pit restorability": {
-      "Water quality threat": {
-        "Contamination": null,
-        "Restorable Substrate": null
-      },
-      "Practical restorability": {
-        "Slope distance to river": null,
-        "Pit-adjacent levees": null,
-        "Bedrock Constraints": null,
-        "Adjacent river depth": null
-      },
-      "Pit geometry": {
-        "Bank slope": null,
-        "Complexity": null,
-        "Depth": null,
-        "Surface area": null
-      }
-    },
+    "__Overall Pit restorability": null,
     "Practical property-level restorability": {
       "Continuing property access": null,
       "Fill material availability~Available,Unavailable": null,

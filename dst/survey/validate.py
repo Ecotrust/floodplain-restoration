@@ -18,7 +18,8 @@ def systemcheck():
     # the terminal nodes of the belief network match questions
     terminalnode_names = []
     for name, prob in bn.probabilities.items():
-        if not prob['given']:  # terminal node
+        if not prob['given'] and not name.startswith('__'):
+            # it's a terminal node or "hidden" node without questions
             terminalnode_names.append(name)
 
     from survey.models import Question

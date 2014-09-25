@@ -122,6 +122,10 @@ def expand_questions(node):
                 name = key
                 levels = ['suitable', 'unsuitable']
 
+            if name.startswith("__"):
+                # starts with __ ... skip it
+                continue
+                
             QUESTION_PK += 1
             QUESTIONS_LIST.append(terminalnode_template % (
                 QUESTION_PK,

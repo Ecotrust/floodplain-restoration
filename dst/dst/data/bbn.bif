@@ -1,477 +1,359 @@
 network unknown {
 }
-variable relationship_to_protected_areas {
-  type discrete [ 2 ] { connected, disconnected };
-})
-variable surface_area {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable species_of_interest {
-  type discrete [ 2 ] { present, not_present };
-})
-variable infrastructure_constraints {
-  type discrete [ 2 ] { no_restrictions, unsuitable };
-})
-variable adjacent_river_depth {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable fill_material_availability {
-  type discrete [ 2 ] { available, unavailable };
-})
-variable site {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable pit_adjacent_levees {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable conservation_value {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable socio_economic {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable channel_mobility {
-  type discrete [ 2 ] { mobile, not_mobile };
-})
-variable connectivity_barriers {
-  type discrete [ 2 ] { connected, disconnected };
-})
-variable landscape {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable practical_restorability {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable surrounding_ownership {
-  type discrete [ 2 ] { ammenable, unfriendly };
-})
-variable cost_benefit {
-  type discrete [ 2 ] { beneficial, costly };
-})
-variable location_in_floodplain {
-  type discrete [ 2 ] { strategic, ineffective };
-})
-variable gradient {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable abiotic_conditions {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable complexity {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable water_quality_threat {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable on_property {
-  type discrete [ 2 ] { connected, disconnected };
-})
-variable width {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable pit_geometry {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable contamination_or_hazardous_waste {
-  type discrete [ 2 ] { clean, contaminated };
-})
-variable practical_property_level_restorability {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable slope_distance_to_river {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable biotic_conditions {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable geomorphic_controls {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable pit_restorability {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable continuing_property_access {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable infrastructure {
-  type discrete [ 2 ] { no_threats, threatened };
-})
-variable site_accessibility {
-  type discrete [ 2 ] { accessible, inaccessible };
-})
-variable downstream {
-  type discrete [ 2 ] { connected, disconnected };
-})
-variable bedrock_constraints {
-  type discrete [ 2 ] { suitable, unsuitable };
-})
-variable water_rights {
-  type discrete [ 2 ] { no_threats, threatened };
-})
-variable public_perception {
-  type discrete [ 2 ] { supportive, unfavorable };
-})
-variable threats_to_other_areas_or_permittability {
-  type discrete [ 2 ] { no_threats, threatened };
-})
 variable suitability {
   type discrete [ 2 ] { suitable, unsuitable };
-})
-variable property_value {
-  type discrete [ 2 ] { good_deal, costly };
-})
-variable upstream {
-  type discrete [ 2 ] { connected, disconnected };
-})
-variable contamination {
+}
+variable site {
   type discrete [ 2 ] { suitable, unsuitable };
-})
-variable habitat_features {
+}
+variable socio_economic {
   type discrete [ 2 ] { suitable, unsuitable };
-})
+}
+variable landscape {
+  type discrete [ 2 ] { suitable, unsuitable };
+}
+variable practical_property_level_restorability {
+  type discrete [ 2 ] { suitable, unsuitable };
+}
+variable __overall_pit_restorability {
+  type discrete [ 2 ] { suitable, unsuitable };
+}
+variable fill_material_availability {
+  type discrete [ 2 ] { available, unavailable };
+}
+variable continuing_property_access {
+  type discrete [ 2 ] { suitable, unsuitable };
+}
+variable site_accessibility {
+  type discrete [ 2 ] { accessible, inaccessible };
+}
+variable threats_to_other_areas_or_permittability {
+  type discrete [ 2 ] { no_threats, threatened };
+}
+variable cost_benefit {
+  type discrete [ 2 ] { beneficial, costly };
+}
 variable surrounding_land_use {
   type discrete [ 2 ] { ammenable, unfriendly };
-})
-variable substrate {
+}
+variable surrounding_ownership {
+  type discrete [ 2 ] { ammenable, unfriendly };
+}
+variable infrastructure {
+  type discrete [ 2 ] { no_threats, threatened };
+}
+variable water_rights {
+  type discrete [ 2 ] { no_threats, threatened };
+}
+variable public_perception {
+  type discrete [ 2 ] { supportive, unfavorable };
+}
+variable property_value {
+  type discrete [ 2 ] { good_deal, costly };
+}
+variable contamination_or_hazardous_waste {
+  type discrete [ 2 ] { clean, contaminated };
+}
+variable geomorphic_controls {
   type discrete [ 2 ] { suitable, unsuitable };
-})
+}
 variable floodplain_characteristics {
   type discrete [ 2 ] { suitable, unsuitable };
-})
-variable identified_in_conservation_plan {
-  type discrete [ 2 ] { identified, not_identified };
-})
+}
+variable abiotic_conditions {
+  type discrete [ 2 ] { suitable, unsuitable };
+}
+variable conservation_value {
+  type discrete [ 2 ] { suitable, unsuitable };
+}
+variable infrastructure_constraints {
+  type discrete [ 2 ] { no_restrictions, unsuitable };
+}
+variable channel_mobility {
+  type discrete [ 2 ] { mobile, not_mobile };
+}
+variable substrate {
+  type discrete [ 2 ] { suitable, unsuitable };
+}
 variable material_availability {
   type discrete [ 2 ] { available, unavailable };
-})
-variable restorable_substrate {
+}
+variable location_in_floodplain {
+  type discrete [ 2 ] { strategic, ineffective };
+}
+variable width {
   type discrete [ 2 ] { suitable, unsuitable };
-})
-variable intact_floodplain_forest {
-  type discrete [ 2 ] { intact, missing };
-})
-variable depth {
+}
+variable gradient {
   type discrete [ 2 ] { suitable, unsuitable };
-})
+}
 variable within_x_year_floodplain {
   type discrete [ 2 ] { within, outside };
-})
+}
 variable water_quality {
   type discrete [ 2 ] { high_quality, low_quality };
-})
-variable bank_slope {
+}
+variable connectivity_barriers {
+  type discrete [ 2 ] { connected, disconnected };
+}
+variable upstream {
+  type discrete [ 2 ] { connected, disconnected };
+}
+variable downstream {
+  type discrete [ 2 ] { connected, disconnected };
+}
+variable on_property {
+  type discrete [ 2 ] { connected, disconnected };
+}
+variable biotic_conditions {
   type discrete [ 2 ] { suitable, unsuitable };
-})
-probability ( relationship_to_protected_areas ) {
-  table 0.50, 0.50;
 }
-probability ( surface_area ) {
-  table 0.50, 0.50;
+variable identified_in_conservation_plan {
+  type discrete [ 2 ] { identified, not_identified };
 }
-probability ( species_of_interest ) {
-  table 0.50, 0.50;
+variable relationship_to_protected_areas {
+  type discrete [ 2 ] { connected, disconnected };
 }
-probability ( infrastructure_constraints ) {
-  table 0.50, 0.50;
+variable intact_floodplain_forest {
+  type discrete [ 2 ] { intact, missing };
 }
-probability ( adjacent_river_depth ) {
-  table 0.50, 0.50;
+variable habitat_features {
+  type discrete [ 2 ] { suitable, unsuitable };
+}
+variable species_of_interest {
+  type discrete [ 2 ] { present, not_present };
+}
+probability ( suitability | site, socio_economic, landscape ) {
+  (suitable, suitable, suitable) 1.00, 0.00;
+  (suitable, suitable, unsuitable) 0.67, 0.33;
+  (suitable, unsuitable, suitable) 0.67, 0.33;
+  (suitable, unsuitable, unsuitable) 0.33, 0.67;
+  (unsuitable, suitable, suitable) 0.67, 0.33;
+  (unsuitable, suitable, unsuitable) 0.33, 0.67;
+  (unsuitable, unsuitable, suitable) 0.33, 0.67;
+  (unsuitable, unsuitable, unsuitable) 0.00, 1.00;
+}
+probability ( site | practical_property_level_restorability, __overall_pit_restorability ) {
+  (suitable, suitable) 1.00, 0.00;
+  (suitable, unsuitable) 0.50, 0.50;
+  (unsuitable, suitable) 0.50, 0.50;
+  (unsuitable, unsuitable) 0.00, 1.00;
+}
+probability ( practical_property_level_restorability | fill_material_availability, continuing_property_access, site_accessibility ) {
+  (available, suitable, accessible) 1.00, 0.00;
+  (available, suitable, inaccessible) 0.67, 0.33;
+  (available, unsuitable, accessible) 0.67, 0.33;
+  (available, unsuitable, inaccessible) 0.33, 0.67;
+  (unavailable, suitable, accessible) 0.67, 0.33;
+  (unavailable, suitable, inaccessible) 0.33, 0.67;
+  (unavailable, unsuitable, accessible) 0.33, 0.67;
+  (unavailable, unsuitable, inaccessible) 0.00, 1.00;
 }
 probability ( fill_material_availability ) {
-  table 0.50, 0.50;
+  table 0.5, 0.5;
 }
-probability ( site | pit_restorability, practical_property_level_restorability ) {
-  (suitable, suitable) 1.00, 0.00;
-  (suitable, unsuitable) 0.10, 0.90;
-  (unsuitable, suitable) 0.00, 1.00;
-  (unsuitable, unsuitable) 1.00, 0.00;
+probability ( continuing_property_access ) {
+  table 0.5, 0.5;
 }
-probability ( pit_adjacent_levees ) {
-  table 0.50, 0.50;
+probability ( site_accessibility ) {
+  table 0.5, 0.5;
 }
-probability ( conservation_value | relationship_to_protected_areas, biotic_conditions, identified_in_conservation_plan ) {
-  (connected, suitable, identified) 1.00, 0.00;
-  (connected, suitable, not_identified) 0.77, 0.23;
-  (connected, unsuitable, identified) 0.97, 0.03;
-  (connected, unsuitable, not_identified) 0.63, 0.37;
-  (disconnected, suitable, identified) 0.07, 0.93;
-  (disconnected, suitable, not_identified) 0.73, 0.27;
-  (disconnected, unsuitable, identified) 0.63, 0.37;
-  (disconnected, unsuitable, not_identified) 0.40, 0.60;
+probability ( __overall_pit_restorability ) {
+  table 0.5, 0.5;
 }
 probability ( socio_economic | threats_to_other_areas_or_permittability, cost_benefit ) {
-  (no_threats, beneficial) 0.90, 0.10;
-  (no_threats, costly) 0.00, 1.00;
+  (no_threats, beneficial) 1.00, 0.00;
+  (no_threats, costly) 0.50, 0.50;
   (threatened, beneficial) 0.50, 0.50;
   (threatened, costly) 0.00, 1.00;
 }
-probability ( channel_mobility ) {
-  table 0.50, 0.50;
-}
-probability ( connectivity_barriers | downstream, on_property, upstream ) {
-  (connected, connected, connected) 0.40, 0.60;
-  (connected, connected, disconnected) 0.47, 0.53;
-  (connected, disconnected, connected) 0.77, 0.23;
-  (connected, disconnected, disconnected) 0.33, 0.67;
-  (disconnected, connected, connected) 0.57, 0.43;
-  (disconnected, connected, disconnected) 0.43, 0.57;
-  (disconnected, disconnected, connected) 0.93, 0.07;
-  (disconnected, disconnected, disconnected) 0.90, 0.10;
-}
-probability ( landscape | geomorphic_controls, conservation_value, floodplain_characteristics, abiotic_conditions ) {
-  (suitable, suitable, suitable, suitable) 0.40, 0.60;
-  (suitable, suitable, suitable, unsuitable) 0.95, 0.05;
-  (suitable, suitable, unsuitable, suitable) 0.85, 0.15;
-  (suitable, suitable, unsuitable, unsuitable) 0.90, 0.10;
-  (suitable, unsuitable, suitable, suitable) 0.35, 0.65;
-  (suitable, unsuitable, suitable, unsuitable) 0.20, 0.80;
-  (suitable, unsuitable, unsuitable, suitable) 0.10, 0.90;
-  (suitable, unsuitable, unsuitable, unsuitable) 0.05, 0.95;
-  (unsuitable, suitable, suitable, suitable) 0.15, 0.85;
-  (unsuitable, suitable, suitable, unsuitable) 0.80, 0.20;
-  (unsuitable, suitable, unsuitable, suitable) 0.40, 0.60;
-  (unsuitable, suitable, unsuitable, unsuitable) 0.75, 0.25;
-  (unsuitable, unsuitable, suitable, suitable) 0.00, 1.00;
-  (unsuitable, unsuitable, suitable, unsuitable) 0.15, 0.85;
-  (unsuitable, unsuitable, unsuitable, suitable) 0.45, 0.55;
-  (unsuitable, unsuitable, unsuitable, unsuitable) 0.10, 0.90;
-}
-probability ( practical_restorability | bedrock_constraints, adjacent_river_depth, slope_distance_to_river, pit_adjacent_levees ) {
-  (suitable, suitable, suitable, suitable) 1.00, 0.00;
-  (suitable, suitable, suitable, unsuitable) 0.05, 0.95;
-  (suitable, suitable, unsuitable, suitable) 0.95, 0.05;
-  (suitable, suitable, unsuitable, unsuitable) 0.00, 1.00;
-  (suitable, unsuitable, suitable, suitable) 0.95, 0.05;
-  (suitable, unsuitable, suitable, unsuitable) 0.00, 1.00;
-  (suitable, unsuitable, unsuitable, suitable) 1.00, 0.00;
-  (suitable, unsuitable, unsuitable, unsuitable) 0.05, 0.95;
-  (unsuitable, suitable, suitable, suitable) 0.95, 0.05;
-  (unsuitable, suitable, suitable, unsuitable) 0.00, 1.00;
-  (unsuitable, suitable, unsuitable, suitable) 1.00, 0.00;
-  (unsuitable, suitable, unsuitable, unsuitable) 0.05, 0.95;
-  (unsuitable, unsuitable, suitable, suitable) 1.00, 0.00;
-  (unsuitable, unsuitable, suitable, unsuitable) 0.05, 0.95;
-  (unsuitable, unsuitable, unsuitable, suitable) 0.95, 0.05;
-  (unsuitable, unsuitable, unsuitable, unsuitable) 0.00, 1.00;
-}
-probability ( surrounding_ownership ) {
-  table 0.50, 0.50;
-}
-probability ( cost_benefit | property_value, contamination_or_hazardous_waste, public_perception ) {
-  (good_deal, clean, supportive) 1.00, 0.00;
-  (good_deal, clean, unfavorable) 0.97, 0.03;
-  (good_deal, contaminated, supportive) 0.67, 0.33;
-  (good_deal, contaminated, unfavorable) 0.03, 0.97;
-  (costly, clean, supportive) 0.07, 0.93;
-  (costly, clean, unfavorable) 0.73, 0.27;
-  (costly, contaminated, supportive) 0.23, 0.77;
-  (costly, contaminated, unfavorable) 0.80, 0.20;
-}
-probability ( location_in_floodplain ) {
-  table 0.50, 0.50;
-}
-probability ( gradient ) {
-  table 0.50, 0.50;
-}
-probability ( abiotic_conditions | water_quality, connectivity_barriers ) {
-  (high_quality, connected) 0.20, 0.80;
-  (high_quality, disconnected) 0.80, 0.20;
-  (low_quality, connected) 0.10, 0.90;
-  (low_quality, disconnected) 0.40, 0.60;
-}
-probability ( complexity ) {
-  table 0.50, 0.50;
-}
-probability ( water_quality_threat | restorable_substrate, contamination ) {
-  (suitable, suitable) 1.00, 0.00;
-  (suitable, unsuitable) 0.00, 1.00;
-  (unsuitable, suitable) 1.00, 0.00;
-  (unsuitable, unsuitable) 0.00, 1.00;
-}
-probability ( on_property ) {
-  table 0.50, 0.50;
-}
-probability ( width ) {
-  table 0.50, 0.50;
-}
-probability ( pit_geometry | depth, bank_slope, complexity, surface_area ) {
-  (suitable, suitable, suitable, suitable) 0.70, 0.30;
-  (suitable, suitable, suitable, unsuitable) 0.35, 0.65;
-  (suitable, suitable, unsuitable, suitable) 0.25, 0.75;
-  (suitable, suitable, unsuitable, unsuitable) 0.80, 0.20;
-  (suitable, unsuitable, suitable, suitable) 0.05, 0.95;
-  (suitable, unsuitable, suitable, unsuitable) 0.00, 1.00;
-  (suitable, unsuitable, unsuitable, suitable) 0.40, 0.60;
-  (suitable, unsuitable, unsuitable, unsuitable) 0.45, 0.55;
-  (unsuitable, suitable, suitable, suitable) 0.45, 0.55;
-  (unsuitable, suitable, suitable, unsuitable) 0.80, 0.20;
-  (unsuitable, suitable, unsuitable, suitable) 1.00, 0.00;
-  (unsuitable, suitable, unsuitable, unsuitable) 0.35, 0.65;
-  (unsuitable, unsuitable, suitable, suitable) 0.10, 0.90;
-  (unsuitable, unsuitable, suitable, unsuitable) 0.25, 0.75;
-  (unsuitable, unsuitable, unsuitable, suitable) 0.15, 0.85;
-  (unsuitable, unsuitable, unsuitable, unsuitable) 0.00, 1.00;
-}
-probability ( contamination_or_hazardous_waste ) {
-  table 0.50, 0.50;
-}
-probability ( practical_property_level_restorability | site_accessibility, fill_material_availability, continuing_property_access ) {
-  (accessible, available, suitable) 0.00, 1.00;
-  (accessible, available, unsuitable) 0.97, 0.03;
-  (accessible, unavailable, suitable) 0.17, 0.83;
-  (accessible, unavailable, unsuitable) 0.23, 0.77;
-  (inaccessible, available, suitable) 0.47, 0.53;
-  (inaccessible, available, unsuitable) 0.83, 0.17;
-  (inaccessible, unavailable, suitable) 0.73, 0.27;
-  (inaccessible, unavailable, unsuitable) 0.30, 0.70;
-}
-probability ( slope_distance_to_river ) {
-  table 0.50, 0.50;
-}
-probability ( biotic_conditions | habitat_features, intact_floodplain_forest, species_of_interest ) {
-  (suitable, intact, present) 0.70, 0.30;
-  (suitable, intact, not_present) 0.37, 0.63;
-  (suitable, missing, present) 0.77, 0.23;
-  (suitable, missing, not_present) 0.13, 0.87;
-  (unsuitable, intact, present) 0.47, 0.53;
-  (unsuitable, intact, not_present) 0.33, 0.67;
-  (unsuitable, missing, present) 0.83, 0.17;
-  (unsuitable, missing, not_present) 0.40, 0.60;
-}
-probability ( geomorphic_controls | infrastructure_constraints, material_availability, channel_mobility, substrate ) {
-  (no_restrictions, available, mobile, suitable) 1.00, 0.00;
-  (no_restrictions, available, mobile, unsuitable) 0.75, 0.25;
-  (no_restrictions, available, not_mobile, suitable) 0.45, 0.55;
-  (no_restrictions, available, not_mobile, unsuitable) 0.70, 0.30;
-  (no_restrictions, unavailable, mobile, suitable) 0.55, 0.45;
-  (no_restrictions, unavailable, mobile, unsuitable) 0.80, 0.20;
-  (no_restrictions, unavailable, not_mobile, suitable) 0.40, 0.60;
-  (no_restrictions, unavailable, not_mobile, unsuitable) 0.45, 0.55;
-  (unsuitable, available, mobile, suitable) 0.45, 0.55;
-  (unsuitable, available, mobile, unsuitable) 0.00, 1.00;
-  (unsuitable, available, not_mobile, suitable) 0.90, 0.10;
-  (unsuitable, available, not_mobile, unsuitable) 0.75, 0.25;
-  (unsuitable, unavailable, mobile, suitable) 0.80, 0.20;
-  (unsuitable, unavailable, mobile, unsuitable) 0.05, 0.95;
-  (unsuitable, unavailable, not_mobile, suitable) 0.15, 0.85;
-  (unsuitable, unavailable, not_mobile, unsuitable) 0.60, 0.40;
-}
-probability ( pit_restorability | pit_geometry, water_quality_threat, practical_restorability ) {
-  (suitable, suitable, suitable) 0.40, 0.60;
-  (suitable, suitable, unsuitable) 0.97, 0.03;
-  (suitable, unsuitable, suitable) 0.07, 0.93;
-  (suitable, unsuitable, unsuitable) 0.13, 0.87;
-  (unsuitable, suitable, suitable) 0.97, 0.03;
-  (unsuitable, suitable, unsuitable) 0.93, 0.07;
-  (unsuitable, unsuitable, suitable) 0.03, 0.97;
-  (unsuitable, unsuitable, unsuitable) 0.80, 0.20;
-}
-probability ( continuing_property_access ) {
-  table 0.50, 0.50;
-}
-probability ( infrastructure ) {
-  table 0.50, 0.50;
-}
-probability ( site_accessibility ) {
-  table 0.50, 0.50;
-}
-probability ( downstream ) {
-  table 0.50, 0.50;
-}
-probability ( bedrock_constraints ) {
-  table 0.50, 0.50;
-}
-probability ( water_rights ) {
-  table 0.50, 0.50;
-}
-probability ( public_perception ) {
-  table 0.50, 0.50;
-}
-probability ( threats_to_other_areas_or_permittability | surrounding_land_use, infrastructure, surrounding_ownership, water_rights ) {
-  (ammenable, no_threats, ammenable, no_threats) 0.40, 0.60;
-  (ammenable, no_threats, ammenable, threatened) 0.95, 0.05;
-  (ammenable, no_threats, unfriendly, no_threats) 0.05, 0.95;
-  (ammenable, no_threats, unfriendly, threatened) 1.00, 0.00;
-  (ammenable, threatened, ammenable, no_threats) 0.55, 0.45;
-  (ammenable, threatened, ammenable, threatened) 1.00, 0.00;
-  (ammenable, threatened, unfriendly, no_threats) 0.90, 0.10;
-  (ammenable, threatened, unfriendly, threatened) 0.35, 0.65;
-  (unfriendly, no_threats, ammenable, no_threats) 0.75, 0.25;
-  (unfriendly, no_threats, ammenable, threatened) 0.00, 1.00;
-  (unfriendly, no_threats, unfriendly, no_threats) 1.00, 0.00;
-  (unfriendly, no_threats, unfriendly, threatened) 0.75, 0.25;
-  (unfriendly, threatened, ammenable, no_threats) 0.00, 1.00;
-  (unfriendly, threatened, ammenable, threatened) 0.65, 0.35;
-  (unfriendly, threatened, unfriendly, no_threats) 0.95, 0.05;
-  (unfriendly, threatened, unfriendly, threatened) 0.70, 0.30;
-}
-probability ( suitability | landscape, site, socio_economic ) {
-  (suitable, suitable, suitable) 0.10, 0.90;
-  (suitable, suitable, unsuitable) 0.77, 0.23;
-  (suitable, unsuitable, suitable) 0.57, 0.43;
-  (suitable, unsuitable, unsuitable) 0.53, 0.47;
-  (unsuitable, suitable, suitable) 0.27, 0.73;
-  (unsuitable, suitable, unsuitable) 0.23, 0.77;
-  (unsuitable, unsuitable, suitable) 0.33, 0.67;
-  (unsuitable, unsuitable, unsuitable) 0.60, 0.40;
-}
-probability ( property_value ) {
-  table 0.50, 0.50;
-}
-probability ( upstream ) {
-  table 0.50, 0.50;
-}
-probability ( contamination ) {
-  table 0.50, 0.50;
-}
-probability ( habitat_features ) {
-  table 0.50, 0.50;
+probability ( threats_to_other_areas_or_permittability | surrounding_land_use, surrounding_ownership, infrastructure, water_rights ) {
+  (ammenable, ammenable, no_threats, no_threats) 1.00, 0.00;
+  (ammenable, ammenable, no_threats, threatened) 0.75, 0.25;
+  (ammenable, ammenable, threatened, no_threats) 0.75, 0.25;
+  (ammenable, ammenable, threatened, threatened) 0.50, 0.50;
+  (ammenable, unfriendly, no_threats, no_threats) 0.75, 0.25;
+  (ammenable, unfriendly, no_threats, threatened) 0.50, 0.50;
+  (ammenable, unfriendly, threatened, no_threats) 0.50, 0.50;
+  (ammenable, unfriendly, threatened, threatened) 0.25, 0.75;
+  (unfriendly, ammenable, no_threats, no_threats) 0.75, 0.25;
+  (unfriendly, ammenable, no_threats, threatened) 0.50, 0.50;
+  (unfriendly, ammenable, threatened, no_threats) 0.50, 0.50;
+  (unfriendly, ammenable, threatened, threatened) 0.25, 0.75;
+  (unfriendly, unfriendly, no_threats, no_threats) 0.50, 0.50;
+  (unfriendly, unfriendly, no_threats, threatened) 0.25, 0.75;
+  (unfriendly, unfriendly, threatened, no_threats) 0.25, 0.75;
+  (unfriendly, unfriendly, threatened, threatened) 0.00, 1.00;
 }
 probability ( surrounding_land_use ) {
-  table 0.50, 0.50;
+  table 0.5, 0.5;
+}
+probability ( surrounding_ownership ) {
+  table 0.5, 0.5;
+}
+probability ( infrastructure ) {
+  table 0.5, 0.5;
+}
+probability ( water_rights ) {
+  table 0.5, 0.5;
+}
+probability ( cost_benefit | public_perception, property_value, contamination_or_hazardous_waste ) {
+  (supportive, good_deal, clean) 1.00, 0.00;
+  (supportive, good_deal, contaminated) 0.67, 0.33;
+  (supportive, costly, clean) 0.67, 0.33;
+  (supportive, costly, contaminated) 0.33, 0.67;
+  (unfavorable, good_deal, clean) 0.67, 0.33;
+  (unfavorable, good_deal, contaminated) 0.33, 0.67;
+  (unfavorable, costly, clean) 0.33, 0.67;
+  (unfavorable, costly, contaminated) 0.00, 1.00;
+}
+probability ( public_perception ) {
+  table 0.5, 0.5;
+}
+probability ( property_value ) {
+  table 0.5, 0.5;
+}
+probability ( contamination_or_hazardous_waste ) {
+  table 0.5, 0.5;
+}
+probability ( landscape | geomorphic_controls, floodplain_characteristics, abiotic_conditions, conservation_value ) {
+  (suitable, suitable, suitable, suitable) 1.00, 0.00;
+  (suitable, suitable, suitable, unsuitable) 0.75, 0.25;
+  (suitable, suitable, unsuitable, suitable) 0.75, 0.25;
+  (suitable, suitable, unsuitable, unsuitable) 0.50, 0.50;
+  (suitable, unsuitable, suitable, suitable) 0.75, 0.25;
+  (suitable, unsuitable, suitable, unsuitable) 0.50, 0.50;
+  (suitable, unsuitable, unsuitable, suitable) 0.50, 0.50;
+  (suitable, unsuitable, unsuitable, unsuitable) 0.25, 0.75;
+  (unsuitable, suitable, suitable, suitable) 0.75, 0.25;
+  (unsuitable, suitable, suitable, unsuitable) 0.50, 0.50;
+  (unsuitable, suitable, unsuitable, suitable) 0.50, 0.50;
+  (unsuitable, suitable, unsuitable, unsuitable) 0.25, 0.75;
+  (unsuitable, unsuitable, suitable, suitable) 0.50, 0.50;
+  (unsuitable, unsuitable, suitable, unsuitable) 0.25, 0.75;
+  (unsuitable, unsuitable, unsuitable, suitable) 0.25, 0.75;
+  (unsuitable, unsuitable, unsuitable, unsuitable) 0.00, 1.00;
+}
+probability ( geomorphic_controls | infrastructure_constraints, channel_mobility, substrate, material_availability ) {
+  (no_restrictions, mobile, suitable, available) 1.00, 0.00;
+  (no_restrictions, mobile, suitable, unavailable) 0.75, 0.25;
+  (no_restrictions, mobile, unsuitable, available) 0.75, 0.25;
+  (no_restrictions, mobile, unsuitable, unavailable) 0.50, 0.50;
+  (no_restrictions, not_mobile, suitable, available) 0.75, 0.25;
+  (no_restrictions, not_mobile, suitable, unavailable) 0.50, 0.50;
+  (no_restrictions, not_mobile, unsuitable, available) 0.50, 0.50;
+  (no_restrictions, not_mobile, unsuitable, unavailable) 0.25, 0.75;
+  (unsuitable, mobile, suitable, available) 0.75, 0.25;
+  (unsuitable, mobile, suitable, unavailable) 0.50, 0.50;
+  (unsuitable, mobile, unsuitable, available) 0.50, 0.50;
+  (unsuitable, mobile, unsuitable, unavailable) 0.25, 0.75;
+  (unsuitable, not_mobile, suitable, available) 0.50, 0.50;
+  (unsuitable, not_mobile, suitable, unavailable) 0.25, 0.75;
+  (unsuitable, not_mobile, unsuitable, available) 0.25, 0.75;
+  (unsuitable, not_mobile, unsuitable, unavailable) 0.00, 1.00;
+}
+probability ( infrastructure_constraints ) {
+  table 0.5, 0.5;
+}
+probability ( channel_mobility ) {
+  table 0.5, 0.5;
 }
 probability ( substrate ) {
-  table 0.50, 0.50;
-}
-probability ( floodplain_characteristics | gradient, within_x_year_floodplain, width, location_in_floodplain ) {
-  (suitable, within, suitable, strategic) 0.10, 0.90;
-  (suitable, within, suitable, ineffective) 0.35, 0.65;
-  (suitable, within, unsuitable, strategic) 0.45, 0.55;
-  (suitable, within, unsuitable, ineffective) 1.00, 0.00;
-  (suitable, outside, suitable, strategic) 0.65, 0.35;
-  (suitable, outside, suitable, ineffective) 0.80, 0.20;
-  (suitable, outside, unsuitable, strategic) 0.90, 0.10;
-  (suitable, outside, unsuitable, ineffective) 0.35, 0.65;
-  (unsuitable, within, suitable, strategic) 0.45, 0.55;
-  (unsuitable, within, suitable, ineffective) 0.10, 0.90;
-  (unsuitable, within, unsuitable, strategic) 0.90, 0.10;
-  (unsuitable, within, unsuitable, ineffective) 0.25, 0.75;
-  (unsuitable, outside, suitable, strategic) 0.90, 0.10;
-  (unsuitable, outside, suitable, ineffective) 0.35, 0.65;
-  (unsuitable, outside, unsuitable, strategic) 0.95, 0.05;
-  (unsuitable, outside, unsuitable, ineffective) 1.00, 0.00;
-}
-probability ( identified_in_conservation_plan ) {
-  table 0.50, 0.50;
+  table 0.5, 0.5;
 }
 probability ( material_availability ) {
-  table 0.50, 0.50;
+  table 0.5, 0.5;
 }
-probability ( restorable_substrate ) {
-  table 0.50, 0.50;
+probability ( floodplain_characteristics | location_in_floodplain, width, gradient, within_x_year_floodplain ) {
+  (strategic, suitable, suitable, within) 1.00, 0.00;
+  (strategic, suitable, suitable, outside) 0.75, 0.25;
+  (strategic, suitable, unsuitable, within) 0.75, 0.25;
+  (strategic, suitable, unsuitable, outside) 0.50, 0.50;
+  (strategic, unsuitable, suitable, within) 0.75, 0.25;
+  (strategic, unsuitable, suitable, outside) 0.50, 0.50;
+  (strategic, unsuitable, unsuitable, within) 0.50, 0.50;
+  (strategic, unsuitable, unsuitable, outside) 0.25, 0.75;
+  (ineffective, suitable, suitable, within) 0.75, 0.25;
+  (ineffective, suitable, suitable, outside) 0.50, 0.50;
+  (ineffective, suitable, unsuitable, within) 0.50, 0.50;
+  (ineffective, suitable, unsuitable, outside) 0.25, 0.75;
+  (ineffective, unsuitable, suitable, within) 0.50, 0.50;
+  (ineffective, unsuitable, suitable, outside) 0.25, 0.75;
+  (ineffective, unsuitable, unsuitable, within) 0.25, 0.75;
+  (ineffective, unsuitable, unsuitable, outside) 0.00, 1.00;
 }
-probability ( intact_floodplain_forest ) {
-  table 0.50, 0.50;
+probability ( location_in_floodplain ) {
+  table 0.5, 0.5;
 }
-probability ( depth ) {
-  table 0.50, 0.50;
+probability ( width ) {
+  table 0.5, 0.5;
+}
+probability ( gradient ) {
+  table 0.5, 0.5;
 }
 probability ( within_x_year_floodplain ) {
-  table 0.50, 0.50;
+  table 0.5, 0.5;
+}
+probability ( abiotic_conditions | water_quality, connectivity_barriers ) {
+  (high_quality, connected) 1.00, 0.00;
+  (high_quality, disconnected) 0.50, 0.50;
+  (low_quality, connected) 0.50, 0.50;
+  (low_quality, disconnected) 0.00, 1.00;
 }
 probability ( water_quality ) {
-  table 0.50, 0.50;
+  table 0.5, 0.5;
 }
-probability ( bank_slope ) {
-  table 0.50, 0.50;
+probability ( connectivity_barriers | upstream, downstream, on_property ) {
+  (connected, connected, connected) 1.00, 0.00;
+  (connected, connected, disconnected) 0.67, 0.33;
+  (connected, disconnected, connected) 0.67, 0.33;
+  (connected, disconnected, disconnected) 0.33, 0.67;
+  (disconnected, connected, connected) 0.67, 0.33;
+  (disconnected, connected, disconnected) 0.33, 0.67;
+  (disconnected, disconnected, connected) 0.33, 0.67;
+  (disconnected, disconnected, disconnected) 0.00, 1.00;
+}
+probability ( upstream ) {
+  table 0.5, 0.5;
+}
+probability ( downstream ) {
+  table 0.5, 0.5;
+}
+probability ( on_property ) {
+  table 0.5, 0.5;
+}
+probability ( conservation_value | biotic_conditions, identified_in_conservation_plan, relationship_to_protected_areas ) {
+  (suitable, identified, connected) 1.00, 0.00;
+  (suitable, identified, disconnected) 0.67, 0.33;
+  (suitable, not_identified, connected) 0.67, 0.33;
+  (suitable, not_identified, disconnected) 0.33, 0.67;
+  (unsuitable, identified, connected) 0.67, 0.33;
+  (unsuitable, identified, disconnected) 0.33, 0.67;
+  (unsuitable, not_identified, connected) 0.33, 0.67;
+  (unsuitable, not_identified, disconnected) 0.00, 1.00;
+}
+probability ( biotic_conditions | intact_floodplain_forest, habitat_features, species_of_interest ) {
+  (intact, suitable, present) 1.00, 0.00;
+  (intact, suitable, not_present) 0.67, 0.33;
+  (intact, unsuitable, present) 0.67, 0.33;
+  (intact, unsuitable, not_present) 0.33, 0.67;
+  (missing, suitable, present) 0.67, 0.33;
+  (missing, suitable, not_present) 0.33, 0.67;
+  (missing, unsuitable, present) 0.33, 0.67;
+  (missing, unsuitable, not_present) 0.00, 1.00;
+}
+probability ( intact_floodplain_forest ) {
+  table 0.5, 0.5;
+}
+probability ( habitat_features ) {
+  table 0.5, 0.5;
+}
+probability ( species_of_interest ) {
+  table 0.5, 0.5;
+}
+probability ( identified_in_conservation_plan ) {
+  table 0.5, 0.5;
+}
+probability ( relationship_to_protected_areas ) {
+  table 0.5, 0.5;
 }
