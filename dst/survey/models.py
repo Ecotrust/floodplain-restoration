@@ -126,10 +126,10 @@ class MapLayer(models.Model):
 
 
 class Question(models.Model):
-    name = models.CharField(max_length=80)  # TODO slug correspond to the CPT
+    name = models.CharField(max_length=80)
     title = models.CharField(max_length=80)
     question = models.CharField(max_length=250)
-    detail = models.TextField()  # TODO HTML
+    detail = models.TextField()
     order = models.FloatField()
 
     # contextual info to help use answer the question
