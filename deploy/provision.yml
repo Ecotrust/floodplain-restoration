@@ -1,0 +1,143 @@
+---
+- name: provision TNC gravel dst tool
+  hosts: all
+  connection: ssh
+  remote_user: "{{ remote_user }}"
+  sudo: yes
+
+  vars:
+    app_name: 'dst'
+    dbname: 'dst' # no dash
+
+    base_path: '/usr/local/apps/floodplain-restoration'
+    project_path: '/usr/local/apps/floodplain-restoration/dst'
+    webuser: www-data
+    manage: "python3 {{ project_path }}/manage.py"
+
+  tasks:
+
+    - name: Get aptitude for upgrade
+      apt: pkg=aptitude state=present
+
+    - name: Safe system upgrade
+      apt: upgrade=safe update_cache=yes cache_valid_time=604800
+
+    - name: install base packages
+      apt: pkg={{ item }} state=present
+      with_items:
+        - postgresql-9.3-postgis-2.1
+        - build-essential
+        - cython
+        - git-core
+        - gdal-bin
+        - gfortran
+        - htop
+        - libopenblas-dev
+        - liblapack-dev
+        - libgeos-dev
+        - libgdal1-dev
+        - libpq-dev
+        - mercurial
+        - nginx-full
+        - libtiff5-dev
+        - libjpeg8-dev
+        - zlib1g-dev
+        - libfreetype6-dev
+        - python3-dev
+        - python3-pip
+        - python3-psycopg2
+        - python-psycopg2  # for ansible
+        - uwsgi-plugin-python3
+        - redis-server
+        - subversion
+        - sysstat
+        - uwsgi
+        - postfix
+        - vim
+
+    - name: git checkout
+      when: manage_with_git
+      git: repo=https://github.com/Ecotrust/floodplain-restoration.git
+           dest={{ base_path }}
+           version={{ git_branch }}
+
+    - name: settings local
+      tags:
+        - deploy
+      template: src=templates/settings_local.py dest={{ project_path }}/{{ app_name }}/settings_local.py owner={{ remote_user }} group={{ remote_user }} mode=0755
+
+    - name: fix annoying ubuntu pip bug
+      command: >
+        easy_install3 requests<2.4
+
+    - name: Install global python *3* requirements
+      pip: state=latest requirements={{ base_path }}/requirements.txt executable=pip3
+
+    - name: create db user  
+      sudo_user: postgres
+      # same as dbname
+      postgresql_user: name={{ dbname }} password={{ dbname }} role_attr_flags=CREATEDB,NOSUPERUSER
+
+    - name: create postgres db
+      sudo_user: postgres
+      register: postgres_create_returncode
+      postgresql_db: name={{ dbname }}
+                     owner={{ dbname }}
+                     encoding='UTF-8'
+                     lc_collate='en_US.UTF-8'
+                     lc_ctype='en_US.UTF-8'
+                     template='template0'
+
+    - name: load postgis
+      sudo_user: postgres
+      command: /usr/bin/psql -d {{ dbname }} -c "CREATE EXTENSION postgis;"
+      when: postgres_create_returncode['changed']
+
+    - name: install fixtures 
+      command: "{{ manage }} loaddata {{ project_path }}/survey/fixtures/questions.json"
+      when: postgres_create_returncode['changed']
+
+    - name: migrate 
+      command: "{{ manage }} migrate --noinput"
+
+    - name: collect static 
+      command: "{{ manage }} collectstatic --noinput"
+
+    - name: install nginx site 
+      notify: reload nginx
+      template: src=templates/nginx.j2 dest=/etc/nginx/sites-available/{{ app_name }} owner=root group={{ remote_user }} mode=0754
+
+    - name: enable nginx site
+      file: src=/etc/nginx/sites-available/{{ app_name }} dest=/etc/nginx/sites-enabled/{{ app_name }} owner=root group={{ remote_user }} state=link
+
+    - name: install uwsgi app
+      notify: restart uwsgi
+      template: src=templates/uwsgi.ini dest=/etc/uwsgi/apps-available/{{ app_name }}.ini owner=root group={{ remote_user }} mode=0754
+
+    - name: enable uwsgi app
+      file: src=/etc/uwsgi/apps-available/{{ app_name }}.ini dest=/etc/uwsgi/apps-enabled/{{ app_name }}.ini owner=root group={{ remote_user }} state=link
+
+    - name: remove default site
+      file: path=/etc/nginx/sites-enabled/default state=absent
+
+    # - name: clear redis cache
+    #   redis: command=flush db=5 
+
+    - name: remove all pyc files
+      command: >
+        find . -name '*.pyc' -exec rm -f {} \;
+
+    - name: restart
+      debug: msg="Restarting services..."  # dummy
+      changed_when: True
+      notify: 
+        - reload nginx
+        - restart uwsgi
+
+  handlers: 
+
+    - name: restart uwsgi
+      action: service name=uwsgi state=restarted
+
+    - name: reload nginx
+      action: service name=nginx state=reloaded
