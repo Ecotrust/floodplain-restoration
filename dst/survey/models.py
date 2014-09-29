@@ -131,6 +131,7 @@ class Question(models.Model):
     question = models.CharField(max_length=250)
     detail = models.TextField()
     order = models.FloatField()
+    category = models.CharField(max_length=80)
 
     # contextual info to help use answer the question
     image = models.ImageField(blank=True)
