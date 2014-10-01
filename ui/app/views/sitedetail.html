@@ -1,0 +1,18 @@
+<h3> Site Details for `<em>{{site.properties.name}}</em>` </h3> 
+
+<h4> Pits </h4>
+<ul>
+  <li ng-repeat="pit in site.properties.pit_set">
+  	<p> Pit #{{pit.id}} ({{pit.properties.name}})  [Edit] [Delete] </p>
+<!--   	<ul>
+	    <li ng-repeat='(key, prop) in pit.properties track by key'>
+	        <p>{{key}} : {{prop}}</p>
+	    </li>
+	</ul> -->
+  </li>
+  <li>
+  	[Add New Pit]
+  </li>
+</ul>
+
+<a href="#/sites/{{site.id}}"
