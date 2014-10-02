@@ -3,7 +3,11 @@
 <h4> Pits </h4>
 <ul>
   <li ng-repeat="pit in site.properties.pit_set">
-  	<p> Pit #{{pit.id}} ({{pit.properties.name}})  [Edit] [Delete] </p>
+  	<p> 
+  		Pit #{{pit.id}} ({{pit.properties.name}})  
+  		<a class="btn btn-primary" href="#Edit">Edit</a> 
+  		<a class="btn btn-primary" href="#Delete">Delete</a>
+  	</p>
 <!--   	<ul>
 	    <li ng-repeat='(key, prop) in pit.properties track by key'>
 	        <p>{{key}} : {{prop}}</p>
@@ -11,8 +15,8 @@
 	</ul> -->
   </li>
   <li>
-  	[Add New Pit]
+  	<a class="btn btn-primary" href="#/pits/new">Add New Pit</a>
   </li>
 </ul>
 
-<a href="#/sites/{{site.id}}"
+<a href="#/sites/{{site.id}}/question/{{site.next}}">Next Question</a>

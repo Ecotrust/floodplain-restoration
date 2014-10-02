@@ -17,7 +17,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*s6g2eohg6t1f4y1&dbvkqmb2&xm1dd63p4abd@@sokvp5pd$%'
+# Should be define in settings_local.py and kept out of github 
+# SECRET_KEY = '...''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,11 +48,11 @@ INSTALLED_APPS = (
 
     'django_nose',
 
-    'silk'  # TODO remove or make debug=True only
+    # 'silk'  # TODO remove or make debug=True only
 )
 
 MIDDLEWARE_CLASSES = (
-    'silk.middleware.SilkyMiddleware',   # TODO remove or make debug=True only
+    # 'silk.middleware.SilkyMiddleware',   # TODO remove or make debug=True only
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

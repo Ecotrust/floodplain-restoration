@@ -10,3 +10,4 @@ manage_with_git=true
 git_branch=master
 debug=True
 domain=localhost
+secretkey=*s6g2eohg6t1f4y1&dbvkqmb2&xm1dd63p4abd@@sokvp5pd$%

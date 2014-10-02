@@ -93,12 +93,12 @@
       command: /usr/bin/psql -d {{ dbname }} -c "CREATE EXTENSION postgis;"
       when: postgres_create_returncode['changed']
 
+    - name: migrate 
+      command: "{{ manage }} migrate --noinput"
+
     - name: install fixtures 
       command: "{{ manage }} loaddata {{ project_path }}/survey/fixtures/questions.json"
       when: postgres_create_returncode['changed']
-
-    - name: migrate 
-      command: "{{ manage }} migrate --noinput"
 
     - name: collect static 
       command: "{{ manage }} collectstatic --noinput"
