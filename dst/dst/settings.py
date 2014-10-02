@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Should be define in settings_local.py and kept out of github 
-# SECRET_KEY = '...''
+SECRET_KEY = '*s6g2eohg6t1f4y1&dbvkqmb2&xm1dd63p4abd@@sokvp5pd$%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
