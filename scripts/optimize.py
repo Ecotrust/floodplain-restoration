@@ -90,7 +90,10 @@ if __name__ == "__main__":
             for line in fh.readlines():
                 key, val = line.split(',')
                 val = float(val)
-                cond = bn.variables[key][0]  # assume first
+                try:
+                    cond = bn.variables[key][0]  # assume first
+                except KeyError:
+                    print("    {} not found in BBN".format(key))
                 if key == 'socio_economic':
                     socio_economic = val
                 elif key == 'site':
@@ -120,7 +123,7 @@ if __name__ == "__main__":
                  if p['given']]  # given is not None ~ conditional
 
     annealer = CPTOptimizer(bn)
-    annealer.steps = 800.0
+    annealer.steps = 8000.0
     annealer.Tmax = 0.33
     annealer.Tmin = 6.7e-14 
     annealer.updates = annealer.steps / 5
