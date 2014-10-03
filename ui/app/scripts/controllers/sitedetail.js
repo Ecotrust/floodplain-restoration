@@ -10,4 +10,13 @@
 angular.module('uiApp')
   .controller('SitedetailCtrl', function ($scope, $routeParams, SiteFactory) {
     $scope.site = SiteFactory.getSite($routeParams.siteId);
+
+    $scope.deleteSite = function(siteId) {
+      console.log('Deleted site ' + siteId);
+    };
+
+    $scope.deleteSitePit = function(siteId, pitId) {
+      console.log('Deleted ' + pitId + 'from site ' + siteId);
+    };
+
   });

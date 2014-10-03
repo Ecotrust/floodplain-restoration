@@ -24,11 +24,14 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
+          <li><a ng-href="#/sites">Property List</a></li>
+          <li><a ng-href="#/help/about">Help</a></li>
           <li><a ng-href="#">Login</a></li>
         </ul>
-        <h3 class="text-muted"><a href="#/">Floodplain Restoration Tool</a></h3>
+        <h3 class="text-muted">
+          <a href="#/">Floodplain Gravel Mine Restoration</a>
+        <span class="label label-info">{{ siteName }}</span>
+        </h3>
       </div>
 
       <div ng-view=""></div>
@@ -37,19 +40,6 @@
         <p>&copy; 2014 <a href="http://ecotrust.org">Ecotrust</a></p>
       </div>
     </div>
-
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
-    -->
     
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
@@ -78,8 +68,17 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/sitefactory.js"></script>
+        <script src="scripts/services/pitfactory.js"></script>
         <script src="scripts/controllers/sitelist.js"></script>
         <script src="scripts/controllers/sitedetail.js"></script>
+        <script src="scripts/controllers/sitenew.js"></script>
+        <script src="scripts/controllers/siteedit.js"></script>
+        <script src="scripts/controllers/pitnew.js"></script>
+        <script src="scripts/controllers/pitedit.js"></script>
+        <script src="scripts/controllers/survey.js"></script>
+        <script src="scripts/controllers/surveydone.js"></script>
+        <script src="scripts/controllers/report.js"></script>
+        <script src="scripts/controllers/help.js"></script>
         <!-- endbuild -->
 </body>
 </html>

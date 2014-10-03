@@ -8,7 +8,7 @@
  * Factory in the uiApp.
  */
 angular.module('uiApp')
-  .factory('SiteFactory', function () {
+  .factory('SiteFactory', function ($rootScope) {
 
     var sites = [
       {
@@ -119,15 +119,31 @@ angular.module('uiApp')
         return sites;
       },
 
+      getSitePit: function (siteId, pitId) {
+        pitId = parseInt(pitId, 10);
+        var site = this.getSite(siteId);
+
+        for (var i = site.properties.pit_set.length - 1; i >= 0; i--) {
+          if (site.properties.pit_set[i].id === pitId) {
+            return site.properties.pit_set[i];
+          }
+        }
+        return null;
+      },
+
       getSite: function (siteId) {
         siteId = parseInt(siteId, 10);
         for (var i = sites.length - 1; i >= 0; i--) {
           if (sites[i].id === siteId) {
+            $rootScope.siteId = siteId;
+            $rootScope.siteName = sites[i].properties.name;
             return sites[i];
           }
         }
         return null;
       }
+
+
 
       //getNextQuestionForSite
 

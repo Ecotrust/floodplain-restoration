@@ -1,12 +1,18 @@
-<h3> Site Details for `<em>{{site.properties.name}}</em>` </h3> 
+<h2> 
+  <a class="btn btn-default btn-xs" href="#/sites">&lt;&lt;Back</a>
+  {{site.properties.name}}
+  <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/new">Edit</a>
+  <button class="btn btn-default btn-xs" ng-click="deleteSite(site.id)">Delete</button>
+</h2> 
+
 
 <h4> Pits </h4>
 <ul>
   <li ng-repeat="pit in site.properties.pit_set">
   	<p> 
   		Pit #{{pit.id}} ({{pit.properties.name}})  
-  		<a class="btn btn-primary" href="#Edit">Edit</a> 
-  		<a class="btn btn-primary" href="#Delete">Delete</a>
+  		<a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/{{pit.id}}/edit">Edit</a> 
+  		<button class="btn btn-default btn-xs" ng-click="deleteSitePit(site.id, pit.id)">Delete</button>
   	</p>
 <!--   	<ul>
 	    <li ng-repeat='(key, prop) in pit.properties track by key'>
@@ -14,9 +20,11 @@
 	    </li>
 	</ul> -->
   </li>
-  <li>
-  	<a class="btn btn-primary" href="#/pits/new">Add New Pit</a>
-  </li>
 </ul>
 
-<a href="#/sites/{{site.id}}/question/{{site.next}}">Next Question</a>
+<div>
+  <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/new">Add New Pit</a>
+  <a class="btn btn-primary btn-xs" href="#/site/{{site.id}}/survey/1">Continue to the Survey</a>
+</div>
+
+
