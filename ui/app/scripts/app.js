@@ -24,9 +24,17 @@ angular
         controller: 'MainCtrl'
       })
 
+      /*
+       * Sites
+       */
       .when('/sites', {
         templateUrl: 'views/sitelist.html',
         controller: 'SitelistCtrl'
+      })
+
+      .when('/site/new', {
+        templateUrl: 'views/siteedit.html',
+        controller: 'SiteeditCtrl'
       })
 
       .when('/site/:siteId', {
@@ -34,24 +42,30 @@ angular
         controller: 'SitedetailCtrl'
       })
 
-      .when('/site/new', {
-        templateUrl: 'views/sitenew.html',
-        controller: 'SitenewCtrl'
-      })
-
       .when('/site/:siteId/edit', {
         templateUrl: 'views/siteedit.html',
         controller: 'SiteeditCtrl'
       })
 
+      /*
+       * Pits
+       */
       .when('/site/:siteId/pit/new', {
-        templateUrl: 'views/pitnew.html',
-        controller: 'PitnewCtrl'
+        templateUrl: 'views/pitedit.html',
+        controller: 'PiteditCtrl'
       })
 
       .when('/site/:siteId/pit/:pitId/edit', {
         templateUrl: 'views/pitedit.html',
         controller: 'PiteditCtrl'
+      })
+      
+      /*
+       * Survey
+       */
+      .when('/site/:siteId/survey/done', {
+        templateUrl: 'views/surveydone.html',
+        controller: 'SurveydoneCtrl'
       })
 
       .when('/site/:siteId/survey/:questionId', {
@@ -59,32 +73,29 @@ angular
         controller: 'SurveyCtrl'
       })
 
-      .when('/site/:siteId/survey/done', {
-        templateUrl: 'views/surveydone.html',
-        controller: 'SurveydoneCtrl'
-      })
-
+      /*
+       * Report
+       */
       .when('/site/:siteId/report', {
         templateUrl: 'views/report.html',
         controller: 'ReportCtrl'
       })
 
+      /*
+       * Help
+       */
       .when('/help/:topic', {
         templateUrl: 'views/help.html',
         controller: 'HelpCtrl'
       })
 
       /*
-      ... all of these can drive from a contentService which has all the CMSy text in one json
-
-      How about delete actions?
-
       pitService?
       authenticationService?
       contentService?
       mapConfigService?
-
       */
+
       .otherwise({
         templateUrl: '404.html'
       });

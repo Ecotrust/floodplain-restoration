@@ -1,10 +1,9 @@
 <p>
-  <a class="btn btn-default btn-xs" href="#/site/{{ site.id }}">&lt;&lt;Back</a>
-  Editing <span class="label label-info">{{pit.properties.name}}</span> 
+<!--   <a class="btn btn-default btn-xs" href="#/site/{{ site.id }}">&lt;&lt;Back</a>
+ -->  Editing <span class="label label-info">{{pit.properties.name}}</span> 
   from <span class="label label-info">{{site.properties.name}}</span>
 </p>
 
-{{pit.geometry.coordinates}}
 <div>
   <form novalidate name="pitForm" class="form-horizontal" role="form">
 
@@ -76,8 +75,7 @@
 
       </div>
 
+      <button class="btn btn-primary" ng-click="save()">Save</button>
   </form>
-  <button ng-click="reset()">RESET</button>
-  <button ng-click="update(user)">SAVE</button>
 
 </div>

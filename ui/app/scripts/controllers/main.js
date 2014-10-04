@@ -8,6 +8,8 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $rootScope) {
+    $rootScope.siteId = null;
+    $rootScope.siteName = null;
     $scope.stuff = ['thing 1'];
   });

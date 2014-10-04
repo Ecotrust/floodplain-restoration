@@ -8,10 +8,6 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SurveydoneCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('SurveydoneCtrl', function ($scope, $routeParams, SiteFactory) {
+    $scope.suitability = SiteFactory.getSuitabilityScores($routeParams.siteId); // /api/site/2/suitability.json
   });
