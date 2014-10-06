@@ -130,7 +130,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'dst', 'media')
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = "/api/"
+LOGIN_REDIRECT_URL = "/"
 
 SESSION_ENGINE = 'redis_sessions.session'
 

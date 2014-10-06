@@ -26,7 +26,21 @@
         <ul class="nav nav-pills pull-right">
           <li><a ng-href="#/sites">Property List</a></li>
           <li><a ng-href="#/help/about">Help</a></li>
-          <li><a ng-href="#">Login</a></li>
+          <li ng-if="userName">
+              <a ng-href="#"><span class="glyphicon glyphicon-user"></span> {{userName}} </a>
+              <a ng-href="http://localhost:8000/accounts/logout"> Log Out </a>
+          </li>
+          <li ng-if="!userName">
+              <!-- TODO auth -->
+              <!--
+              <a ng-href="{{ baseurl }}/accounts/login"><span class="glyphicon glyphicon-user"></span> Log In </a>
+              -->
+              <a ng-href="http://localhost:8000/accounts/login">
+                <span class="glyphicon glyphicon-user"></span>
+                Log In
+              </a>
+
+          </li>
         </ul>
         <h3 class="text-muted">
           <a href="#/">Floodplain Gravel Mine Restoration</a>
@@ -84,5 +98,13 @@
         <script src="scripts/controllers/help.js"></script>
         <script src="scripts/services/questionfactory.js"></script>
         <!-- endbuild -->
+
+       
+        <!-- TODO auth -->
+        <!--
+        <script src="sessions/auth.js"></script> 
+        -->
+        <script src="http://localhost:8000/sessions/auth.js"></script>
+
 </body>
 </html>
