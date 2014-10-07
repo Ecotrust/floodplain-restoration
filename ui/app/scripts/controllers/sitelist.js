@@ -9,6 +9,7 @@
  */
 angular.module('uiApp')
   .controller('SitelistCtrl', function ($scope, $rootScope, SiteFactory) {
+    $rootScope.showMap = true;
     $scope.sites = SiteFactory.getSites();
     $rootScope.siteId = null;
     $rootScope.siteName = null;

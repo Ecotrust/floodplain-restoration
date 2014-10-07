@@ -8,6 +8,8 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SurveydoneCtrl', function ($scope, $routeParams, SiteFactory) {
+  .controller('SurveydoneCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
+    $rootScope.showMap = true;
+    
     $scope.suitability = SiteFactory.getSuitabilityScores($routeParams.siteId); // /api/site/2/suitability.json
   });

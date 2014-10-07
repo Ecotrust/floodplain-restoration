@@ -8,7 +8,9 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SurveyCtrl', function ($scope, $routeParams, QuestionFactory) {
+  .controller('SurveyCtrl', function ($scope, $routeParams, $rootScope, QuestionFactory) {
+    $rootScope.showMap = true;
+    
     var questionId = parseInt($routeParams.questionId, 10);
 
     $scope.siteId = $routeParams.siteId;

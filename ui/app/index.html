@@ -33,7 +33,10 @@
           <li ng-if="!userName">
               <!-- TODO auth -->
               <!--
-              <a ng-href="{{ baseurl }}/accounts/login"><span class="glyphicon glyphicon-user"></span> Log In </a>
+              <a ng-href="{{ baseurl }}/accounts/login">
+                <span class="glyphicon glyphicon-user"></span>
+                Log In
+              </a>
               -->
               <a ng-href="http://localhost:8000/accounts/login">
                 <span class="glyphicon glyphicon-user"></span>
@@ -44,20 +47,22 @@
         </ul>
         <h3 class="text-muted">
           <a href="#/">Floodplain Gravel Mine Restoration</a>
-        <span class="label label-info">{{ siteName }}</span>
+          <span class="label label-info">{{ siteName }}</span>
         </h3>
       </div>
 
-<!--       <div class="row">
-        <div class="col-md-6" ng-view=""></div>
-        <div class="col-md-6"></div>
+      <div ng-if="showMap"> 
+        <div class="row">
+          <div class="col-md-6" ng-view=""></div>
+          <div class="col-md-6" style="border:1px grey solid;"></div>
+        </div>
       </div>
- -->      <div ng-view=""></div>
+      <div ng-if="!showMap"> 
+        <div class="row">
+          <div class="col-md-12" ng-view="" ></div>
+        </div>
+      </div>
 
-<!--       <div class="footer">
-        <p>&copy; 2014 <a href="http://ecotrust.org">Ecotrust</a></p>
-      </div>
- -->
     </div>
     
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -85,7 +90,6 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/sitefactory.js"></script>
         <script src="scripts/services/pitfactory.js"></script>
         <script src="scripts/controllers/sitelist.js"></script>

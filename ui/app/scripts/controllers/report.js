@@ -8,7 +8,9 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('ReportCtrl', function ($scope) {
+  .controller('ReportCtrl', function ($scope, $rootScope) {
+    $rootScope.showMap = true;
+
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

@@ -9,7 +9,7 @@
  */
 angular.module('uiApp')
   .controller('MainCtrl', function ($scope, $rootScope) {
+  	$rootScope.showMap = false;
     $rootScope.siteId = null;
     $rootScope.siteName = null;
-    $scope.stuff = ['thing 1'];
   });

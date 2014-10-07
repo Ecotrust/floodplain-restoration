@@ -8,7 +8,8 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SitedetailCtrl', function ($scope, $routeParams, SiteFactory) {
+  .controller('SitedetailCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
+    $rootScope.showMap = true;
     $scope.site = SiteFactory.getSite($routeParams.siteId);
 
     $scope.deleteSite = function(siteId) {

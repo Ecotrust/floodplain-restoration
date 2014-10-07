@@ -8,7 +8,8 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SiteeditCtrl', function ($scope, $routeParams, SiteFactory) {
+  .controller('SiteeditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
+    $rootScope.showMap = true;
     var site = SiteFactory.getSite($routeParams.siteId);
     var newSite = false;
     if ($routeParams.siteId === 'new' || site === null) {
