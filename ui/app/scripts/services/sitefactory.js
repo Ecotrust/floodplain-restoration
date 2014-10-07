@@ -119,17 +119,7 @@ angular.module('uiApp')
         return sites;
       },
 
-      getSitePit: function (siteId, pitId) {
-        pitId = parseInt(pitId, 10);
-        var site = this.getSite(siteId);
 
-        for (var i = site.properties.pit_set.length - 1; i >= 0; i--) {
-          if (site.properties.pit_set[i].id === pitId) {
-            return site.properties.pit_set[i];
-          }
-        }
-        return null;
-      },
 
       getSuitabilityScores: function (siteId) {
         // TODO http://localhost:8000/api/site/2/suitability.json

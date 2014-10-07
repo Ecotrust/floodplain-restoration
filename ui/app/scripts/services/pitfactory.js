@@ -68,18 +68,16 @@ angular.module('uiApp')
         return pits;
       },
 
-      getSite: function (siteId) {
-        siteId = parseInt(siteId, 10);
-        for (var i = sites.length - 1; i >= 0; i--) {
-          if (sites[i].id === siteId) {
-            $rootScope.siteId = siteId;
-            $rootScope.siteName = sites[i].properties.name;
-            console.log($rootScope)
-            return sites[i];
+      getSitePit: function (siteId, pitId) {
+        pitId = parseInt(pitId, 10);
+
+        for (var i = pits.length - 1; i >= 0; i--) {
+          if (pits[i].id === pitId) {
+            return pits[i];
           }
         }
         return null;
-      }
+      },
 
       //getNextQuestionForSite
 
