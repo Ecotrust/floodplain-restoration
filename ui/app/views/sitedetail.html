@@ -1,31 +1,38 @@
 <!--   <a class="btn btn-default btn-xs" href="#/sites">&lt;&lt;Back</a>
  -->
-<p>
-  Selected Site is <span class="label label-info">{{site.properties.name}}</span>
-  <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/edit">Edit</a>
-  <button class="btn btn-default btn-xs" ng-click="deleteSite(site.id)">Delete</button>
-</p>
+<div class="row">
+  <div class="col-md-6">
+    Selected Site is <span class="label label-info">{{site.properties.name}}</span>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group">
+      <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/edit">Edit</a>
+      <button class="btn btn-default btn-xs" ng-click="deleteSite(site.id)">Delete</button>
+    </div>
+  </div>
+</div>
 
+<hr>
 
-<h4> Pits </h4>
-<ul>
-  <li ng-repeat="pit in site.properties.pit_set">
-  	<p> 
-  		Pit #{{pit.id}} ({{pit.properties.name}})  
-  		<a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/{{pit.id}}/edit">Edit</a> 
-  		<button class="btn btn-default btn-xs" ng-click="deleteSitePit(site.id, pit.id)">Delete</button>
-  	</p>
-<!--   	<ul>
-	    <li ng-repeat='(key, prop) in pit.properties track by key'>
-	        <p>{{key}} : {{prop}}</p>
-	    </li>
-	</ul> -->
-  </li>
-</ul>
+<div class="row" ng-repeat="pit in site.properties.pit_set">
+  <div class="col-md-2"></div>
+  <div class="col-md-4">
+    Pit #{{pit.id}} ({{pit.properties.name}})  
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/{{pit.id}}/edit">Edit</a> 
+      <a class="btn btn-default btn-xs" href="#" ng-click="deleteSitePit(site.id, pit.id)">Delete</a>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
 
-<div>
-  <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/new">Add New Pit</a>
-  <a class="btn btn-primary btn-xs" href="#/site/{{site.id}}/survey/1">Continue to the Survey</a>
+<hr>
+
+<div class="btn-group pull-right">
+  <a class="btn btn-default" href="#/site/{{site.id}}/pit/new">Add New Pit</a>
+  <a class="btn btn-default" href="#/site/{{site.id}}/survey/1">Continue to the Survey</a>
 </div>
 
 

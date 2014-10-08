@@ -14,9 +14,20 @@ angular.module('uiApp')
     var newSite = false;
     if ($routeParams.siteId === 'new' || site === null) {
       newSite = true;
+      site = {
+        id: '',
+        type: 'Feature',
+        geometry: {}, // wkt
+        properties: {}
+      };
     }
 
     $scope.site = site;
+      
+    $scope.$on('activeFeatureWKT', function (event, wkt) {
+      $scope.site.geometry = wkt;
+    });
+
     $scope.save = function () {
       if (newSite) {
         console.log('New Site saved');
