@@ -8,13 +8,14 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory, PitFactory) {
+  .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
     $rootScope.showMap = true;
 
-    var site = SiteFactory.getSite($routeParams.siteId);
+    SiteFactory.setActiveSiteId($routeParams.siteId);
+    var site = SiteFactory.getActiveSite();
     $scope.site = site;
 
-    var pit = PitFactory.getSitePit($routeParams.siteId, $routeParams.pitId);
+    var pit = SiteFactory.getSitePit($routeParams.pitId);
     $scope.pit = pit;
 
     var newPit = false;

@@ -10,7 +10,10 @@
 angular.module('uiApp')
   .controller('SiteeditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
     $rootScope.showMap = true;
-    var site = SiteFactory.getSite($routeParams.siteId);
+
+    SiteFactory.setActiveSiteId($routeParams.siteId);
+    var site = SiteFactory.getActiveSite();
+
     var newSite = false;
     if ($routeParams.siteId === 'new' || site === null) {
       newSite = true;

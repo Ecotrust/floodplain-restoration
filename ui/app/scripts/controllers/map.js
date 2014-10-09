@@ -8,15 +8,20 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('MapCtrl', function ($scope, $rootScope, leafletData) {
+  .controller('MapCtrl', function ($scope, $rootScope, leafletData, SiteFactory) {
+
+
+    //SiteFactory.setActiveSiteId($routeParams.siteId);
+    var site = SiteFactory.getActiveSite();
 
     // See docs for leaflet.draw at https://github.com/Leaflet/Leaflet.draw
     var drawnItems = new L.FeatureGroup();
+
     var options = {
       edit: {
         featureGroup: drawnItems,
         remove: false,
-        edit: false
+        // edit: false
       },
       draw: {
         polyline: false,
@@ -33,14 +38,54 @@ angular.module('uiApp')
 
     var drawControl = new L.Control.Draw(options);
 
+    $rootScope.$on('activeSiteUpdated', function (args) {
+      console.log('MapCtrl says activeSiteChanged!', args);
+    });
+    
+    var style = function (feature) {
+      var isSite = false;
+      if ('pit_set' in feature.properties) {
+        isSite = true;
+      }
+
+      return {
+        fillColor: isSite?'white':'red',
+        weight: 2,
+        opacity: 1,
+        color: 'black',
+        dashArray: isSite?'3':'1',
+        fillOpacity: isSite?0.1:0.5
+      };
+    }
+
+    var getData = function() {
+
+      var theData = {
+        'type': 'FeatureCollection',
+        'features': [site]
+      };
+
+      // And the remainder are pits
+      for (var i = site.properties.pit_set.length - 1; i >= 0; i--) {
+        var pit = site.properties.pit_set[i];
+        theData.features.push(pit);
+      }
+
+      return theData;
+    }
+
     angular.extend($scope, {
       startview: {
         lat: 45,
         lng: -123,
-        zoom: 8
+        zoom: 7
       },
       controls: {
         custom: [ drawControl ]
+      },
+      geojson: {
+        data: getData(),
+        style: style
       }
     });
 
@@ -61,13 +106,15 @@ angular.module('uiApp')
       $rootScope.$broadcast('activeFeatureWKT', wkt);
     };
 
+
     leafletData.getMap().then(function(map) {
       map.addLayer(drawnItems);
-
+      map.on('draw:editstart', function () {
+      //   //drawnItems.clearLayers();
+      });
       map.on('draw:drawstart', function () {
         drawnItems.clearLayers();
       });
-
-      map.on('draw:created', createdActiveFeature);
+      map.on('draw:created', createdActiveFeature );
     });
   });

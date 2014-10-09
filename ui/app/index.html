@@ -50,7 +50,7 @@
         </ul>
         <h3 class="text-muted">
           <a href="#/">Floodplain Gravel Mine Restoration</a>
-          <span class="label label-info">{{ siteName }}</span>
+          <span class="label label-info">{{ activeSiteName }}</span>
         </h3>
       </div>
 
@@ -58,7 +58,7 @@
         <div class="row" >
           <div class="col-md-6" ng-view=""></div>
           <div class="col-md-6" ng-controller="MapCtrl">
-            <leaflet defaults="defaults" center="startview" controls="controls" height="480px" width="100%"></leaflet>
+            <leaflet center="startview" controls="controls" height="480px" width="100%" geojson="geojson"></leaflet>
           </div>
         </div>
       </div>
@@ -101,7 +101,6 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/services/sitefactory.js"></script>
-        <script src="scripts/services/pitfactory.js"></script>
         <script src="scripts/controllers/sitelist.js"></script>
         <script src="scripts/controllers/sitedetail.js"></script>
         <script src="scripts/controllers/siteedit.js"></script>

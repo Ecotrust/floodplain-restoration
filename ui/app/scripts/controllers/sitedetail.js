@@ -10,14 +10,15 @@
 angular.module('uiApp')
   .controller('SitedetailCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
     $rootScope.showMap = true;
-    $scope.site = SiteFactory.getSite($routeParams.siteId);
+    SiteFactory.setActiveSiteId($routeParams.siteId);
+    $scope.site = SiteFactory.getActiveSite();
 
     $scope.deleteSite = function(siteId) {
       console.log('Deleted site ' + siteId);
     };
 
     $scope.deleteSitePit = function(siteId, pitId) {
-      console.log('Deleted ' + pitId + 'from site ' + siteId);
+      console.log('Deleted pit ' + pitId + ' from site ' + siteId);
     };
 
   });

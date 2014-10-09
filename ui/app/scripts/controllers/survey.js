@@ -13,7 +13,7 @@ angular.module('uiApp')
     
     var questionId = parseInt($routeParams.questionId, 10);
 
-    $scope.siteId = $routeParams.siteId;
+    // $scope.siteId = $routeParams.siteId;
     $scope.question = QuestionFactory.getQuestion(questionId);
 
     var maxQuestionId = QuestionFactory.maxId();
@@ -28,7 +28,7 @@ angular.module('uiApp')
       if (next > maxQuestionId) {
         next = maxQuestionId;
         $scope.showNext = true;
-        return "done";
+        return 'done';
       }
       return next;
     };
