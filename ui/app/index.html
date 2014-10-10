@@ -31,8 +31,7 @@
           <li><a ng-href="#/sites">Property List</a></li>
           <li><a ng-href="#/help/about">Help</a></li>
           <li ng-if="userName">
-              <a ng-href="#"><span class="glyphicon glyphicon-user"></span> {{userName}} </a>
-              <a ng-href="http://localhost:8000/accounts/logout"> Log Out </a>
+              <a ng-href="http://localhost:8000/accounts/logout"><span class="glyphicon glyphicon-user"></span> {{userName}} (Log Out)</a>
           </li>
           <li ng-if="!userName">
               <!-- TODO auth -->

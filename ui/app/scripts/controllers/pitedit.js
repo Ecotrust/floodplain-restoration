@@ -11,6 +11,9 @@ angular.module('uiApp')
   .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
     $rootScope.showMap = true;
 
+    // TODO tell MapCtrl to edit the given pit
+    // SiteFactory.setActivePit($routeParams.pitId) ???  
+
     SiteFactory.setActiveSiteId($routeParams.siteId);
     var site = SiteFactory.getActiveSite();
     $scope.site = site;

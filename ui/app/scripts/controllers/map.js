@@ -105,4 +105,10 @@ angular.module('uiApp')
     });
     
     $scope.map1 = map;
+
+    $scope.editPit = function(pitId) {
+      console.log('Editing pit ' + pitId);
+    };
+
+
   });
