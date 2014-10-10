@@ -1,5 +1,9 @@
 'use strict';
 
+// Just for the sake of jshint
+// TODO remove this!!!
+var ol = ol;
+
 // ol3 map directive
 angular.module('uiApp')
   .directive('olMap', ['$parse', function($parse) {
@@ -26,6 +30,21 @@ angular.module('uiApp')
     var site = SiteFactory.getActiveSite();
 
 
+    var siteStyle = function() {
+      var style = [new ol.style.Style({
+        stroke: new ol.style.Stroke({
+          color: 'black',
+          lineDash: [3],
+          width: 1
+        }),
+        fill: new ol.style.Fill({
+          color: 'rgba(255, 255, 255, 0.2)'
+        })
+      })];
+
+      return style;
+    };
+
     var siteSource = new ol.source.GeoJSON(
       ({
         object: site
@@ -33,9 +52,24 @@ angular.module('uiApp')
     );
 
     var siteLayer = new ol.layer.Vector({
-      source: siteSource
-      // style: styleFunction
+      source: siteSource,
+      style: siteStyle
     });
+
+
+    var pitStyle = function() {  // optionally takes feature, resolution 
+      var style = [new ol.style.Style({
+        stroke: new ol.style.Stroke({
+          color: 'black',
+          width: 1
+        }),
+        fill: new ol.style.Fill({
+          color: 'rgba(255, 255, 0, 0.5)'
+        })
+      })];
+
+      return style;
+    };
 
     var pitSource = new ol.source.GeoJSON(
       ({
@@ -47,8 +81,8 @@ angular.module('uiApp')
     );
 
     var pitLayer = new ol.layer.Vector({
-      source: pitSource
-      // style: styleFunction
+      source: pitSource,
+      style: pitStyle
     });
 
 
@@ -69,7 +103,6 @@ angular.module('uiApp')
         zoom: 6
       })
     });
-
     
     $scope.map1 = map;
   });

@@ -93,16 +93,6 @@ angular.module('uiApp')
       }
     ];
 
-    var vectorSource = new ol.source.GeoJSON(
-      ({
-        object: sites
-      })
-    );
-
-    var vectorLayer = new ol.layer.Vector({
-      source: vectorSource
-      // style: styleFunction
-    });
 
     
     // Public API
