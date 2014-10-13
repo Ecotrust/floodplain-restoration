@@ -13,4 +13,9 @@ angular.module('uiApp')
     $scope.sites = SiteFactory.getSites();
     $rootScope.siteId = null;
     $rootScope.siteName = null;
+
+    ///////////////////////////////////////////////////
+    map.clear();
+    map.loadSites(SiteFactory.getSitesCollection());
+    ///////////////////////////////////////////////////
   });

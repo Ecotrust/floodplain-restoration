@@ -35,7 +35,16 @@ angular.module('uiApp')
       if (newSite) {
         console.log('New Site saved');
       } else {
+        console.log("New geometry is ", map.getActiveSiteWkt());
         console.log('Save site ' + $scope.site.id);
       }
     };
+
+    ///////////////////////////////////////////////////
+    map.clear();
+    map.loadSites(SiteFactory.getActiveSiteCollection());
+    map.editSite();
+    //map.loadPits(SiteFactory.getActivePitCollection());
+    //map.zoomToPit();
+    ///////////////////////////////////////////////////
   });

@@ -11,15 +11,15 @@ angular.module('uiApp')
   .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
     $rootScope.showMap = true;
 
-    // TODO tell MapCtrl to edit the given pit
-    // SiteFactory.setActivePit($routeParams.pitId) ???  
-
     SiteFactory.setActiveSiteId($routeParams.siteId);
     var site = SiteFactory.getActiveSite();
     $scope.site = site;
 
+    console.log('call SiteFactory.editPit from pitedit.js');
+    SiteFactory.editPit($routeParams.pitId);
     var pit = SiteFactory.getSitePit($routeParams.pitId);
     $scope.pit = pit;
+    console.log('pitedit now has $scope.pit = ', pit);
 
     var newPit = false;
     if ($routeParams.pitId === 'new' || pit === null) {

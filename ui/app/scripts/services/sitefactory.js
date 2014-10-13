@@ -11,6 +11,7 @@ angular.module('uiApp')
   .factory('SiteFactory', function ($rootScope) {
 
     var activeSiteId;
+    var activePitId;
 
     var sites = [
       {
@@ -90,16 +91,111 @@ angular.module('uiApp')
           'coordinates': [ [ [ [ -13692317.750780193135142, 5650225.130840227939188 ], [ -13684674.047951675951481, 5694864.355358773842454 ], [ -13621689.936644691973925, 5674684.979891482740641 ], [ -13631168.128152053803205, 5585100.782741256989539 ], [ -13713414.370586901903152, 5593967.478022339753807 ], [ -13692317.750780193135142, 5650225.130840227939188 ] ] ] ],
           'type': 'MultiPolygon'
         },
+      },
+      {
+        'id': 4,
+        'type': 'Feature',
+        'properties': {
+          'name': 'Another Site',
+          'pit_set' : [
+            {
+              'id': 2,
+              'type': 'Feature',
+              'geometry': {
+                'coordinates': [ [ [ -13758685.458334716036916, 5653282.611971635371447 ],
+                                   [ -13754710.732863888144493, 5665206.788384127430618 ],
+                                   [ -13739423.327206851914525, 5663678.047818418592215 ],
+                                   [ -13739423.327206851914525, 5648084.894048248417675 ],
+                                   [ -13758685.458334716036916, 5653282.611971635371447 ] ] ],
+                'type': 'Polygon'
+              },
+              'properties': {
+                'user': 'dummyuser',
+                'name': 'testpit',
+                'notes': '',
+                'date_created': '2014-09-29T20:13:17.927Z',
+                'date_modified': '2014-09-29T20:13:17.927Z',
+                'site': 2,
+                'contamination': 0.5,
+                'substrate': 0.5,
+                'adjacent_river_depth': 0.5,
+                'slope_dist': 0.5,
+                'pit_levies': 0.5,
+                'bedrock': 0.5,
+                'bank_slope': 0.5,
+                'pit_depth': 0.5,
+                'surface_area': 0.5,
+                'complexity': 0.5
+              }
+            }
+          ],
+          'inputnode_set': [
+            {
+              'user': 'dummyuser',
+              'id': 2,
+              'name': '',
+              'notes': '',
+              'date_created': '2014-09-29T20:13:17.938Z',
+              'date_modified': '2014-09-29T20:13:17.938Z',
+              'site': 2,
+              'question': 1,
+              'value': 0.3
+            }
+          ]
+        },
+        'geometry': {
+          'coordinates': [ [ [ [ -13792317, 5650225 ], [ -13784674, 5694864 ], [ -13721689, 5674684 ],
+                               [ -13739423, 5585100 ], [ -13813414, 5593967 ], [ -13792317, 5650225 ] ] ] ],
+          'type': 'MultiPolygon'
+        },
       }
     ];
 
-
-    
     // Public API
     return {
       getSites: function () {
         return sites;
       },
+
+      getSitesCollection: function() {
+        return {
+          type: 'FeatureCollection',
+          features: sites
+        };
+      },
+
+      getPitsCollection: function() {
+        var site = this.getActiveSite();
+        return {
+          type: 'FeatureCollection',
+          features: site.properties.pit_set
+        };
+      },
+
+      editPit: function (pitId) {
+        activePitId = parseInt(pitId, 10);
+        console.log('in SiteFactory.editPit(' + pitId + ')');
+        var p = this.getSitePit(pitId);
+        if (typeof(p) === 'undefined' || typeof(p) === null) {
+          console.log('ERROR - can not edit pit ' + pitId + '... does not exist');
+        } else {
+          console.log("edit pit is a go " + activePitId);
+        }
+        $rootScope.$broadcast('activePitChanged', {});
+      },
+
+      getActivePit: function() {
+        return this.getSitePit(activePitId);
+      },
+
+      getActivePitCollection: function() {
+        var pit = this.getSitePit(activePitId);
+        return {
+          type: 'FeatureCollection',
+          features: [pit]
+        };
+      },
+
 
       getSitePit: function (pitId) {
         pitId = parseInt(pitId, 10);
@@ -153,6 +249,17 @@ angular.module('uiApp')
           }
         }
         return null;
+      },
+
+      getActiveSiteId: function() {
+        return activeSiteId;
+      },
+
+      getActiveSiteCollection: function() {
+        return {
+          type: 'FeatureCollection',
+          features: [this.getActiveSite()]
+        };
       }
       //getNextQuestionForSite
 

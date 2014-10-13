@@ -21,4 +21,9 @@ angular.module('uiApp')
       console.log('Deleted pit ' + pitId + ' from site ' + siteId);
     };
 
+    ///////////////////////////////////////////////////
+    map.clear();
+    map.loadSites(SiteFactory.getActiveSiteCollection());
+    map.loadPits(SiteFactory.getPitsCollection());
+    ///////////////////////////////////////////////////
   });
