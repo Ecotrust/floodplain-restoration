@@ -22,6 +22,6 @@
 </p>
 
 <div class="btn-group pull-right">
-<a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ prevQuestion() }}"> &lt;&lt; Previous Question</a>
-<a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ nextQuestion() }}"> Save <span ng-show="showNext">and Next question &gt;&gt;</span></a>
+<a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ prevQuestion() }}"> {{content.previousQuestion}}</a>
+<a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ nextQuestion() }}"> {{content.nextQuestion}}</span></a>
 </div>

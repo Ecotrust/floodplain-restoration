@@ -11,6 +11,6 @@ angular
   .module('uiApp').run(function($rootScope){
     $rootScope.userId = 'dummyuser';
    // $rootScope.userId = '';
-    $rootScope.baseUrl = 'http://localhost:8000'; // no trailing slash
+    $rootScope.baseUrl = 'localhost:8000'; // no trailing slash, no http://
     console.log($rootScope);
   });

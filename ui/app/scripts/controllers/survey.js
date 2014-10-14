@@ -13,7 +13,7 @@ angular.module('uiApp')
     
     var questionId = parseInt($routeParams.questionId, 10);
 
-    // $scope.siteId = $routeParams.siteId;
+    $scope.siteId = $routeParams.siteId;
     $scope.question = QuestionFactory.getQuestion(questionId);
 
     var maxQuestionId = QuestionFactory.maxId();

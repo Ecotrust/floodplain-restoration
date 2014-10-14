@@ -2,9 +2,7 @@
 	<h2 ng-bind="content.welcome"> Welcome...</h2>
 	</h2>
 
-	<p>
-		{{content.hook}}
-	</p>
+	<p ng-bind-html="content.hook"><br></p>
 
 	<a class="btn btn-primary btn-lg" href="#/sites">{{content.getStarted}}</a>
 </div>

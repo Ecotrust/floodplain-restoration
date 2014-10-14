@@ -5,8 +5,8 @@
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
   padding-bottom: 20px;
+  padding-top: 70px; 
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -100,4 +100,17 @@ body {
   text-align: center;
 
   font: 18px Arial, sans-serif;
+}
+
+.bar {
+  color: blue;
+  display: block;
+  border: 1px gray solid;
+}
+
+.active-site-name {
+  padding-top: 20px;
+  padding-left: 28px;
+  font: 16px Arial, sans-serif;
+  color: #999;
 }

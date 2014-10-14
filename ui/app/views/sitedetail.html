@@ -1,31 +1,27 @@
 <!--   <a class="btn btn-default btn-xs" href="#/sites">&lt;&lt;Back</a>
  -->
-<div class="row">
-  <div class="col-md-6">
-    Selected Site is <span class="label label-info">{{site.properties.name}}</span>
-  </div>
-  <div class="col-md-6">
-    <div class="btn-group">
-      <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/edit">Edit</a>
-      <button class="btn btn-default btn-xs" ng-click="deleteSite(site.id)">Delete</button>
-    </div>
-  </div>
+<p> Selected Site </p>
+<strong>{{site.properties.name}}</strong>
+<div class="btn-group">
+  <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/edit"><span class="glyphicon glyphicon-edit"></span></a>
+  <button class="btn btn-default btn-xs" ng-click="deleteSite(site.id)"><span class="glyphicon glyphicon-trash"></span></button>
 </div>
 
 <hr>
 
+<p> List of Gravel Pits on Property </p>
 <div class="row" ng-repeat="pit in site.properties.pit_set">
-  <div class="col-md-2"></div>
-  <div class="col-md-4">
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
     Pit #{{pit.id}} ({{pit.properties.name}})  
   </div>
-  <div class="col-md-4">
+  <div class="col-md-2">
     <div class="btn-group">
-      <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/{{pit.id}}/edit">Edit</a>
-      <button class="btn btn-default btn-xs" href="#" ng-click="deleteSitePit(site.id, pit.id)">Delete</button>
+      <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/{{pit.id}}/edit"><span class="glyphicon glyphicon-edit"></span></a>
+      <button class="btn btn-default btn-xs" href="#" ng-click="deleteSitePit(site.id, pit.id)"><span class="glyphicon glyphicon-trash"></span></button>
     </div>
   </div>
-  <div class="col-md-2"></div>
+  <div class="col-md-4"></div>
 </div>
 
 <hr>

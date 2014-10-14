@@ -9,8 +9,9 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="styles/thirdparty/ol.css" type="text/css">
     <!-- endbower -->
+    <link rel="stylesheet" href="styles/thirdparty/ol.css" type="text/css">
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.2.0+2/simplex/bootstrap.css"> -->
     <!-- endbuild -->
 
 
@@ -24,36 +25,80 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li><a ng-href="#/sites">Property List</a></li>
-          <li><a ng-href="#/help/about">Help</a></li>
-          <li ng-if="userName">
-              <a ng-href="http://localhost:8000/accounts/logout"><span class="glyphicon glyphicon-user"></span> {{userName}} (Log Out)</a>
-          </li>
-          <li ng-if="!userName">
-              <!-- TODO auth -->
-              <!--
-              <a ng-href="{{ baseurl }}/accounts/login">
-                <span class="glyphicon glyphicon-user"></span>
-                Log In
-              </a>
-              -->
-              <a ng-href="http://localhost:8000/accounts/login">
-                <span class="glyphicon glyphicon-user"></span>
-                Log In
-              </a>
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">    
+            <a class="navbar-brand" href="#" > 
+              <span class="glyphicon glyphicon-stats"></span> &nbsp;&nbsp; 
+              <span ng-bind="content.title">Floodplain Gravel Mine Restoration</span>
+            </a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+              <li>
+                <p class="active-site-name">{{ activeSiteName }}</strong>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
 
-          </li>
-        </ul>
-        <h3 class="text-muted">
-          <!-- note ng-bind will replace contents when/if available -->
-          <a href="#/" ng-bind="content.title">Floodplain Gravel Mine Restoration</a>
-          <span class="label label-info">{{ activeSiteName }}</span>
-        </h3>
-      </div>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                  Property <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#/help/documents">Documents</a></li>
+                  <li><a href="#/site/new">Add a property</a></li>
+                  <li><a href="#/sites">List of all properties</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Property 1</a></li>
+                  <li><a href="#">Property 2</a></li>
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                  Survey <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Water Quality</a></li>
+                  <li><a href="#">Hydrology</a></li>
+                  <li><a href="#">Water Rights</a></li>
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                  Help <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#/help/about">About the Tool</a></li>
+                  <li><a href="#/help/resources">Links to Resources</a></li>
+                  <li><a href="#/help/faq">Frequently Asked Questions</a></li>
+                </ul>
+              </li>
+
+              <li ng-if="!userName">
+                <a href="http://localhost:8000/accounts/login" class="dropdown-toggle">
+                      <span class="glyphicon glyphicon-user"></span>
+                      Log In
+                    </a> 
+                </a>
+              </li>
+
+              <li ng-if="userName" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-user"></span> {{userName}} <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="http://{{ baseUrl }}/accounts/logout">Log Out</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+
 
       <div class="row" >
         <div class="col-md-6" ng-view=""></div>
@@ -106,6 +151,7 @@
         <script src="scripts/controllers/help.js"></script>
 
         <script src="scripts/filters/digits.js"></script>
+        <script src="scripts/filters/percentage.js"></script>
         
         <script src="scripts/map.js"></script>
         <!-- endbuild -->
