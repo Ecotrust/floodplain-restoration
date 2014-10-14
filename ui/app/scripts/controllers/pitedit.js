@@ -15,11 +15,9 @@ angular.module('uiApp')
     var site = SiteFactory.getActiveSite();
     $scope.site = site;
 
-    console.log('call SiteFactory.editPit from pitedit.js');
-    SiteFactory.editPit($routeParams.pitId);
+    SiteFactory.setActivePitId($routeParams.pitId);
     var pit = SiteFactory.getSitePit($routeParams.pitId);
     $scope.pit = pit;
-    console.log('pitedit now has $scope.pit = ', pit);
 
     var newPit = false;
     if ($routeParams.pitId === 'new' || pit === null) {
@@ -38,10 +36,25 @@ angular.module('uiApp')
 
     $scope.save = function () {
       if (newPit) {
-        console.log('New Pit saved');
-        console.log(JSON.stringify($scope.pit));
+        console.log('POST new Pit');
       } else {
-        console.log('Pit ' + $scope.pit.id + ' saved');
+        console.log('PUT edited Pit');
       }
+      console.log("New geometry is ", map.getActivePitWkt());
+      console.log('Save Pit ' + $scope.pit.id );
+      console.log('spinner on');
+      console.log('If AJAX call is a success, update the SiteFactory singleton');
+      console.log('spinner off');
     };
+
+    // ----------------------- Map setup ------------------------------------//
+    map.clear();
+    map.loadSites(SiteFactory.getActiveSiteCollection());
+    if (newPit) {
+      map.loadPits({type: 'FeatureCollection', features: []});
+      map.addPit();
+    } else {
+      map.loadPits(SiteFactory.getActivePitCollection());
+      map.editPit();
+    } 
   });

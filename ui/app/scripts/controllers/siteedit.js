@@ -33,18 +33,24 @@ angular.module('uiApp')
 
     $scope.save = function () {
       if (newSite) {
-        console.log('New Site saved');
+        console.log('POST new Site');
       } else {
-        console.log("New geometry is ", map.getActiveSiteWkt());
-        console.log('Save site ' + $scope.site.id);
+        console.log('PUT edited Site');
       }
+      console.log('New geometry is ', map.getActiveSiteWkt());
+      console.log('Save site ' + $scope.site.id);
+      console.log('spinner on');
+      console.log('If AJAX call is a success, update the SiteFactory singleton');
+      console.log('spinner off');
     };
 
-    ///////////////////////////////////////////////////
+    // ----------------------- Map setup ------------------------------------//
     map.clear();
-    map.loadSites(SiteFactory.getActiveSiteCollection());
-    map.editSite();
-    //map.loadPits(SiteFactory.getActivePitCollection());
-    //map.zoomToPit();
-    ///////////////////////////////////////////////////
+    if (newSite) {
+      map.loadSites({type: 'FeatureCollection', features: []});
+      map.addSite();
+    } else {
+      map.loadSites(SiteFactory.getActiveSiteCollection());
+      map.editSite();
+    } 
   });

@@ -172,15 +172,12 @@ angular.module('uiApp')
         };
       },
 
-      editPit: function (pitId) {
+      setActivePitId: function (pitId) {
         activePitId = parseInt(pitId, 10);
-        console.log('in SiteFactory.editPit(' + pitId + ')');
         var p = this.getSitePit(pitId);
         if (typeof(p) === 'undefined' || typeof(p) === null) {
           console.log('ERROR - can not edit pit ' + pitId + '... does not exist');
-        } else {
-          console.log("edit pit is a go " + activePitId);
-        }
+        } 
         $rootScope.$broadcast('activePitChanged', {});
       },
 
@@ -196,6 +193,9 @@ angular.module('uiApp')
         };
       },
 
+      getActivePitId: function() {
+        return activePitId;
+      },
 
       getSitePit: function (pitId) {
         pitId = parseInt(pitId, 10);
@@ -231,7 +231,6 @@ angular.module('uiApp')
         }
 
         var site = this.getActiveSite();
-        // console.log(site);
         if (site) {
           $rootScope.activeSiteId = site.id;
           $rootScope.activeSiteName = site.properties.name;
