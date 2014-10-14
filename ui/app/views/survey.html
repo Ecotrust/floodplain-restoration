@@ -1,19 +1,27 @@
-<h4>{{question.title}}</h4>
-<strong>{{question.question}}</strong>
+<p><span class="numberCircle">{{question.id|digits}}</span> {{question.category|uppercase}}</p>
+<p class="question">{{question.question}}</p>
 
 <div>
-  <form novalidate name="pitForm" class="form-horizontal" role="form">
-    <div class="form-group" ng-repeat="choice in question.choices">
-      {{choice.choice}}, {{choice.value}}
+  <form novalidate name="pitForm" role="form">
+    <div ng-repeat="choice in question.choices">
+
+      <div class="radio">
+        <label>
+          <input type="radio" name="choice" value="{{choice.value}}">
+          {{choice.choice}}
+        </label>
+      </div>
+
     </div>
   </form>
 </div>
 
 
-<p>
-	More info: 
+<p class="question-detail">
 {{question.detail}}
 </p>
 
-<a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ prevQuestion() }}"> Back Question</a>
-<a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ nextQuestion() }}"> Save <span ng-show="showNext">and Go to next question</span></a>
+<div class="btn-group pull-right">
+<a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ prevQuestion() }}"> &lt;&lt; Previous Question</a>
+<a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ nextQuestion() }}"> Save <span ng-show="showNext">and Next question &gt;&gt;</span></a>
+</div>

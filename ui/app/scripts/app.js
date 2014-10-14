@@ -16,7 +16,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch'
-    // 'leaflet-directive'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -100,4 +99,7 @@ angular
       .otherwise({
         templateUrl: '404.html'
       });
+  })
+  .run(function ($rootScope, ContentFactory) {
+    $rootScope.content = ContentFactory.allContent();
   });
