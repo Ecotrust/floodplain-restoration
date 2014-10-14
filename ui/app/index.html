@@ -154,19 +154,6 @@
         <script src="scripts/map.js"></script>
         <!-- endbuild -->
 
-        <script>
-          var onResize = function () {
-              var height = $(window).height();
-              var width = $(window).width();
-
-              $(".map-container").height(height - 51);
-              map.map.updateSize();
-          };
-
-          $(window).resize(onResize);
-          onResize();
-        </script>
-
         <!-- TODO auth -->
         <!-- <script src="sessions/auth.js"></script> -->
         <script src="http://localhost:8000/sessions/auth.js"></script>

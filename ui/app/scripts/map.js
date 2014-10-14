@@ -180,3 +180,14 @@ map.map = new ol.Map({
     zoom: 7
   })
 });
+
+map.onResize = function () {
+  var height = $(window).height();
+  var width = $(window).width();
+
+  $(".map-container").height(height - 51);
+  map.map.updateSize();
+};
+
+$(window).resize(map.onResize);
+map.onResize();
