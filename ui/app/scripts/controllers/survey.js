@@ -8,7 +8,7 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SurveyCtrl', function ($scope, $routeParams, $rootScope, QuestionFactory) {
+  .controller('SurveyCtrl', function ($scope, $routeParams, $rootScope, SiteFactory, QuestionFactory) {
     $rootScope.showMap = true;
     
     var questionId = parseInt($routeParams.questionId, 10);
@@ -42,4 +42,8 @@ angular.module('uiApp')
       }
       return prev;
     };
+
+    // map.clear();
+    // map.loadSites(SiteFactory.getActiveSiteCollection());
+    // map.loadPits(SiteFactory.getPitsCollection());
   });

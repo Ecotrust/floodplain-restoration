@@ -1,12 +1,13 @@
 .map {
   width: 100%;
-  height: 480px;
+  height: 100%;
 }
 
 /* Space out content a bit */
 body {
   padding-bottom: 20px;
-  padding-top: 70px; 
+  padding-top: 51px;  /* navbar is 50px by default */ 
+  overflow:hidden;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -114,3 +115,27 @@ body {
   font: 16px Arial, sans-serif;
   color: #999;
 }
+
+.map-container {
+  margin:0px;
+  padding:0px;
+  overflow:hidden;
+  border-left:1px #ccc solid;
+  padding-right: 1px;
+  padding-left: 0 px; 
+}
+
+.left-panel {
+  padding-top: 22px;
+  padding-left: 18px;
+}
+
+.slide.ng-enter, .slide.ng-leave {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+}
+
+.slide.ng-enter { }        /* starting animations for enter */
+.slide.ng-enter.ng-enter-active { } /* terminal animations for enter */
+.slide.ng-leave { }        /* starting animations for leave */
+.slide.ng-leave.ng-leave-active { } /* terminal animations for leave */

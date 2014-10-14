@@ -12,4 +12,8 @@ angular.module('uiApp')
     $rootScope.showMap = true;
     $scope.siteId = $routeParams.siteId;
     $scope.suitability = SiteFactory.getSuitabilityScores($routeParams.siteId); // /api/site/2/suitability.json
+
+    // map.clear();
+    // map.loadSites(SiteFactory.getActiveSiteCollection());
+    // map.loadPits(SiteFactory.getPitsCollection());
   });
