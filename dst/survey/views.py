@@ -104,7 +104,7 @@ angular
 
     if username:
         content = template.format(username, baseurl)
-        return HttpResponse(content, status=200, content_type="application/javascript")
     else:
         content = template.format('', baseurl)
-        return HttpResponseForbidden(content)
+
+    return HttpResponse(content, status=200, content_type="application/javascript")

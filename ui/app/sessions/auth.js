@@ -9,8 +9,7 @@
 //   which is served behind nginx based on django auth sessions
 angular
   .module('uiApp').run(function($rootScope){
-    $rootScope.userId = 'dummyuser';
-   // $rootScope.userId = '';
+    $rootScope.userId = '';
     $rootScope.baseUrl = 'localhost:8000'; // no trailing slash, no http://
     console.log($rootScope);
   });
