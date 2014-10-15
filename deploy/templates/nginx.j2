@@ -7,11 +7,11 @@ server {
 
     location = / {
         ## Run off dev files, requires bower_components dir
-        ## alias {{ basepath }}/ui/app/;
+        ## alias {{ base_path }}/ui/app/;
 
         # Run off minified build
         # requires a successful grunt build and check in the dist dir
-        alias {{ basepath }}/ui/dist/;
+        alias {{ base_path }}/ui/dist/;
     }
 
     location / {
