@@ -310,7 +310,8 @@ module.exports = function (grunt) {
             'images/{,*/}*.{webp}',
             'fonts/*',
             'scripts/vendor/*',
-            'styles/vendor/*'
+            'styles/vendor/*',
+            'sessions/auth.js'
           ]
         }, {
           expand: true,
