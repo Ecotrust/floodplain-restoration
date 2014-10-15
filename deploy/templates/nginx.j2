@@ -4,6 +4,16 @@ server {
     server_name {{ domain }};
     access_log /var/log/nginx/{{ app_name }}.access.log;
     error_log /var/log/nginx/{{ app_name }}.error.log;
+
+    location = / {
+        ## Run off dev files, requires bower_components dir
+        ## alias {{ basepath }}/ui/app/;
+
+        # Run off minified build
+        # requires a successful grunt build and check in the dist dir
+        alias {{ basepath }}/ui/dist/;
+    }
+
     location / {
         uwsgi_pass unix:///var/run/uwsgi/app/{{ app_name }}/socket;
         uwsgi_read_timeout 300;
