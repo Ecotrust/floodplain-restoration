@@ -1,9 +1,27 @@
 server {
     listen 80;
     client_max_body_size 20M;
+    root /var/www;
     server_name {{ domain }};
     access_log /var/log/nginx/{{ app_name }}.access.log;
     error_log /var/log/nginx/{{ app_name }}.error.log;
+
+    # root gets redirected to angular
+    location = / {
+        return 301 $scheme://{{ domain }}/app/;
+    }
+
+    # Angular app; served from static dist build
+    location /app/ {
+        alias {{ base_path }}/ui/dist/;
+    }
+
+    # Django static files
+    location /static/  {
+        alias {{ project_path }}/{{ app_name }}/static/;
+    }
+
+    # All other URIs get handled by uwsgi
     location / {
         uwsgi_pass unix:///var/run/uwsgi/app/{{ app_name }}/socket;
         uwsgi_read_timeout 300;
@@ -11,8 +29,5 @@ server {
         #uwsgi_param HTTP_HOST localhost;
         uwsgi_param X-Real-IP $remote_addr;
         uwsgi_param Host $http_host;
-    }
-    location /static/  {
-        alias {{ project_path }}/{{ app_name }}/static/;
     }
 }

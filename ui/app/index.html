@@ -79,7 +79,7 @@
               </li>
 
               <li ng-if="!userName">
-                <a href="http://{{ baseUrl }}/accounts/login" class="dropdown-toggle">
+                <a href="/accounts/login" class="dropdown-toggle">
                   <span class="glyphicon glyphicon-user"></span>
                   Log In
                 </a> 
@@ -90,7 +90,7 @@
                   <span class="glyphicon glyphicon-user"></span> {{userName}} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="http://{{ baseUrl }}/accounts/logout">Log Out</a></li>
+                  <li><a href="/accounts/logout">Log Out</a></li>
                 </ul>
               </li>
             </ul>
@@ -130,8 +130,6 @@
     <!-- endbuild -->
 
         <script src="scripts/vendor/ol.js"></script>
-        <script src="/sessions/auth.js"></script>
-
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/services/sitefactory.js"></script>
@@ -150,6 +148,6 @@
         <script src="scripts/filters/percentage.js"></script>
         <script src="scripts/map.js"></script>
         <!-- endbuild -->
-
+        <script src="/sessions/auth.js"></script>
 </body>
 </html>
