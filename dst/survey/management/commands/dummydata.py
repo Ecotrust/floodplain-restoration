@@ -2,20 +2,20 @@ from django.core.management.base import BaseCommand, CommandError
 from survey.validate import systemcheck, SystemCheckError
 from django.contrib.auth.models import User
 from survey.models import GravelSite, Pit, InputNode, Question, MapLayer
+import json
+import os
+from django.contrib.gis.geos import GEOSGeometry, MultiPolygon
 
 
-MULTIPOLY = """MULTIPOLYGON (((-13737541 5483225, -13737541 5615730, -13559249 5615730, -13559249 5483225, -13737541 5483225)))"""
-POLY = """POLYGON ((-13682677 5540964, -13682677 5575747, -13635875 5575747, -13635875 5540964, -13682677 5540964))"""
-
-
-SITE1 = {
-    'name': 'GravelSite1',
-    'notes': 'Notes on Site 1',
-    'geometry': MULTIPOLY,
+SITETEMP = {
+    'name': None,
+    'notes': 'Notes on Site',
+    'geometry': None,
 }
-PIT1 = {
+
+PITTEMP = {
     'name': 'testpit',
-    'geometry': POLY,
+    'geometry': None,
     # pit-specific attrs
     'contamination': 0.5,
     'substrate': 0.5,
@@ -29,8 +29,15 @@ PIT1 = {
     'complexity': 0.5,
     # site (with site id) is also required, filled in when needed
 }
-USER1 = dict(username="dummyuser", password="dummyuser")
 
+USER1 = dict(username="dummyuser", password="dummyuser")
+DUMMYDATADIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'dst', 'data', 'dummydata'))
+
+DATA = [
+  ('Willamette Confluence', os.path.join(DUMMYDATADIR, 'site1.geojson'), os.path.join(DUMMYDATADIR, 'site1_pits.geojson')),
+  ('Site Two', os.path.join(DUMMYDATADIR, 'site2.geojson'), os.path.join(DUMMYDATADIR, 'site2_pits.geojson')),
+  ('Site 3', os.path.join(DUMMYDATADIR, 'site3.geojson'), os.path.join(DUMMYDATADIR, 'site3_pits.geojson')),
+]
 
 class Command(BaseCommand):
     help = 'Checks the current system for data integrity'
@@ -46,12 +53,31 @@ class Command(BaseCommand):
         Pit.objects.filter(user=user).delete()
         InputNode.objects.filter(user=user).delete()
 
-        print("Create site...")
-        site = GravelSite.objects.create(user=user, **SITE1)
+        for sitetuple in DATA:
+            sitename = sitetuple[0]
+            sitegeojson = sitetuple[1]
+            pitsgeojson = sitetuple[2]
 
-        print("Create pits...")
-        pit = Pit.objects.create(user=user, site=site, **PIT1)
+            print("Create site {} ...".format(sitename))
 
-        print("Create some input nodes (answers)...")
-        q = Question.objects.get(id=1)
-        inode = InputNode.objects.create(user=user, site=site, question=q, value=0.3)
+            thesite = SITETEMP.copy()
+            thesite['name'] = sitename
+            with open(sitegeojson, 'r') as fh:
+                fc = json.loads(fh.read())
+
+            thesite['geometry'] = MultiPolygon(GEOSGeometry(str(fc['features'][0]['geometry']))).wkt
+            site = GravelSite.objects.create(user=user, **thesite)
+
+            with open(pitsgeojson, 'r') as fh:
+                fc = json.loads(fh.read())
+
+                for feat in fc['features']:
+                    thepit = PITTEMP.copy()
+                    thepit['geometry'] = GEOSGeometry(str(feat['geometry'])).wkt
+                    
+                    print("\tCreate pits...")
+                    pit = Pit.objects.create(user=user, site=site, **thepit)
+
+            print("Create some input nodes (answers)...")
+            q = Question.objects.get(id=1)
+            inode = InputNode.objects.create(user=user, site=site, question=q, value=0.3)
