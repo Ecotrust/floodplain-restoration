@@ -127,7 +127,7 @@
       file: path=/etc/nginx/sites-enabled/default state=absent
 
     - name: create demo account 
-      command: "{{ manage }} dummydata --noinput"
+      command: "{{ manage }} dummydata"
 
     # - name: clear redis cache
     #   redis: command=flush db=5 
