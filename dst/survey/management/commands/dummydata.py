@@ -30,7 +30,7 @@ PITTEMP = {
     # site (with site id) is also required, filled in when needed
 }
 
-USER1 = dict(username="dummyuser", password="dummyuser")
+USER1 = dict(username="demo", password="demo")
 DUMMYDATADIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'dst', 'data', 'dummydata'))
 
 DATA = [
@@ -44,11 +44,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            user = User.objects.get(username="dummyuser")
+            user = User.objects.get(username="demo")
         except:
             user = User.objects.create_user(**USER1)
 
-        print("Deleting existing dummyuser data...")
+        print("Deleting existing demo data...")
         GravelSite.objects.filter(user=user).delete()
         Pit.objects.filter(user=user).delete()
         InputNode.objects.filter(user=user).delete()
@@ -74,7 +74,7 @@ class Command(BaseCommand):
                 for feat in fc['features']:
                     thepit = PITTEMP.copy()
                     thepit['geometry'] = GEOSGeometry(str(feat['geometry'])).wkt
-                    
+
                     print("\tCreate pits...")
                     pit = Pit.objects.create(user=user, site=site, **thepit)
 
