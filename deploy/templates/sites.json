@@ -1,0 +1,10 @@
+[
+  {
+  	"pk": 1,
+  	"model": "sites.site",
+  	"fields": {
+  		"name": "Floodplain Gravel Mine Restoration Tool",
+  		"domain": "{{ domain }}"
+  	}
+  }
+]

@@ -96,7 +96,13 @@
     - name: migrate 
       command: "{{ manage }} migrate --noinput"
 
-    - name: install fixtures 
+    - name: construct site fixture
+      template: src=templates/sites.json dest={{ project_path }}/{{ app_name }}/data/sites.json owner={{ remote_user }} group={{ remote_user }} mode=0754
+
+    - name: install site fixture
+      command: "{{ manage }} loaddata {{ project_path }}/{{ app_name }}/data/sites.json"
+
+    - name: install question fixture
       command: "{{ manage }} loaddata {{ project_path }}/survey/fixtures/questions.json"
       when: postgres_create_returncode['changed']
 
