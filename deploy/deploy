@@ -1,0 +1,8 @@
+if [ -z "$1" ]
+  then
+    echo "No argument supplied; specify host"
+    ansible-playbook provision.yml -i hosts --list-hosts
+    exit
+fi
+
+ansible-playbook provision.yml -i hosts --limit $1

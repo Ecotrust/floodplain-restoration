@@ -12,6 +12,6 @@ DEBUG = {{ debug }}
 TEMPLATE_DEBUG = {{ debug }} 
 
 ADMINS = (('Matt Perry', 'mperry@ecotrust.org'),)
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['{{allowed_host}}']
 
 SECRET_KEY = '{{ secretkey }}'

@@ -7,6 +7,7 @@ ansible_ssh_host=127.0.0.1
 ansible_ssh_port=2222
 ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 manage_with_git=true
+allowed_host=localhost
 git_branch=master
 debug=True
 domain=localhost:8089
