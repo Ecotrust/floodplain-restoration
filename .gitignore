@@ -6,7 +6,6 @@
 # Packages
 *.egg
 *.egg-info
-dist
 build
 eggs
 parts
@@ -41,3 +40,6 @@ dst/dst/db.sqlite3
 dst/.coverage_html
 dst/dst/settings_local.py
 deploy/hosts
+ui/dist/sessions
+.vagrant
+bbn_temp
