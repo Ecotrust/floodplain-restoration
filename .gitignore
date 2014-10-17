@@ -43,3 +43,4 @@ deploy/hosts
 ui/dist/sessions
 .vagrant
 bbn_temp
+dst/data/sites.json
