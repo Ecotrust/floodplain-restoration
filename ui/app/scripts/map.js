@@ -5,6 +5,10 @@ var map = {
   pit: {}
 };
 
+
+/*
+ * Vector feature styling
+ */
 map.styleEditable = function() {
   return [new ol.style.Style({
     stroke: new ol.style.Stroke({
@@ -17,6 +21,35 @@ map.styleEditable = function() {
   })];
 };
 
+map.pit.style = function() {
+  return [new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'white',
+      width: 2
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(255, 255, 100, 0.1)'
+    })
+  })];
+};
+
+map.site.style = function() {
+  return [new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'white',
+      lineDash: [4],
+      width: 2
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(255, 255, 255, 0.2)'
+    })
+  })];
+};
+
+
+/*
+ * Public methods
+ */
 map.loadSites = function(data) {
 
   if (!data || data.type !== 'FeatureCollection') {
@@ -30,19 +63,6 @@ map.loadSites = function(data) {
       object: data
     })
   );
-
-  map.site.style = function() {
-    return [new ol.style.Style({
-      stroke: new ol.style.Stroke({
-        color: 'black',
-        lineDash: [3],
-        width: 1
-      }),
-      fill: new ol.style.Fill({
-        color: 'rgba(255, 255, 255, 0.2)'
-      })
-    })];
-  };
 
   map.site.layer = new ol.layer.Vector({
     source: map.site.source,
@@ -66,18 +86,6 @@ map.loadPits = function(data) {
       object: data
     })
   );
-
-  map.pit.style = function() {
-    return [new ol.style.Style({
-      stroke: new ol.style.Stroke({
-        color: 'black',
-        width: 1
-      }),
-      fill: new ol.style.Fill({
-        color: 'rgba(255, 255, 100, 0.4)'
-      })
-    })];
-  };
 
   map.pit.layer = new ol.layer.Vector({
     source: map.pit.source,
@@ -172,7 +180,7 @@ map.map = new ol.Map({
   target: 'map',
   layers: [
     new ol.layer.Tile({
-      source: new ol.source.MapQuest({layer: 'osm'})
+      source: new ol.source.MapQuest({layer: 'sat'})
     })
   ],
   view: new ol.View({
