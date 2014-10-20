@@ -15,7 +15,7 @@ angular.module('uiApp')
         'layers': [],
         'id': 1,
         'name': 'fill_material_availability',
-        'title': 'Property Information',
+        'title': 'Fill Material',
         'question': 'Is the property for sale at or below fair market value?',
         'detail': 'Detail about Fill material availability',
         'order': 100.0,
@@ -41,7 +41,7 @@ angular.module('uiApp')
         'layers': [],
         'id': 2,
         'name': 'q2',
-        'title': '',
+        'title': 'Water Quality',
         'question': 'Are there recent or continuing impacts from contaminated sites upstream or adjacent to your property, within the river reach?',
         'detail': 'Additional info and resources',
         'order': 100.0,
@@ -67,6 +67,24 @@ angular.module('uiApp')
 
     // TODO put question list in rootScope for navbar dropdown
     return {
+      getCategoryQuestions: function () {
+        var categories = {};
+        for (var i = questions.length - 1; i >= 0; i--) {
+          // first pass, categories as keys, empty array as values
+          categories[questions[i].category] = [];
+        }
+
+        for (var i = questions.length - 1; i >= 0; i--) {
+          // second pass, organize questions into heirarchy
+          categories[questions[i].category].push(questions[i]);
+        }
+        return categories;
+      },
+
+      getQuestions: function () {
+        return questions;
+      },
+
       getQuestion: function (questionId) {
         // questionId = parseInt(questionId, 10);
         for (var i = questions.length - 1; i >= 0; i--) {
