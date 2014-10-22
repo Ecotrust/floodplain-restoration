@@ -113,3 +113,14 @@ a.footer:hover {
 .green {
     color: #00a551;
 }
+
+.signup p {
+    margin-left: 33%;
+    text-align: left;
+}
+
+.errorlist {
+    background-color: lightyellow;
+    border:solid red 1px;
+    color: #262223;
+}

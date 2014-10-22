@@ -8,7 +8,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h1>{% trans "Sign Up" %}</h1>
+            <h1>{% trans "Sign up." %}</h1>
 
             <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 
@@ -18,8 +18,17 @@
               {% if redirect_field_value %}
               <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
               {% endif %}
-              <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+              <br/>
+              <button type="submit" class="account-submit-btn">{% trans "Sign Up" %}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right green"></span></button>
             </form>
+
+            <hr />
+
+            <a class="footer" href="{% url 'account_login' %}">{% trans "I want to log in" %}</a>
+            <span class="footer middot">&middot;</span>
+            <a class="footer" href="{% url 'account_reset_password' %}">{% trans "I forgot my password" %}</a>
+
+
         </div>
     </div>
 
