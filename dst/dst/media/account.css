@@ -1,14 +1,82 @@
+/*
+    "Black": #262223;
+    "Green": #00a551;
+    "Blue": #094ca0;
+    "Gray": #84847d;
+    "Light Gray": #e6e7e8;
+    "Light Gray Hover": #f6f7f8;
+*/
+
 body {
     padding-top: 51px;
     padding-bottom: 20px;
     overflow: hidden;
     background-color: #e6e7e8;
+    font-family: "Agenda", Arial;
+    font-size: 16px;
+    color: #84847d;
 }
 
 h1 {
     color: #094ca0;
+    font-family: "Agenda", Arial;
+    font-weight: bold;
+    margin-top: 80px;
 }
 
 .accounts-page {
     text-align: center;
+}
+
+.navbar-default .navbar-brand, 
+.navbar-default .navbar-brand:hover {
+    color: #00a551;
+}
+
+a {
+    color: #00a551;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #094ca0;
+}
+
+hr {
+    border-top-color: #b1b3b5;
+}
+
+.footer {
+    color: #262223;
+    font-weight: normal;
+    font-size: 14px;
+    font-family:"Rotis Serif", Georgia;
+}
+
+a.footer:hover {
+    color: #00a551;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.middot {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.account-submit-btn {
+    margin: 30px;
+    border-color: #00a551;
+    padding: 8px 25px;
+    color: #262223;
+    background-color: #e6e7e8;
+}
+
+.account-submit-btn:hover {
+    background-color: #f6f7f8;
+}
+
+.green {
+    color: #00a551;
 }
