@@ -2,4 +2,13 @@ body {
     padding-top: 51px;
     padding-bottom: 20px;
     overflow: hidden;
+    background-color: #e6e7e8;
+}
+
+h1 {
+    color: #094ca0;
+}
+
+.accounts-page {
+    text-align: center;
 }

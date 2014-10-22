@@ -4,17 +4,25 @@
 {% load account %}
 {% load url from future %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}{% trans "TNC Floodplain Login" %}{% endblock %}
 
 {% block content %}
   <div class="row">
-    <div class="col-md-6 well">
-      <h1>{% trans "Sign In" %}</h1>
+    <div class="col-md-8 col-md-offset-2">
+      <h1>{% trans "Log in." %}</h1>
+
+      <p>{% blocktrans %}Anyone can register for the FLoodplain Gravel Mine Restoration tool - <a href="{{ signup_url }}">registering</a> allows you to define properties, test their suitability, and share the results with your collaborators.{% endblocktrans %}</p>
+
+      <form class="login" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
 
       {% if socialaccount.providers  %}
-      <p>{% blocktrans with site.name as site_name %}Please sign in with one
-      of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-      for a {{site_name}} account and sign in below:{% endblocktrans %}</p>
+      <p>{% blocktrans with site.name as site_name %}or log in with {% endblocktrans %}</p>
 
       <div class="socialaccount_ballot">
 
@@ -28,20 +36,11 @@
 
       {% include "socialaccount/snippets/login_extra.html" %}
 
-      {% else %}
-      <p>{% blocktrans %}If you have not created an account yet, then please
-      <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
       {% endif %}
-
-      <form class="login" method="POST" action="{% url 'account_login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-        <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+        <br />
+        <button class="primaryAction" type="submit">{% trans "Log in" %}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></button>
       </form>
+
     </div>
   </div>
 {% endblock %}
