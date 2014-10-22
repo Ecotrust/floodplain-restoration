@@ -2,12 +2,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="//cloud.webtype.com/css/89204a89-7163-455e-b3dc-8a183cbe44e0.css" rel="stylesheet" type="text/css" />
     <title>{% block head_title %}{% endblock %}</title>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
-    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.2.0+2/cosmo/bootstrap.css"></link>-->
     <link rel="stylesheet" href="/media/account.css"></link>
+    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.2.0+2/cosmo/bootstrap.css"></link>-->
     {% block extra_head %}
     {% endblock %}
   </head>
@@ -34,17 +35,25 @@
                 <a href="{% url 'account_logout' %}">Sign Out</a>
               </li>
               {% else %}
-              <li>
-                <a href="{% url 'account_login' %}">
+
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
                   <span class="glyphicon glyphicon-user"></span>
-                  Log In
+                  Log in <span class="caret"></span>
                 </a>
-              </li>
-              <li>
-                <a href="{% url 'account_signup' %}">
-                  <span class="glyphicon glyphicon-plus"></span>
-                  Sign Up
-                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="{% url 'account_login' %}">
+                      LOG IN
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a href="{% url 'account_signup' %}">
+                      REGISTER
+                    </a>
+                  </li>
+                </ul>
               </li>
               {% endif %}
             </ul>
