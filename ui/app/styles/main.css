@@ -9,10 +9,16 @@ body {
   padding-top: 51px;  /* navbar is 50px by default */ 
   overflow:hidden;
   font-family: "Agenda", Arial;
+  background-color: #e6e7e8;
 }
 
 h2, p {
   color: #FFF;
+}
+
+h3 {
+  color: #094ca0; /* blue */
+  font-size: 36px;
 }
 
 p {
@@ -41,13 +47,13 @@ a:hover {
 .header {
   border-bottom: 1px solid #e5e5e5;
 }
-/* Make the masthead heading the same height as the navigation */
+/* Make the masthead heading the same height as the navigation 
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
-  /*padding-bottom: 19px;*/
 }
+*/
 
 .navbar-default .navbar-brand, 
 .navbar-default .navbar-brand:hover {

@@ -19,7 +19,7 @@ angular.module('uiApp')
       'welcome': 'The Floodplain Gravel Mine Restoration Tool',
       'hook': 'Informed decision making and resource investment <br> for the restoration of floodplain mining sites.',
       'getStarted': 'Get Started',
-      'siteListHeader': 'Select a property to evaluate',
+      'siteListHeader': 'All properties',
       'previousQuestion': '<< Previous Question',
       'nextQuestion': 'Next Question >>',
       'attribution': 'This tool is a product of The Nature Conservancy and Ecotrust'
