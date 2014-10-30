@@ -21,7 +21,8 @@ angular.module('uiApp')
       'getStarted': 'Get Started',
       'siteListHeader': 'Select a property to evaluate',
       'previousQuestion': '<< Previous Question',
-      'nextQuestion': 'Next Question >>'
+      'nextQuestion': 'Next Question >>',
+      'attribution': 'This tool is a product of The Nature Conservancy and Ecotrust'
     };
 
     return {

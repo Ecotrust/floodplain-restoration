@@ -15,6 +15,20 @@ h2, p {
   color: #FFF;
 }
 
+p {
+  font-family:"Rotis Serif", Georgia;
+}
+
+i, em, cite {
+  font-family: "Rotis Serif Italic", "Georgia Italic", Georgia;
+  font-style: normal; /* This is important! Otherwise, faux italic italics. Terrible. */
+}
+
+a:hover {
+  color: #00a551; /* Green */
+  text-decoration: none;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -108,6 +122,7 @@ h2, p {
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 10px;
 }
 
 .jumbotron .btn {
@@ -117,16 +132,35 @@ h2, p {
 
 .jumbotron .btn-primary {
   background-color: transparent;
+  background-color: rgba(9,76,160,0.3);
+
   border-color: #FFF;
   border-radius: 0;
   border-width: 2px;
 }
 
 .jumbotron .btn-primary:hover {
-  background-color: rgb(255,255,255);
-  background-color: rgba(255,255,255, 0.4);
+  background-color: rgb(125,125,125);
+  background-color: rgba(0,181,51,0.3);
+}
 
-  /*background-opacity: 0.4;*/
+.glyphicon.glyphicon-play-circle {
+  margin-left: 15px;
+}
+
+.jumbotron h2,
+.jumbotron p {
+  background: rgb(9,76,160);
+  background: rgba(9,76,160,0.3);
+  border-radius: 15px;
+}
+
+.jumbotron .attribution {
+  margin-top: 90px;
+  padding: 0 10px;
+  font-size: 14px;
+  text-align: center;
+  background: rgba(9,76,160,0.6);
 }
 
 /* Supporting marketing content */
@@ -199,6 +233,11 @@ h2, p {
   /* image from dam under CC 3.0: 
   http://dam.ecotrust.org/pages/view.php?ref=7263&k=&search=stream&offset=0&order_by=relevance&sort=DESC&archive=0;*/
   background-position: center;
+}
+
+.homepage-content p{
+  letter-spacing: 1px;
+  font-size: 16px;
 }
 
 .map-container {
