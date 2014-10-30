@@ -8,6 +8,11 @@ body {
   padding-bottom: 20px;
   padding-top: 51px;  /* navbar is 50px by default */ 
   overflow:hidden;
+  font-family: "Agenda", Arial;
+}
+
+h2, p {
+  color: #FFF;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -30,11 +35,61 @@ body {
   /*padding-bottom: 19px;*/
 }
 
+.navbar-default .navbar-brand, 
+.navbar-default .navbar-brand:hover {
+    color: #00a551;
+}
+
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover {
+    cursor: pointer;
+    color: #094ca0;
+}
+
+.dropdown {
+    border-bottom: solid #f6f7f8;
+}
+
+.dropdown:hover,
+.navbar-nav>li:hover {
+    background-color: #e7e7e7;
+    border-bottom: solid;
+    border-bottom-color: #094ca0;
+}
+
+.dropdown-toggle,
+.dropdown-menu {
+    width: 160px;
+}
+
+.dropdown-toggle {
+    text-align: center;
+}
+
+.dropdown-menu {
+    background-color: #094ca0;
+    padding: 15px 15px;
+}
+
+.dropdown-menu>li>a {
+    color: white;
+}
+
+.dropdown-menu .divider {
+    background-color: #a6a8ab;
+}
+
+.dropdown-menu > li > a {
+    padding: 3px 0;
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;
   color: #777;
-  bottom: 0px;
+  bottom: 0;
 /*  border-top: 1px solid #e5e5e5; */
 }
 
@@ -54,9 +109,24 @@ body {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
+
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
+}
+
+.jumbotron .btn-primary {
+  background-color: transparent;
+  border-color: #FFF;
+  border-radius: 0;
+  border-width: 2px;
+}
+
+.jumbotron .btn-primary:hover {
+  background-color: rgb(255,255,255);
+  background-color: rgba(255,255,255, 0.4);
+
+  /*background-opacity: 0.4;*/
 }
 
 /* Supporting marketing content */
@@ -109,25 +179,35 @@ body {
   border: 1px gray solid;
 }
 
-.active-site-name {
-  padding-top: 20px;
-  padding-left: 28px;
-  font: 16px Arial, sans-serif;
-  color: #999;
+.navbar-left {
+  margin-left: 28px;
 }
 
-.map-container {
-  margin:0px;
-  padding:0px;
-  overflow:hidden;
-  border-left:1px #ccc solid;
-  padding-right: 1px;
-  padding-left: 0 px; 
+.active-site-name {
+  padding-top: 20px;
+  font: 16px Arial, sans-serif;
+  color: #999;
 }
 
 .left-panel {
   padding-top: 22px;
   padding-left: 18px;
+}
+
+.homepage-content {
+  background-image: url('../images/sam_gravel_stream_photo.jpg');
+  /* image from dam under CC 3.0: 
+  http://dam.ecotrust.org/pages/view.php?ref=7263&k=&search=stream&offset=0&order_by=relevance&sort=DESC&archive=0;*/
+  background-position: center;
+}
+
+.map-container {
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  border-left:1px #ccc solid;
+  padding-right: 1px;
+  padding-left: 0; 
 }
 
 .slide.ng-enter, .slide.ng-leave {
