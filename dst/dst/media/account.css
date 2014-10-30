@@ -41,7 +41,8 @@ hr {
     border-bottom: solid #f6f7f8;
 }
 
-.dropdown:hover {
+.dropdown:hover, 
+.navbar-nav>li:hover {
     background-color: #e7e7e7;
     border-bottom: solid;
     border-bottom-color: #094ca0;
