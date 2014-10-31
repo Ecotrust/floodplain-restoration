@@ -5,11 +5,9 @@
         <div class="row">
             <div class="col-md-6">
                 <h4>
-                    <a data-toggle="collapse" data-parent="#accordion-{{site.id}}" data-target="#collapse-{{site.id}}">
-                    <!-- <a href="#/site/{{site.id}}"> -->
+                    <a data-toggle="collapse" data-parent="#accordion-{{site.id}}" data-target="#collapse-{{site.id}}" ng-click="toggleCircleIconClass('circle-icon-{{site.id}}')">
                         {{site.properties.name}}
-                    <!-- </a> -->
-                        <span class="glyphicon glyphicon-plus-sign"></span>
+                        <span id="circle-icon-{{site.id}}" class="glyphicon glyphicon-plus-sign"></span>
                     </a>
                 </h4>
             </div>
