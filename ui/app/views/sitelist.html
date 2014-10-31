@@ -1,14 +1,16 @@
 <h3> {{content.siteListHeader}} </h3>
 
 <div class="properties">
-    <div class="property-box" ng-repeat="site in sites">
+    <div class="property-box" ng-repeat="site in sites" id="accordion-{{site.id}}">
         <div class="row">
             <div class="col-md-6">
                 <h4>
-                    <a href="#/site/{{site.id}}">
+                    <a data-toggle="collapse" data-parent="#accordion-{{site.id}}" data-target="#collapse-{{site.id}}">
+                    <!-- <a href="#/site/{{site.id}}"> -->
                         {{site.properties.name}}
+                    <!-- </a> -->
+                        <span class="glyphicon glyphicon-plus-sign"></span>
                     </a>
-                    <span class="glyphicon glyphicon-plus-sign"></span>
                 </h4>
             </div>
             <div class="col-md-2 property-delete">
@@ -23,18 +25,20 @@
         <hr>
         <div class="row">
             <div class="col-md-10 col-md-offset-2">
-                <div class="row" ng-repeat="pit in site.properties.pit_set">
-                  <div class="col-md-1"></div>
-                  <div class="col-md-3">
-                    Pit #{{pit.id}} ({{pit.properties.name}})  
-                  </div>
-                  <div class="col-md-2">
-                    <div class="btn-group">
-                      <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/{{pit.id}}/edit"><span class="glyphicon glyphicon-edit"></span></a>
-                      <button class="btn btn-default btn-xs" href="#" ng-click="deleteSitePit(site.id, pit.id)"><span class="glyphicon glyphicon-trash"></span></button>
+                <div id="collapse-{{site.id}}" class="collapse">
+                    <div class="row" ng-repeat="pit in site.properties.pit_set">
+                      <div class="col-md-1"></div>
+                      <div class="col-md-3">
+                        Pit #{{pit.id}} ({{pit.properties.name}})  
+                      </div>
+                      <div class="col-md-2">
+                        <div class="btn-group">
+                          <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/{{pit.id}}/edit"><span class="glyphicon glyphicon-edit"></span></a>
+                          <button class="btn btn-default btn-xs" href="#" ng-click="deleteSitePit(site.id, pit.id)"><span class="glyphicon glyphicon-trash"></span></button>
+                        </div>
+                      </div>
+                      <div class="col-md-4"></div>
                     </div>
-                  </div>
-                  <div class="col-md-4"></div>
                 </div>
             </div>
         </div>
