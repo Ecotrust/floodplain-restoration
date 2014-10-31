@@ -23,20 +23,17 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-10 col-md-offset-2">
-                <div id="collapse-{{site.id}}" class="collapse">
-                    <div class="row" ng-repeat="pit in site.properties.pit_set">
-                      <div class="col-md-1"></div>
-                      <div class="col-md-3">
-                        Pit #{{pit.id}} ({{pit.properties.name}})  
-                      </div>
-                      <div class="col-md-2">
-                        <div class="btn-group">
-                          <a class="btn btn-default btn-xs" href="#/site/{{site.id}}/pit/{{pit.id}}/edit"><span class="glyphicon glyphicon-edit"></span></a>
-                          <button class="btn btn-default btn-xs" href="#" ng-click="deleteSitePit(site.id, pit.id)"><span class="glyphicon glyphicon-trash"></span></button>
+            <div id="collapse-{{site.id}}" class="col-md-11 col-md-offset-1 collapse">
+                <div class="row">
+                    <div class="col-md-4 prop-list-details">
+                        <p>Total pits: {{site.properties.pit_set.length}}</p>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row" ng-repeat="pit in site.properties.pit_set">
+                          <div class="col-md-11">
+                            Pit #{{pit.id}} ({{pit.properties.name}})  
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-md-4"></div>
                     </div>
                 </div>
             </div>

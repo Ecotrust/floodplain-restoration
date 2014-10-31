@@ -210,6 +210,10 @@ a:hover {
   letter-spacing: 1px;
 }
 
+.prop-list-details >p {
+  color: #000;
+}
+
 /* Supporting marketing content */
 .marketing {
   margin: 40px 0;
