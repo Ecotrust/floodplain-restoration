@@ -1,5 +1,21 @@
 <h3> {{content.siteListHeader}} </h3>
 
+<div class="property-box" ng-repeat="site in sites">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>{{site.properties.name}}<span class="glyphicon glyphicon-plus-sign"></span></h4>
+        </div>
+        <div class="col-md-2 property-delete">
+            <a class="prop-action">delete</a>
+        </div>
+        <div class="col-md-2 property-edit">
+            <a class="prop-action">edit</a>
+        </div><div class="col-md-2 property-survey">
+            <a class="prop-action">survey</a>
+        </div>
+    </div>
+</div>
+
 <ul>
   <li ng-repeat="site in sites">
     <a href="#/site/{{site.id}}">{{site.properties.name}}</a>

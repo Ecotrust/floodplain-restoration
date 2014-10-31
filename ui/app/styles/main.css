@@ -21,6 +21,10 @@ h3 {
   font-size: 36px;
 }
 
+h4 {
+  color: #094ca0; /* blue */
+}
+
 p {
   font-family:"Rotis Serif", Georgia;
 }
@@ -138,7 +142,7 @@ a:hover {
 
 .jumbotron .btn-primary {
   background-color: transparent;
-  background-color: rgba(9,76,160,0.3);
+  /*background-color: rgba(9,76,160,0.3);*/
 
   border-color: #FFF;
   border-radius: 0;
@@ -147,17 +151,21 @@ a:hover {
 
 .jumbotron .btn-primary:hover {
   background-color: rgb(125,125,125);
-  background-color: rgba(0,181,51,0.3);
+  background-color: rgba(0,181,51,0.3); /* green */
 }
 
-.glyphicon.glyphicon-play-circle {
+.glyphicon-play-circle,
+.glyphicon-plus-sign {
   margin-left: 15px;
+}
+.glyphicon-plus-sign {
+  color: #00a551;
 }
 
 .jumbotron h2,
 .jumbotron p {
-  background: rgb(9,76,160);
-  background: rgba(9,76,160,0.3);
+  /*background: rgb(9,76,160);*/
+  /*background: rgba(9,76,160,0.3);*/
   border-radius: 15px;
 }
 
@@ -166,7 +174,33 @@ a:hover {
   padding: 0 10px;
   font-size: 14px;
   text-align: center;
-  background: rgba(9,76,160,0.6);
+  /*background: rgba(9,76,160,0.6);*/
+}
+
+.property-box {
+  background-color: #f8f8f8;
+  padding: 10px;
+  margin:15px auto;
+}
+
+
+.property-delete,
+.property-edit{
+  border-right: 2px solid #e7e7e7;
+  height: 40px;
+}
+
+.property-delete,
+.property-edit,
+.property-survey{
+  padding-top: 10px;
+  text-align: center;
+}
+
+.prop-action{
+  color: #000;
+  font-size: 14px;
+  letter-spacing: 1px;
 }
 
 /* Supporting marketing content */
@@ -235,10 +269,12 @@ a:hover {
 }
 
 .homepage-content {
-  background-image: url('../images/sam_gravel_stream_photo.jpg');
+  background-image: url('../images/WaiteRanchSloughKateCarone2013.jpg');
   /* image from dam under CC 3.0: 
   http://dam.ecotrust.org/pages/view.php?ref=7263&k=&search=stream&offset=0&order_by=relevance&sort=DESC&archive=0;*/
-  background-position: center;
+  background-repeat:no-repeat;
+  background-position:50% 25%;
+  background-size: 816px 1088px;
 }
 
 .homepage-content p{
