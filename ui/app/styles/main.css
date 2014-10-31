@@ -39,6 +39,11 @@ a:hover {
   text-decoration: none;
 }
 
+.disabled,
+.disabled:hover {
+  color: #BBB;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -184,7 +189,7 @@ a:hover {
 }
 
 
-.property-delete,
+.property-details,
 .property-edit{
   border-right: 2px solid #e7e7e7;
   height: 40px;
@@ -192,7 +197,7 @@ a:hover {
 
 .property-delete,
 .property-edit,
-.property-survey{
+.property-details{
   padding-top: 10px;
   text-align: center;
 }
