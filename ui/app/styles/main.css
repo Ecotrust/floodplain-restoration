@@ -280,12 +280,14 @@ a:hover {
 }
 
 .homepage-content {
-  background-image: url('../images/WaiteRanchSloughKateCarone2013.jpg');
+  background-image: url('../images/bulldozer.jpg');
   /* image from dam under CC 3.0: 
   http://dam.ecotrust.org/pages/view.php?ref=7263&k=&search=stream&offset=0&order_by=relevance&sort=DESC&archive=0;*/
   background-repeat:no-repeat;
-  background-position:50% 25%;
-  background-size: 816px 1088px;
+  background-position:10% 85%;  /* For bulldozer photo */
+  background-size: 800px 600px;  /* For bulldozer photo */
+  /*background-position:50% 25%;*/  /* For Waite Ranch photo */
+  /*background-size: 816px 1088px;*/  /* For Waite Ranch photo */
 }
 
 .homepage-content p{
