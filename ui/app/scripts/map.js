@@ -193,8 +193,9 @@ map.onResize = function () {
   var height = $(window).height();
   var width = $(window).width();
 
-  $(".map-container").height(height - 51);
+  $('.map-container').height(height - 51);
   map.map.updateSize();
+  $('.left-panel').height(height - 51);
 };
 
 $(window).resize(map.onResize);

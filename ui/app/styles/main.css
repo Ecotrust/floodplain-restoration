@@ -275,9 +275,13 @@ a:hover {
 }
 
 .left-panel {
-  padding-top: 22px;
   padding-left: 18px;
+  overflow: auto;
 }
+
+ .left-panel-content {
+  margin-bottom: 8px;
+ }
 
 .homepage-content {
   background-image: url('../images/bulldozer.jpg');
