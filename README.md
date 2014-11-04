@@ -34,7 +34,7 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 	python manage.py makemigrations
 	rm dst/db.sqlite3
 	# follow steps in `Initialize` above
-
+
 # Process for Creating/Updating the Bayesian Belief Network
 
 The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](http://www.cs.cmu.edu/~fgcozman/Research/InterchangeFormat/Old/xmlbif02.html). By default, the canonical bbn for the project resides at `dst/data/bbn.bif`. Creating or updating this file goes as follows:
@@ -54,25 +54,31 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 The deployment to stage and production is automated through the use of ansible
 playbooks. 
 
-1. "Build" the javascript and html app using grunt. Check closely for errors:
+"Build" the javascript and html app using grunt. Check closely for errors:
+   
+```
+cd ui && grunt build
+```
 
-	cd ui && grunt build
+Add the newly created js/css/html files, commit them and push to master:
+    
+```
+git add dist/scripts/scripts.cd312094.js
+git commit -a -m "new grunt build"
+git push
+```
 
-2. Add the newly created js/css/html files, commit them and push to master:
+Deploy to "stage", our local virtualbox machine.
+    
+```
+vagrant up
+cd ../deploy
+./deploy localhost
+```
 
-    git add dist/scripts/scripts.cd312094.js
-    git commit -a -m "new grunt build"
-    git push
-
-3. Deploying to "stage", our local virtualbox machine.
-
-	vagrant up
-	cd ../deploy
-	./deploy localhost
-
-4. Test it. Fix it if needed.
-
-5. Deploy to production
-
-	./deploy <produciton hostname>
+Test it and fix it if needed. Then deploy to production
+    
+```
+./deploy <produciton hostname>
+```
 
