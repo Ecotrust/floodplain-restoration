@@ -226,7 +226,7 @@ hr {
   border-bottom: solid #CCC 1px;
 }
 
-.pit-info p {
+.pit-label {
   color: #000;
   font-size: 24px;
 }
@@ -237,6 +237,11 @@ hr {
 
 .pit-info-link:hover {
   background-color: #eee;
+}
+
+.pit-details {
+  font-size: 14px;
+  color: #84847d;
 }
 
 .bottom-buttons {

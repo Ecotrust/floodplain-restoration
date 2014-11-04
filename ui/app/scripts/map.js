@@ -189,20 +189,30 @@ map.map = new ol.Map({
   })
 });
 
-map.onResize = function () {
-  var height = $(window).height();
-  var width = $(window).width();
-
+map.onResize = function (height, width) {
   $('.map-container').height(height - 51);
   map.map.updateSize();
-  $('.left-panel').height(height - 51);
-  $('.bottom-buttons').css('padding-bottom', parseInt($('#main-navbar').css("height"))-50);
+};
+
+function resize() {
+  var height = $(window).height();
+  var width = $(window).width();
+  map.onResize(height, width);
+  leftPanelResize(height, width);
+  bodyResize(height, width);
+};
+
+function bodyResize(height, width){
   $('body').css('padding-top', parseInt($('#main-navbar').css("height")));
 };
 
-$(window).resize(map.onResize);
-map.onResize();
+function leftPanelResize(height, width) { 
+  $('.left-panel').height(height - 51);
+  $('.bottom-buttons').css('padding-bottom', parseInt($('#main-navbar').css("height"))-50);
+};
 
-$(window).load(function () { 
-    $('body').css('padding-top', parseInt($('#main-navbar').css("height")));        
+$(window).resize(resize);
+
+$(document).ready(function() {
+  window.setTimeout(resize,200);
 });
