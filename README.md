@@ -48,3 +48,31 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 4. Edit `dst/data/bbn.bif` by hand if necessary.
 5. Reload question fixtures with `python manage.py loaddata survey/fixtures/questions.json` (*warning: this will destroy all questions in the database and requires careful thought about data migration*)
 6. Check system integrity with `python manage.py systemcheck`
+
+# Deployment 
+
+The deployment to stage and production is automated through the use of ansible
+playbooks. 
+
+1. "Build" the javascript and html app using grunt. Check closely for errors:
+
+	cd ui && grunt build
+
+2. Add the newly created js/css/html files, commit them and push to master:
+
+    git add dist/scripts/scripts.cd312094.js
+    git commit -a -m "new grunt build"
+    git push
+
+3. Deploying to "stage", our local virtualbox machine.
+
+	vagrant up
+	cd ../deploy
+	./deploy localhost
+
+4. Test it. Fix it if needed.
+
+5. Deploy to production
+
+	./deploy <produciton hostname>
+
