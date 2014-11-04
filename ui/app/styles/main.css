@@ -39,6 +39,10 @@ a:hover {
   text-decoration: none;
 }
 
+hr {
+  border-top: 1px solid #ccc;
+}
+
 .disabled,
 .disabled:hover {
   color: #BBB;
@@ -194,11 +198,13 @@ a:hover {
 
 
 .property-details,
+.property-survey,
 .property-edit{
-  border-right: 2px solid #e7e7e7;
+  border-right: 2px solid #CCC;
   height: 40px;
 }
 
+.property-survey,
 .property-delete,
 .property-edit,
 .property-details{
@@ -214,6 +220,28 @@ a:hover {
 
 .prop-list-details >p {
   color: #000;
+}
+
+.pit-info {
+  border-bottom: solid #CCC 1px;
+}
+
+.pit-info p {
+  color: #000;
+  font-size: 24px;
+}
+
+.pit-info-row .btn-group {
+  margin-top: 5px;
+}
+
+.pit-info-link:hover {
+  background-color: #eee;
+}
+
+.bottom-buttons {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 /* Supporting marketing content */
@@ -282,7 +310,8 @@ a:hover {
 }
 
  .left-panel-content {
-  margin-bottom: 8px;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
  }
 
 .homepage-content {

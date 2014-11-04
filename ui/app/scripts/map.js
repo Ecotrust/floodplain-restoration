@@ -196,7 +196,13 @@ map.onResize = function () {
   $('.map-container').height(height - 51);
   map.map.updateSize();
   $('.left-panel').height(height - 51);
+  $('.bottom-buttons').css('padding-bottom', parseInt($('#main-navbar').css("height"))-50);
+  $('body').css('padding-top', parseInt($('#main-navbar').css("height")));
 };
 
 $(window).resize(map.onResize);
 map.onResize();
+
+$(window).load(function () { 
+    $('body').css('padding-top', parseInt($('#main-navbar').css("height")));        
+});
