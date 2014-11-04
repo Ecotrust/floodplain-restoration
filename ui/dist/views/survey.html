@@ -1,1 +1,29 @@
-<div> <p><span class="numberCircle">{{question.id|digits}}</span> {{question.category|uppercase}}</p> <p class="question">{{question.question}}</p> <div> <form novalidate name="pitForm" role="form"> <div ng-repeat="choice in question.choices"> <div class="radio"> <label> <input type="radio" name="choice" value="{{choice.value}}"> {{choice.choice}} </label> </div> </div> </form> </div> <p class="question-detail"> {{question.detail}} </p> <div class="btn-group pull-right"> <a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ prevQuestion() }}"> {{content.previousQuestion}}</a> <a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ nextQuestion() }}"> {{content.nextQuestion}}</a> </div> </div>
+<div>
+  <p><span class="numberCircle">{{question.id|digits}}</span> {{question.category|uppercase}}</p>
+  <p class="question">{{question.question}}</p>
+
+  <div>
+    <form novalidate name="pitForm" role="form">
+      <div ng-repeat="choice in question.choices">
+
+        <div class="radio">
+          <label>
+            <input type="radio" name="choice" value="{{choice.value}}">
+            {{choice.choice}}
+          </label>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+
+  <p class="question-detail">
+  {{question.detail}}
+  </p>
+
+  <div class="btn-group pull-right">
+  <a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ prevQuestion() }}"> {{content.previousQuestion}}</a>
+  <a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ nextQuestion() }}"> {{content.nextQuestion}}</span></a>
+  </div>
+</div>
