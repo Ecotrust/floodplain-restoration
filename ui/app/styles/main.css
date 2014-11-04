@@ -159,10 +159,12 @@ a:hover {
   background-color: rgba(0,181,51,0.3); /* green */
 }
 
-.glyphicon-play-circle,
+.glyphicon-play-circle{
+  margin-left: 20px;
+}
 .glyphicon-plus-sign,
 .glyphicon-minus-sign {
-  margin-left: 15px;
+  margin: 0 10px;
 }
 .glyphicon-plus-sign,
 .glyphicon-minus-sign {
