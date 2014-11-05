@@ -1,6 +1,13 @@
-<div class="left-panel-content">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-1">
+<div survey-dir class="left-panel-content survey-content">
+  <div class="row survey-row">
+    <div class="col-md-1 survey-col survey-nav-col">
+      <p class="survey-nav">
+        <a href="#/site/{{siteId}}/survey/{{ prevQuestion() }}">
+          <span class="glyphicon glyphicon-play survey-nav-icon survey-nav-back"></span>
+        </a>
+      </p>
+    </div>
+    <div class="col-md-8 survey-col">
       <p class="survey-question-header">
         <span class="numberCircle">{{question.id|digits}}</span> {{question.category|uppercase}}
       </p>
@@ -29,20 +36,31 @@
       {{question.detail}}
       </p>
 
+      <div class="row">
+        <div class="col-md-9">
+          <hr/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 survey-status-summary">
+          <span class="glyphicon glyphicon-ok survey-status-icon"></span>&nbsp;{{question.id-1}} of 2 completed
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <div class="survey-status-bar">
+            <span class="survey-status-span" style="padding-left:{{((question.id -1 )/2)*100}}%">
+              &nbsp;
+            </span>
+          </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-1">
-      <p class="survey-nav">
-        <a href="#/site/{{siteId}}/survey/{{ prevQuestion() }}">
-          <span class="glyphicon glyphicon-play survey-nav-icon survey-nav-back"></span>
-        </a>
-      </p>
-    </div>
-    <div class="col-md-9">
-      <hr/>
-    </div>
-    <div class="col-md-1">
+    <div class="col-md-1 survey-col survey-nav-col">
       <p class="survey-nav survey-nav-forward">
         <a href="#/site/{{siteId}}/survey/{{ nextQuestion() }}">
           <span class="glyphicon glyphicon-play survey-nav-icon"></span>

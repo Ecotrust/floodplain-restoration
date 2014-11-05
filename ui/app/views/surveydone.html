@@ -1,11 +1,33 @@
-<div>
-  <div class="row" ng-repeat="(key, prop) in suitability track by key">
-    <div class="col-md-6"><strong>{{key}}</strong></div>
-    <div class="col-md-6">
-      <span>{{prop|percentage:0}}</span>
+<div survey-dir class="left-panel-content survey-content">
+  <div class="row survey-row">
+  	<div class="col-md-1 survey-col survey-nav-col">
+  	  <p class="survey-nav">
+        <a href="#/site/{{siteId}}/survey/2">
+          <span class="glyphicon glyphicon-play survey-nav-icon survey-nav-back"></span>
+        </a>
+      </p>
+  	</div>
+    <div class="col-md-10 survey-col">
+	  <div class="row">
+		<div class="col-md-8">
+		  <p class="survey-question-header">
+		    <span class="numberCircle">
+		     	<span class="glyphicon glyphicon-ok"></span>
+		    </span> VIEW AND SHARE REPORT
+		  </p>
+		  <p class="question">You have completed the survey. The three scores below indicate that lorem ipsum dolor sit amet, consecte adipiscing elit:</p>
+	    </div>
+	  </div>
+	  <div class="row" ng-repeat="(key, prop) in suitability track by key">
+	    <div class="col-md-6"><strong>{{key}}</strong></div>
+		<div class="col-md-6">
+		  <span>{{prop|percentage:0}}</span>
+		</div>
+	  </div>
     </div>
+
+    <div class="btn-group pull-right">
+      <a class="btn btn-default" href="#/site/{{siteId}}/"> &lt;&lt; Back to site </a>
+    </div>  
   </div>
-  <div class="btn-group pull-right">
-    <a class="btn btn-default" href="#/site/{{siteId}}/"> &lt;&lt; Back to site </a>
-  </div>  
 </div>
