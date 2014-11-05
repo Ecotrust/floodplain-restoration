@@ -19,6 +19,7 @@ h2, p {
 h3 {
   color: #094ca0; /* blue */
   font-size: 36px;
+  line-height: normal;
 }
 
 h4 {
@@ -27,6 +28,10 @@ h4 {
 
 p {
   font-family:"Rotis Serif", Georgia;
+}
+
+.capitalize {
+    text-transform: capitalize;
 }
 
 i, em, cite {
@@ -194,6 +199,8 @@ hr {
   background-color: #f8f8f8;
   padding: 10px;
   margin:15px auto;
+  border: solid #aaa 1px;
+  box-shadow: 0px 0px 10px #aaa;
 }
 
 
@@ -232,7 +239,7 @@ hr {
 }
 
 .pit-info-row .btn-group {
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 .pit-info-link:hover {
@@ -247,6 +254,10 @@ hr {
 .bottom-buttons {
   margin-bottom: 10px;
   padding-bottom: 10px;
+}
+
+.pit-edit-field {
+  margin: 2px auto;
 }
 
 /* Supporting marketing content */
@@ -276,21 +287,47 @@ hr {
   }
 }
 
+.survey-question-header {
+  margin-top: 35px;
+  color: #84847d;
+  font-family: "Agenda", Arial;
+}
+
+.question {
+  color: #094ca0;
+  font-size: 24px;
+  font-family: "Agenda", Arial;
+  margin: 25px 5px;
+}
+
 .numberCircle {
   border-radius: 50%;
   behavior: url(PIE.htc); /* remove if you don't care about IE8 */
 
   width: 24px;
   height: 24px;
-  padding: 4px;
+  padding: 6px;
   margin: 6px;
 
-  background: #fff;
-  border: 2px solid #777;
-  color: #555;
+  background: transparent;
+  border: 2px solid #094ca0;
+  color: #84847d;
   text-align: center;
 
-  font: 18px Arial, sans-serif;
+  font: 14px Arial, sans-serif;
+}
+
+.survey-choice {
+  color: #094ca0;
+}
+
+.radio-span {
+  margin: 0 15px;
+}
+
+.question-detail {
+  margin: 15px 0;
+  color: #84847d;
 }
 
 .bar {

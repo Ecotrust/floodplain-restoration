@@ -1,29 +1,38 @@
-<div>
-  <p><span class="numberCircle">{{question.id|digits}}</span> {{question.category|uppercase}}</p>
-  <p class="question">{{question.question}}</p>
+<div class="left-panel-content">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-1">
+      <p class="survey-question-header">
+        <span class="numberCircle">{{question.id|digits}}</span> {{question.category|uppercase}}
+      </p>
+      <p class="question">{{question.question}}</p>
 
-  <div>
-    <form novalidate name="pitForm" role="form">
-      <div ng-repeat="choice in question.choices">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <form novalidate name="pitForm" role="form">
+            <div ng-repeat="choice in question.choices">
 
-        <div class="radio">
-          <label>
-            <input type="radio" name="choice" value="{{choice.value}}">
-            {{choice.choice}}
-          </label>
+              <div class="radio">
+                <label class="survey-choice">
+                  <input type="radio" name="choice" value="{{choice.value}}">
+                  <span class="radio-span">&nbsp;</span>
+                  {{choice.choice}}
+                </label>
+              </div>
+
+            </div>
+          </form>
         </div>
-
       </div>
-    </form>
-  </div>
 
 
-  <p class="question-detail">
-  {{question.detail}}
-  </p>
+      <p class="question-detail">
+      {{question.detail}}
+      </p>
 
-  <div class="btn-group pull-right">
-  <a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ prevQuestion() }}"> {{content.previousQuestion}}</a>
-  <a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ nextQuestion() }}"> {{content.nextQuestion}}</span></a>
+      <div class="btn-group pull-right">
+      <a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ prevQuestion() }}"> {{content.previousQuestion}}</a>
+      <a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ nextQuestion() }}"> {{content.nextQuestion}}</span></a>
+      </div>
+    </div>
   </div>
 </div>
