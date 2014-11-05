@@ -29,10 +29,25 @@
       {{question.detail}}
       </p>
 
-      <div class="btn-group pull-right">
-      <a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ prevQuestion() }}"> {{content.previousQuestion}}</a>
-      <a class="btn btn-default" href="#/site/{{siteId}}/survey/{{ nextQuestion() }}"> {{content.nextQuestion}}</span></a>
-      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1">
+      <p class="survey-nav">
+        <a href="#/site/{{siteId}}/survey/{{ prevQuestion() }}">
+          <span class="glyphicon glyphicon-play survey-nav-icon survey-nav-back"></span>
+        </a>
+      </p>
+    </div>
+    <div class="col-md-9">
+      <hr/>
+    </div>
+    <div class="col-md-1">
+      <p class="survey-nav survey-nav-forward">
+        <a href="#/site/{{siteId}}/survey/{{ nextQuestion() }}">
+          <span class="glyphicon glyphicon-play survey-nav-icon"></span>
+        </a>
+      </p>
     </div>
   </div>
 </div>
