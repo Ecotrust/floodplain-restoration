@@ -208,7 +208,6 @@ function bodyResize(height, width){
 
 function leftPanelResize(height, width) { 
   $('.left-panel').height(height - 51);
-  $('.bottom-buttons').css('padding-bottom', parseInt($('#main-navbar').css("height"))-50);
 };
 
 $(window).resize(resize);

@@ -1,4 +1,4 @@
-<div class="left-panel-content survey-content">
+<div class="survey-content">
   <div class="row survey-row">
   	<div class="col-md-1 survey-col survey-nav-col">
   	  <p class="survey-nav">
@@ -9,7 +9,7 @@
   	</div>
     <div class="col-md-10 survey-col">
 	  <div class="row">
-		<div class="col-md-8">
+		<div class="col-md-12">
 		  <p class="survey-question-header">
 		    <span class="numberCircle">
 		     	<span class="glyphicon glyphicon-ok"></span>
@@ -19,15 +19,23 @@
 	    </div>
 	  </div>
 	  <div class="row" ng-repeat="(key, prop) in suitability track by key">
-	    <div class="col-md-6"><strong>{{key}}</strong></div>
+	    <div class="col-md-6">
+	    	<strong>{{key}}</strong>
+	    </div>
 		<div class="col-md-6">
 		  <span>{{prop|percentage:0}}</span>
 		</div>
 	  </div>
+	  <div class="row">
+	  	<div class="col-md-12">
+		  <div class="btn-group pull-right bottom-buttons">
+		    <a class="btn btn-default" href="#/site/{{siteId}}/"> &lt;&lt; Back to site </a>
+		  </div>  
+		</div>
+	  </div>
     </div>
+  	<div class="col-md-1 survey-col survey-nav-col">
+  	</div>
 
-    <div class="btn-group pull-right">
-      <a class="btn btn-default" href="#/site/{{siteId}}/"> &lt;&lt; Back to site </a>
-    </div>  
   </div>
 </div>
