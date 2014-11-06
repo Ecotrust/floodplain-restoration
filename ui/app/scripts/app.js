@@ -65,14 +65,12 @@ angular
        */
       .when('/site/:siteId/survey/done', {
         templateUrl: 'views/surveydone.html',
-        controller: 'SurveydoneCtrl',
-        directive: 'SurveyDir'
+        controller: 'SurveydoneCtrl'
       })
 
       .when('/site/:siteId/survey/:questionId', {
         templateUrl: 'views/survey.html',
-        controller: 'SurveyCtrl',
-        directive: 'SurveyDir'
+        controller: 'SurveyCtrl'
       })
 
       /*
