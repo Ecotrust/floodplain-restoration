@@ -15,6 +15,9 @@ angular.module('uiApp')
 
     $scope.siteId = $routeParams.siteId;
     $scope.question = QuestionFactory.getQuestion(questionId);
+    // $scope.questions = QuestionFactory.getQuestions();
+    $scope.numQuestions = 2;  //QuestionFactory will likely change substantially
+                                  //We'll hardcode this for now.
 
     var maxQuestionId = QuestionFactory.maxId();
     var minQuestionId = QuestionFactory.minId();
