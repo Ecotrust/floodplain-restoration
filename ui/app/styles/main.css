@@ -291,16 +291,19 @@ hr {
   }
 }
 
-.survey-content {
+.survey-content,
+.table-container {
   display: table;
   height: 100%;
 }
 
-.survey-row {
+.survey-row,
+.table-row {
   display: table-row;
 }
 
-.survey-col {
+.survey-col,
+.table-cell {
   display: table-cell;
   float: none;
 }
@@ -485,6 +488,19 @@ hr {
   padding-top: 10px;
 }
 
-.documents {
-  background-color: #00a551;
+.blue-text {
+  color: #094ca0;
+}
+
+.padded-box {
+  padding: 30px;
+}
+
+.document-list-item {
+  margin-left: 30px;
+  font-size: 14px;
+}
+
+.document-list-hr {
+  margin: 7px auto;
 }

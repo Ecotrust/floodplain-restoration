@@ -8,10 +8,10 @@
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('HelpCtrl', function ($scope, $routeParams, $rootScope, ContentFactory) {
+  .controller('HelpCtrl', function ($scope, $routeParams, $rootScope, $sce, ContentFactory) {
     $rootScope.showMap = false;
 
-    $scope.text = ContentFactory.get($routeParams.topic);
+    $scope.text = $sce.trustAsHtml(ContentFactory.get($routeParams.topic));
     $scope.topic = $routeParams.topic;
 
   });
