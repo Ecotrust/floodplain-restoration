@@ -207,7 +207,7 @@ function bodyResize(height, width){
 };
 
 function leftPanelResize(height, width) { 
-  $('.left-panel').height(height - 51);
+  $('.left-panel-column').height(height - 51);
 };
 
 $(window).resize(resize);

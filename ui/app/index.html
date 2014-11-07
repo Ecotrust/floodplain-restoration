@@ -30,7 +30,8 @@
     <div class="container">
       <div ng-controller="NavCtrl" ng-include src="'views/nav.html'"></div>
       <div class="row content" >
-        <div class="col-md-6 left-panel" ng-view=""></div>
+        <div class="col-md-6 no-padding left-panel-column" ng-view="">
+        </div>
         <div class="col-md-6 map-container">
           <div class="map" id="map"></div>
         </div>

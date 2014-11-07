@@ -30,10 +30,6 @@ p {
   font-family:"Rotis Serif", Georgia;
 }
 
-.capitalize {
-    text-transform: capitalize;
-}
-
 i, em, cite {
   font-family: "Rotis Serif Italic", "Georgia Italic", Georgia;
   font-style: normal; /* This is important! Otherwise, faux italic italics. Terrible. */
@@ -46,6 +42,14 @@ a:hover {
 
 hr {
   border-top: 1px solid #ccc;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.capitalize {
+    text-transform: capitalize;
 }
 
 .disabled,
@@ -425,9 +429,14 @@ hr {
   color: #999;
 }
 
+.left-panel-column {
+  height: 100%;
+  overflow: auto;
+}
+
 .left-panel {
   padding-left: 18px;
-  overflow: auto;
+  padding-right: 15px;
 }
 
  .left-panel-content {
@@ -469,3 +478,13 @@ hr {
 .slide.ng-enter.ng-enter-active { } /* terminal animations for enter */
 .slide.ng-leave { }        /* starting animations for leave */
 .slide.ng-leave.ng-leave-active { } /* terminal animations for leave */
+
+.help-panel {
+  width: 100%;
+  height: 100%;
+  padding-top: 10px;
+}
+
+.documents {
+  background-color: #00a551;
+}
