@@ -25,7 +25,8 @@ angular.module('uiApp')
       'nextQuestion': 'Next Question >>',
       'attribution': 'This tool is a product of The Nature Conservancy and Ecotrust',
       'documents': '\
-        <h4>Please assemble as many of the following resources as possible before you begin:</h4>\
+        <h3>Before you get started...</h3>\
+        <h4>Please assemble as many of the following resources as possible:</h4>\
         <div class="table-container">\
           <div class="table-row">\
             <div class="table-cell col-md-11">\

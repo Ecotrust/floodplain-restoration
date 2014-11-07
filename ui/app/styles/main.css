@@ -497,7 +497,7 @@ hr {
 }
 
 .document-list-item {
-  margin-left: 30px;
+  margin: auto 30px;
   font-size: 14px;
 }
 
