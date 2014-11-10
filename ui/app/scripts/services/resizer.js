@@ -19,11 +19,11 @@ angular.module('uiApp')
     .factory('myHttpInterceptor', function ($q, $window) {
         return function (promise) {
             return promise.then(function (response) {
-            	window.setTimeout(resize,50);
+            	window.setTimeout(resize, 1);
                 return response;
 
             }, function (response) {
-                window.setTimeout(resize,50);
+                window.setTimeout(resize, 1);
                 return $q.reject(response);
             });
         };

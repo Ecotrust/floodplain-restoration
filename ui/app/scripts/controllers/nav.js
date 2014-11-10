@@ -9,12 +9,18 @@
  */
 angular.module('uiApp')
   .controller('NavCtrl', function ($scope, $rootScope, SiteFactory, QuestionFactory) {
-    $scope.sites = SiteFactory.getSites();
+    $scope.sites = [];
+    SiteFactory.getSites().then(
+      function() {
+        $scope.sites = SiteFactory.sites.features;
+      }
+    );
+  
     $scope.questions = [];
     QuestionFactory
       .getQuestions()
       .then( function() {
-            $scope.questions = QuestionFactory.questions;
+        $scope.questions = QuestionFactory.questions;
       });
     // $scope.categoryQuestions = QuestionFactory.getCategoryQuestions();
   });

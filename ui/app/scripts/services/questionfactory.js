@@ -13,7 +13,6 @@ angular.module('uiApp')
     var service = {};
 
     service.questions = [];
-    service.activeQuestion = {};
     
     service.getQuestions = function () {
         var promise = $http.get('/api/questions.json');

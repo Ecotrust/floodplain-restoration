@@ -10,12 +10,19 @@
 angular.module('uiApp')
   .controller('SitelistCtrl', function ($scope, $rootScope, SiteFactory) {
     $rootScope.showMap = true;
-    $scope.sites = SiteFactory.getSites();
+    
+    $scope.sites = [];
+
     $rootScope.siteId = null;
     $rootScope.siteName = null;
 
     ///////////////////////////////////////////////////
     map.clear();
-    map.loadSites(SiteFactory.getSitesCollection());
+    SiteFactory.getSites()
+      .then( function() {
+        $scope.sites = SiteFactory.sites.features;
+        console.log("within ctrl, then ", $scope.sites);
+        map.loadSites(SiteFactory.sites);
+      });
     ///////////////////////////////////////////////////
   });
