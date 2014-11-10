@@ -21,7 +21,6 @@ angular.module('uiApp')
     SiteFactory.getSites()
       .then( function() {
         $scope.sites = SiteFactory.sites.features;
-        console.log("within ctrl, then ", $scope.sites);
         map.loadSites(SiteFactory.sites);
       });
     ///////////////////////////////////////////////////
