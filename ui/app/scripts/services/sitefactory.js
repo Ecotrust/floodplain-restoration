@@ -10,7 +10,6 @@
 angular.module('uiApp')
   .factory('SiteFactory', function ($rootScope, $http) {
 
-
     var service = {};
 
     service.sites = [];

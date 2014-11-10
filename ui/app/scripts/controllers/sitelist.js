@@ -16,12 +16,10 @@ angular.module('uiApp')
     $rootScope.siteId = null;
     $rootScope.siteName = null;
 
-    ///////////////////////////////////////////////////
-    map.clear();
     SiteFactory.getSites()
       .then( function() {
         $scope.sites = SiteFactory.sites.features;
+        map.clear();
         map.loadSites(SiteFactory.sites);
       });
-    ///////////////////////////////////////////////////
   });

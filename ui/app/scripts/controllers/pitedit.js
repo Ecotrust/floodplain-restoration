@@ -11,16 +11,58 @@ angular.module('uiApp')
   .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
     $rootScope.showMap = true;
 
-    SiteFactory.setActiveSiteId($routeParams.siteId);
-    var site = SiteFactory.getActiveSite();
-    $scope.site = site;
+    var activeSiteId = parseInt($routeParams.siteId, 10);
+    var activePitId = parseInt($routeParams.pitId, 10);
 
-    SiteFactory.setActivePitId($routeParams.pitId);
-    var pit = SiteFactory.getSitePit($routeParams.pitId);
-    $scope.pit = pit;
+    $scope.pit = {};
+    $scope.site = {};
+    $scope.sites = [];
+
+    SiteFactory.getSites().then( function() {
+      $scope.sites = SiteFactory.sites.features;
+
+      // set active site
+      for (var i = SiteFactory.sites.features.length - 1; i >= 0; i--) {
+        var site = SiteFactory.sites.features[i];
+        if (site.id === activeSiteId) {
+          $scope.site = site;
+        }
+      }
+
+      // set active pit
+      for (var j = $scope.site.properties.pit_set.length - 1; j >= 0; j--) {
+        var pit = $scope.site.properties.pit_set[j];
+        if (pit.id === activePitId) {
+          $scope.pit = pit;
+        }
+      }
+
+      // map
+      map.clear();
+      map.loadSites({
+        type: 'FeatureCollection',
+        features:[$scope.site]
+      });
+      if (newPit) {
+        map.loadPits({
+          type: 'FeatureCollection',
+          features: []
+        });
+        map.addPit();
+      } else {
+        // map.loadPits(SiteFactory.getActivePitCollection());
+        map.loadPits({
+          type: 'FeatureCollection',
+          // features:$scope.site.properties.pit_set
+          features: [$scope.pit]
+        });
+        map.editPit();
+      }
+
+    });
 
     var newPit = false;
-    if ($routeParams.pitId === 'new' || pit === null) {
+    if ($routeParams.pitId === 'new' || $scope.pit === null) {
       newPit = true;
       $scope.pit = {
         id: '',
@@ -47,14 +89,4 @@ angular.module('uiApp')
       console.log('spinner off');
     };
 
-    // ----------------------- Map setup ------------------------------------//
-    map.clear();
-    map.loadSites(SiteFactory.getActiveSiteCollection());
-    if (newPit) {
-      map.loadPits({type: 'FeatureCollection', features: []});
-      map.addPit();
-    } else {
-      map.loadPits(SiteFactory.getActivePitCollection());
-      map.editPit();
-    } 
   });
