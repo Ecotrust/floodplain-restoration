@@ -8,99 +8,28 @@
  * Factory in the uiApp.
  */
 angular.module('uiApp')
-  .factory('QuestionFactory', function () {
+  .factory('QuestionFactory', function ($http) {
 
-    var questions = [
-      {
-        'layers': [],
-        'id': 1,
-        'name': 'fill_material_availability',
-        'title': 'Fill Material',
-        'question': 'Is the property for sale at or below fair market value?',
-        'detail': 'Detail about Fill material availability',
-        'order': 100.0,
-        'category': 'Property Information',
-        'image': '',
-        'supplement': '',
-        'choices': [
-          {
-            'choice': 'available',
-            'value': 1.0
-          },
-          {
-            'choice': 'Not Sure',
-            'value': 0.5
-          },
-          {
-            'choice': 'unavailable',
-            'value': 0.0
-          }
-        ]
-      },
-      {
-        'layers': [],
-        'id': 2,
-        'name': 'q2',
-        'title': 'Water Quality',
-        'question': 'Are there recent or continuing impacts from contaminated sites upstream or adjacent to your property, within the river reach?',
-        'detail': 'Additional info and resources',
-        'order': 100.0,
-        'category': 'Water Quality',
-        'image': '',
-        'supplement': '',
-        'choices': [
-          {
-            'choice': 'suitable',
-            'value': 1.0
-          },
-          {
-            'choice': 'Not Sure',
-            'value': 0.5
-          },
-          {
-            'choice': 'unsuitable',
-            'value': 0.0
-          }
-        ]
-      }
-    ];
+    var service = {};
 
-    // TODO put question list in rootScope for navbar dropdown
-    return {
-      getCategoryQuestions: function () {
-        var categories = {};
-        for (var i = questions.length - 1; i >= 0; i--) {
-          // first pass, categories as keys, empty array as values
-          categories[questions[i].category] = [];
-        }
+    service.questions = [];
+    service.activeQuestion = {};
+    
+    service.getQuestions = function () {
+        var promise = $http.get('/api/questions.json');
 
-        for (var i = questions.length - 1; i >= 0; i--) {
-          // second pass, organize questions into heirarchy
-          categories[questions[i].category].push(questions[i]);
-        }
-        return categories;
-      },
+        promise.success(function(data) {
+          // full args
+          // data, status, headers, config
+          service.questions = data;
+        });
+        
+        promise.error(function() {
+          console.log('Could not fetch questions.json');
+        });
 
-      getQuestions: function () {
-        return questions;
-      },
+        return promise;
+      };
 
-      getQuestion: function (questionId) {
-        // questionId = parseInt(questionId, 10);
-        for (var i = questions.length - 1; i >= 0; i--) {
-          if (questions[i].id === questionId) {
-            return questions[i];
-            // TODO determine choice based on inputnodes of selected site
-          }
-        }
-      },
-
-      minId: function() {
-        return 1; //TODO
-      },
-
-      maxId: function() {
-        return 2;  // TODO 
-      }
-    };
+    return service;
   });

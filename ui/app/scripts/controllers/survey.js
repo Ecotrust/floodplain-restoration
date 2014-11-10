@@ -14,13 +14,25 @@ angular.module('uiApp')
     var questionId = parseInt($routeParams.questionId, 10);
 
     $scope.siteId = $routeParams.siteId;
-    $scope.question = QuestionFactory.getQuestion(questionId);
-    // $scope.questions = QuestionFactory.getQuestions();
-    $scope.numQuestions = 2;  //QuestionFactory will likely change substantially
+    
+    $scope.question = {};
+    
+    QuestionFactory
+      .getQuestions()
+      .then( function() {
+        for (var i = QuestionFactory.questions.length - 1; i >= 0; i--) {
+          var question = QuestionFactory.questions[i];
+          if (question.id === questionId) {
+            $scope.question = question;
+          }
+        }
+      });
+
+    $scope.numQuestions = 4;  //QuestionFactory will likely change substantially
                                   //We'll hardcode this for now.
 
-    var maxQuestionId = QuestionFactory.maxId();
-    var minQuestionId = QuestionFactory.minId();
+    var maxQuestionId = 4;
+    var minQuestionId = 0;
     
     $scope.showPrev = true;
     $scope.showPrev = true;

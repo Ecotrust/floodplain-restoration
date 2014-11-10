@@ -10,6 +10,11 @@
 angular.module('uiApp')
   .controller('NavCtrl', function ($scope, $rootScope, SiteFactory, QuestionFactory) {
     $scope.sites = SiteFactory.getSites();
-    $scope.questions = QuestionFactory.getQuestions();
+    $scope.questions = [];
+    QuestionFactory
+      .getQuestions()
+      .then( function() {
+            $scope.questions = QuestionFactory.questions;
+      });
     // $scope.categoryQuestions = QuestionFactory.getCategoryQuestions();
   });
