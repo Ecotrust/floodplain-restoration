@@ -11,28 +11,63 @@ angular.module('uiApp')
   .controller('SiteeditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
     $rootScope.showMap = true;
 
-    SiteFactory.setActiveSiteId($routeParams.siteId);
-    var site = SiteFactory.getActiveSite();
+    //SiteFactory.setActiveSiteId($routeParams.siteId);
+    //var site = SiteFactory.getActiveSite();
 
-    var newSite = false;
-    if ($routeParams.siteId === 'new' || site === null) {
-      newSite = true;
-      site = {
+    $scope.sites = [];
+    $scope.site = {};
+    var isNewSite = false;
+    var blankSite;
+
+    if ($routeParams.siteId === undefined) {
+      var activeSiteId = null;
+      isNewSite = true;
+      blankSite = {
         id: '',
         type: 'Feature',
         geometry: {}, // wkt
         properties: {}
       };
+    } else {
+      var activeSiteId = parseInt($routeParams.siteId, 10);
     }
 
-    $scope.site = site;
-      
+    SiteFactory.getSites().then(
+      function() {
+        $scope.sites = SiteFactory.sites.features;
+
+        map.clear();
+
+        if (isNewSite) {
+          map.loadSites({type: 'FeatureCollection', features: []});
+          map.addSite();
+
+        } else {
+          // set active site
+          for (var i = SiteFactory.sites.features.length - 1; i >= 0; i--) {
+            var site = SiteFactory.sites.features[i];
+            if (site.id === activeSiteId) {
+              $scope.site = site;
+            }
+          }
+
+          map.loadSites({
+            type: 'FeatureCollection',
+            features:[$scope.site]
+          });
+          map.editSite();
+        }
+
+          
+      }
+    );
+
     $scope.$on('activeFeatureWKT', function (event, wkt) {
       $scope.site.geometry = wkt;
     });
 
     $scope.save = function () {
-      if (newSite) {
+      if (isNewSite) {
         console.log('POST new Site');
       } else {
         console.log('PUT edited Site');
@@ -44,13 +79,4 @@ angular.module('uiApp')
       console.log('spinner off');
     };
 
-    // ----------------------- Map setup ------------------------------------//
-    map.clear();
-    if (newSite) {
-      map.loadSites({type: 'FeatureCollection', features: []});
-      map.addSite();
-    } else {
-      map.loadSites(SiteFactory.getActiveSiteCollection());
-      map.editSite();
-    } 
   });
