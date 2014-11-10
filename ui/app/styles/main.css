@@ -103,7 +103,7 @@ hr {
 
 .dropdown-toggle,
 .dropdown-menu {
-    width: 160px;
+    width: initial;
 }
 
 .dropdown-toggle {
