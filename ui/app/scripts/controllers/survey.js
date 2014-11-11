@@ -7,8 +7,13 @@
  * # SurveyCtrl
  * Controller of the uiApp
  */
+
+if(false) {
+  var map = null;
+}
+
 angular.module('uiApp')
-  .controller('SurveyCtrl', function ($scope, $routeParams, $rootScope, SiteFactory, QuestionFactory) {
+  .controller('SurveyCtrl', function ($scope, $routeParams, $rootScope, SiteFactory, QuestionFactory, NodeFactory) {
     map.showMap(true);
     
     var questionId = parseInt($routeParams.questionId, 10);
@@ -16,6 +21,7 @@ angular.module('uiApp')
     $scope.siteId = $routeParams.siteId;
     
     $scope.question = {};
+    $scope.node = {};
     
     QuestionFactory
       .getQuestions()
@@ -24,6 +30,7 @@ angular.module('uiApp')
           var question = QuestionFactory.questions[i];
           if (question.id === questionId) {
             $scope.question = question;
+            console.log('Question: ' + question);
           }
         }
         map.showMap(true);
@@ -34,7 +41,20 @@ angular.module('uiApp')
 
     var maxQuestionId = 4;
     var minQuestionId = 0;
-    
+
+    NodeFactory
+      .getNodes()
+      .then( function() {
+        for (var i = NodeFactory.nodes.length - 1; i >=0; i--) {
+          var node = NodeFactory.nodes[i];
+          if (node.question === questionId && node.site === parseInt($scope.siteId, 10)) {
+            $scope.node = node;
+            console.log('Node: ' + node);
+          }
+        }
+        map.showMap(true);
+      });
+
     $scope.showPrev = true;
     $scope.showPrev = true;
 
