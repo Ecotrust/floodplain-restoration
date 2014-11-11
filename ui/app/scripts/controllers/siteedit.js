@@ -1,5 +1,8 @@
 'use strict';
 
+// Hack to make linter happy about global variables
+if (false) { var map; }
+
 /**
  * @ngdoc function
  * @name uiApp.controller:SiteeditCtrl
@@ -38,7 +41,7 @@ angular.module('uiApp')
 
         if (isNewSite) {
           map.loadSites({type: 'FeatureCollection', features: []});
-          map.addSite();
+          map.addSite(blankSite);
 
         } else {
           // set active site
@@ -64,16 +67,20 @@ angular.module('uiApp')
     });
 
     $scope.save = function () {
-      if (isNewSite) {
-        console.log('POST new Site');
-      } else {
-        console.log('PUT edited Site');
-      }
-      console.log('New geometry is ', map.getActiveSiteWkt());
-      console.log('Save site ' + $scope.site.id);
       console.log('spinner on');
-      console.log('If AJAX call is a success, update the SiteFactory singleton');
-      console.log('spinner off');
+      if (isNewSite) {
+        SiteFactory
+          .postSite($scope.site, map.getActiveSiteWkt());
+          // .then(function() {
+          //   console.log('spinner off');
+          // });
+      } else {
+        SiteFactory
+          .putSite($scope.site, map.getActiveSiteWkt());
+          // .then(function() {
+          //   console.log('spinner off');
+          // });
+      }
     };
 
   });

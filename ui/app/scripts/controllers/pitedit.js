@@ -1,5 +1,8 @@
 'use strict';
 
+// Hack to make linter happy about global variables
+if (false) { var map; }
+
 /**
  * @ngdoc function
  * @name uiApp.controller:PiteditCtrl
@@ -12,8 +15,24 @@ angular.module('uiApp')
     map.showMap(true);
 
     var activeSiteId = parseInt($routeParams.siteId, 10);
-    var activePitId = parseInt($routeParams.pitId, 10);
+    var activePitId;
+    var blankPit;
+    var isNewPit = false;
 
+    if ($routeParams.pitId === undefined) {
+      activePitId = null;
+      isNewPit = true;
+      blankPit = {
+        id: '',
+        type: 'Feature',
+        geometry: {}, // wkt
+        properties: {}
+      };
+    } else {
+      activePitId = parseInt($routeParams.pitId, 10);
+    }
+    
+    console.log($routeParams, isNewPit);
     $scope.pit = {};
     $scope.site = {};
     $scope.sites = [];
@@ -29,31 +48,28 @@ angular.module('uiApp')
         }
       }
 
-      // set active pit
-      for (var j = $scope.site.properties.pit_set.length - 1; j >= 0; j--) {
-        var pit = $scope.site.properties.pit_set[j];
-        if (pit.id === activePitId) {
-          $scope.pit = pit;
-        }
-      }
-
-      // map
       map.clear();
       map.loadSites({
         type: 'FeatureCollection',
         features:[$scope.site]
       });
-      if (newPit) {
+
+      if (isNewPit) {
+        $scope.pit = blankPit;
         map.loadPits({
           type: 'FeatureCollection',
           features: []
         });
         map.addPit();
       } else {
-        // map.loadPits(SiteFactory.getActivePitCollection());
+        for (var j = $scope.site.properties.pit_set.length - 1; j >= 0; j--) {
+          var pit = $scope.site.properties.pit_set[j];
+          if (pit.id === activePitId) {
+            $scope.pit = pit;
+          }
+        }
         map.loadPits({
           type: 'FeatureCollection',
-          // features:$scope.site.properties.pit_set
           features: [$scope.pit]
         });
         map.editPit();
@@ -78,16 +94,19 @@ angular.module('uiApp')
     });
 
     $scope.save = function () {
-      if (newPit) {
-        console.log('POST new Pit');
+      if (isNewPit) {
+        SiteFactory
+          .postSitePit(activeSiteId, $scope.pit, map.getActivePitWkt());
+          // .then(function() {
+          //   console.log('spinner off');
+          // });
       } else {
-        console.log('PUT edited Pit');
+        SiteFactory
+          .putSitePit(activeSiteId, $scope.pit, map.getActivePitWkt());
+          // .then(function() {
+          //   console.log('spinner off');
+          // });
       }
-      console.log("New geometry is ", map.getActivePitWkt());
-      console.log('Save Pit ' + $scope.pit.id );
-      console.log('spinner on');
-      console.log('If AJAX call is a success, update the SiteFactory singleton');
-      console.log('spinner off');
     };
 
   });

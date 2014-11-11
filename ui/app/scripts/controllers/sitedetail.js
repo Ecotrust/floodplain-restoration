@@ -36,7 +36,6 @@ angular.module('uiApp')
           type: 'FeatureCollection',
           features:[$scope.site]
         });
-        console.log($scope.site);
         map.loadPits({
           type: 'FeatureCollection',
           features:$scope.site.properties.pit_set
@@ -46,11 +45,15 @@ angular.module('uiApp')
     );
 
     $scope.deleteSite = function(siteId) {
-      console.log('Deleted site ' + activeSiteId);
+      if (confirm('Delete this property? Are you sure?') === true) {
+        SiteFactory.deleteSite(siteId);
+      }
     };
 
     $scope.deleteSitePit = function(siteId, pitId) {
-      console.log('Deleted pit ' + pitId + ' from site ' + activeSiteId);
+      if (confirm('Delete this pit? Are you sure?') === true) {
+        SiteFactory.deleteSitePit(siteId, pitId);
+      }
     };
 
   });
