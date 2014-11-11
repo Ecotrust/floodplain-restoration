@@ -11,9 +11,6 @@ angular.module('uiApp')
   .controller('SiteeditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
     map.showMap(true);
 
-    //SiteFactory.setActiveSiteId($routeParams.siteId);
-    //var site = SiteFactory.getActiveSite();
-
     $scope.sites = [];
     $scope.site = {};
     var isNewSite = false;
@@ -58,8 +55,6 @@ angular.module('uiApp')
           });
           map.editSite();
         }
-
-          
       }
     );
 
