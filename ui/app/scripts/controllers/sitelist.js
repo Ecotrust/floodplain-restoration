@@ -21,5 +21,6 @@ angular.module('uiApp')
         $scope.sites = SiteFactory.sites.features;
         map.clear();
         map.loadSites(SiteFactory.sites);
+        map.showMap(true);
       });
   });

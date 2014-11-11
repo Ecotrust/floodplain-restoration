@@ -26,6 +26,7 @@ angular.module('uiApp')
             $scope.question = question;
           }
         }
+        map.showMap(true);
       });
 
     $scope.numQuestions = 4;  //QuestionFactory will likely change substantially

@@ -59,6 +59,7 @@ angular.module('uiApp')
         map.editPit();
       }
 
+      map.showMap(true);
     });
 
     var newPit = false;

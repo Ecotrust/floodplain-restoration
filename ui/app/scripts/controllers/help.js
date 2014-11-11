@@ -9,9 +9,9 @@
  */
 angular.module('uiApp')
   .controller('HelpCtrl', function ($scope, $routeParams, $rootScope, $sce, ContentFactory) {
-    map.showMap(false);
 
     $scope.text = $sce.trustAsHtml(ContentFactory.get($routeParams.topic));
     $scope.topic = $routeParams.topic;
 
+    map.showMap(false);
   });
