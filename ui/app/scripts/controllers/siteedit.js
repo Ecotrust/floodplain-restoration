@@ -17,10 +17,11 @@ angular.module('uiApp')
     $scope.sites = [];
     $scope.site = {};
     var isNewSite = false;
+    var activeSiteId;
     var blankSite;
 
     if ($routeParams.siteId === undefined) {
-      var activeSiteId = null;
+      activeSiteId = null;
       isNewSite = true;
       blankSite = {
         id: '',
@@ -29,7 +30,7 @@ angular.module('uiApp')
         properties: {}
       };
     } else {
-      var activeSiteId = parseInt($routeParams.siteId, 10);
+      activeSiteId = parseInt($routeParams.siteId, 10);
     }
 
     SiteFactory.getSites().then(
