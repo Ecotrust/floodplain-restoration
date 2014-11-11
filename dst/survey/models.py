@@ -10,7 +10,6 @@ BBN = BeliefNetwork.from_bif(settings.BBN_BIF)
 
 
 class BaseModel(models.Model):
-    name = models.CharField(max_length=80)
     notes = models.TextField(default='', blank=True)
     user = models.ForeignKey(User)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -26,6 +25,7 @@ class BaseModel(models.Model):
 
 
 class GravelSite(BaseModel):
+    name = models.CharField(max_length=80)
     geometry = models.MultiPolygonField(srid=3857)
     objects = models.GeoManager()
     shared_with_public = models.BooleanField(default=False)
@@ -77,6 +77,7 @@ class GravelSite(BaseModel):
 
 
 class Pit(BaseModel):
+    name = models.CharField(max_length=80)
     site = models.ForeignKey(GravelSite)
     geometry = models.PolygonField(srid=3857)
 

@@ -69,6 +69,8 @@ class InputNodeViewSet(viewsets.ModelViewSet):
     #queryset = InputNode.objects.all()
     model = InputNode
 
+    def get_queryset(self):
+        return InputNode.objects.filter(user=self.request.user)
 
     serializer_class = serializers.InputNodeSerializer
     permission_classes = (
