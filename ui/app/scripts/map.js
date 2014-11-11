@@ -215,3 +215,17 @@ $(window).resize(resize);
 $(document).ready(function() {
   window.setTimeout(resize,200);
 });
+
+map.showMap = function (show) {
+  if (show) {
+    $('#left-container').removeClass('col-md-12');
+    $('#map-container').addClass('col-md-6');
+    $('#left-container').addClass('col-md-6');
+    $('#map-container').show();
+  } else {
+    $('#map-container').hide();
+    $('#map-container').removeClass('col-md-6');
+    $('#left-container').removeClass('col-md-6');
+    $('#left-container').addClass('col-md-12');
+  }
+};

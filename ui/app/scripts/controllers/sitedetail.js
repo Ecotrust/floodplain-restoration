@@ -9,7 +9,7 @@
  */
 angular.module('uiApp')
   .controller('SitedetailCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
-    $rootScope.showMap = true;
+    map.showMap(true);
 
     var activeSiteId = parseInt($routeParams.siteId, 10);
     SiteFactory.activeSiteId = activeSiteId;

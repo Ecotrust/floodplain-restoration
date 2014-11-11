@@ -9,7 +9,7 @@
  */
 angular.module('uiApp')
   .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
-    $rootScope.showMap = true;
+    map.showMap(true);
 
     var activeSiteId = parseInt($routeParams.siteId, 10);
     var activePitId = parseInt($routeParams.pitId, 10);

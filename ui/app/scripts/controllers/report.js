@@ -9,7 +9,7 @@
  */
 angular.module('uiApp')
   .controller('ReportCtrl', function ($scope, $rootScope) {
-    $rootScope.showMap = true;
+    map.showMap(true);
 
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

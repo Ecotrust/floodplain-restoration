@@ -9,7 +9,7 @@
  */
 angular.module('uiApp')
   .controller('SurveyCtrl', function ($scope, $routeParams, $rootScope, SiteFactory, QuestionFactory) {
-    $rootScope.showMap = true;
+    map.showMap(true);
     
     var questionId = parseInt($routeParams.questionId, 10);
 

@@ -9,7 +9,7 @@
  */
 angular.module('uiApp')
   .controller('SiteeditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
-    $rootScope.showMap = true;
+    map.showMap(true);
 
     //SiteFactory.setActiveSiteId($routeParams.siteId);
     //var site = SiteFactory.getActiveSite();

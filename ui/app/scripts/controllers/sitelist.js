@@ -9,7 +9,7 @@
  */
 angular.module('uiApp')
   .controller('SitelistCtrl', function ($scope, $rootScope, SiteFactory) {
-    $rootScope.showMap = true;
+    map.showMap(true);
     
     $scope.sites = [];
 
