@@ -1,5 +1,7 @@
 'use strict';
 
+if (false) { var map; }
+
 /**
  * @ngdoc function
  * @name uiApp.controller:SitedetailCtrl
@@ -52,9 +54,11 @@ angular.module('uiApp')
             if (pit.id === pitId) {
               // Pop it off the array
               $scope.site.properties.pit_set.splice(i, 1);
-              
-              // TODO 
-              // manage map; remove site and reload?
+
+              map.loadPits({
+                type: 'FeatureCollection',
+                features:$scope.site.properties.pit_set
+              });
             }
           }
         });

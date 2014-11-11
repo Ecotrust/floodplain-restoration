@@ -32,10 +32,13 @@ angular.module('uiApp')
           for (var i = $scope.sites.length - 1; i >= 0; i--) {
             var site = $scope.sites[i];
             if (site.id === siteId) {
-              $scope.sites.splice(i, 1);  // pop i off the array
+              // pop i off the array
+              $scope.sites.splice(i, 1);
 
-              // TODO 
-              // manage map; remove site and reload?
+              map.loadSites({
+                type: 'FeatureCollection',
+                features: $scope.sites
+              });
             }
           }
         });

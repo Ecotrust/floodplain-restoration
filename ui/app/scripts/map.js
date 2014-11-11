@@ -74,7 +74,7 @@ map.loadSites = function(data) {
 };
 
 map.loadPits = function(data) {
-
+  
   if (!data || data.type !== 'FeatureCollection') {
     console.log("ERROR in data supplied to map.loadPits:", data)
     return false;
