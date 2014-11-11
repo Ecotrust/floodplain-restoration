@@ -1,12 +1,23 @@
-<div class="left-panel">
+<div id="homepage-container">
   <div class="jumbotron homepage-content">
-	<h2 ng-bind="content.welcome"> Welcome...</h2>
-	</h2>
+    <div class="homepage-fill">
+        <div class="homepage-item">
+            <h2 ng-bind="content.welcome"> Welcome...</h2>
+            </h2>
+            <p ng-bind-html="content.hook"><br></p>
+        </div>
 
-	<p ng-bind-html="content.hook"><br></p>
+    	<div class="homepage-item get-started-btn">
+            <a class="btn btn-primary btn-lg" href="{{userName?'#/sites':'/accounts/login/'}}">
+                <span class="btn-text">{{content.getStarted}}</span><span class="glyphicon glyphicon-play-circle"></span>
+            </a>
+        </div>
 
-	<a class="btn btn-primary btn-lg" href="{{userName?'#/sites':'/accounts/login/'}}"><span class="btn-text">{{content.getStarted}}</span><span class="glyphicon glyphicon-play-circle"></span></a>
-
-    <p class='attribution'><i>{{content.attribution}}</i></p>
+        <div class='homepage-item attribution'>
+            <p>
+                <i>{{content.attribution}}</i>
+            </p>
+        </div>
+    </div>
   </div>
 </div>

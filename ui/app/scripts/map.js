@@ -221,9 +221,7 @@ map.showMap = function (show) {
     $('#left-container').removeClass('col-md-12');
     $('#map-container').addClass('col-md-6');
     $('#left-container').addClass('col-md-6');
-    $('#map-container').show();
   } else {
-    $('#map-container').hide();
     $('#map-container').removeClass('col-md-6');
     $('#left-container').removeClass('col-md-6');
     $('#left-container').addClass('col-md-12');

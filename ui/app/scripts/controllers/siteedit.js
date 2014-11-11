@@ -55,6 +55,7 @@ angular.module('uiApp')
           });
           map.editSite();
         }
+        map.showMap(true);
       }
     );
 

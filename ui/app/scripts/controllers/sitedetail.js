@@ -41,6 +41,7 @@ angular.module('uiApp')
           type: 'FeatureCollection',
           features:$scope.site.properties.pit_set
         });
+        map.showMap(true);
       }
     );
 
