@@ -46,7 +46,18 @@ angular.module('uiApp')
 
     $scope.deleteSitePit = function(siteId, pitId) {
       if (confirm('Delete this pit? Are you sure?') === true) {
-        SiteFactory.deleteSitePit(siteId, pitId);
+        SiteFactory.deleteSitePit(siteId, pitId).then(function() {
+          for (var i = $scope.site.properties.pit_set.length - 1; i >= 0; i--) {
+            var pit = $scope.site.properties.pit_set[i];
+            if (pit.id === pitId) {
+              // Pop it off the array
+              $scope.site.properties.pit_set.splice(i, 1);
+              
+              // TODO 
+              // manage map; remove site and reload?
+            }
+          }
+        });
       }
     };
 
