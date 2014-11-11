@@ -18,8 +18,6 @@ angular.module('uiApp')
       var promise = $http.get('/api/node.json');
 
       promise.success(function(data) {
-        // full args
-        // data, status, headers, config
         service.nodes = data;
       });
       
