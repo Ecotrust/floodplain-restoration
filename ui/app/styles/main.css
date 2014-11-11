@@ -160,7 +160,6 @@ hr {
 
 .jumbotron .btn-primary {
   background-color: transparent;
-  /*background-color: rgba(9,76,160,0.3);*/
 
   border-color: #FFF;
   border-radius: 0;
@@ -186,17 +185,31 @@ hr {
 
 .jumbotron h2,
 .jumbotron p {
-  /*background: rgb(9,76,160);*/
-  /*background: rgba(9,76,160,0.3);*/
   border-radius: 15px;
 }
 
-.jumbotron .attribution {
-  margin-top: 90px;
-  padding: 0 10px;
-  font-size: 14px;
+.jumbotron .homepage-item {
+  width: 100%;
   text-align: center;
-  /*background: rgba(9,76,160,0.6);*/
+  position: absolute;
+}
+
+.jumbotron .get-started-btn {
+  top: 50%;
+}
+
+.jumbotron .attribution {
+  font-size: 14px;
+  bottom: 10%;
+}
+
+.homepage-fill {
+  width: 70%;
+  height: 90%;
+  margin: 0 auto;
+  position: relative;
+  background: rgb(100,100,100);
+  background: rgba(0,0,0,0.4);
 }
 
 .property-box {
@@ -206,7 +219,6 @@ hr {
   border: solid #aaa 1px;
   box-shadow: 0px 0px 10px #aaa;
 }
-
 
 .property-details,
 .property-survey,
@@ -448,15 +460,22 @@ hr {
   padding-bottom: 30px;
  }
 
+#homepage-container {
+  height: 100%;
+}
+
 .homepage-content {
   background-image: url('../images/bulldozer.jpg');
   /* image from dam under CC 3.0: 
   http://dam.ecotrust.org/pages/view.php?ref=7263&k=&search=stream&offset=0&order_by=relevance&sort=DESC&archive=0;*/
   background-repeat:no-repeat;
-  background-position:10% 85%;  /* For bulldozer photo */
-  background-size: 800px 600px;  /* For bulldozer photo */
+  background-position:0 80%;  /* For bulldozer photo */
+  background-size: 1400px 1050px;  /* For bulldozer photo */
   /*background-position:50% 25%;*/  /* For Waite Ranch photo */
   /*background-size: 816px 1088px;*/  /* For Waite Ranch photo */
+  height: 100%;
+  margin-bottom: 0;
+  position: relative;
 }
 
 .homepage-content p{
