@@ -31,13 +31,19 @@ angular.module('uiApp')
       };
 
     service.deleteSite = function(activeSiteId) {
-      console.log('Delete site ' + activeSiteId);
-      // TODO return a promise
+      var url = '/api/site/' + activeSiteId;
+      console.log('DELETE', url);
+
+      var promise = $http.delete(url);
+      return promise;
     };
 
     service.deleteSitePit = function(activeSiteId, pitId) {
-      console.log('Delete pit ' + pitId + ' from site ' + activeSiteId);
-      // TODO return a promise
+      var url = '/api/pit/' + pitId;
+      console.log('DELETE', url);
+
+      var promise = $http.delete(url);
+      return promise;
     };
 
     service.postSite = function(site, wkt) {

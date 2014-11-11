@@ -44,12 +44,6 @@ angular.module('uiApp')
       }
     );
 
-    $scope.deleteSite = function(siteId) {
-      if (confirm('Delete this property? Are you sure?') === true) {
-        SiteFactory.deleteSite(siteId);
-      }
-    };
-
     $scope.deleteSitePit = function(siteId, pitId) {
       if (confirm('Delete this pit? Are you sure?') === true) {
         SiteFactory.deleteSitePit(siteId, pitId);
