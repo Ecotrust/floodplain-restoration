@@ -66,6 +66,20 @@ angular.module('uiApp')
       // TODO return a promise
     };
 
+    service.getSuitabilityScores = function () {
+      // TODO http://localhost:8000/api/site/2/suitability.json
+      //var site = this.getSite(siteId);
+
+      var suitability = {
+        'site': 0.27260624999999994,
+        'landscape': 0.46898395525146463,
+        'suitability': 0.43765438899978504,
+        'socio_economic': 0.43198437499999986
+      };
+
+      return suitability;
+    };
+
     return service;
 
   });
