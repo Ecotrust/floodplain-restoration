@@ -5,7 +5,7 @@
         <div class="properties">
             <div class="property-box" ng-repeat="site in sites" id="accordion-{{site.id}}">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <h4>
                             <a data-toggle="collapse" data-parent="#accordion-{{site.id}}" data-target="#collapse-{{site.id}}" ng-click="toggleCircleIconClass('circle-icon-{{site.id}}')">
                                 <span id="circle-icon-{{site.id}}" class="glyphicon glyphicon-plus-sign"></span>
@@ -18,9 +18,6 @@
                     </div>
                     <div class="col-md-2 property-edit">
                         <a class="prop-action" href="#/site/{{site.id}}/edit">edit</a>
-                    </div>
-                    <div class="col-md-2 property-delete">
-                        <a class="disabled">delete</a>
                     </div>
                 </div>
                 <hr>

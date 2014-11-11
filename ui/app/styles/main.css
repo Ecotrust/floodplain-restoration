@@ -222,8 +222,7 @@ hr {
 }
 
 .property-details,
-.property-survey,
-.property-edit{
+.property-survey {
   border-right: 2px solid #CCC;
   height: 40px;
 }
@@ -240,6 +239,7 @@ hr {
   color: #000;
   font-size: 14px;
   letter-spacing: 1px;
+  cursor: pointer;
 }
 
 .prop-list-details >p {
