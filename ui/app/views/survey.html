@@ -43,7 +43,7 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-md-offset-3 survey-status-summary">
-          <span class="glyphicon glyphicon-ok survey-status-icon"></span>&nbsp;{{question.id-1}} of {{numQuestions}} completed
+          <span class="glyphicon glyphicon-ok survey-status-icon"></span>&nbsp;{{numNodes}} of {{numQuestions}} completed
         </div>
       </div>
       <div class="row">
@@ -51,7 +51,7 @@
         </div>
         <div class="col-md-6">
           <div class="survey-status-bar">
-            <span class="survey-status-span" style="padding-left:{{((question.id -1 )/numQuestions)*100}}%">
+            <span class="survey-status-span" style="padding-left:{{(numNodes/numQuestions)*100}}%">
               &nbsp;
             </span>
           </div>

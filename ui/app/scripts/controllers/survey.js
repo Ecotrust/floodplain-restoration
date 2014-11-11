@@ -20,40 +20,45 @@ angular.module('uiApp')
 
     $scope.siteId = $routeParams.siteId;
     
+    var questions = [];
     $scope.question = {};
+    $scope.numQuestions = questions.length;
+    var maxQuestionId = 999;
+    var minQuestionId = 0;
+
+    var nodes = [];
     $scope.node = {};
+    $scope.numNodes = 0;
     
     QuestionFactory
       .getQuestions()
       .then( function() {
+        questions = QuestionFactory.questions;
+        $scope.numQuestions = questions.length;  //QuestionFactory will likely change substantially
+        maxQuestionId = questions[questions.length-1].id;
         for (var i = QuestionFactory.questions.length - 1; i >= 0; i--) {
           var question = QuestionFactory.questions[i];
           if (question.id === questionId) {
             $scope.question = question;
-            console.log('Question: ' + question);
           }
         }
         map.showMap(true);
       });
-
-    $scope.numQuestions = 4;  //QuestionFactory will likely change substantially
-                                  //We'll hardcode this for now.
-
-    var maxQuestionId = 4;
-    var minQuestionId = 0;
 
     NodeFactory
       .getNodes()
       .then( function() {
+        nodes = NodeFactory.nodes;
+        $scope.numNodes = nodes.length;
         for (var i = NodeFactory.nodes.length - 1; i >=0; i--) {
           var node = NodeFactory.nodes[i];
           if (node.question === questionId && node.site === parseInt($scope.siteId, 10)) {
             $scope.node = node;
-            console.log('Node: ' + node);
           }
         }
         map.showMap(true);
       });
+
 
     $scope.showPrev = true;
     $scope.showPrev = true;
@@ -61,7 +66,7 @@ angular.module('uiApp')
     $scope.nextQuestion = function() {
       var next = questionId + 1;
       $scope.showNext = true;
-      if (next > maxQuestionId) {
+      if (next > $scope.numQuestions) {
         next = maxQuestionId;
         $scope.showNext = true;
         return 'done';
