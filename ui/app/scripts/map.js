@@ -197,9 +197,13 @@ map.onResize = function (height, width) {
 function resize() {
   var height = $(window).height();
   var width = $(window).width();
+  var screen_width = $( window ).width();
   map.onResize(height, width);
-  leftPanelResize(height, width);
-  bodyResize(height, width);
+    
+  if (screen_width > 991) {
+    leftPanelResize(height, width);
+    bodyResize(height, width);
+  }
 };
 
 function bodyResize(height, width){
