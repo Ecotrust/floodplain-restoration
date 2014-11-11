@@ -217,7 +217,7 @@ function leftPanelResize(height, width) {
 $(window).resize(resize);
 
 $(document).ready(function() {
-  window.setTimeout(resize,200);
+  window.setTimeout(resize,1);
 });
 
 map.showMap = function (show) {
