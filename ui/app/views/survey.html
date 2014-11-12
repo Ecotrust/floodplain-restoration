@@ -20,7 +20,7 @@
 
               <div class="radio">
                 <label class="survey-choice">
-                  <input type="radio" name="choice" value="{{choice.value}}">
+                  <input type="radio" name="choice" ng-value="choice.value" ng-checked="choice.value == node.value" ng-model="$parent.nodeVal">
                   <span class="radio-span">&nbsp;</span>
                   {{choice.choice}}
                 </label>
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="col-md-1 survey-col survey-nav-col">
-      <a href="#/site/{{siteId}}/survey/{{ nextQuestion() }}">
+      <a ng-click="submitForm()">
         <p class="survey-nav survey-nav-forward">
           <span class="glyphicon glyphicon-play survey-nav-icon"></span>
         </p>

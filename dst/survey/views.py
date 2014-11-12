@@ -66,17 +66,16 @@ class PitViewSet(viewsets.ModelViewSet):
 class InputNodeViewSet(viewsets.ModelViewSet):
 
     """InputNode """
-    #queryset = InputNode.objects.all()
     model = InputNode
-
-    def get_queryset(self):
-        return InputNode.objects.filter(user=self.request.user)
-
+    filter_fields = ('site',)
     serializer_class = serializers.InputNodeSerializer
     permission_classes = (
         permissions.IsAuthenticated,
         IsOwnerOrShared,
     )
+
+    def get_queryset(self):
+        return InputNode.objects.filter(user=self.request.user)
 
     def pre_save(self, obj):
         obj.user = self.request.user

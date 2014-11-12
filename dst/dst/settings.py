@@ -62,6 +62,10 @@ INSTALLED_APPS = (
     # 'silk'  # TODO remove or make debug=True only
 )
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+}
+
 MIDDLEWARE_CLASSES = (
     # 'silk.middleware.SilkyMiddleware',   # TODO remove or make debug=True only
     'django.contrib.sessions.middleware.SessionMiddleware',

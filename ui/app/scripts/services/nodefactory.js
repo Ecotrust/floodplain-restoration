@@ -14,8 +14,8 @@ angular.module('uiApp')
     service.nodes = [];
     
 
-    service.getNodes = function () {
-      var promise = $http.get('/api/node.json');
+    service.getNodes = function (siteId) {
+      var promise = $http.get('/api/node?format=json&site=' + siteId);
 
       promise.success(function(data) {
         service.nodes = data;
@@ -28,14 +28,34 @@ angular.module('uiApp')
       return promise;
     };
 
-    service.postNode = function(node, wkt) {
-      console.log('POST', node, wkt);
-      // TODO return a promise
+    service.postNode = function(node) {
+      var postPromise = $http.post('/api/node', node);
+
+      postPromise.success(function(status){
+        service.status = status;
+      });
+
+      postPromise.error(function(status){
+        service.status = status;
+        console.log('Could not create new node -- Error: ' + status);
+      });
+
+      return postPromise;
     };
 
-    service.putNode = function(node, wkt) {
-      console.log('PUT', node, wkt);
-      // TODO return a promise
+    service.putNode = function(node) {
+      var putPromise = $http.put('/api/node/' + node.id, node);
+
+      putPromise.success(function(status){
+        service.status = status;
+      });
+
+      putPromise.error(function(status) {
+        service.status = status;
+        console.log('Could not update node id: ' + node.id + ' -- Error: ' + status);
+      });
+
+      return putPromise;
     };
 
     return service;
