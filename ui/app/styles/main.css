@@ -430,6 +430,10 @@ hr {
   font-size: 5px;
 }
 
+.notes-box {
+  margin-top: 25px;
+}
+
 .bar {
   color: blue;
   display: block;

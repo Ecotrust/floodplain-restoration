@@ -36,6 +36,7 @@ angular.module('uiApp')
 
     $scope.numNodes = 0;
     $scope.nodeVal = null;
+    $scope.nodeNotes = null;
     $scope.newNode = true;
     
     QuestionFactory
@@ -63,6 +64,7 @@ angular.module('uiApp')
           if (node.question === questionId && node.site === parseInt($scope.siteId, 10)) {
             $scope.node = node;
             $scope.nodeVal = node.value;
+            $scope.nodeNotes = node.notes;
             $scope.newNode = false;
           }
         }
@@ -79,6 +81,7 @@ angular.module('uiApp')
       } else {
         var nextQuestion = $scope.nextQuestion();
         $scope.node.value = $scope.nodeVal;
+        $scope.node.notes = $scope.nodeNotes;
         if ($scope.newNode){
           NodeFactory
             .postNode($scope.node)
