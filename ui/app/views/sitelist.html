@@ -27,6 +27,14 @@
                 <div class="row">
                     <div id="collapse-{{site.id}}" class="col-md-11 col-md-offset-1 collapse">
                         <div class="row">
+                          <div class="col-md-12 prop-list-details">
+                            <strong>Notes:</strong>
+                            <p>
+                              {{ site.properties.notes }}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4 prop-list-details">
                                 <p>Total pits: {{site.properties.pit_set.length}}</p>
                             </div>
