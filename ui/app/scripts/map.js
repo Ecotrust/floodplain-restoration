@@ -140,7 +140,7 @@ map.addSite = function() {
     map.site.source.clear();
   });
   map.drawSite.on('drawend', function(e) {
-    console.log("drawing ended... TODO start editing");
+    // todo, drawing ended
   });
   map.map.addInteraction(map.drawSite);
   map.site.layer.setStyle(map.styleEditable);

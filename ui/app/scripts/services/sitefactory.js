@@ -99,21 +99,50 @@ angular.module('uiApp')
     service.postSitePit = function(siteId, pit, wkt) {
       var url = '/api/pit';
       pit.geometry = wkt;  // replace geojson geom with wkt
-      console.log("POST", url, pit);
       var promise = $http.post(url, pit);
-      // *************************** see TODO
+
+      promise.success( function(data, status, headers, config) {
+        var newId = data.id;
+      });
+
+      promise.error( function(res) {
+        console.log('ERROR', res);
+      });
+
       return promise;
     };
-
     // PUT
     service.putSite = function(site, wkt) {
-      console.log('PUT', site, wkt);
+      var url = '/api/site/' + site.id;
+      site.geometry = wkt;  // replace geojson geom with wkt
+      var promise = $http.put(url, site);
+
+      promise.success( function(data, status, headers, config) {
+        var newId = data.id;
+      });
+
+      promise.error( function(res) {
+        console.log('ERROR', res);
+      });
+
+      return promise;
       // TODO return a promise
     };
 
     service.putSitePit = function(siteId, pit, wkt) {
-      console.log('PUT', pit, wkt);
-      // TODO return a promise
+      var url = '/api/pit/' + pit.id;
+      pit.geometry = wkt;  // replace geojson geom with wkt
+      var promise = $http.put(url, pit);
+
+      promise.success( function(data, status, headers, config) {
+        var newId = data.id;
+      });
+
+      promise.error( function(res) {
+        console.log('ERROR', res);
+      });
+
+      return promise;
     };
 
     service.getSuitabilityScores = function () {

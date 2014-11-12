@@ -79,7 +79,8 @@ angular.module('uiApp')
         SiteFactory
           .putSite($scope.site, map.getActiveSiteWkt())
           .then(function() {
-            console.log('spinner off');
+            console.log('spinner off (PUT existing site complete!)');
+            $location.path('/sites');
           });
       }
     };

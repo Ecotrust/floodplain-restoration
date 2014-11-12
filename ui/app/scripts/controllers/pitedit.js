@@ -11,7 +11,7 @@ if (false) { var map; }
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
+  .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, $location, SiteFactory) {
     map.showMap(true);
 
     var activeSiteId = parseInt($routeParams.siteId, 10);
@@ -26,13 +26,26 @@ angular.module('uiApp')
         id: '',
         type: 'Feature',
         geometry: {}, // wkt
-        properties: {}
+        properties: {
+          'notes': '',
+          'name': '<new pit>',
+          'site': activeSiteId,
+          'contamination': 0.5,
+          'substrate': 0.5,
+          'adjacent_river_depth': 0.5,
+          'slope_dist': 0.5,
+          'pit_levies': 0.5,
+          'bedrock': 0.5,
+          'bank_slope': 0.5,
+          'pit_depth': 0.5,
+          'surface_area': 0.5,
+          'complexity': 0.5
+        }
       };
     } else {
       activePitId = parseInt($routeParams.pitId, 10);
     }
     
-    console.log($routeParams, isNewPit);
     $scope.pit = {};
     $scope.site = {};
     $scope.sites = [];
@@ -94,17 +107,20 @@ angular.module('uiApp')
     });
 
     $scope.save = function () {
+      console.log('spinner on');
       if (isNewPit) {
         SiteFactory
           .postSitePit(activeSiteId, $scope.pit, map.getActivePitWkt())
           .then(function() {
             console.log('spinner off');
+            $location.path("/site/" + activeSiteId);
           });
       } else {
         SiteFactory
           .putSitePit(activeSiteId, $scope.pit, map.getActivePitWkt())
           .then(function() {
             console.log('spinner off');
+            $location.path("/site/" + activeSiteId);
           });
       }
     };
