@@ -28,7 +28,7 @@ angular.module('uiApp')
         });
 
         return promise;
-      };
+    };
 
     // Delete
     service.deleteSite = function(activeSiteId) {
@@ -83,9 +83,16 @@ angular.module('uiApp')
     service.postSite = function(site, wkt) {
       var url = '/api/site';
       site.geometry = wkt;  // replace geojson geom with wkt
-      console.log("POST", url, site);
       var promise = $http.post(url, site);
-      // *************************** see TODO
+
+      promise.success( function(data, status, headers, config) {
+        var newId = data.id;
+      });
+
+      promise.error( function(res) {
+        console.log('ERROR', res);
+      });
+
       return promise;
     };
 

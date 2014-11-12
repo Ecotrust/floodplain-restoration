@@ -96,16 +96,16 @@ angular.module('uiApp')
     $scope.save = function () {
       if (isNewPit) {
         SiteFactory
-          .postSitePit(activeSiteId, $scope.pit, map.getActivePitWkt());
-          // .then(function() {
-          //   console.log('spinner off');
-          // });
+          .postSitePit(activeSiteId, $scope.pit, map.getActivePitWkt())
+          .then(function() {
+            console.log('spinner off');
+          });
       } else {
         SiteFactory
-          .putSitePit(activeSiteId, $scope.pit, map.getActivePitWkt());
-          // .then(function() {
-          //   console.log('spinner off');
-          // });
+          .putSitePit(activeSiteId, $scope.pit, map.getActivePitWkt())
+          .then(function() {
+            console.log('spinner off');
+          });
       }
     };
 
