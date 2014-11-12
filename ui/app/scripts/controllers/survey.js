@@ -13,7 +13,7 @@ if(false) {
 }
 
 angular.module('uiApp')
-  .controller('SurveyCtrl', function ($scope, $routeParams, $rootScope, SiteFactory, QuestionFactory, NodeFactory) {
+  .controller('SurveyCtrl', function ($scope, $routeParams, $rootScope, $location, SiteFactory, QuestionFactory, NodeFactory) {
     map.showMap(true);
     
     var questionId = parseInt($routeParams.questionId, 10);
@@ -27,8 +27,16 @@ angular.module('uiApp')
     var minQuestionId = 0;
 
     var nodes = [];
-    $scope.node = {};
+    $scope.node = {
+      notes: '',
+      site: $scope.siteId,
+      question: questionId,
+      value: null
+    };
+
     $scope.numNodes = 0;
+    $scope.nodeVal = null;
+    $scope.newNode = true;
     
     QuestionFactory
       .getQuestions()
@@ -46,7 +54,7 @@ angular.module('uiApp')
       });
 
     NodeFactory
-      .getNodes()
+      .getNodes($scope.siteId)
       .then( function() {
         nodes = NodeFactory.nodes;
         $scope.numNodes = nodes.length;
@@ -54,6 +62,8 @@ angular.module('uiApp')
           var node = NodeFactory.nodes[i];
           if (node.question === questionId && node.site === parseInt($scope.siteId, 10)) {
             $scope.node = node;
+            $scope.nodeVal = node.value;
+            $scope.newNode = false;
           }
         }
         map.showMap(true);
@@ -62,6 +72,28 @@ angular.module('uiApp')
 
     $scope.showPrev = true;
     $scope.showPrev = true;
+
+    $scope.submitForm = function() {
+      if ($scope.nodeVal === null) {
+        alert('Please answer the question before moving on. If you are unable to answer the question, select "Not Sure".');
+      } else {
+        var nextQuestion = $scope.nextQuestion();
+        $scope.node.value = $scope.nodeVal;
+        if ($scope.newNode){
+          NodeFactory
+            .postNode($scope.node)
+            .then( function () {
+              $location.path('site/' + $scope.siteId + '/survey/' + nextQuestion);
+            });
+        } else {
+          NodeFactory
+            .putNode($scope.node)
+            .then( function () {
+              $location.path('site/' + $scope.siteId + '/survey/' + nextQuestion);
+            });
+        }
+      }
+    };
 
     $scope.nextQuestion = function() {
       var next = questionId + 1;
