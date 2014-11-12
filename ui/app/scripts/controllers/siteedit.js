@@ -11,7 +11,7 @@ if (false) { var map; }
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SiteeditCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
+  .controller('SiteeditCtrl', function ($scope, $routeParams, $location, $rootScope, SiteFactory) {
     map.showMap(true);
 
     $scope.sites = [];
@@ -70,16 +70,17 @@ angular.module('uiApp')
       console.log('spinner on');
       if (isNewSite) {
         SiteFactory
-          .postSite($scope.site, map.getActiveSiteWkt());
-          // .then(function() {
-          //   console.log('spinner off');
-          // });
+          .postSite($scope.site, map.getActiveSiteWkt())
+          .then(function() {
+            console.log('spinner off (POST new site complete!)');
+            $location.path('/sites');
+          });
       } else {
         SiteFactory
-          .putSite($scope.site, map.getActiveSiteWkt());
-          // .then(function() {
-          //   console.log('spinner off');
-          // });
+          .putSite($scope.site, map.getActiveSiteWkt())
+          .then(function() {
+            console.log('spinner off');
+          });
       }
     };
 

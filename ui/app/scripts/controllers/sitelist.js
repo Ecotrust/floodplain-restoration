@@ -29,18 +29,13 @@ angular.module('uiApp')
     $scope.deleteSite = function(siteId) {
       if (confirm('Delete this property? Are you sure?') === true) {
         SiteFactory.deleteSite(siteId).then(function() {
-          for (var i = $scope.sites.length - 1; i >= 0; i--) {
-            var site = $scope.sites[i];
-            if (site.id === siteId) {
-              // pop i off the array
-              $scope.sites.splice(i, 1);
 
-              map.loadSites({
-                type: 'FeatureCollection',
-                features: $scope.sites
-              });
-            }
-          }
+          // Update new sites
+          $scope.sites = SiteFactory.sites.features;
+
+          // Map active sites
+          map.clear();
+          map.loadSites(SiteFactory.sites);
         });
       }
     };
