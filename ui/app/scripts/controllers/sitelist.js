@@ -15,8 +15,7 @@ angular.module('uiApp')
     
     $scope.sites = [];
 
-    $rootScope.siteId = null;
-    $rootScope.siteName = null;
+    $rootScope.activeSiteId = null;
 
     SiteFactory.getSites()
       .then( function() {

@@ -15,7 +15,7 @@ angular.module('uiApp')
   .controller('SurveydoneCtrl', function ($scope, $routeParams, $rootScope, SiteFactory, QuestionFactory) {
     map.showMap(true);
     var questions = [];
-    $scope.siteId = $routeParams.siteId;
+    $rootScope.activeSiteId = $routeParams.siteId;
     $scope.suitability = SiteFactory.getSuitabilityScores($routeParams.siteId); // /api/site/2/suitability.json
     // $scope.questions = QuestionFactory.getQuestions();
     $scope.maxQuestionId = 2;  //QuestionFactory will likely change substantially

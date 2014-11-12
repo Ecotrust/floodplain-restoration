@@ -7,9 +7,13 @@
  * # MainCtrl
  * Controller of the uiApp
  */
+
+if (false) {
+  var map = null;
+}
+
 angular.module('uiApp')
   .controller('MainCtrl', function ($scope, $rootScope) {
-    $rootScope.siteId = null;
-    $rootScope.siteName = null;
+    $rootScope.activeSiteId = null;
     map.showMap(false);
   });

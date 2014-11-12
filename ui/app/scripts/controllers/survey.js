@@ -18,7 +18,7 @@ angular.module('uiApp')
     
     var questionId = parseInt($routeParams.questionId, 10);
 
-    $scope.siteId = $routeParams.siteId;
+    $rootScope.activeSiteId = $routeParams.siteId;
     
     var questions = [];
     $scope.question = {};
@@ -29,7 +29,7 @@ angular.module('uiApp')
     var nodes = [];
     $scope.node = {
       notes: '',
-      site: $scope.siteId,
+      site: $rootScope.activeSiteId,
       question: questionId,
       value: null
     };
@@ -55,13 +55,13 @@ angular.module('uiApp')
       });
 
     NodeFactory
-      .getNodes($scope.siteId)
+      .getNodes($rootScope.activeSiteId)
       .then( function() {
         nodes = NodeFactory.nodes;
         $scope.numNodes = nodes.length;
         for (var i = NodeFactory.nodes.length - 1; i >=0; i--) {
           var node = NodeFactory.nodes[i];
-          if (node.question === questionId && node.site === parseInt($scope.siteId, 10)) {
+          if (node.question === questionId && node.site === parseInt($rootScope.activeSiteId, 10)) {
             $scope.node = node;
             $scope.nodeVal = node.value;
             $scope.nodeNotes = node.notes;
@@ -86,13 +86,13 @@ angular.module('uiApp')
           NodeFactory
             .postNode($scope.node)
             .then( function () {
-              $location.path('site/' + $scope.siteId + '/survey/' + nextQuestion);
+              $location.path('site/' + $rootScope.activeSiteId + '/survey/' + nextQuestion);
             });
         } else {
           NodeFactory
             .putNode($scope.node)
             .then( function () {
-              $location.path('site/' + $scope.siteId + '/survey/' + nextQuestion);
+              $location.path('site/' + $rootScope.activeSiteId + '/survey/' + nextQuestion);
             });
         }
       }
