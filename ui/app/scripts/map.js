@@ -53,7 +53,7 @@ map.site.style = function() {
 map.loadSites = function(data) {
 
   if (!data || data.type !== 'FeatureCollection') {
-    console.log("ERROR in data supplied to map.loadSites:", data)
+    console.log("ERROR in data supplied to map.loadSites:", data);
     return false;
   }
   map.map.removeLayer(map.site.layer);
