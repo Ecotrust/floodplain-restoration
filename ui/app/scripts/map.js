@@ -152,11 +152,10 @@ map.addPit = function() {
     type: 'Polygon'
   });
   map.drawPit.on('drawstart', function(e) {
-    console.log('clearing drawing');
     map.pit.source.clear();
   });
   map.drawPit.on('drawend', function(e) {
-    console.log("drawing ended... TODO start editing");
+    // TODO drawing ended... start editing
   });
   map.map.addInteraction(map.drawPit);
   map.pit.layer.setStyle(map.styleEditable);
