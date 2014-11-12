@@ -14,9 +14,8 @@ angular.module('uiApp')
     map.showMap(true);
 
     var activeSiteId = parseInt($routeParams.siteId, 10);
-    SiteFactory.activeSiteId = activeSiteId;
-    // $scope.site = SiteFactory.getActiveSite();
-
+    $rootScope.activeSiteId = activeSiteId;
+    
     $scope.sites = [];
     $scope.site = {};
 

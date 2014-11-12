@@ -32,6 +32,7 @@ angular.module('uiApp')
     } else {
       activeSiteId = parseInt($routeParams.siteId, 10);
     }
+    $rootScope.activeSiteId = activeSiteId;
 
     SiteFactory.getSites().then(
       function() {

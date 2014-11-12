@@ -15,6 +15,7 @@ angular.module('uiApp')
     map.showMap(true);
 
     var activeSiteId = parseInt($routeParams.siteId, 10);
+    $rootScope.activeSiteId = activeSiteId;
     var activePitId;
     var blankPit;
     var isNewPit = false;
