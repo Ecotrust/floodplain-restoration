@@ -202,6 +202,8 @@ function resize() {
   if (screen_width > 991) {
     leftPanelResize(height, width);
     bodyResize(height, width);
+  } else if (!$('#map-container').is(":visible") ) { 
+    leftPanelResize(height, width);
   }
 };
 
@@ -210,7 +212,7 @@ function bodyResize(height, width){
 };
 
 function leftPanelResize(height, width) { 
-  $('.left-panel-column').height(height - 51);
+  $('.left-panel-column').height(height - 53);
 };
 
 $(window).resize(resize);
@@ -221,12 +223,15 @@ $(document).ready(function() {
 
 map.showMap = function (show) {
   if (show) {
+    $('#map-container').show();
     $('#left-container').removeClass('col-md-12');
     $('#map-container').addClass('col-md-6');
     $('#left-container').addClass('col-md-6');
   } else {
     $('#map-container').removeClass('col-md-6');
+    $('#map-container').hide();
     $('#left-container').removeClass('col-md-6');
     $('#left-container').addClass('col-md-12');
   }
+
 };

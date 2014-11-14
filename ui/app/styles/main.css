@@ -6,7 +6,6 @@
 
 /* Space out content a bit */
 body {
-  padding-bottom: 20px;
   padding-top: 51px;  /* navbar is 50px by default */ 
   overflow:hidden;
   font-family: "Agenda", Arial;
@@ -535,8 +534,12 @@ hr {
     overflow-y: auto;
   }
 
-  #left-container {
-    margin-bottom: 35px;
+  /*#left-container {
+    overflow-y: hidden;
+  }*/
+
+  #map-container {
+    margin-top: 35px;
   }
 
 }
