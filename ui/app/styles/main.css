@@ -12,7 +12,7 @@ body {
   background-color: #e6e7e8;
 }
 
-h2, p {
+h2, .homepage-item>p {
   color: #FFF;
 }
 
@@ -27,6 +27,7 @@ h4 {
 }
 
 p {
+  color: #094ca0; /* blue */
   font-family:"Rotis Serif", Georgia;
 }
 
@@ -533,6 +534,14 @@ hr {
 
 .padded-box {
   padding: 30px;
+}
+
+.definitions {
+  margin-top: 75px;
+}
+
+.definition-term {
+  font-weight: bold;
 }
 
 .document-list-item {

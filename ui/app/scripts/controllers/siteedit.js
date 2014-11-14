@@ -11,12 +11,16 @@ if (false) { var map; }
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SiteeditCtrl', function ($scope, $routeParams, $location, $rootScope, $window, SiteFactory) {
+  .controller('SiteeditCtrl', function ($scope, $routeParams, $location, $rootScope, $window, $sce, ContentFactory, SiteFactory) {
 
     if (!$rootScope.userName) {
       alert('You are not logged in. You will now be redirected to the login page.');
       $window.location = '/accounts/login/';
     }
+
+    $scope.siteEditDirections = $sce.trustAsHtml(ContentFactory.get('siteCreateDirections'));
+    $scope.siteEditDefinitions = $sce.trustAsHtml(ContentFactory.get('siteEditDefinitions'));
+    $scope.title = 'Creating A New Property'
 
     map.showMap(true);
 
@@ -56,6 +60,8 @@ angular.module('uiApp')
             var site = SiteFactory.sites.features[i];
             if (site.id === activeSiteId) {
               $scope.site = site;
+              $scope.title = 'Editing <span class="label label-info">'+ site.properties.name + '</span>'
+              $scope.siteEditDirections = $sce.trustAsHtml(ContentFactory.get('siteEditDirections'));
             }
           }
 
