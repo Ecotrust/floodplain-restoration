@@ -48,6 +48,8 @@ angular.module('uiApp')
                 <p class="blue-text document-list-item">Watershed assessments, sediment budgets, and other available watershed or river research, reports, or data</p>\
                 <hr class="document-list-hr">\
                 <p class="blue-text document-list-item">Ecological assessments, research, reports, or data on species and habitat in the watershed, the reach, or on the property</p>\
+                <hr class="document-list-hr">\
+                <p class="blue-text document-list-item">Reasonable estimates of both pit depth and river thalweg</p>\
               </div>\
             </div>\
             <div class="col-md-1 table-cell survey-nav-col">\
