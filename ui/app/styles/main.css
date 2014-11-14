@@ -543,3 +543,9 @@ hr {
   }
 
 }
+
+@media (min-width: 1400px) {
+  .homepage-content {
+    background-size: 2000px 1500px;  /* For bulldozer photo */
+  }
+}
