@@ -19,6 +19,7 @@ angular.module('uiApp')
       'title': 'Floodplain Gravel Mine Restoration',
       'welcome': 'The Floodplain Gravel Mine Restoration Tool',
       'hook': 'Informed decision making and resource investment <br> for the restoration of floodplain mining sites.',
+      'requirements': '<a class="documents-link" href="#/help/documents">What will I need?</a>',
       'getStarted': 'Get Started',
       'siteListHeader': 'All properties',
       'previousQuestion': '<< Previous Question',
@@ -29,7 +30,7 @@ angular.module('uiApp')
         <h4>Please assemble as many of the following resources as possible:</h4>\
         <div class="table-container">\
           <div class="table-row">\
-            <div class="table-cell col-md-11">\
+            <div class="table-cell col-md-12">\
               <div class="property-box padded-box">\
                 <p class="blue-text document-list-item">Taxlot, land user, easement, access, infrastructure, and other relevant property information.</p>\
                 <hr class="document-list-hr">\
@@ -47,7 +48,7 @@ angular.module('uiApp')
               </div>\
             </div>\
             <div class="col-md-1 table-cell survey-nav-col">\
-              <a href="#/site/new">\
+              <a href="#/">\
                 <p class="survey-nav survey-nav-forward">\
                   <span class="glyphicon glyphicon-play survey-nav-icon"></span>\
                 </p>\

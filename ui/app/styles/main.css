@@ -194,8 +194,23 @@ hr {
   position: absolute;
 }
 
-.jumbotron .get-started-btn {
+.documents-link {
+  color: #FFF;
+  text-decoration: underline;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.documents-link:hover {
+  color: #00a551;
+}
+
+.jumbotron .get-started-row {
   top: 50%;
+}
+
+.get-started-btn {
+  margin-bottom: 20px;
 }
 
 .jumbotron .attribution {

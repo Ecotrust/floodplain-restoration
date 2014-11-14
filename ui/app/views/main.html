@@ -7,10 +7,12 @@
             <p ng-bind-html="content.hook"><br></p>
         </div>
 
-    	<div class="homepage-item get-started-btn">
-            <a class="btn btn-primary btn-lg" href="{{userName?'#/sites':'/accounts/login/'}}">
+    	<div class="homepage-item get-started-row">
+            <a class="btn btn-primary btn-lg get-started-btn" href="{{userName?'#/sites':'/accounts/login/'}}">
                 <span class="btn-text">{{content.getStarted}}</span><span class="glyphicon glyphicon-play-circle"></span>
             </a>
+            <br/>
+            <p ng-bind-html="content.requirements"></p>
         </div>
 
         <div class='homepage-item attribution'>

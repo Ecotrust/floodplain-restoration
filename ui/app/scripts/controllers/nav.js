@@ -25,19 +25,22 @@ angular.module('uiApp')
         }
       };
 
-      SiteFactory
-        .getSites()
-        .then( function() {
-          $scope.sites = SiteFactory.sites.features;
+      if ($rootScope.userName) {
 
-          // set active site
-          for (var i = SiteFactory.sites.features.length - 1; i >= 0; i--) {
-            var site = SiteFactory.sites.features[i];
-            if (site.id === parseInt($rootScope.activeSiteId, 10)) {
-              $scope.site = site;
+        SiteFactory
+          .getSites()
+          .then( function() {
+            $scope.sites = SiteFactory.sites.features;
+
+            // set active site
+            for (var i = SiteFactory.sites.features.length - 1; i >= 0; i--) {
+              var site = SiteFactory.sites.features[i];
+              if (site.id === parseInt($rootScope.activeSiteId, 10)) {
+                $scope.site = site;
+              }
             }
-          }
-        });
+          });
+      }
     });
   
     $scope.questions = [];
