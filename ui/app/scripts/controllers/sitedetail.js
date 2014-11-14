@@ -10,12 +10,13 @@ if (false) { var map; }
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SitedetailCtrl', function ($scope, $routeParams, $rootScope, SiteFactory) {
+  .controller('SitedetailCtrl', function ($scope, $routeParams, $rootScope, SiteFactory, NodeFactory) {
     map.showMap(true);
 
     var activeSiteId = parseInt($routeParams.siteId, 10);
     $rootScope.activeSiteId = activeSiteId;
     
+    $scope.surveyPrompt = "Begin Survey";
     $scope.sites = [];
     $scope.site = {};
 
@@ -44,6 +45,16 @@ angular.module('uiApp')
         map.showMap(true);
       }
     );
+
+    NodeFactory
+      .getNodes($rootScope.activeSiteId)
+      .then( function() {
+        var nodes = NodeFactory.nodes;
+        if (nodes.length > 0) {
+          $scope.surveyPrompt = "Continue Survey";
+        }
+        map.showMap(true);
+      });
 
     $scope.deleteSitePit = function(siteId, pitId) {
       if (confirm('Delete this pit? Are you sure?') === true) {
