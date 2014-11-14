@@ -45,4 +45,13 @@ angular.module('uiApp')
       }
     };
 
+    $scope.toggleCircleIconClass = function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (icon.classList.contains('glyphicon-plus-sign')) {
+        icon.className = icon.className.replace(/\bglyphicon-plus-sign\b/,'glyphicon-minus-sign');
+      } else {
+        icon.className = icon.className.replace(/\bglyphicon-minus-sign\b/,'glyphicon-plus-sign');
+      }
+    }
+
   });
