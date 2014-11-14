@@ -10,7 +10,13 @@ if (false) { var map; }
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SitedetailCtrl', function ($scope, $routeParams, $rootScope, SiteFactory, NodeFactory) {
+  .controller('SitedetailCtrl', function ($scope, $routeParams, $rootScope, $window, SiteFactory, NodeFactory) {
+
+    if (!$rootScope.userName) {
+      alert('You are not logged in. You will now be redirected to the login page.');
+      $window.location = '/accounts/login/';
+    }
+
     map.showMap(true);
 
     var activeSiteId = parseInt($routeParams.siteId, 10);

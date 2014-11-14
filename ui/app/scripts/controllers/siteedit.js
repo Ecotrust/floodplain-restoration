@@ -11,7 +11,13 @@ if (false) { var map; }
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SiteeditCtrl', function ($scope, $routeParams, $location, $rootScope, SiteFactory) {
+  .controller('SiteeditCtrl', function ($scope, $routeParams, $location, $rootScope, $window, SiteFactory) {
+
+    if (!$rootScope.userName) {
+      alert('You are not logged in. You will now be redirected to the login page.');
+      $window.location = '/accounts/login/';
+    }
+
     map.showMap(true);
 
     $scope.sites = [];

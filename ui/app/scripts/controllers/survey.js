@@ -13,7 +13,13 @@ if(false) {
 }
 
 angular.module('uiApp')
-  .controller('SurveyCtrl', function ($scope, $routeParams, $rootScope, $location, SiteFactory, QuestionFactory, NodeFactory) {
+  .controller('SurveyCtrl', function ($scope, $routeParams, $rootScope, $location, $window, SiteFactory, QuestionFactory, NodeFactory) {
+
+    if (!$rootScope.userName) {
+      alert('You are not logged in. You will now be redirected to the login page.');
+      $window.location = '/accounts/login/';
+    }
+
     map.showMap(true);
     
     var questionId = parseInt($routeParams.questionId, 10);

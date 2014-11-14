@@ -12,7 +12,13 @@ if(false) {
 }
 
 angular.module('uiApp')
-  .controller('SurveydoneCtrl', function ($scope, $routeParams, $rootScope, SiteFactory, QuestionFactory) {
+  .controller('SurveydoneCtrl', function ($scope, $routeParams, $rootScope, $window, SiteFactory, QuestionFactory) {
+
+    if (!$rootScope.userName) {
+      alert('You are not logged in. You will now be redirected to the login page.');
+      $window.location = '/accounts/login/';
+    }
+
     map.showMap(true);
     var questions = [];
     $rootScope.activeSiteId = $routeParams.siteId;

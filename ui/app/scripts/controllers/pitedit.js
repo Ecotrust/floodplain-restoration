@@ -3,6 +3,7 @@
 // Hack to make linter happy about global variables
 if (false) { var map; }
 
+
 /**
  * @ngdoc function
  * @name uiApp.controller:PiteditCtrl
@@ -11,7 +12,13 @@ if (false) { var map; }
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, $location, SiteFactory) {
+  .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, $location, $window, SiteFactory) {
+
+    if (!$rootScope.userName) {
+      alert('You are not logged in. You will now be redirected to the login page.');
+      $window.location = '/accounts/login/';
+    }
+
     map.showMap(true);
 
     var activeSiteId = parseInt($routeParams.siteId, 10);
