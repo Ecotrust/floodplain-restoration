@@ -26,6 +26,10 @@ h4 {
   color: #094ca0; /* blue */
 }
 
+h5 {
+  color: #999;
+}
+
 p {
   color: #094ca0; /* blue */
   font-family:"Rotis Serif", Georgia;
@@ -34,6 +38,10 @@ p {
 i, em, cite {
   font-family: "Rotis Serif Italic", "Georgia Italic", Georgia;
   font-style: normal; /* This is important! Otherwise, faux italic italics. Terrible. */
+}
+
+a {
+  color: rgb(9,76,160);
 }
 
 a:hover {
@@ -379,6 +387,10 @@ hr {
   margin: 0 15px;
 }
 
+.survey-info-icon {
+  margin: 5px;
+}
+
 .question-detail {
   margin: 15px 0;
   color: #84847d;
@@ -446,7 +458,8 @@ hr {
 }
 
 .notes-box {
-  margin-top: 25px;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .bar {

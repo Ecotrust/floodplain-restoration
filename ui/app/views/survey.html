@@ -13,9 +13,9 @@
       </p>
       <p class="question">{{question.question}}</p>
 
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <form novalidate name="pitForm" role="form">
+      <form novalidate id="pitForm" name="pitForm" role="form">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
             <div ng-repeat="choice in question.choices">
 
               <div class="radio">
@@ -25,23 +25,34 @@
                   {{choice.choice}}
                 </label>
               </div>
-
             </div>
-            <textarea class="notes-box" ng-value="choice.notes" ng-model="nodeNotes" rows="4" cols="50" placeholder="Notes"></textarea>
-          </form>
+          </div>
         </div>
-      </div>
-
-
-      <p class="question-detail">
-      {{question.detail}}
-      </p>
-
-      <div class="row">
-        <div class="col-md-12">
-          <hr/>
+        <div class="row" id="info-row">
+          <div class="col-md-12">
+            <hr />
+            <a data-toggle="collapse" data-parent="#info-row" data-target="#collapse-info" ng-click="toggleCircleIconClass('circle-info-icon')"><h5>ADDITIONAL INFO & RESOURCES<span id="circle-info-icon" class="glyphicon glyphicon-plus-sign"></span></h5></a>
+            <div id="collapse-info" class="collapse">
+              <div class="row">
+                <!-- question.supplement??? -->
+                <div class="col-md-4"><a><span class="survey-info-icon glyphicon glyphicon-new-window"></span>External link</a></div>
+                <div class="col-md-4"><a><span class="survey-info-icon glyphicon glyphicon-arrow-down"></span>Download</a></div>
+                <div class="col-md-4"><a><span class="survey-info-icon glyphicon glyphicon-picture"></span>View image</a></div><!-- question.image -->
+              </div>
+              <p class="question-detail" ng-bind="question.detail">
+              {{question.detail}}
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+            <textarea class="notes-box" ng-value="choice.notes" ng-model="nodeNotes" rows="4" cols="40" placeholder="Notes"></textarea>
+          </div>
+        </div>
+      </form>
+
       <div class="row">
         <div class="col-md-6 col-md-offset-3 survey-status-summary">
           <span class="glyphicon glyphicon-ok survey-status-icon"></span>&nbsp;{{numNodes}} of {{numQuestions}} completed

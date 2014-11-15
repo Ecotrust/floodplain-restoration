@@ -82,7 +82,14 @@ angular.module('uiApp')
     $scope.showPrev = true;
 
     $scope.submitForm = function() {
-      if ($scope.nodeVal === null) {
+      var valueChecked = false;
+      var formElements = document.getElementById('pitForm').elements;
+      for (var i = 0; i < formElements.length; i++) {
+        if (formElements[i].type == 'radio' && formElements[i].checked){
+          valueChecked=true;
+        }
+      }
+      if ($scope.nodeVal === null || !valueChecked) {
         alert('Please answer the question before moving on. If you are unable to answer the question, select "Not Sure".');
       } else {
         var nextQuestion = $scope.nextQuestion();
@@ -124,6 +131,15 @@ angular.module('uiApp')
       }
       return prev;
     };
+
+    $scope.toggleCircleIconClass = function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (icon.classList.contains('glyphicon-plus-sign')) {
+        icon.className = icon.className.replace(/\bglyphicon-plus-sign\b/,'glyphicon-minus-sign');
+      } else {
+        icon.className = icon.className.replace(/\bglyphicon-minus-sign\b/,'glyphicon-plus-sign');
+      }
+    }
 
     // map.clear();
     // map.loadSites(SiteFactory.getActiveSiteCollection());
