@@ -18,6 +18,35 @@
 		  <p class="question">You have completed the survey. The three scores below indicate that lorem ipsum dolor sit amet, consecte adipiscing elit:</p>
 	    </div>
 	  </div>
+
+      <div class="suitability-scores">
+        <p><span class="suitability-label">Site:</span> <span ng-bind="suitabilityCategorySite" class="suitability-category">Sorta Suitable</span></p>
+        <div class="row suitability-row">
+          <div class="col-md-12 suitability-bar" style="background-color:green">
+          </div>
+        </div>
+
+        <p><span class="suitability-label">Socio-economic:</span> <span ng-bind="suitabilityCategorySocioeconomic" class="suitability-category">Sorta Suitable</span></p>
+        <div class="row suitability-row">
+          <div class="col-md-7 suitability-bar" style="background-color:yellow">
+          </div>
+        </div>
+
+        <p><span class="suitability-label">Landscape:</span> <span ng-bind="suitabilityCategoryLandscape" class="suitability-category">Sorta Suitable</span></p>
+        <div class="row suitability-row">
+          <div class="col-md-4 suitability-bar" style="background-color:gray">
+          </div>
+        </div>
+
+        <p><span class="suitability-label">Overall:</span> <span ng-bind="suitabilityCategoryOverall" class="suitability-category">Sorta Suitable</span></p>
+        <div class="row suitability-row">
+          <div class="col-md-8 suitability-bar" style="background-color:yellow">
+          </div>
+        </div>
+
+      </div>
+
+      <!--
 	  <div class="row" ng-repeat="(key, prop) in suitability track by key">
 	    <div class="col-md-6">
 	    	<strong>{{key}}</strong>
@@ -26,6 +55,12 @@
 		  <span>{{prop|percentage:0}}</span>
 		</div>
 	  </div>
+      -->
+
+      <hr />
+
+      
+
 	  <div class="row">
 	  	<div class="col-md-12">
 		  <div class="btn-group pull-right bottom-buttons">

@@ -566,6 +566,27 @@ hr {
   margin: 7px auto;
 }
 
+.suitability-scores {
+  margin: 0 45px;
+}
+
+.suitability-scores>p {
+  color: black;
+  font-family: "Agenda", Arial;
+}
+
+.suitability-label {
+  font-weight: bold;
+}
+
+.suitability-row {
+  margin: 0 0 15px 0;
+}
+
+.suitability-bar {
+  height: 30px;
+}
+
 @media (max-width: 991px) {
   body {
     overflow-y: auto;
