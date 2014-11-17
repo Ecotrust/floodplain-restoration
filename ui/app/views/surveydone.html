@@ -26,11 +26,13 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="btn-group pull-right bottom-buttons">
-            <a class="btn btn-default" href="#/site/{{activeSiteId}}/"> &lt;&lt; Back to site </a>
-            <a class="btn btn-default" href="#/site/{{activeSiteId}}/report"> Explore report </a>
-            <a class="btn btn-default" ng-click="alert('Export!')"> Export .doc or .pdf </a>
-            <a class="btn btn-default" ng-click="alert('Share!')"> Share </a>
+          <div class="btn-group pull-left bottom-buttons">
+            <a class="btn btn-default" href="#/site/{{activeSiteId}}/report"> Explore report <span class="glyphicon glyphicon-arrow-right green-text"></span></a>
+            <a class="btn btn-default" ng-click="alert('Export!')"> Export .doc <span class="glyphicon glyphicon-arrow-down green-text"></span> | .pdf <span class="glyphicon glyphicon-arrow-down green-text"></span></a>
+            <a class="btn btn-default" ng-click="alert('Share!')"> Share <span class="glyphicon glyphicon-share green-text"></span></a>
+          </div>  
+          <div class="btn-group pull-left bottom-buttons">
+            <a class="btn btn-default" href="#/site/{{activeSiteId}}/"> <span class="glyphicon glyphicon-arrow-left green-text"></span> Back to site </a>
           </div>  
         </div>
       </div>

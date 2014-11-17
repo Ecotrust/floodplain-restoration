@@ -557,6 +557,14 @@ hr {
   color: #094ca0;
 }
 
+.green-text {
+  color:  #00a551;
+  background-color: rgb(230, 231, 232);
+  border-radius: 8px;
+  padding: 1px;
+  /*margin: 3px;*/
+}
+
 .padded-box {
   padding: 30px;
 }
