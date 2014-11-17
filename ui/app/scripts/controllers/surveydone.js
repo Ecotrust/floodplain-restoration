@@ -16,7 +16,7 @@ angular.module('uiApp')
   .controller('SurveydoneCtrl', function ($scope, $routeParams, $rootScope, $window, SiteFactory, QuestionFactory) {
 
     if (!$rootScope.userName) {
-      alert('You are not logged in. You will now be redirected to the login page.');
+      $window.alert('You are not logged in. You will now be redirected to the login page.');
       $window.location = '/accounts/login/';
     }
 
@@ -120,5 +120,9 @@ angular.module('uiApp')
         
         map.showMap(true);
       });
+
+    $scope.alert = function (msg) {
+      $window.alert(msg);
+    }
 
   });

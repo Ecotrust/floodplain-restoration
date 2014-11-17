@@ -160,6 +160,7 @@ hr {
   background-color: transparent;
   /*border-color: ;*/
   border-radius: 0;
+  margin: 0 10px;
 }
 
 .btn-default:hover {
