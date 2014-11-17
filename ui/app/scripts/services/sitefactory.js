@@ -13,6 +13,7 @@ angular.module('uiApp')
     var service = {};
 
     service.sites = [];
+    service.suitability = {};
 
     service.getSites = function () {
         var promise = $http.get('/api/site.json');
@@ -145,19 +146,19 @@ angular.module('uiApp')
       return promise;
     };
 
-    service.getSuitabilityScores = function () {
-      // TODO
-      // GET from e.g. /api/site/2/suitability.json
-      //var site = this.getSite(siteId);
+    service.getSuitabilityScores = function (siteId) {
+      var url = '/api/site/' + siteId + '/suitability.json';
+      var promise = $http.get(url);
 
-      var suitability = {
-        'site': 0.27260624999999994,
-        'landscape': 0.46898395525146463,
-        'suitability': 0.43765438899978504,
-        'socio_economic': 0.43198437499999986
-      };
+      promise.success(function(data) {
+        service.suitability= data;
+      });
 
-      return suitability;
+      promise.error(function() {
+        console.log('Could not fetch suitability.json');
+      });
+
+      return promise;
     };
 
     return service;

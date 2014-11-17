@@ -22,7 +22,12 @@ angular.module('uiApp')
     map.showMap(true);
     var questions = [];
     $rootScope.activeSiteId = $routeParams.siteId;
-    $scope.suitability = SiteFactory.getSuitabilityScores($routeParams.siteId); // /api/site/2/suitability.json
+
+    SiteFactory
+      .getSuitabilityScores($routeParams.siteId)
+      .then( function() {
+        $rootScope.suitability = SiteFactory.suitability;
+      });
     // $scope.questions = QuestionFactory.getQuestions();
     $scope.maxQuestionId = 2;  //QuestionFactory will likely change substantially
                                   //We'll hardcode this for now.
