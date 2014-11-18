@@ -10,10 +10,10 @@ if (false) { var map; }
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('SitedetailCtrl', function ($scope, $routeParams, $rootScope, $window, SiteFactory, NodeFactory) {
+  .controller('SitedetailCtrl', function ($scope, $routeParams, $rootScope, $window, SiteFactory, QuestionFactory, NodeFactory) {
 
     if (!$rootScope.userName) {
-      alert('You are not logged in. You will now be redirected to the login page.');
+      $window.alert('You are not logged in. You will now be redirected to the login page.');
       $window.location = '/accounts/login/';
     }
 
@@ -22,9 +22,10 @@ angular.module('uiApp')
     var activeSiteId = parseInt($routeParams.siteId, 10);
     $rootScope.activeSiteId = activeSiteId;
     
-    $scope.surveyPrompt = "Begin Survey";
+    $scope.surveyPrompt = 'Begin Survey';
     $scope.sites = [];
     $scope.site = {};
+    $scope.firstUnansweredId = 1;
 
     SiteFactory.getSites().then(
       function() {
@@ -52,18 +53,41 @@ angular.module('uiApp')
       }
     );
 
-    NodeFactory
-      .getNodes($rootScope.activeSiteId)
+    QuestionFactory
+      .getQuestions()
       .then( function() {
-        var nodes = NodeFactory.nodes;
-        if (nodes.length > 0) {
-          $scope.surveyPrompt = "Continue Survey";
-        }
-        map.showMap(true);
+        $scope.questions = QuestionFactory.questions;
+        $scope.questions.sort(function(a,b) {
+          return a.order - b.order;
+        });
+        $scope.firstUnansweredId = $scope.questions[0].id;
+
+        NodeFactory
+          .getNodes($rootScope.activeSiteId)
+          .then( function() {
+            var nodes = NodeFactory.nodes;
+            if (nodes.length > 0) {
+              $scope.surveyPrompt = 'Continue Survey';
+              for (var i in $scope.questions) {
+                var questionAnswered = false;
+                for (var j in nodes) {
+                  if (nodes[j].question === $scope.questions[i].id) {
+                    questionAnswered = true;
+                    break;
+                  }
+                }
+                if (questionAnswered === false) {
+                  $scope.firstUnansweredId = $scope.questions[i].id;
+                  break;
+                }
+              }
+            }
+            map.showMap(true);
+          });
       });
 
     $scope.deleteSitePit = function(siteId, pitId) {
-      if (confirm('Delete this pit? Are you sure?') === true) {
+      if ($window.confirm('Delete this pit? Are you sure?') === true) {
         SiteFactory.deleteSitePit(siteId, pitId).then(function() {
 
           // Update new sites
