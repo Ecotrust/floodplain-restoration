@@ -116,20 +116,26 @@ angular.module('uiApp')
 
     $scope.save = function () {
       console.log('spinner on');
-      if (isNewPit) {
-        SiteFactory
-          .postSitePit(activeSiteId, $scope.pit, map.getActivePitWkt())
-          .then(function() {
-            console.log('spinner off');
-            $location.path("/site/" + activeSiteId);
-          });
-      } else {
-        SiteFactory
-          .putSitePit(activeSiteId, $scope.pit, map.getActivePitWkt())
-          .then(function() {
-            console.log('spinner off');
-            $location.path("/site/" + activeSiteId);
-          });
+      try {
+        var pitWkt = map.getActivePitWkt;
+        if (isNewPit) {
+          SiteFactory
+            .postSitePit(activeSiteId, $scope.pit, pitWkt())
+            .then(function() {
+              console.log('spinner off');
+              $location.path('/site/' + activeSiteId);
+            });
+        } else {
+          SiteFactory
+            .putSitePit(activeSiteId, $scope.pit, map.getActivePitWkt())
+            .then(function() {
+              console.log('spinner off');
+              $location.path('/site/' + activeSiteId);
+            });
+        }
+      } catch (error){
+        console.log(error);
+        $window.alert('No Pit Drawn');
       }
     };
 

@@ -14,13 +14,13 @@ angular.module('uiApp')
   .controller('SiteeditCtrl', function ($scope, $routeParams, $location, $rootScope, $window, $sce, ContentFactory, SiteFactory) {
 
     if (!$rootScope.userName) {
-      alert('You are not logged in. You will now be redirected to the login page.');
+      $window.alert('You are not logged in. You will now be redirected to the login page.');
       $window.location = '/accounts/login/';
     }
 
     $scope.siteEditDirections = $sce.trustAsHtml(ContentFactory.get('siteCreateDirections'));
     $scope.siteEditDefinitions = $sce.trustAsHtml(ContentFactory.get('siteEditDefinitions'));
-    $scope.title = 'Creating A New Property'
+    $scope.title = 'Creating A New Property';
 
     map.showMap(true);
 
@@ -60,7 +60,7 @@ angular.module('uiApp')
             var site = SiteFactory.sites.features[i];
             if (site.id === activeSiteId) {
               $scope.site = site;
-              $scope.title = 'Editing <span class="label label-info">'+ site.properties.name + '</span>'
+              $scope.title = 'Editing <span class="label label-info">'+ site.properties.name + '</span>';
               $scope.siteEditDirections = $sce.trustAsHtml(ContentFactory.get('siteEditDirections'));
             }
           }
@@ -81,20 +81,26 @@ angular.module('uiApp')
 
     $scope.save = function () {
       console.log('spinner on');
-      if (isNewSite) {
-        SiteFactory
-          .postSite($scope.site, map.getActiveSiteWkt())
-          .then(function() {
-            console.log('spinner off (POST new site complete!)');
-            $location.path('/sites');
-          });
-      } else {
-        SiteFactory
-          .putSite($scope.site, map.getActiveSiteWkt())
-          .then(function() {
-            console.log('spinner off (PUT existing site complete!)');
-            $location.path('/sites');
-          });
+      try {
+        var siteWkt = map.getActiveSiteWkt();
+        if (isNewSite) {
+          SiteFactory
+            .postSite($scope.site, siteWkt)
+            .then(function() {
+              console.log('spinner off (POST new property complete!)');
+              $location.path('/sites');
+            });
+        } else {
+          SiteFactory
+            .putSite($scope.site, siteWkt)
+            .then(function() {
+              console.log('spinner off (PUT existing property complete!)');
+              $location.path('/sites');
+            });
+        }
+      } catch (error) {
+        console.log(error);
+        $window.alert('Please draw the boundaries for your property.');
       }
     };
 

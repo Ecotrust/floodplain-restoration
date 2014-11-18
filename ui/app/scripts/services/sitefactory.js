@@ -8,7 +8,7 @@
  * Factory in the uiApp.
  */
 angular.module('uiApp')
-  .factory('SiteFactory', function ($rootScope, $http) {
+  .factory('SiteFactory', function ($rootScope, $http, $window) {
 
     var service = {};
 
@@ -29,7 +29,7 @@ angular.module('uiApp')
         });
 
         return promise;
-    };
+      };
 
     // Delete
     service.deleteSite = function(activeSiteId) {
@@ -37,10 +37,10 @@ angular.module('uiApp')
 
       var promise = $http.delete(url);
 
-      promise.success(function(data) {
+      promise.success(function() {
         for (var i = service.sites.features.length - 1; i >= 0; i--) {
           var site = service.sites.features[i];
-          if (site.id == activeSiteId) {
+          if (site.id === activeSiteId) {
             service.sites.features.splice(i, 1); // pop it off the list
           }
         }
@@ -86,12 +86,11 @@ angular.module('uiApp')
       site.geometry = wkt;  // replace geojson geom with wkt
       var promise = $http.post(url, site);
 
-      promise.success( function(data, status, headers, config) {
-        var newId = data.id;
-      });
+      promise.success(function() {});
 
       promise.error( function(res) {
         console.log('ERROR', res);
+        $window.alert('Could not create new property. Be sure you have all required fields filled in.');
       });
 
       return promise;
@@ -102,12 +101,11 @@ angular.module('uiApp')
       pit.geometry = wkt;  // replace geojson geom with wkt
       var promise = $http.post(url, pit);
 
-      promise.success( function(data, status, headers, config) {
-        var newId = data.id;
-      });
+      promise.success( function() {});
 
       promise.error( function(res) {
         console.log('ERROR', res);
+        $window.alert('Could not create new pit. Be sure you have all required fields filled in.');
       });
 
       return promise;
@@ -118,12 +116,11 @@ angular.module('uiApp')
       site.geometry = wkt;  // replace geojson geom with wkt
       var promise = $http.put(url, site);
 
-      promise.success( function(data, status, headers, config) {
-        var newId = data.id;
-      });
+      promise.success( function() {});
 
       promise.error( function(res) {
         console.log('ERROR', res);
+        $window.alert('Could not update property. Be sure you have all required fields filled in.');
       });
 
       return promise;
@@ -135,12 +132,11 @@ angular.module('uiApp')
       pit.geometry = wkt;  // replace geojson geom with wkt
       var promise = $http.put(url, pit);
 
-      promise.success( function(data, status, headers, config) {
-        var newId = data.id;
-      });
+      promise.success( function() {});
 
       promise.error( function(res) {
         console.log('ERROR', res);
+        $window.alert('Could not update pit. Be sure you have all required fields filled in.');
       });
 
       return promise;
