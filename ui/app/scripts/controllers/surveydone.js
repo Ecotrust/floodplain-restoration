@@ -77,7 +77,7 @@ angular.module('uiApp')
           .text(function(d) {return suitabilityScoreTypes[d.key] + ': ';});
             
         scoreDivPs.append('span')
-          .attr('class', 'suitability-category')
+          .attr('class', 'suitability-context')
           .text(function(d) {
             for (var catKey in suitabilityCategories) {
               var cat = suitabilityCategories[catKey];

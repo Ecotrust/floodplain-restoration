@@ -599,7 +599,7 @@ hr {
   font-weight: bold;
 }
 
-.suitability-category {
+.suitability-context {
   font-family: "Rotis Serif", Georgia;
 }
 
@@ -611,6 +611,100 @@ hr {
   margin-bottom: 15px;
   text-align: right;
   padding: 5px;
+  min-height: 15px;
+}
+
+.map-placeholder {
+  color: white;
+  font-size: 35px;
+  text-align: center;
+  border: solid 1px black;
+  height: 400px;
+  background-color: blue;
+  padding-top: 50px;
+}
+
+.report {
+  padding: 45px;
+}
+
+.report-header {
+  margin: 35px 50px 25px 50px;
+}
+
+.report-name {
+  margin-bottom: 25px;
+}
+
+.report-property {
+  font-weight: normal;
+  font-family: "Rotis Serif", Georgia;
+  margin-left: 10px;
+}
+
+.report-buttons {
+  margin-top: 25px;
+}
+
+.report-intro {
+  margin-top: 20px;
+  font-weight: normal;
+  font-family: "Rotis Serif", Georgia;
+  color: gray;
+}
+
+.pit-row {
+  margin-top: 40px;
+}
+
+.report > .row > .bar-right {
+  height: 100%;
+}
+
+.report-pit-container {
+  padding: 15px;
+  text-align: center;
+}
+
+.report-pit-container:hover {
+  background: lightgray;
+  cursor: pointer;
+}
+
+.report-pit-container:hover > .report-pit-name {
+  color: #00a551;
+}
+
+.report-pit-name {
+  color: black;
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.report-pit-info {
+  font-size: 10px;
+  color: gray;
+  font-family: "Agenda", Arial;
+}
+
+.report-content > hr {
+  border-color: black;
+}
+
+.report-score {
+  color: black;
+  font-family: "Agenda", Arial;
+  margin: 12px auto;
+  font-size: 16px;
+}
+
+.report-context-title {
+  font-size: 25px;
+  margin: 7px auto;
+}
+
+.report-context-title .green-text {
+  font-size: 14px;
 }
 
 @media (max-width: 991px) {
