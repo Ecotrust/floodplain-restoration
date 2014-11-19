@@ -28,6 +28,35 @@ angular.module('uiApp')
     $rootScope.activeSiteId = $routeParams.siteId;
     $scope.pits = [];
 
+    var suitabilityList= [];
+    var suitabilityCategories = {
+      'low': {
+        'minScore' : 0,
+        'maxScore' : 33,
+        'label' : 'Unsuitable',
+        'bgColor': 'gray'
+      },
+      'med' : {
+        'minScore': 33,
+        'maxScore': 66,
+        'label': 'Moderately Suitable',
+        'bgColor': 'yellow'
+      },
+      'high' : {
+        'minScore': 66,
+        'maxScore': 100,
+        'label': 'Highly Suitable',
+        'bgColor': 'green'
+      }
+    };
+
+    var suitabilityScoreTypes = {
+      'site': 'Property',
+      'socio_economic': 'Socio-Economic',
+      'landscape': 'Landscape',
+      'suitability': 'Overall'
+    };
+
     SiteFactory
       .getSites()
       .then( function() {
@@ -51,34 +80,6 @@ angular.module('uiApp')
       .then( function() {
 
         $rootScope.suitability = SiteFactory.suitability;
-        var suitabilityList= [];
-        var suitabilityCategories = {
-          'low': {
-            'minScore' : 0,
-            'maxScore' : 33,
-            'label' : 'Unsuitable',
-            'bgColor': 'gray'
-          },
-          'med' : {
-            'minScore': 33,
-            'maxScore': 66,
-            'label': 'Moderately Suitable',
-            'bgColor': 'yellow'
-          },
-          'high' : {
-            'minScore': 66,
-            'maxScore': 100,
-            'label': 'Highly Suitable',
-            'bgColor': 'green'
-          }
-        };
-
-        var suitabilityScoreTypes = {
-          'site': 'Site',
-          'socio_economic': 'Socio-Economic',
-          'landscape': 'Landscape',
-          'suitability': 'Overall'
-        };
 
         for (var key in suitabilityScoreTypes) {  //TODO: what if keys do not match?
           suitabilityList.push({
@@ -87,47 +88,50 @@ angular.module('uiApp')
           });
         }
 
-        // var scoreDivs = d3.select('.suitability-scores')
-        //   .selectAll('div')
-        //     .data(suitabilityList)
-        //     .enter().append('div')
-        //       .attr('class', 'suitability-score');
+        var contextDivs = d3.select('.report-content')
+          .selectAll('div')
+            .data(suitabilityList)
+            .enter().append('div')
+              .attr('class','row');
 
-        // var scoreDivPs = scoreDivs.append('p');
+        var contextDivLabels = contextDivs.append('div')
+          .attr('class', 'col-md-4 report-score');
 
-        // scoreDivPs.append('span')
-        //   .attr('class', 'suitability-label')
-        //   .text(function(d) {return suitabilityScoreTypes[d.key] + ': ';});
-            
-        // scoreDivPs.append('span')
-        //   .attr('class', 'suitability-context')
-        //   .text(function(d) {
-        //     for (var catKey in suitabilityCategories) {
-        //       var cat = suitabilityCategories[catKey];
-        //       if (d.value <= cat.maxScore && d.value >= cat.minScore) {
-        //         console.log(cat.label);
-        //         return cat.label;
-        //       }
-        //     }
-        //     console.log('no label for ' + d.key);
-        //     return null;
-        //   });
+        contextDivLabels.append('span')
+          .attr('class','suitability-label')
+          .text(function(d) {return suitabilityScoreTypes[d.key] + ': ';});
 
-        // scoreDivs.append('div')
-        //   .attr('class', 'suitability-bar')
-        //   .style('width', function(d) { return d.value + '%';})
-        //   .style('background-color', function(d) {
-        //     for (var catKey in suitabilityCategories) {
-        //       var cat = suitabilityCategories[catKey];
-        //       if (d.value <= cat.maxScore && d.value >= cat.minScore) {
-        //         console.log(cat.bgColor);
-        //         return cat.bgColor;
-        //       }
-        //     }
-        //     console.log('no bg color for ' + d.key);
-        //     return 'transparent';
-        //   })
-        //   .text(function(d) {return d.value;});
+        contextDivLabels.append('span')
+          .attr('class', 'suitability-rank')
+          .text(function(d) {
+            for (var catKey in suitabilityCategories) {
+              var cat = suitabilityCategories[catKey];
+              if (d.value <= cat.maxScore && d.value >= cat.minScore) {
+                console.log(cat.label);
+                return cat.label;
+              }
+            }
+            console.log('no label for ' + d.key);
+            return null;
+          });
+
+        var contextDivBars = contextDivs.append('div')
+          .attr('class','col-md-8 report-score')
+          .append('div')
+            .attr('class','suitability-bar')
+            .style('width', function(d) { return d.value + '%';})
+            .style('background-color', function(d) {
+              for (var catKey in suitabilityCategories) {
+                var cat = suitabilityCategories[catKey];
+                if (d.value <= cat.maxScore && d.value >= cat.minScore) {
+                  console.log(cat.bgColor);
+                  return cat.bgColor;
+                }
+              }
+              console.log('no bg color for ' + d.key);
+              return 'transparent';
+            });
+            // .text(function(d) {return d.value;});
 
       });
     // $scope.questions = QuestionFactory.getQuestions();

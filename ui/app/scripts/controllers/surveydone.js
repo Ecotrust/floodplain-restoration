@@ -51,7 +51,7 @@ angular.module('uiApp')
         };
 
         var suitabilityScoreTypes = {
-          'site': 'Site',
+          'site': 'Property',
           'socio_economic': 'Socio-Economic',
           'landscape': 'Landscape',
           'suitability': 'Overall'
@@ -77,7 +77,7 @@ angular.module('uiApp')
           .text(function(d) {return suitabilityScoreTypes[d.key] + ': ';});
             
         scoreDivPs.append('span')
-          .attr('class', 'suitability-context')
+          .attr('class', 'suitability-rank')
           .text(function(d) {
             for (var catKey in suitabilityCategories) {
               var cat = suitabilityCategories[catKey];

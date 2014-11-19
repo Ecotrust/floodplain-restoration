@@ -599,7 +599,7 @@ hr {
   font-weight: bold;
 }
 
-.suitability-context {
+.suitability-rank {
   font-family: "Rotis Serif", Georgia;
 }
 
@@ -687,7 +687,8 @@ hr {
   font-family: "Agenda", Arial;
 }
 
-.report-content > hr {
+.report-content > hr,
+.report-content-demo > hr {
   border-color: black;
 }
 
