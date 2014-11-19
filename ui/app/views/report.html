@@ -30,135 +30,34 @@
     </div>
 
     <div class="report-content">
+        <p>Angular</p>
+        <div class="row" ng-repeat="context in context_list">
+            <div class="col-md-12">
+                <hr />
+                <div class="row">
+                    <div class="col-md-4 report-score">
+                        <span class="suitability-label">{{contexts[context].label}}: </span>
+                        <span class="suitability-rank">{{contexts[context].rank}}</span>
+                    </div>
+                    <div class="col-md-8 report-score">
+                        <div class="suitability-bar" style="width: {{contexts[context].score}}%; background-color: {{contexts[context].bgColor}};">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-repeat="component in contexts[context].components">
+                    <div class="col-md-12 report-context-container">
+                        <div class="row">
+                            <div class="col-md-12 report-context-title">
+                                {{component.name}} 
+                                <span class="glyphicon glyphicon-plus-sign green-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="report-content-demo">
 
-        <!-- Site -->
-        <p>hard-coded</p>
-        <hr />
-
-        <div class="row">
-            <div class="col-md-4 report-score">
-                <span class="suitability-label">Site: </span>
-                <span class="suitability-rank">Highly Suitable</span>
-            </div>
-            <div class="col-md-8 report-score">
-                <div class="suitability-bar" style="background-color:green; width: 70%"></div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 report-context-container">
-                <div class="row">
-                    <div class="col-md-12 report-context-title">
-                        Pit restorability <span class="glyphicon glyphicon-plus-sign green-text"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 report-context-container">
-                <div class="row">
-                    <div class="col-md-12 report-context-title">
-                        Practical, property-level restorability <span class="glyphicon glyphicon-plus-sign green-text"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Socio-economic -->
-        <hr />
-
-        <div class="row">
-            <div class="col-md-4 report-score">
-                <span class="suitability-label">Socio-economic: </span>
-                <span class="suitability-rank">Unsuitable</span>
-            </div>
-            <div class="col-md-8 report-score">
-                <div class="suitability-bar" style="background-color:gray; width: 15%"></div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 report-context-container">
-                <div class="row">
-                    <div class="col-md-12 report-context-title">
-                        Cost benefit <span class="glyphicon glyphicon-plus-sign green-text"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 report-context-container">
-                <div class="row">
-                    <div class="col-md-12 report-context-title">
-                        Threat to other areas / permutability <span class="glyphicon glyphicon-plus-sign green-text"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Landscape -->
-        <hr />
-
-        <div class="row">
-            <div class="col-md-4 report-score">
-                <span class="suitability-label">Landscape: </span>
-                <span class="suitability-rank">Moderately suitable</span>
-            </div>
-            <div class="col-md-8 report-score">
-                <div class="suitability-bar" style="background-color:yellow; width: 45%"></div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 report-context-container">
-                <div class="row">
-                    <div class="col-md-12 report-context-title">
-                        Conservation value <span class="glyphicon glyphicon-plus-sign green-text"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 report-context-container">
-                <div class="row">
-                    <div class="col-md-12 report-context-title">
-                        Biotic conditions <span class="glyphicon glyphicon-plus-sign green-text"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 report-context-container">
-                <div class="row">
-                    <div class="col-md-12 report-context-title">
-                        Abiotic conditions <span class="glyphicon glyphicon-plus-sign green-text"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 report-context-container">
-                <div class="row">
-                    <div class="col-md-12 report-context-title">
-                        Geomorphic controls <span class="glyphicon glyphicon-plus-sign green-text"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 report-context-container">
-                <div class="row">
-                    <div class="col-md-12 report-context-title">
-                        Floodplain characteristics <span class="glyphicon glyphicon-plus-sign green-text"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
 </div>
 
 

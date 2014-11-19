@@ -28,7 +28,6 @@ angular.module('uiApp')
     $rootScope.activeSiteId = $routeParams.siteId;
     $scope.pits = [];
 
-    var suitabilityList= [];
     var suitabilityCategories = {
       'low': {
         'minScore' : 0,
@@ -57,6 +56,66 @@ angular.module('uiApp')
       'suitability': 'Overall'
     };
 
+    $scope.context_list = ['site', 'socio_economic', 'landscape','suitability'];
+
+    $scope.contexts = {
+      'site': {
+        'label': 'Property',
+        'components': [
+          {
+            'name': 'Pit restorability',
+            'question_ids': []
+          },
+          {
+            'name': 'Practical, property-level restorability',
+            'question_ids': [1,2,3]
+          }
+        ]
+      },
+      'socio_economic': {
+        'label': 'Socio-Economic',
+        'components': [
+          {
+            'name': 'Cost benefit',
+            'question_ids': [8,9,10]
+          },
+          {
+            'name': 'Threat to other areas / permutability',
+            'question_ids': [4,5,6,7]
+          }
+        ]
+      },
+      'landscape': {
+        'label': 'Landscape',
+        'components': [
+          {
+            'name': 'Conservation value',
+            'question_ids': [26,27]
+          },
+          {
+            'name': 'Biotic conditions',
+            'question_ids': [23,24,25]
+          },
+          {
+            'name': 'Abiotic conditions',
+            'question_ids': [19,20,21,22]
+          },
+          {
+            'name': 'Geomorphic controls',
+            'question_ids': [11,12,13,14]
+          },
+          {
+            'name': 'Floodplain characteristics',
+            'question_ids': [15,16,17,18]
+          }
+        ]
+      },
+      'suitability': {
+        'label': 'Overall',
+        'components': []
+      },
+    };
+
     SiteFactory
       .getSites()
       .then( function() {
@@ -75,65 +134,39 @@ angular.module('uiApp')
 
       });
 
-    SiteFactory
-      .getSuitabilityScores($routeParams.siteId)
-      .then( function() {
 
-        $rootScope.suitability = SiteFactory.suitability;
-
-        for (var key in suitabilityScoreTypes) {  //TODO: what if keys do not match?
-          suitabilityList.push({
-            'key': key,
-            'value': Math.floor(SiteFactory.suitability[key] * 100)
-          });
+    function getRank(score) {
+      for (var catKey in suitabilityCategories) {
+        var cat = suitabilityCategories[catKey];
+        if (score <= cat.maxScore && score >= cat.minScore) {
+          return cat.label;
         }
+      }
+      return null;
+    }
 
-        var contextDivs = d3.select('.report-content')
-          .selectAll('div')
-            .data(suitabilityList)
-            .enter().append('div')
-              .attr('class','row');
+    function getBgColor(score) {
+      for (var catKey in suitabilityCategories) {
+        var cat = suitabilityCategories[catKey];
+        if (score <= cat.maxScore && score >= cat.minScore) {
+          return cat.bgColor;
+        }
+      }
+      return 'transparent';
+    }
 
-        var contextDivLabels = contextDivs.append('div')
-          .attr('class', 'col-md-4 report-score');
+    function buildReport() {
 
-        contextDivLabels.append('span')
-          .attr('class','suitability-label')
-          .text(function(d) {return suitabilityScoreTypes[d.key] + ': ';});
+      for (var key in suitabilityScoreTypes) {  //TODO: what if keys do not match?
+        var score = $rootScope.suitability[key] * 100;
+        $scope.contexts[key]['score'] = score;
+        $scope.contexts[key]['rank'] = getRank(score);
+        $scope.contexts[key]['bgColor'] = getBgColor(score);
 
-        contextDivLabels.append('span')
-          .attr('class', 'suitability-rank')
-          .text(function(d) {
-            for (var catKey in suitabilityCategories) {
-              var cat = suitabilityCategories[catKey];
-              if (d.value <= cat.maxScore && d.value >= cat.minScore) {
-                console.log(cat.label);
-                return cat.label;
-              }
-            }
-            console.log('no label for ' + d.key);
-            return null;
-          });
+      }
 
-        var contextDivBars = contextDivs.append('div')
-          .attr('class','col-md-8 report-score')
-          .append('div')
-            .attr('class','suitability-bar')
-            .style('width', function(d) { return d.value + '%';})
-            .style('background-color', function(d) {
-              for (var catKey in suitabilityCategories) {
-                var cat = suitabilityCategories[catKey];
-                if (d.value <= cat.maxScore && d.value >= cat.minScore) {
-                  console.log(cat.bgColor);
-                  return cat.bgColor;
-                }
-              }
-              console.log('no bg color for ' + d.key);
-              return 'transparent';
-            });
-            // .text(function(d) {return d.value;});
+    };
 
-      });
     // $scope.questions = QuestionFactory.getQuestions();
     $scope.maxQuestionId = 2;  //QuestionFactory will likely change substantially
                                   //We'll hardcode this for now.
@@ -153,8 +186,15 @@ angular.module('uiApp')
           .then( function() {
             nodes = NodeFactory.nodes;
             $scope.numNodes = nodes.length;
+
+            SiteFactory
+              .getSuitabilityScores($rootScope.activeSiteId)
+              .then( function() {
+
+                $rootScope.suitability = SiteFactory.suitability;
+                buildReport();
             
-            map.showMap(false);
+            });
           });
 
         

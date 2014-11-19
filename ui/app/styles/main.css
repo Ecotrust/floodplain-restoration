@@ -687,8 +687,7 @@ hr {
   font-family: "Agenda", Arial;
 }
 
-.report-content > hr,
-.report-content-demo > hr {
+.report-content > .row > .col-md-12 > hr {
   border-color: black;
 }
 
