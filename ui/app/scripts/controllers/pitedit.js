@@ -12,23 +12,25 @@ if (false) { var map; }
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, $location, $window, SiteFactory) {
+  .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, $location, $window, $sce, ContentFactory, SiteFactory) {
 
     if (!$rootScope.userName) {
-      alert('You are not logged in. You will now be redirected to the login page.');
+      $window.alert('You are not logged in. You will now be redirected to the login page.');
       $window.location = '/accounts/login/';
     }
 
     map.showMap(true);
 
+    $scope.pitEditDirections = $sce.trustAsHtml(ContentFactory.get('pitEditDirections'));
+
     var activeSiteId = parseInt($routeParams.siteId, 10);
     $rootScope.activeSiteId = activeSiteId;
-    var activePitId;
+    $scope.activePitId = false;
     var blankPit;
     var isNewPit = false;
 
     if ($routeParams.pitId === undefined) {
-      activePitId = null;
+      $scope.pitEditDirections = $sce.trustAsHtml(ContentFactory.get('pitCreateDirections'));
       isNewPit = true;
       blankPit = {
         id: '',
@@ -51,7 +53,7 @@ angular.module('uiApp')
         }
       };
     } else {
-      activePitId = parseInt($routeParams.pitId, 10);
+      $scope.activePitId = parseInt($routeParams.pitId, 10);
     }
     
     $scope.pit = {};
@@ -85,7 +87,7 @@ angular.module('uiApp')
       } else {
         for (var j = $scope.site.properties.pit_set.length - 1; j >= 0; j--) {
           var pit = $scope.site.properties.pit_set[j];
-          if (pit.id === activePitId) {
+          if (pit.id === $scope.activePitId) {
             $scope.pit = pit;
           }
         }

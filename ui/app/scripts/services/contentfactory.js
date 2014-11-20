@@ -25,6 +25,8 @@ angular.module('uiApp')
       'siteCreateDirections': 'Click anywhere on the map to start defining your general property boundary. <br/><br/> Continue clicking to complete the shape of your property. <br/><br/> When you\'re satisfied with your property outline, double-click to end drawing.<br/><br/> Name and save your property when done. You can come back and edit this at any time.',
       'siteEditDirections': 'Click and hold anywhere on the property border to grab it. <br/><br/> Drag the section of border to where it belongs.',
       'siteEditDefinitions': '<div class="definition-block blue-text"><p><span class="definition-term">Project</span>: The collection of properties being considered for restoration.</p><p><span class="definition-term">Property</span>: A contiguous plot of land that encompasses one or more pits.</p><p><span class="definition-term">Pit</span>: A single gravel pit mine.</p></div>',
+      'pitCreateDirections': 'Like drawing your property, click once on the map to begin drawing your pit boundaries. Click again to add additional points. Double-click to finish.',
+      'pitEditDirections': 'Click and hold anywhere on the pit border to grab it. Drag the section of the border to where it belongs.',
       'previousQuestion': '<< Previous Question',
       'nextQuestion': 'Next Question >>',
       'attribution': 'This tool is a product of The Nature Conservancy and Ecotrust',
