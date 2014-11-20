@@ -262,6 +262,11 @@ hr {
   height: 40px;
 }
 
+.property-box-hr {
+  margin: 5px 5px 3px 5px;
+}
+
+
 .property-survey,
 .property-delete,
 .property-edit,
@@ -467,6 +472,28 @@ hr {
   background-color: #00a551;
   padding: 2px 0;
   font-size: 5px;
+}
+
+.mini-status-bar {
+  border: solid #00a551 1px;
+  background-color: transparent;
+  width: 100%;
+  height: 8px;
+  margin: 8px auto auto 20px;
+}
+
+.mini-status-span {
+  padding: 2px 0;
+  font-size: 2px;
+}
+
+.property-box-question-status {
+  color: gray;
+  font-size: 10px;
+}
+
+.property-box-pit-status {
+  font-size: 11px;
 }
 
 .notes-box {
