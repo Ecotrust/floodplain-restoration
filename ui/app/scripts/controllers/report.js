@@ -27,6 +27,7 @@ angular.module('uiApp')
 
     $rootScope.activeSiteId = $routeParams.siteId;
     $scope.pits = [];
+    $scope.answers = {};
 
     var suitabilityCategories = {
       'low': {
@@ -193,12 +194,31 @@ angular.module('uiApp')
         questions = QuestionFactory.questions;
         $scope.numQuestions = questions.length;  //QuestionFactory will likely change substantially
         $scope.maxQuestionId = questions[questions.length-1].id;
+        for (var i = 0; i < questions.length; i++) {
+          $scope.answers[questions[i].id] = questions[i];
+          $scope.answers[questions[i].id]['value'] = false;
+          $scope.answers[questions[i].id]['notes'] = false;
+          $scope.answers[questions[i].id]['answer'] = false;
+        }
 
         NodeFactory
           .getNodes($rootScope.activeSiteId)
           .then( function() {
             nodes = NodeFactory.nodes;
             $scope.numNodes = nodes.length;
+            for (var i = 0; i < nodes.length; i++) {
+              $scope.answers[nodes[i].question]['value'] = nodes[i].value;
+              $scope.answers[nodes[i].question]['notes'] = nodes[i].notes;
+              console.log(nodes[i].value)
+              var choices = $scope.answers[nodes[i].question].choices;
+              for (var choice_idx in choices) {
+                console.log('== ' + choices[choice_idx].value)
+                if (choices[choice_idx].value === nodes[i].value) {
+                  $scope.answers[nodes[i].question]['answer'] = choices[choice_idx].choice;
+                  console.log('MATCH! Answer: ' + choices[choice_idx].choice);
+                }
+              }
+            }
 
             SiteFactory
               .getSuitabilityScores($rootScope.activeSiteId)

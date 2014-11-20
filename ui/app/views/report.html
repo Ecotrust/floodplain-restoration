@@ -48,15 +48,37 @@
                     <div class="col-md-12 report-context-container">
                         <div class="row">
                             <a data-toggle="collapse" data-parent="#accordion-{{component.id}}" data-target="#collapse-{{component.id}}" ng-click="toggleCircleIconClass('circle-icon-{{component.id}}'); selectComponent('accordion-{{component.id}}');">
-                                <div class="col-md-12 report-context-title">
+                                <div class="col-md-11 report-context-title">
                                     {{component.name}} 
                                     <span id="circle-icon-{{component.id}}" class="glyphicon glyphicon-plus-sign green-text"></span>
                                 </div>
                             </a>
                         </div>
                         <div class="row">
-                            <div id="collapse-{{component.id}}" class="col-md-12 collapse">
-                                <h3>Some content!</h3>
+                            <div id="collapse-{{component.id}}" class="col-md-11 collapse">
+                                <div ng-if="component.question_ids.length == 0">
+                                    <h4> This data comes from the pit values. This report is not yet implemented.</h4>
+                                </div>
+                                <div class="row report-question-row" ng-repeat="qid in component.question_ids">
+                                    <div class="col-md-1">
+                                        <span class="numberCircle">{{qid|digits}}</span>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="row">
+                                            <div class="col-md-11">
+                                                <p class="report-question">{{answers[qid].question}}</p>
+                                                <p class="report-answer" ng-if="answers[qid].answer">{{answers[qid].answer | uppercase }}</p>
+                                                <p class="report-answer-unanswered" ng-if="!answers[qid].answer">UNANSWERED - <a class="btn btn-default" href="#/site/{{activeSiteId}}/survey/{{qid}}">Answer it now?</a></p>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-if="answers[qid].notes">
+                                            <div class="col-md-11 report-question-notes">
+                                                <p class="report-question-notes-header">Notes and references</p>
+                                                <p class="report-question-notes-text">{{answers[qid].notes}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

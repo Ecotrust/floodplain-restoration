@@ -698,11 +698,17 @@ hr {
   font-size: 16px;
 }
 
+.report-context-container {
+  font-family: "Agenda", Arial;
+}
+
 .report-context-title {
   font-size: 25px;
-  margin: 7px auto;
   cursor: pointer;
   color: black;
+  padding: 0 5px;
+  margin: 7px 10px;
+  border-radius: 6px;
 }
 
 .report-context-title:hover {
@@ -715,6 +721,45 @@ hr {
 
 .report-component-selected {
   background-color: white;
+  margin-bottom: 10px;
+}
+
+.report-question-row {
+  margin: 20px auto;
+}
+
+.report-question {
+  color: #094ca0;
+  font-size: 22px;
+  font-family: "Agenda", Arial;
+}
+
+.report-answer {
+  font-family: "Agenda", Arial;
+  color: #00a551;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.report-answer-unanswered {
+  color: red;
+}
+
+.report-question-notes {
+  border: solid 1px black;
+  font-family: "Rotis Serif", Georgia;
+  color: black;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.report-question-notes-header {
+  font-size: 12px;
+  color: gray;
+}
+
+.report-question-notes-text {
+  color: black;
 }
 
 @media (max-width: 991px) {
