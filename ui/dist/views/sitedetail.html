@@ -3,7 +3,7 @@
         <div class="col-md-2 property-edit bar-right">
             <a class="prop-action" href="#/site/{{site.id}}/edit">edit</a>
         </div>
-        --> <div class="col-md-2 property-survey"> <a class="prop-action" href="#/site/{{site.id}}/survey/1" ng-bind="surveyPrompt">Begin Survey</a> </div> <!--    
+        --> <div class="col-md-2 property-survey"> <a class="prop-action" href="#/site/{{site.id}}/survey/{{firstUnansweredId}}" ng-bind="surveyPrompt">Begin Survey</a> </div> <!--    
         <div class="col-md-2 property-delete">
             <a class="prop-action" ng-click="deleteSite(site.id)">delete</a>
         </div>
