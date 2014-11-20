@@ -7,6 +7,7 @@
  * # NavCtrl
  * Controller of the uiApp
  */
+
 angular.module('uiApp')
   .controller('NavCtrl', function ($scope, $rootScope, SiteFactory, QuestionFactory) {
 
