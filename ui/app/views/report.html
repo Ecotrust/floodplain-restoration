@@ -44,12 +44,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" ng-repeat="component in contexts[context].components">
+                <div class="row" ng-repeat="component in contexts[context].components" id="accordion-{{component.id}}">
                     <div class="col-md-12 report-context-container">
                         <div class="row">
-                            <div class="col-md-12 report-context-title">
-                                {{component.name}} 
-                                <span class="glyphicon glyphicon-plus-sign green-text"></span>
+                            <a data-toggle="collapse" data-parent="#accordion-{{component.id}}" data-target="#collapse-{{component.id}}" ng-click="toggleCircleIconClass('circle-icon-{{component.id}}'); selectComponent('accordion-{{component.id}}');">
+                                <div class="col-md-12 report-context-title">
+                                    {{component.name}} 
+                                    <span id="circle-icon-{{component.id}}" class="glyphicon glyphicon-plus-sign green-text"></span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div id="collapse-{{component.id}}" class="col-md-12 collapse">
+                                <h3>Some content!</h3>
                             </div>
                         </div>
                     </div>

@@ -701,10 +701,20 @@ hr {
 .report-context-title {
   font-size: 25px;
   margin: 7px auto;
+  cursor: pointer;
+  color: black;
+}
+
+.report-context-title:hover {
+  background-color: lightgray;
 }
 
 .report-context-title .green-text {
   font-size: 14px;
+}
+
+.report-component-selected {
+  background-color: white;
 }
 
 @media (max-width: 991px) {
