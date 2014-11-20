@@ -266,6 +266,27 @@ hr {
   margin: 5px 5px 3px 5px;
 }
 
+.property-pit-box {
+  margin: 20px auto;
+}
+
+.property-box-pit-name {
+  font-size: 22px;
+  margin-bottom: 0;
+}
+
+.property-box-pit-status {
+  font-size: 11px;
+  font-family: "Agenda", Arial;
+}
+
+.property-box-pit-status > .green-text {
+  background-color: transparent;
+}
+
+.property-box-pit-hr {
+  margin-top: 0;
+}
 
 .property-survey,
 .property-delete,
@@ -282,8 +303,9 @@ hr {
   cursor: pointer;
 }
 
-.prop-list-details >p {
+.prop-list-details > p {
   color: #000;
+  margin-left: 20px;
 }
 
 .pit-info {

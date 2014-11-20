@@ -42,25 +42,12 @@
                                 <span class="property-box-question-status">{{site.nodeCount}} of {{numQuestions}} questions completed</span>
                                 <span class="property-box-pit-status"> &middot; {{site.properties.pit_set.length}} pits</span>
                         </div>
-                        <div id="collapse-{{site.id}}" class="col-md-11 col-md-offset-1 collapse">
-                            <div class="row">
-                              <div class="col-md-12 prop-list-details">
-                                <strong>Notes:</strong>
-                                <p>
-                                  {{ site.properties.notes }}
-                                </p>
-                              </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 prop-list-details">
-                                    <p>Total pits: {{site.properties.pit_set.length}}</p>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="row" ng-repeat="pit in site.properties.pit_set">
-                                      <div class="col-md-11">
-                                        {{pit.properties.name}}
-                                      </div>
-                                    </div>
+                        <div id="collapse-{{site.id}}" class="col-md-11 collapse property-pit-box">
+                            <div class="row" ng-repeat="pit in site.properties.pit_set">
+                                <div class="col-md-6 prop-list-details">
+                                    <p class="property-box-pit-name">{{pit.properties.name}}</p>
+                                    <p class="property-box-pit-status" ng-if="pit.properties.notes">{{pit.properties.notes}}</p>
+                                    <hr class="property-box-pit-hr" ng-if="$index < site.properties.pit_set.length-1"/>
                                 </div>
                             </div>
                         </div>
