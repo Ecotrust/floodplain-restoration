@@ -34,19 +34,19 @@ angular.module('uiApp')
             'minScore' : 0,
             'maxScore' : 33,
             'label' : 'Unsuitable',
-            'bgColor': 'gray'
+            'class': 'unsuitable'
           },
           'med' : {
             'minScore': 33,
             'maxScore': 66,
             'label': 'Moderately Suitable',
-            'bgColor': 'yellow'
+            'class': 'moderately-suitable'
           },
           'high' : {
             'minScore': 66,
             'maxScore': 100,
             'label': 'Highly Suitable',
-            'bgColor': 'green'
+            'class': 'highly-suitable'
           }
         };
 
@@ -82,7 +82,6 @@ angular.module('uiApp')
             for (var catKey in suitabilityCategories) {
               var cat = suitabilityCategories[catKey];
               if (d.value <= cat.maxScore && d.value >= cat.minScore) {
-                console.log(cat.label);
                 return cat.label;
               }
             }
@@ -91,19 +90,16 @@ angular.module('uiApp')
           });
 
         scoreDivs.append('div')
-          .attr('class', 'suitability-bar')
-          .style('width', function(d) { return d.value + '%';})
-          .style('background-color', function(d) {
+          .attr('class', function(d) {
             for (var catKey in suitabilityCategories) {
               var cat = suitabilityCategories[catKey];
               if (d.value <= cat.maxScore && d.value >= cat.minScore) {
-                console.log(cat.bgColor);
-                return cat.bgColor;
+                return 'suitability-bar ' + cat.class;
               }
             }
-            console.log('no bg color for ' + d.key);
-            return 'transparent';
+            return 'suitability-bar';
           })
+          .style('width', function(d) { return d.value + '%';})
           .text(function(d) {return d.value;});
 
       });

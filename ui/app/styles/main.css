@@ -663,6 +663,18 @@ hr {
   min-height: 15px;
 }
 
+.unsuitable {
+  background-color: gray;
+}
+
+.moderately-suitable {
+  background-color: yellow;
+}
+
+.highly-suitable {
+  background-color: #49f;
+}
+
 .map-placeholder {
   color: white;
   font-size: 35px;

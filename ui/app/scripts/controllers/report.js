@@ -34,19 +34,19 @@ angular.module('uiApp')
         'minScore' : 0,
         'maxScore' : 33,
         'label' : 'Unsuitable',
-        'bgColor': 'gray'
+        'class' : 'unsuitable'
       },
       'med' : {
         'minScore': 33,
         'maxScore': 66,
         'label': 'Moderately Suitable',
-        'bgColor': 'yellow'
+        'class': 'moderately-suitable'
       },
       'high' : {
         'minScore': 66,
         'maxScore': 100,
         'label': 'Highly Suitable',
-        'bgColor': 'green'
+        'class': 'highly-suitable'
       }
     };
 
@@ -159,11 +159,11 @@ angular.module('uiApp')
       return null;
     }
 
-    function getBgColor(score) {
+    function getBgColorClass(score) {
       for (var catKey in suitabilityCategories) {
         var cat = suitabilityCategories[catKey];
         if (score <= cat.maxScore && score >= cat.minScore) {
-          return cat.bgColor;
+          return cat.class;
         }
       }
       return 'transparent';
@@ -175,7 +175,7 @@ angular.module('uiApp')
         var score = $rootScope.suitability[key] * 100;
         $scope.contexts[key].score = score;
         $scope.contexts[key].rank = getRank(score);
-        $scope.contexts[key].bgColor = getBgColor(score);
+        $scope.contexts[key].bgColorClass = getBgColorClass(score);
 
       }
 
