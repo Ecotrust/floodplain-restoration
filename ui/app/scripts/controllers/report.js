@@ -57,7 +57,7 @@ angular.module('uiApp')
       'suitability': 'Overall'
     };
 
-    $scope.context_list = ['site', 'socio_economic', 'landscape','suitability'];
+    $scope.contextList = ['site', 'socio_economic', 'landscape','suitability'];
 
     $scope.contexts = {
       'site': {
@@ -173,13 +173,13 @@ angular.module('uiApp')
 
       for (var key in suitabilityScoreTypes) {  //TODO: what if keys do not match?
         var score = $rootScope.suitability[key] * 100;
-        $scope.contexts[key]['score'] = score;
-        $scope.contexts[key]['rank'] = getRank(score);
-        $scope.contexts[key]['bgColor'] = getBgColor(score);
+        $scope.contexts[key].score = score;
+        $scope.contexts[key].rank = getRank(score);
+        $scope.contexts[key].bgColor = getBgColor(score);
 
       }
 
-    };
+    }
 
     // $scope.questions = QuestionFactory.getQuestions();
     $scope.maxQuestionId = 2;  //QuestionFactory will likely change substantially
@@ -196,9 +196,9 @@ angular.module('uiApp')
         $scope.maxQuestionId = questions[questions.length-1].id;
         for (var i = 0; i < questions.length; i++) {
           $scope.answers[questions[i].id] = questions[i];
-          $scope.answers[questions[i].id]['value'] = false;
-          $scope.answers[questions[i].id]['notes'] = false;
-          $scope.answers[questions[i].id]['answer'] = false;
+          $scope.answers[questions[i].id].value = false;
+          $scope.answers[questions[i].id].notes = false;
+          $scope.answers[questions[i].id].answer = false;
         }
 
         NodeFactory
@@ -207,15 +207,12 @@ angular.module('uiApp')
             nodes = NodeFactory.nodes;
             $scope.numNodes = nodes.length;
             for (var i = 0; i < nodes.length; i++) {
-              $scope.answers[nodes[i].question]['value'] = nodes[i].value;
-              $scope.answers[nodes[i].question]['notes'] = nodes[i].notes;
-              console.log(nodes[i].value)
+              $scope.answers[nodes[i].question].value = nodes[i].value;
+              $scope.answers[nodes[i].question].notes = nodes[i].notes;
               var choices = $scope.answers[nodes[i].question].choices;
-              for (var choice_idx in choices) {
-                console.log('== ' + choices[choice_idx].value)
-                if (choices[choice_idx].value === nodes[i].value) {
-                  $scope.answers[nodes[i].question]['answer'] = choices[choice_idx].choice;
-                  console.log('MATCH! Answer: ' + choices[choice_idx].choice);
+              for (var choiceIndex in choices) {
+                if (choices[choiceIndex].value === nodes[i].value) {
+                  $scope.answers[nodes[i].question].answer = choices[choiceIndex].choice;
                 }
               }
             }
@@ -227,7 +224,7 @@ angular.module('uiApp')
                 $rootScope.suitability = SiteFactory.suitability;
                 buildReport();
             
-            });
+              });
           });
 
         
@@ -236,7 +233,7 @@ angular.module('uiApp')
 
     $scope.alert = function (msg) {
       $window.alert(msg);
-    }
+    };
 
     $scope.toggleCircleIconClass = function(iconId) {
       var icon = document.getElementById(iconId);
@@ -245,7 +242,7 @@ angular.module('uiApp')
       } else {
         icon.className = icon.className.replace(/\bglyphicon-minus-sign\b/,'glyphicon-plus-sign');
       }
-    }
+    };
 
     $scope.selectComponent = function(componentId) {
       var component = document.getElementById(componentId);
@@ -254,6 +251,6 @@ angular.module('uiApp')
       } else {
         component.className = component.className + ' report-component-selected';
       }
-    }
+    };
 
   });
