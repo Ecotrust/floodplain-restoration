@@ -19,7 +19,7 @@ angular.module('uiApp')
       'title': 'Floodplain Gravel Mine Restoration',
       'welcome': 'The Floodplain Gravel Mine Restoration Tool',
       'hook': 'Informed decision making and resource investment <br> for the restoration of floodplain mining sites.',
-      'requirements': '<a class="documents-link" href="#/help/documents">What will I need?</a>',
+      'requirements': '<a class="homepage-link" href="#/help/documents">Before you get started</a>',
       'getStarted': 'Get Started',
       'siteListHeader': 'All properties',
       'siteCreateDirections': 'Click anywhere on the map to start defining your general property boundary. <br/><br/> Continue clicking to complete the shape of your property. <br/><br/> When you\'re satisfied with your property outline, double-click to end drawing.<br/><br/> Name and save your property when done. You can come back and edit this at any time.',

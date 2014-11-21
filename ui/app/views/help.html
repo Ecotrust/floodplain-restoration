@@ -1,6 +1,6 @@
 <div class="help-panel {{topic}}">
     <div class="left-panel">
-        <h3>{{ topic | uppercase }}</h3>
+        <h3 ng-if="topic!='documents'">{{ topic | uppercase }}</h3>
         <div><span ng-bind-html="text"></span></div>
     </div>
 </div>

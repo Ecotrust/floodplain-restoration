@@ -215,19 +215,19 @@ hr {
   position: absolute;
 }
 
-.documents-link {
+.homepage-link {
   color: #FFF;
   text-decoration: underline;
   font-weight: bold;
   margin: 20px;
 }
 
-.documents-link:hover {
+.homepage-link:hover {
   color: #00a551;
 }
 
 .jumbotron .get-started-row {
-  top: 50%;
+  top: 40%;
 }
 
 .get-started-btn {
