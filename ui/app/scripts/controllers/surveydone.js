@@ -51,7 +51,7 @@ angular.module('uiApp')
         };
 
         var suitabilityScoreTypes = {
-          'site': 'Property',
+          'site': 'Location',
           'socio_economic': 'Socio-Economic',
           'landscape': 'Landscape',
           'suitability': 'Overall'

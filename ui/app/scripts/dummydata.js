@@ -109,7 +109,7 @@ var dummydata = {
         ], 
         "name": "Willamette Confluence", 
         "date_modified": "2014-10-16T23:33:42.686Z", 
-        "notes": "Notes on Site", 
+        "notes": "Notes on Location", 
         "user": "dummyuser", 
         "date_created": "2014-10-16T23:33:42.686Z", 
         "shared_with_public": false, 
@@ -591,9 +591,9 @@ var dummydata = {
             "id": 5
           }
         ], 
-        "name": "Site Two", 
+        "name": "Location Two", 
         "date_modified": "2014-10-16T23:33:42.763Z", 
-        "notes": "Notes on Site", 
+        "notes": "Notes on Location", 
         "user": "dummyuser", 
         "date_created": "2014-10-16T23:33:42.763Z", 
         "shared_with_public": false, 
@@ -785,9 +785,9 @@ var dummydata = {
             "id": 6
           }
         ], 
-        "name": "Site 3", 
+        "name": "Location 3", 
         "date_modified": "2014-10-16T23:33:42.798Z", 
-        "notes": "Notes on Site", 
+        "notes": "Notes on Location", 
         "user": "dummyuser", 
         "date_created": "2014-10-16T23:33:42.798Z", 
         "shared_with_public": false, 

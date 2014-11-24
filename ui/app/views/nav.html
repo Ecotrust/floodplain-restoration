@@ -17,12 +17,12 @@
 
         <li class="dropdown" ng-show="userName">
           <a class="dropdown-toggle" data-toggle="dropdown">
-            Property <span class="caret"></span>
+            Location <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#/help/documents">Documents</a></li>
-            <li><a href="#/site/new">Add a property</a></li>
-            <li><a href="#/sites">List of all properties</a></li>
+            <li><a href="#/site/new">Add a location</a></li>
+            <li><a href="#/sites">List of all locations</a></li>
             <li class="divider"></li>
             <li ng-repeat="site in sites">
               <a href="#/site/{{site.id}}">{{site.properties.name}}</a>

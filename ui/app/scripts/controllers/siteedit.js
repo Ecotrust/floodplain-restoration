@@ -20,7 +20,7 @@ angular.module('uiApp')
 
     $scope.siteEditDirections = $sce.trustAsHtml(ContentFactory.get('siteCreateDirections'));
     $scope.siteEditDefinitions = $sce.trustAsHtml(ContentFactory.get('siteEditDefinitions'));
-    $scope.title = 'Creating A New Property';
+    $scope.title = 'Creating A New Location';
 
     map.showMap(true);
 
@@ -87,20 +87,20 @@ angular.module('uiApp')
           SiteFactory
             .postSite($scope.site, siteWkt)
             .then(function() {
-              console.log('spinner off (POST new property complete!)');
+              console.log('spinner off (POST new location complete!)');
               $location.path('/sites');
             });
         } else {
           SiteFactory
             .putSite($scope.site, siteWkt)
             .then(function() {
-              console.log('spinner off (PUT existing property complete!)');
+              console.log('spinner off (PUT existing location complete!)');
               $location.path('/sites');
             });
         }
       } catch (error) {
         console.log(error);
-        $window.alert('Please draw the boundaries for your property.');
+        $window.alert('Please draw the boundaries for your location.');
       }
     };
 

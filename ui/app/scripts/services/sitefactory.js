@@ -90,7 +90,7 @@ angular.module('uiApp')
 
       promise.error( function(res) {
         console.log('ERROR', res);
-        $window.alert('Could not create new property. Be sure you have all required fields filled in.');
+        $window.alert('Could not create new location. Be sure you have all required fields filled in.');
       });
 
       return promise;
@@ -120,7 +120,7 @@ angular.module('uiApp')
 
       promise.error( function(res) {
         console.log('ERROR', res);
-        $window.alert('Could not update property. Be sure you have all required fields filled in.');
+        $window.alert('Could not update location. Be sure you have all required fields filled in.');
       });
 
       return promise;

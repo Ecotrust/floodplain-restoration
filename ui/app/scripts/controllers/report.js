@@ -51,7 +51,7 @@ angular.module('uiApp')
     };
 
     var suitabilityScoreTypes = {
-      'site': 'Property',
+      'site': 'Location',
       'socio_economic': 'Socio-Economic',
       'landscape': 'Landscape',
       'suitability': 'Overall'
@@ -62,7 +62,7 @@ angular.module('uiApp')
     $scope.contexts = {
       'site': {
         'id': 1,
-        'label': 'Property',
+        'label': 'Location',
         'components': [
           {
             'id': 10,
@@ -71,7 +71,7 @@ angular.module('uiApp')
           },
           {
             'id': 11,
-            'name': 'Practical, property-level restorability',
+            'name': 'Practical, location-level restorability',
             'question_ids': [1,2,3]
           }
         ]
