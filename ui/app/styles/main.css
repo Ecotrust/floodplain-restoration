@@ -270,6 +270,11 @@ hr {
   margin: 20px auto;
 }
 
+.no-pits {
+  margin-left: 20px;
+  color: black;
+}
+
 .property-box-pit-name {
   font-size: 22px;
   margin-bottom: 0;

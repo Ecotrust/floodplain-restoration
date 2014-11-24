@@ -43,7 +43,8 @@
                                 <span class="property-box-pit-status"> &middot; {{site.properties.pit_set.length}} pits</span>
                         </div>
                         <div id="collapse-{{site.id}}" class="col-md-11 collapse property-pit-box">
-                            <div class="row" ng-repeat="pit in site.properties.pit_set">
+                            <div ng-if="site.properties.pit_set.length == 0"><p class="no-pits">You have not added any pits to this location.</p></div>
+                            <div class="row" ng-repeat="pit in site.properties.pit_set" ng-if="site.properties.pit_set.length > 0">
                                 <div class="col-md-6 prop-list-details">
                                     <p class="property-box-pit-name">{{pit.properties.name}}</p>
                                     <p class="property-box-pit-status" ng-if="pit.properties.notes">{{pit.properties.notes}}</p>
