@@ -717,8 +717,22 @@ hr {
   text-align: center;
   border: solid 1px black;
   height: 400px;
-  background-color: blue;
+  /*background-color: blue;*/
+  background-image: url('../images/map-example.png');
+  background-size: 900px 600px;
   padding-top: 50px;
+}
+
+@media (min-width: 1000px) {
+  .map-placeholder {
+    background-size: 1200px 800px;  /* For map photo */
+  }
+}
+
+@media (min-width: 1200px) {
+  .map-placeholder {
+    background-size: 1500px 900px;  /* For map photo */
+  }
 }
 
 .report {
