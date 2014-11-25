@@ -9,7 +9,7 @@
  */
 
 angular.module('uiApp')
-  .controller('NavCtrl', function ($scope, $rootScope, SiteFactory, QuestionFactory) {
+  .controller('NavCtrl', function ($scope, $rootScope, $window, $location, SiteFactory, QuestionFactory) {
 
     $scope.sites = [];
     $scope.site = {
@@ -45,10 +45,25 @@ angular.module('uiApp')
     });
   
     $scope.questions = [];
+    $scope.questionsObj = {};
+    $scope.contexts = [];
     QuestionFactory
       .getQuestions()
       .then( function() {
         $scope.questions = QuestionFactory.questions;
+        for (var question in $scope.questions) {
+          $scope.questionsObj[$scope.questions[question].id.toString()] = $scope.questions[question];
+        }
+        $scope.contexts = QuestionFactory.contexts;
       });
+
+    $scope.href = function(link) {
+      $location.path(link);
+    };
+
+    $scope.link = function(link) {
+      $window.location = link;
+    };
+
     // $scope.categoryQuestions = QuestionFactory.getCategoryQuestions();
   });
