@@ -26,7 +26,7 @@
             <li class="nav-dd" ng-click="href('site/new')">
               ADD A LOCATION
             </li>
-            <li ng-repeat="site in sites" class="nav-dd" ng-click="href('site/{{site.id}}')">
+            <li ng-repeat="site in sites" class="nav-dd" ng-click="href('site/' + site.id)">
               {{site.properties.name | uppercase}}
             </li>
             <li class="nav-dd last-dd" ng-click="href('sites')">ALL LOCATIONS</a></li>
@@ -42,13 +42,13 @@
               <div ng-repeat="component in context.components" ng-if="component.question_ids.length>0" class="dropdown-submenu nav-dd">
                 {{component.name | uppercase}}
                 <ul class="dropdown-menu survey-question-dd" role="menu">
-                  <li class="nav-dd" ng-repeat="question_id in component.question_ids" ng-click="href('site/{{activeSiteId}}/survey/{{question_id}}/')" ng-class="{ 'last-dd' : $index+1 == component.question_ids.length}">
+                  <li class="nav-dd" ng-repeat="question_id in component.question_ids" ng-click="href('site/' + activeSiteId + '/survey/' + question_id + '/')" ng-class="{ 'last-dd' : $index+1 == component.question_ids.length}">
                     {{questionsObj[question_id.toString()].title | uppercase}}
                   </li>
                 </ul>
               </div>
             </li>    
-            <li class="nav-dd last-dd" ng-click="href('site/{{activeSiteId}}/report')">  
+            <li class="nav-dd last-dd" ng-click="href('site/' + activeSiteId + '/report')">  
               REPORT
             </li>    
           </ul>

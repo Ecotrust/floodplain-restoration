@@ -11,6 +11,8 @@ if (false) { var map; }
  */
 angular.module('uiApp')
   .controller('SitedetailCtrl', function ($scope, $routeParams, $rootScope, $window, SiteFactory, QuestionFactory, NodeFactory) {
+    var activeSiteId = parseInt($routeParams.siteId, 10);
+    $rootScope.activeSiteId = activeSiteId;
 
     if (!$rootScope.userName) {
       $window.alert('You are not logged in. You will now be redirected to the login page.');
@@ -18,9 +20,6 @@ angular.module('uiApp')
     }
 
     map.showMap(true);
-
-    var activeSiteId = parseInt($routeParams.siteId, 10);
-    $rootScope.activeSiteId = activeSiteId;
     
     $scope.surveyPrompt = 'Begin Survey';
     $scope.sites = [];
