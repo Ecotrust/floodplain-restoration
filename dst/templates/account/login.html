@@ -11,7 +11,7 @@
     <div class="col-md-8 col-md-offset-2">
       <h1>{% trans "Log in." %}</h1>
 
-      <p>{% blocktrans %}Anyone can register for the FLoodplain Gravel Mine Restoration tool - <a href="{{ signup_url }}">registering</a> allows you to define properties, test their suitability, and share the results with your collaborators.{% endblocktrans %}</p>
+      <p>{% blocktrans %}Anyone can register for the Floodplain Gravel Mine Restoration tool - <a href="{{ signup_url }}">registering</a> allows you to define properties, test their suitability, and share the results with your collaborators.{% endblocktrans %}</p>
 
       <form class="login" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
