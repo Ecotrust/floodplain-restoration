@@ -29,6 +29,237 @@ angular.module('uiApp')
     var blankPit;
     var isNewPit = false;
 
+    $scope.pitFormObj = {
+      'form': [
+        {
+          'question': 'Name',
+          'id': 'name',
+          'order': 0,
+          'type': 'text',
+          'answers': []
+        },
+        {
+          'question': 'Contamination',
+          'id': 'contamination',
+          'order': 10,
+          'type': 'select',
+          'answers': [
+            {
+              'label': 'Unknown',
+              'value': 0.5
+            },
+            {
+              'label': 'Clean',
+              'value': 1
+            },
+            {
+              'label': 'Contaminated',
+              'value': 0
+            }
+          ]
+        },
+        {
+          'question': 'Substrate',
+          'id': 'substrate',
+          'order': 20,
+          'type': 'select',
+          'answers': [
+            {
+              'label': 'Unknown',
+              'value': 0.5
+            },
+            {
+              'label': 'Good',
+              'value': 1
+            },
+            {
+              'label': 'Bad',
+              'value': 0
+            }
+          ]
+        },
+        {
+          'question': 'Adjacent River Depth',
+          'id': 'adjacent_river_depth',
+          'order': 30,
+          'type': 'select',
+          'answers': [
+            {
+              'label': 'Unknown',
+              'value': 0.5
+            },
+            {
+              'label': 'Deeper than pit (good?)',
+              'value': 1
+            },
+            {
+              'label': 'Same as pit',
+              'value': 0.6
+            },
+            {
+              'label': 'Shallower than pit (bad?)',
+              'value': 0
+            }
+          ]
+        },
+        {
+          'question': 'Slope Distance',
+          'id': 'slope_dist',
+          'order': 40,
+          'type': 'select',
+          'answers': [
+            {
+              'label': 'Unknown',
+              'value': 0.5
+            },
+            {
+              'label': 'Short (< 20 ft.)',
+              'value': 1
+            },
+            {
+              'label': 'Medium (20-80 ft.)',
+              'value': 0.6
+            },
+            {
+              'label': 'Long (> 80ft.)',
+              'value': 0
+            }
+          ]
+        },
+        {
+          'question': 'Pit Levees',
+          'id': 'pit_levies',
+          'order': 50,
+          'type': 'select',
+          'answers': [
+            {
+              'label': 'Unknown',
+              'value': 0.5
+            },
+            {
+              'label': 'Yes (Good?)',
+              'value': 1
+            },
+            {
+              'label': 'No (Bad?)',
+              'value': 0
+            }
+          ]
+        },
+        {
+          'question': 'Bedrock',
+          'id': 'bedrock',
+          'order': 60,
+          'type': 'select',
+          'answers': [
+            {
+              'label': 'Unknown',
+              'value': 0.5
+            },
+            {
+              'label': 'Yes (Good?)',
+              'value': 1
+            },
+            {
+              'label': 'No (Bad?)',
+              'value': 0
+            }
+          ]
+        },
+        {
+          'question': 'Bank Slope',
+          'id': 'bank_slope',
+          'order': 70,
+          'type': 'select',
+          'answers': [
+            {
+              'label': 'Unknown',
+              'value': 0.5
+            },
+            {
+              'label': 'Gentle (Good?)',
+              'value': 1
+            },
+            {
+              'label': 'Steep (Bad?)',
+              'value': 0
+            }
+          ]
+        },
+        {
+          'question': 'Pit Depth',
+          'id': 'pit_depth',
+          'order': 80,
+          'type': 'select',
+          'answers': [
+            {
+              'label': 'Unknown',
+              'value': 0.5
+            },
+            {
+              'label': 'Shallower than river (Good?)',
+              'value': 1
+            },
+            {
+              'label': 'About the same',
+              'value': 0.6
+            },
+            {
+              'label': 'Deeper than river (Bad?)',
+              'value': 0
+            }
+          ]
+        },
+        {
+          'question': 'Surface Area',
+          'id': 'surface_area',
+          'order': 90,
+          'type': 'select',
+          'answers': [
+            {
+              'label': 'Unknown',
+              'value': 0.5
+            },
+            {
+              'label': '< 1 acre',
+              'value': 1
+            },
+            {
+              'label': '> 1 acre',
+              'value': 0
+            }
+          ]
+        },
+        {
+          'question': 'Complexity',
+          'id': 'complexity',
+          'order': 100,
+          'type': 'select',
+          'answers': [
+            {
+              'label': 'Unknown',
+              'value': 0.5
+            },
+            {
+              'label': 'Simple',
+              'value': 1
+            },
+            {
+              'label': 'Complex',
+              'value': 0
+            }
+          ]
+        },
+        {
+          'question': 'Notes',
+          'id': 'notes',
+          'order': 110,
+          'type': 'textarea',
+          'answers': []
+        }
+      ]
+    };
+
     if ($routeParams.pitId === undefined) {
       $scope.pitEditDirections = $sce.trustAsHtml(ContentFactory.get('pitCreateDirections'));
       isNewPit = true;

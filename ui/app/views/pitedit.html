@@ -12,117 +12,23 @@
 
     <div>
       <form novalidate name="pitForm" class="form-horizontal" role="form">
-
-          <div class="property-box">
-              <div class="form-group">
-                <label for="name" class="col-sm-4 control-label">Name</label>
-                <div class="col-sm-8 pit-edit-field">
-                  <input type="text" class="form-control" id="name" ng-model="pit.properties.name" required>
+          <div class="property-box row">
+              <div class="form-group col-sm-12">
+                <div ng-repeat="question in pitFormObj.form" class="row">
+                    <label for="question.id" class="col-sm-4 control-label">
+                        {{question.question}}
+                    </label>
+                    <div class="col-sm-8 pit-edit-field">
+                        <input type="text" class="form-control" id="{{question.id}}" ng-model="pit.properties[question.id]" required ng-if="question.type=='text'">
+                        <select class="form-control" id="{{question.id}}" ng-model="pit.properties[question.id]" required ng-if="question.type=='select'">
+                            <option ng-repeat="opt in question.answers" value="{{opt.value}}">  {{opt.label}}
+                            </option>
+                        </select>
+                        <textarea type="text" class="form-control" id="{{question.id}}" ng-model="pit.properties[question.id]" ng-if="question.type=='textarea'"></textarea>
+                    </div>
                 </div>
-
-                <label for="contamination" class="col-sm-4 control-label">Contamination</label>
-                <div class="col-sm-8 pit-edit-field">
-                    <select class="form-control" id="contamination" ng-model="pit.properties.contamination" required>
-                        <option value="0.5">Unknown</option>
-                        <option value="1">Clean</option>
-                        <option value="0">Contaminated</option>
-                    </select>
-
-                <!-- <input type="text" class="form-control"> -->
-                </div>
-
-                <label for="substrate" class="col-sm-4 control-label">Substrate</label>
-                <div class="col-sm-8 pit-edit-field">
-                    <select class="form-control" id="substrate" ng-model="pit.properties.substrate" required>
-                        <option value="0.5">Unknown</option>
-                        <option value="1">Good</option>
-                        <option value="0">Bad</option>
-                    </select>
-                </div>
-
-                <label for="adjacent_river_depth" class="col-sm-4 control-label">Adjacent River Depth</label>
-                <div class="col-sm-8 pit-edit-field">
-                    <select class="form-control" id="adjacent_river_depth" ng-model="pit.properties.adjacent_river_depth" required>
-                        <option value="0.5">Unknown</option>
-                        <option value="1">Deeper than pit (good?)</option>
-                        <option value="0.6">Same as pit</option>
-                        <option value="0">Shallower than pit (bad?)</option>
-                    </select>
-                </div>
-
-                <label for="slope_dist" class="col-sm-4 control-label">Slope Distance</label>
-                <div class="col-sm-8 pit-edit-field">
-                    <select class="form-control" id="slope_dist" ng-model="pit.properties.slope_dist" required>
-                        <option value="0.5">Unknown</option>
-                        <option value="1">Short (&lt; 20 ft.)</option>
-                        <option value="0.6">medium (20-80 ft.)</option>
-                        <option value="0">Long (&gt; 80 ft)</option>
-                    </select>
-                </div>
-
-                <label for="pit_levies" class="col-sm-4 control-label">Pit Levees</label>
-                <div class="col-sm-8 pit-edit-field">
-                    <select class="form-control" id="pit_levies" ng-model="pit.properties.pit_levies" required>
-                        <option value="0.5">Unknown</option>
-                        <option value="1">Yes (good?)</option>
-                        <option value="0">No (bad?)</option>
-                    </select>
-                </div>
-
-                <label for="bedrock" class="col-sm-4 control-label">Bedrock</label>
-                <div class="col-sm-8 pit-edit-field">
-                    <select class="form-control" id="bedrock" ng-model="pit.properties.bedrock" required>
-                        <option value="0.5">Unknown</option>
-                        <option value="1">Yes (Good?)</option>
-                        <option value="0">No (Bad?)</option>
-                    </select>
-                </div>
-
-                <label for="bank_slope" class="col-sm-4 control-label">Bank Slope</label>
-                <div class="col-sm-8 pit-edit-field">
-                    <select class="form-control" id="bank_slope" ng-model="pit.properties.bank_slope" required>
-                        <option value="0.5">Unknown</option>
-                        <option value="1">Gentle (Good?)</option>
-                        <option value="0">Steep (Bad?)</option>
-                    </select>
-                </div>
-
-                <label for="pit_depth" class="col-sm-4 control-label">Pit Depth</label>
-                <div class="col-sm-8 pit-edit-field">
-                    <select class="form-control" id="pit_depth" ng-model="pit.properties.pit_depth" required>
-                        <option value="0.5">Unknown</option>
-                        <option value="1">Shallower than river (Good?)</option>
-                        <option value="0.6">About the same</option>
-                        <option value="0">Deeper than river (Bad?)</option>
-                    </select>
-                </div>
-
-                <label for="surface_area" class="col-sm-4 control-label">Surface Area</label>
-                <div class="col-sm-8 pit-edit-field">
-                    <select class="form-control" id="surface_area" ng-model="pit.properties.surface_area" required>
-                        <option value="0.5">Unknown</option>
-                        <option value="1">&lt; 1 acre</option>
-                        <option value="0">&gt; 1 acre</option>
-                    </select>
-                </div>
-
-                <label for="complexity" class="col-sm-4 control-label">Complexity</label>
-                <div class="col-sm-8 pit-edit-field">
-                    <select class="form-control" id="complexity" ng-model="pit.properties.complexity" required>
-                        <option value="0.5">Unknown</option>
-                        <option value="1">Simple</option>
-                        <option value="0">Complex</option>
-                    </select>
-                </div>
-
-                <label for="notes" class="col-sm-4 control-label">Notes</label>
-                <div class="col-sm-8 pit-edit-field">
-                <textarea type="text" class="form-control" id="notes" ng-model="pit.properties.notes"></textarea>
-                </div>
-
               </div>
             </div>
-
           <div class="pull-right bottom-buttons">
             <a class="btn btn-default" href="#/site/{{ site.id }}">Cancel</a>
             <button class="btn btn-default" ng-click="save()">Save</button>
