@@ -1,6 +1,9 @@
 'use strict';
 
-if (false) {var map =  null;}
+if (false) {
+  var map =  null;
+  var rmap =  null;
+}
 
 /**
  * @ngdoc function
@@ -226,6 +229,34 @@ angular.module('uiApp')
             
               });
           });
+
+
+            /*
+        SiteFactory.getSites().then(
+          function() {
+            $scope.sites = SiteFactory.sites.features;
+
+            // set active site
+            for (var i = SiteFactory.sites.features.length - 1; i >= 0; i--) {
+              var site = SiteFactory.sites.features[i];
+              if (site.id === $rootScope.activeSiteId) {
+                $scope.site = site;
+              }
+            }
+
+            // map
+            rmap.clear();
+            rmap.loadSites({
+              type: 'FeatureCollection',
+              features:[$scope.site]
+            });
+            rmap.loadPits({
+              type: 'FeatureCollection',
+              features:$scope.site.properties.pit_set
+            });
+          }
+        );
+            */
 
         
         map.showMap(false);

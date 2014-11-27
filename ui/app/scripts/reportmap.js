@@ -2,7 +2,7 @@
 
 if (false) { var ol = null; }
 
-var map = {
+var rmap = {
   site: {},
   pit: {}
 };
@@ -11,7 +11,7 @@ var map = {
 /*
  * Vector feature styling
  */
-map.styleEditable = function() {
+rmap.styleEditable = function() {
   return [new ol.style.Style({
     stroke: new ol.style.Stroke({
       color: 'blue',
@@ -23,7 +23,7 @@ map.styleEditable = function() {
   })];
 };
 
-map.pit.style = function() {
+rmap.pit.style = function() {
   return [new ol.style.Style({
     stroke: new ol.style.Stroke({
       color: 'white',
@@ -35,7 +35,7 @@ map.pit.style = function() {
   })];
 };
 
-map.site.style = function() {
+rmap.site.style = function() {
   return [new ol.style.Style({
     stroke: new ol.style.Stroke({
       color: 'white',
@@ -52,136 +52,77 @@ map.site.style = function() {
 /*
  * Public methods
  */
-map.loadSites = function(data) {
+rmap.loadSites = function(data) {
 
   if (!data || data.type !== 'FeatureCollection') {
-    console.log('ERROR in data supplied to map.loadSites:', data);
+    console.log('ERROR in data supplied to rmap.loadSites:', data);
     return false;
   }
-  map.map.removeLayer(map.site.layer);
+  rmap.map.removeLayer(rmap.site.layer);
 
-  map.site.source = new ol.source.GeoJSON(
+  rmap.site.source = new ol.source.GeoJSON(
     ({
       object: data
     })
   );
 
-  map.site.layer = new ol.layer.Vector({
-    source: map.site.source,
-    style: map.site.style
+  rmap.site.layer = new ol.layer.Vector({
+    source: rmap.site.source,
+    style: rmap.site.style
   });
 
-  map.map.addLayer(map.site.layer);
-  map.map.getView().fitExtent(map.site.source.getExtent(), map.map.getSize());
+  rmap.map.addLayer(rmap.site.layer);
+  rmap.map.getView().fitExtent(rmap.site.source.getExtent(), rmap.map.getSize());
 };
 
-map.loadPits = function(data) {
+rmap.loadPits = function(data) {
   
   if (!data || data.type !== 'FeatureCollection') {
-    console.log('ERROR in data supplied to map.loadPits:', data);
+    console.log('ERROR in data supplied to rmap.loadPits:', data);
     return false;
   }
-  map.map.removeLayer(map.pit.layer);
+  rmap.map.removeLayer(rmap.pit.layer);
 
-  map.pit.source = new ol.source.GeoJSON(
+  rmap.pit.source = new ol.source.GeoJSON(
     ({
       object: data
     })
   );
 
-  map.pit.layer = new ol.layer.Vector({
-    source: map.pit.source,
-    style: map.pit.style
+  rmap.pit.layer = new ol.layer.Vector({
+    source: rmap.pit.source,
+    style: rmap.pit.style
   });
 
-  map.map.addLayer(map.pit.layer);
+  rmap.map.addLayer(rmap.pit.layer);
 };
 
-map.clear = function() {
-  map.map.removeInteraction(map.drawPit);
-  map.map.removeInteraction(map.drawSite);
-  map.map.removeInteraction(map.modifyPit);
-  map.map.removeInteraction(map.modifySite);
-  map.map.removeLayer(map.pit.layer);
-  map.map.removeLayer(map.site.layer);
+rmap.clear = function() {
+  rmap.map.removeInteraction(rmap.drawPit);
+  rmap.map.removeInteraction(rmap.drawSite);
+  rmap.map.removeInteraction(rmap.modifyPit);
+  rmap.map.removeInteraction(rmap.modifySite);
+  rmap.map.removeLayer(rmap.pit.layer);
+  rmap.map.removeLayer(rmap.site.layer);
 };
 
-map.wktFormat = new ol.format.WKT();
+rmap.wktFormat = new ol.format.WKT();
 
-map.editSite = function() {
-  map.modifySite = new ol.interaction.Modify({
-    features: new ol.Collection(map.site.source.getFeatures()),
-    deleteCondition: function(event) {
-      return ol.events.condition.shiftKeyOnly(event) &&
-          ol.events.condition.singleClick(event);
-    }
-  });
-  map.map.addInteraction(map.modifySite);
-  map.site.layer.setStyle(map.styleEditable);
-};
-
-map.editPit = function() {
-  map.modifyPit = new ol.interaction.Modify({
-    features: new ol.Collection(map.pit.source.getFeatures()),
-    deleteCondition: function(event) {
-      return ol.events.condition.shiftKeyOnly(event) &&
-          ol.events.condition.singleClick(event);
-    }
-  });
-  map.map.addInteraction(map.modifyPit);
-  map.map.getView().fitExtent(map.pit.source.getExtent(), map.map.getSize());
-  map.pit.layer.setStyle(map.styleEditable);
-};
-
-map.addSite = function() {
-  map.drawSite = new ol.interaction.Draw({
-    source: map.site.source,
-    type: 'MultiPolygon'
-  });
-  map.drawSite.on('drawstart', function(e) {
-    e = e;
-    map.site.source.clear();
-  });
-  map.drawSite.on('drawend', function(e) {
-    e = e;
-    // todo, drawing ended
-  });
-  map.map.addInteraction(map.drawSite);
-  map.site.layer.setStyle(map.styleEditable);
-};
-
-map.addPit = function() {
-  map.drawPit = new ol.interaction.Draw({
-    source: map.pit.source,
-    type: 'Polygon'
-  });
-  map.drawPit.on('drawstart', function(e) {
-    e = e;
-    map.pit.source.clear();
-  });
-  map.drawPit.on('drawend', function(e) {
-    e = e;
-    // TODO drawing ended... start editing
-  });
-  map.map.addInteraction(map.drawPit);
-  map.pit.layer.setStyle(map.styleEditable);
-};
-
-map.getActiveSiteWkt = function() {
-  var features = map.site.source.getFeatures();
+rmap.getActiveSiteWkt = function() {
+  var features = rmap.site.source.getFeatures();
   var geom = features[0].getGeometry();
-  var geomwkt = map.wktFormat.writeGeometry(geom);
+  var geomwkt = rmap.wktFormat.writeGeometry(geom);
   return geomwkt;
 };
 
-map.getActivePitWkt = function() {
-  var features = map.pit.source.getFeatures();
+rmap.getActivePitWkt = function() {
+  var features = rmap.pit.source.getFeatures();
   var geom = features[0].getGeometry();
-  var geomwkt = map.wktFormat.writeGeometry(geom);
+  var geomwkt = rmap.wktFormat.writeGeometry(geom);
   return geomwkt;
 };
 
-map.map = new ol.Map({
+rmap.map = new ol.Map({
   target: 'report-map',
   layers: [
     new ol.layer.Tile({
