@@ -1,5 +1,5 @@
 <div class="left-panel"> <div class="left-panel-content"> <!--   <a class="btn btn-default btn-xs" href="#/sites">&lt;&lt;Back</a>
-     --> <h3> Property Details </h3> <div class="property-box"> <div class="row"> <div class="col-md-10"> <h4>{{site.properties.name}}</h4> </div> <!--
+     --> <h3> Location Details </h3> <div class="property-box"> <div class="row"> <div class="col-md-10"> <h4>{{site.properties.name}}</h4> </div> <!--
         <div class="col-md-2 property-edit bar-right">
             <a class="prop-action" href="#/site/{{site.id}}/edit">edit</a>
         </div>
@@ -7,4 +7,4 @@
         <div class="col-md-2 property-delete">
             <a class="prop-action" ng-click="deleteSite(site.id)">delete</a>
         </div>
-        --> </div> <hr> <div class="row" ng-repeat="pit in site.properties.pit_set"> <div class="col-md-10 col-md-offset-1 pit-info-row"> <div class="row"> <a href="#/site/{{site.id}}/pit/{{pit.id}}/edit"> <div class="col-md-8 pit-info pit-info-link"> <p class="pit-label"> {{pit.properties.name}} </p> <p class="pit-details"> {{pit.properties.notes}} <span class="hide">(#{{pit.id}})</span> </p> </div> </a> <div class="col-md-4"> <div class="btn-group"> <button class="btn btn-default" href="#" ng-click="deleteSitePit(site.id, pit.id)"><span class="glyphicon glyphicon-trash"></span></button> </div> </div> </div> </div> </div> </div> <div class="btn-group pull-right bottom-buttons"> <a class="btn btn-default" href="#/sites">&lt;&lt; Back to Sites</a> <a class="btn btn-default" href="#/site/{{site.id}}/pit/new">Add New Pit</a> </div> </div> </div>
+        --> </div> <hr> <div class="row" ng-repeat="pit in site.properties.pit_set"> <div class="col-md-10 col-md-offset-1 pit-info-row"> <div class="row"> <a href="#/site/{{site.id}}/pit/{{pit.id}}/edit"> <div class="col-md-8 pit-info pit-info-link"> <p class="pit-label"> {{pit.properties.name}} </p> <p class="pit-details"> {{pit.properties.notes}} <span class="hide">(#{{pit.id}})</span> </p> </div> </a> <div class="col-md-4"> <div class="btn-group"> <button class="btn btn-default" href="#" ng-click="deleteSitePit(site.id, pit.id)"><span class="glyphicon glyphicon-trash"></span></button> </div> </div> </div> </div> </div> </div> <div class="btn-group pull-right bottom-buttons"> <a class="btn btn-default" href="#/sites">&lt;&lt; Back to Locations</a> <a class="btn btn-default" href="#/site/{{site.id}}/pit/new">Add New Pit</a> </div> </div> </div>
