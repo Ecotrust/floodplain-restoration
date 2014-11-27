@@ -14,17 +14,21 @@
       <form novalidate name="pitForm" class="form-horizontal" role="form">
           <div class="property-box row">
               <div class="form-group col-sm-12">
-                <div ng-repeat="question in pitFormObj.form" class="row">
-                    <label for="question.id" class="col-sm-4 control-label">
-                        {{question.question}}
-                    </label>
-                    <div class="col-sm-8 pit-edit-field">
-                        <input type="text" class="form-control" id="{{question.id}}" ng-model="pit.properties[question.id]" required ng-if="question.type=='text'">
-                        <select class="form-control" id="{{question.id}}" ng-model="pit.properties[question.id]" required ng-if="question.type=='select'">
-                            <option ng-repeat="opt in question.answers" value="{{opt.value}}">  {{opt.label}}
-                            </option>
-                        </select>
-                        <textarea type="text" class="form-control" id="{{question.id}}" ng-model="pit.properties[question.id]" ng-if="question.type=='textarea'"></textarea>
+                <div ng-repeat="question in pitFormObj.form" ng-show="question.visible">
+                    <div class="row">
+                      <label for="question.id" class="col-sm-10 pit-question-label">
+                          {{question.question}}
+                      </label>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-11 col-sm-offset-1">
+                          <input type="text" class="form-control" id="{{question.id}}" ng-model="pit.properties[question.id]" required ng-if="question.type=='text'">
+                          <select class="form-control" id="{{question.id}}" ng-model="pit.properties[question.id]" required ng-if="question.type=='select'">
+                              <option ng-repeat="opt in question.answers" value="{{opt.value}}">  {{opt.label}}
+                              </option>
+                          </select>
+                          <textarea type="text" class="form-control" id="{{question.id}}" ng-model="pit.properties[question.id]" ng-if="question.type=='textarea'"></textarea>
+                      </div>
                     </div>
                 </div>
               </div>

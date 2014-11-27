@@ -33,33 +33,48 @@ angular.module('uiApp')
       'form': [
         {
           'question': 'Name',
+          'visible': true,
           'id': 'name',
           'order': 0,
           'type': 'text',
           'answers': []
         },
         {
-          'question': 'Contamination',
+          'question': 'Is hazardous waste present?',
+          'visible': true,
           'id': 'contamination',
           'order': 10,
           'type': 'select',
           'answers': [
             {
-              'label': 'Unknown',
+              'label': 'I don\'t know',
               'value': 0.5
             },
             {
-              'label': 'Clean',
+              'label': 'No, definitely not.',
               'value': 1
             },
             {
-              'label': 'Contaminated',
+              'label': 'No, I don’t think so',
+              'value': 0.8
+            },
+            {
+              'label': 'Yes, but I do not know if it can be remediated.',
+              'value': 0.4
+            },
+            {
+              'label': 'Yes, and the cost and effort to remediate it is acceptable.',
+              'value': 0.2
+            },
+            {
+              'label': 'Yes, and it will be expensive and/or very difficult to remediate.',
               'value': 0
             }
           ]
         },
         {
           'question': 'Substrate',
+          'visible': false,
           'id': 'substrate',
           'order': 20,
           'type': 'select',
@@ -79,37 +94,47 @@ angular.module('uiApp')
           ]
         },
         {
-          'question': 'Adjacent River Depth',
+          'question': 'How much deeper is the pit than the adjacent river thalweg?',
+          'visible': true,
           'id': 'adjacent_river_depth',
           'order': 30,
           'type': 'select',
           'answers': [
             {
-              'label': 'Unknown',
+              'label': 'I don\'t know',
               'value': 0.5
             },
             {
-              'label': 'Deeper than pit (good?)',
+              'label': 'Much deeper than pit (good?)',
               'value': 1
             },
             {
-              'label': 'Same as pit',
+              'label': 'A little deeper than pit',
+              'value': 0.8
+            },
+            {
+              'label': 'About the same as pit',
               'value': 0.6
             },
             {
-              'label': 'Shallower than pit (bad?)',
+              'label': 'A little shallower than pit',
+              'value': 0.3
+            },
+            {
+              'label': 'Much shallower than pit (bad?)',
               'value': 0
             }
           ]
         },
         {
-          'question': 'Slope Distance',
+          'question': 'What is the distance from the river to the pit edge?',
+          'visible': true,
           'id': 'slope_dist',
           'order': 40,
           'type': 'select',
           'answers': [
             {
-              'label': 'Unknown',
+              'label': 'I don\'t know',
               'value': 0.5
             },
             {
@@ -127,13 +152,14 @@ angular.module('uiApp')
           ]
         },
         {
-          'question': 'Pit Levees',
+          'question': 'Are there any pit-adjacent levees?',
+          'visible': true,
           'id': 'pit_levies',
           'order': 50,
           'type': 'select',
           'answers': [
             {
-              'label': 'Unknown',
+              'label': 'I don\'t know',
               'value': 0.5
             },
             {
@@ -148,6 +174,7 @@ angular.module('uiApp')
         },
         {
           'question': 'Bedrock',
+          'visible': false,
           'id': 'bedrock',
           'order': 60,
           'type': 'select',
@@ -167,27 +194,33 @@ angular.module('uiApp')
           ]
         },
         {
-          'question': 'Bank Slope',
+          'question': 'Select the answer that best describes the slope of the pit bank:',
+          'visible': true,
           'id': 'bank_slope',
           'order': 70,
           'type': 'select',
           'answers': [
             {
-              'label': 'Unknown',
+              'label': 'I don\'t know',
               'value': 0.5
             },
             {
-              'label': 'Gentle (Good?)',
+              'label': 'The bank slope is very shallow around most of the pit. (Good?)',
               'value': 1
             },
             {
-              'label': 'Steep (Bad?)',
+              'label': 'The bank slope is a mix of steep and shallow.',
+              'value': 0.51
+            },
+            {
+              'label': 'The bank slope is steep around most of the pit. (Bad?)',
               'value': 0
             }
           ]
         },
         {
           'question': 'Pit Depth',
+          'visible': false,
           'id': 'pit_depth',
           'order': 80,
           'type': 'select',
@@ -211,13 +244,14 @@ angular.module('uiApp')
           ]
         },
         {
-          'question': 'Surface Area',
+          'question': 'What is the surface area of the pit?',
+          'visible': true,
           'id': 'surface_area',
           'order': 90,
           'type': 'select',
           'answers': [
             {
-              'label': 'Unknown',
+              'label': 'I don\'t know',
               'value': 0.5
             },
             {
@@ -231,13 +265,14 @@ angular.module('uiApp')
           ]
         },
         {
-          'question': 'Complexity',
+          'question': 'How complex is the perimeter of the pit?',
+          'visible': true,
           'id': 'complexity',
           'order': 100,
           'type': 'select',
           'answers': [
             {
-              'label': 'Unknown',
+              'label': 'I don\'t know',
               'value': 0.5
             },
             {
@@ -252,6 +287,7 @@ angular.module('uiApp')
         },
         {
           'question': 'Notes',
+          'visible': true,
           'id': 'notes',
           'order': 110,
           'type': 'textarea',

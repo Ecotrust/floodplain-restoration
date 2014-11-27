@@ -371,6 +371,11 @@ hr {
   padding-bottom: 10px;
 }
 
+.pit-question-label {
+  font-size: 16px;
+  margin: 15px auto 6px 15px;
+}
+
 .pit-edit-field {
   margin: 2px auto;
 }
