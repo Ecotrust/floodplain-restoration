@@ -94,7 +94,7 @@ angular.module('uiApp')
           ]
         },
         {
-          'question': 'How much deeper is the pit than the adjacent river thalweg?',
+          'question': 'Is the pit deeper than the adjacent river thalweg?',
           'visible': true,
           'id': 'adjacent_river_depth',
           'order': 30,
@@ -105,23 +105,15 @@ angular.module('uiApp')
               'value': 0.5
             },
             {
-              'label': 'Much deeper than pit (good?)',
+              'label': 'No',
               'value': 1
             },
             {
-              'label': 'A little deeper than pit',
-              'value': 0.8
+              'label': 'They are the same depth',
+              'value': 0.51
             },
             {
-              'label': 'About the same as pit',
-              'value': 0.6
-            },
-            {
-              'label': 'A little shallower than pit',
-              'value': 0.3
-            },
-            {
-              'label': 'Much shallower than pit (bad?)',
+              'label': 'Yes',
               'value': 0
             }
           ]
@@ -163,11 +155,11 @@ angular.module('uiApp')
               'value': 0.5
             },
             {
-              'label': 'Yes (Good?)',
+              'label': 'Yes',
               'value': 1
             },
             {
-              'label': 'No (Bad?)',
+              'label': 'No',
               'value': 0
             }
           ]
@@ -184,11 +176,11 @@ angular.module('uiApp')
               'value': 0.5
             },
             {
-              'label': 'Yes (Good?)',
+              'label': 'Yes',
               'value': 1
             },
             {
-              'label': 'No (Bad?)',
+              'label': 'No',
               'value': 0
             }
           ]
@@ -205,7 +197,7 @@ angular.module('uiApp')
               'value': 0.5
             },
             {
-              'label': 'The bank slope is very shallow around most of the pit. (Good?)',
+              'label': 'The bank slope is very shallow around most of the pit.',
               'value': 1
             },
             {
@@ -213,7 +205,7 @@ angular.module('uiApp')
               'value': 0.51
             },
             {
-              'label': 'The bank slope is steep around most of the pit. (Bad?)',
+              'label': 'The bank slope is steep around most of the pit.',
               'value': 0
             }
           ]
@@ -230,7 +222,7 @@ angular.module('uiApp')
               'value': 0.5
             },
             {
-              'label': 'Shallower than river (Good?)',
+              'label': 'Shallower than river',
               'value': 1
             },
             {
@@ -238,7 +230,7 @@ angular.module('uiApp')
               'value': 0.6
             },
             {
-              'label': 'Deeper than river (Bad?)',
+              'label': 'Deeper than river',
               'value': 0
             }
           ]

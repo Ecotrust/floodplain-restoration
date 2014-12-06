@@ -41,7 +41,7 @@ angular.module('uiApp')
           },
           {
             'id': 13,
-            'name': 'Threat to other areas / permutability',
+            'name': 'Threat to other areas / permitability',
             'question_ids': [4,5,6,7]
           }
         ]

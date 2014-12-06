@@ -85,14 +85,15 @@ angular.module('uiApp')
       var valueChecked = false;
       var formElements = document.getElementById('pitForm').elements;
       for (var i = 0; i < formElements.length; i++) {
-        if (formElements[i].type == 'radio' && formElements[i].checked){
+        if (formElements[i].type === 'radio' && formElements[i].checked){
           valueChecked=true;
         }
       }
+      var nextQuestion = $scope.nextQuestion();
       if ($scope.nodeVal === null || !valueChecked) {
-        alert('Please answer the question before moving on. If you are unable to answer the question, select "Not Sure".');
+        //   alert('Please answer the question before moving on. If you are unable to answer the question, select "I don\'t know."');
+        $location.path('site/' + $rootScope.activeSiteId + '/survey/' + nextQuestion);
       } else {
-        var nextQuestion = $scope.nextQuestion();
         $scope.node.value = $scope.nodeVal;
         $scope.node.notes = $scope.nodeNotes;
         if ($scope.newNode){
