@@ -175,6 +175,14 @@ map.getActivePitWkt = function() {
   return geomwkt;
 };
 
+map.getActivePitArea = function() {
+  var features = map.pit.source.getFeatures();
+  var geom = features[0].getGeometry();
+  var area = geom.getArea(); //In sq. meters
+  var acres = area*0.00024711;
+  return acres;
+};
+
 map.map = new ol.Map({
   target: 'map',
   layers: [

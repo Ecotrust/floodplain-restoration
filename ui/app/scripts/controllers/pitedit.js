@@ -237,7 +237,7 @@ angular.module('uiApp')
         },
         {
           'question': 'What is the surface area of the pit?',
-          'visible': true,
+          'visible': false,
           'id': 'surface_area',
           'order': 90,
           'type': 'select',
@@ -247,11 +247,19 @@ angular.module('uiApp')
               'value': 0.5
             },
             {
-              'label': '< 1 acre',
+              'label': '< 5 acres',
               'value': 1
             },
             {
-              'label': '> 1 acre',
+              'label': '5-20 acres',
+              'value': 0.6
+            },
+            {
+              'label': '20-30 acres',
+              'value': 0.3
+            },
+            {
+              'label': '> 30 acres',
               'value': 0
             }
           ]
@@ -375,22 +383,36 @@ angular.module('uiApp')
       $scope.pit.geometry = wkt;
     });
 
+    $scope.setPitArea = function (pit) {
+      var acres = map.getActivePitArea();
+      var areaVal = 0.5;
+      if (acres <= 5){
+        areaVal = 1;
+      } else if (5 < acres && acres <= 20) {
+        areaVal = 0.6;
+      } else if (20 < acres && acres <= 30) {
+        areaVal = 0.3;
+      } else if (acres > 30) {
+        areaVal = 0;
+      }
+
+      pit.properties.surface_area = areaVal;
+    };
+
     $scope.save = function () {
-      console.log('spinner on');
       try {
         var pitWkt = map.getActivePitWkt;
+        $scope.setPitArea($scope.pit)
         if (isNewPit) {
           SiteFactory
             .postSitePit(activeSiteId, $scope.pit, pitWkt())
             .then(function() {
-              console.log('spinner off');
               $location.path('/site/' + activeSiteId);
             });
         } else {
           SiteFactory
             .putSitePit(activeSiteId, $scope.pit, map.getActivePitWkt())
             .then(function() {
-              console.log('spinner off');
               $location.path('/site/' + activeSiteId);
             });
         }
