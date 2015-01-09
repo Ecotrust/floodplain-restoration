@@ -14,3 +14,10 @@ TEMPLATE_DEBUG = {{ debug }}
 ADMINS = (('Matt Perry', 'mperry@ecotrust.org'),)
 
 SECRET_KEY = '*s6g2eohg6t1f4y1&dbvkqmb2&xm1dd63p4abd@@sokvp5pd$%'
+
+EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 
+# EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'floodplainrestoration@ecotrust.org'
+DEFAULT_FROM_EMAIL = 'floodplainrestoration@ecotrust.org'
+SERVER_EMAIL = 'floodplainrestoration@ecotrust.org'

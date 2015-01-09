@@ -169,6 +169,8 @@ NOSE_ARGS = [
 ]
 
 EMAIL_HOST = 'localhost'
+EMAIL_SUBJECT_PREFIX = ''
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 try:
     from .settings_local import *
