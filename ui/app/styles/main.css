@@ -950,3 +950,14 @@ hr {
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
+
+.ol-top-container {
+  position: absolute;
+  z-index: 1;
+  min-width: 250px;
+  margin-left: 40px;
+  margin-top: 7px;
+  padding: 6px;
+  padding-right: 55px;
+  visibility: hidden;
+}

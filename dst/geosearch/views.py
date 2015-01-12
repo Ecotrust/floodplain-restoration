@@ -43,12 +43,9 @@ def search(request):
     centerloc = Point("45.54 N 120.64 W")
     max_dist = 315  # should be everything in WA and Oregon
 
-    # import ipdb
-    # ipdb.set_trace()
     searches = [
         geocoders.GeoNames('ecotrust','ecotrust'),
         geocoders.OpenMapQuest(), 
-        # geocoders.Yahoo(app_id=settings.APP_NAME), 
         geocoders.Bing(api_key=settings.BING_API_KEY),
         # these are tried in reverse order, fastest first
         # TODO thread them and try them as they come in.

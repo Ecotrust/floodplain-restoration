@@ -34,6 +34,18 @@
             class="no-padding left-panel-column" ng-view="">
         </div>
         <div id="map-container" class="map-container">
+          <div class="well ol-top-container">
+            <form class="form-horizontal" id="map-geosearch-form" role="form" onsubmit="geosearch()">
+              <div class="control-group row-fluid">
+                <div class="controls col-sm-10"> 
+                  <input type="text" id="input-geosearch" class="form-control">
+                </div>
+                <div class="controls col-sm-2"> 
+                  <button class="btn btn-default" type="submit" >Search</button>
+                </div>
+              </div>
+            </form>
+          </div>
           <div class="map" id="map"></div>
         </div>
       </div>

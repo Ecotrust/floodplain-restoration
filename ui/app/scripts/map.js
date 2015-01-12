@@ -235,13 +235,28 @@ map.showMap = function (show) {
     $('#left-container').removeClass('col-md-12');
     $('#map-container').addClass('col-md-6');
     $('#left-container').addClass('col-md-6');
+    $('.ol-top-container').css('visibility', 'visible');
   } else {
     $('#map-container').removeClass('col-md-6');
     $('#map-container').hide();
     $('#left-container').removeClass('col-md-6');
     $('#left-container').addClass('col-md-12');
+    $('.ol-top-container').css('visibility', 'hidden');
   }
 
+};
+
+var geosearch = function(request) {
+  var placename = document.forms['map-geosearch-form']['input-geosearch'].value;
+  $.ajax({
+    url: '/geosearch/search/?search=' + placename,
+    success: function(response) {
+      map.geosearchZoom(response.extent);
+    },
+    error: function(response) {
+      window.alert('Unable to locate "' + response.responseJSON.search + '"');
+    }
+  });
 };
 
 map.geosearchZoom = function(extent) {
