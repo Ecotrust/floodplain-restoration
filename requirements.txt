@@ -9,6 +9,7 @@ django-redis-sessions
 django-redis
 django-silk
 django-filter
+geopy==1.7.1
 
 # Testing
 ipdb

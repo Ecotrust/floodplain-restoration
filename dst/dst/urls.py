@@ -4,11 +4,14 @@ from django.views.generic import RedirectView
 from survey import views
 from django.conf import settings
 import os
+import geosearch
+# from dst import views
 
 urlpatterns = patterns('',
     url(r'^api/', include('survey.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^geosearch/', include('geosearch.urls')),
     url(r'^silk/', include('silk.urls', namespace='silk')),
     url(r'^sessions/auth.js$', views.auth),
     url(r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STATIC_ROOT, 'show_indexes': True}),

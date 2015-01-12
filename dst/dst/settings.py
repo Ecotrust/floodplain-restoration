@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'survey',
+    'dst',
     'rest_framework',
 
     'django.contrib.sites',
@@ -171,6 +172,10 @@ NOSE_ARGS = [
 EMAIL_HOST = 'localhost'
 EMAIL_SUBJECT_PREFIX = ''
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+
+
+GEOMETRY_DB_SRID = 3857
+POINT_BUFFER = 2500  # meters
 
 try:
     from .settings_local import *

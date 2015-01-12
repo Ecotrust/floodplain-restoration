@@ -7,6 +7,9 @@
  * # siteFactory
  * Factory in the uiApp.
  */
+
+if (false) { var map; }
+
 angular.module('uiApp')
   .factory('SiteFactory', function ($rootScope, $http, $window) {
 
@@ -60,7 +63,7 @@ angular.module('uiApp')
       var siteIndex;
       for (var i = service.sites.features.length - 1; i >= 0; i--) {
         var site = service.sites.features[i];
-        if (site.id == activeSiteId) {
+        if (site.id === activeSiteId) {
           siteIndex = i;
         }
       }
@@ -153,6 +156,25 @@ angular.module('uiApp')
       promise.error(function() {
         console.log('Could not fetch suitability.json');
       });
+
+      return promise;
+    };
+
+    service.geosearch = function(placeName) {
+      var url = '/geosearch/search/?search=' + placeName;
+      var promise = $http.get(url);
+
+      promise.success(
+        function(response) {
+          map.geosearchZoom(response.extent);
+        }
+      );
+
+      promise.error(
+        function(response) {
+          window.alert('Location "' + response.search + '" not found.');
+        }
+      );
 
       return promise;
     };

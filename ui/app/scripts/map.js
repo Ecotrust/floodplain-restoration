@@ -243,3 +243,7 @@ map.showMap = function (show) {
   }
 
 };
+
+map.geosearchZoom = function(extent) {
+  map.map.getView().fitExtent(extent, map.map.getSize());
+};

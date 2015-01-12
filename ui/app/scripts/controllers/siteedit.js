@@ -1,7 +1,7 @@
 'use strict';
 
 // Hack to make linter happy about global variables
-if (false) { var map; }
+if (false) { var map, OpenLayers; }
 
 /**
  * @ngdoc function
@@ -17,6 +17,8 @@ angular.module('uiApp')
       $window.alert('You are not logged in. You will now be redirected to the login page.');
       $window.location = '/accounts/login/';
     }
+
+    $scope.searchTerm = '';
 
     $scope.siteEditDirections = $sce.trustAsHtml(ContentFactory.get('siteCreateDirections'));
     $scope.siteEditDefinitions = $sce.trustAsHtml(ContentFactory.get('siteEditDefinitions'));
@@ -102,6 +104,10 @@ angular.module('uiApp')
         console.log(error);
         $window.alert('Please draw the boundaries for your location.');
       }
+    };
+
+    $scope.geosearch = function(placeName) {
+      SiteFactory.geosearch(placeName);
     };
 
   });

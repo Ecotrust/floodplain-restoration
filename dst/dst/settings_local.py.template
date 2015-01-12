@@ -21,3 +21,5 @@ EMAIL_HOST = 'localhost'
 EMAIL_HOST_USER = 'floodplainrestoration@ecotrust.org'
 DEFAULT_FROM_EMAIL = 'floodplainrestoration@ecotrust.org'
 SERVER_EMAIL = 'floodplainrestoration@ecotrust.org'
+
+BING_API_KEY = ""
