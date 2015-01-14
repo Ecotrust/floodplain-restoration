@@ -104,5 +104,11 @@ angular
       });
   })
   .run(function ($rootScope, ContentFactory) {
-    $rootScope.content = ContentFactory.allContent();
+
+    $rootScope.content = ContentFactory.initialContent();
+    ContentFactory
+      .allContent()
+      .then( function() {
+        $rootScope.content = ContentFactory.content;
+      });
   });

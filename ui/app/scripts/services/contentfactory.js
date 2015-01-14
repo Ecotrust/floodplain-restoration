@@ -8,13 +8,16 @@
  * Factory in the uiApp.
  */
 angular.module('uiApp')
-  .factory('ContentFactory', function () {
+  .factory('ContentFactory', function ($http) {
 
     // TODO get from REST API
     // If you need HTML here, the view needs to contain an ng-bind-html directive 
     // e.g. <span ng-bind-html='content.attrWithHtml'></span>
     /*jshint multistr:true */
-    var allContent = {
+
+    var service = {};
+
+    service.content = {
       'about': 'We are building an online tool that provides an efficient and sound approach to quickly identify whether restoring a former gravel pit mine location is worth the investment of time and money.',
       'title': 'Floodplain Gravel Mine Restoration',
       'welcome': 'The Floodplain Gravel Mine Restoration Tool',
@@ -63,16 +66,33 @@ angular.module('uiApp')
             </div>'
     };
 
-    return {
-      allContent: function () {
-        return allContent;
-      },
-      getContent: function (key) {
-        return allContent[key];
-      },
-      //alias
-      get: function (key) {
-        return this.getContent(key);
-      }
+    service.initialContent = function () {
+      return service.content;
     };
+
+    service.allContent = function () {
+        var promise = $http.get('/api/content.json');
+
+        promise.success(function(data) {
+          for (var i = 0; i < data.length; i++) {
+            service.content[data[i].slug] = data[i].content;
+          }
+        });
+        
+        promise.error(function() {
+          console.log('Could not fetch content.json');
+        });
+
+        return promise;
+      };
+
+    service.getContent = function (key) {
+        return service.content[key];
+      };
+
+    service.get = function (key) {
+        return this.getContent(key);
+      };
+
+    return service;
   });
