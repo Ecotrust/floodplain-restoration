@@ -8,6 +8,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 from survey.models import GravelSite, Pit, InputNode, Question
 from survey import serializers
 from survey.permissions import IsOwnerOrShared
+from flatblocks.models import FlatBlock
 
 
 class GravelSiteViewSet(viewsets.ModelViewSet):
@@ -87,6 +88,13 @@ class QuestionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Question.objects.all().order_by('order')
     serializer_class = serializers.QuestionSerializer
 
+class FlatblockSet(viewsets.ReadOnlyModelViewSet):
+
+    """Flatblock (Read only)"""
+    model = FlatBlock
+    filter_fields = ('slug','header','content')
+    queryset = FlatBlock.objects.all().order_by('header')
+    serializer_class = serializers.FlatBlockSerializer
 
 def auth(request):
     baseurl = request.get_host()

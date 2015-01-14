@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'survey',
     'dst',
+    'flatblocks',
     'rest_framework',
 
     'django.contrib.sites',

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from survey import models
+from flatblocks.models import FlatBlock
 
 
 class InputNodeSerializer(serializers.ModelSerializer):
@@ -42,3 +43,8 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Question
+
+class FlatBlockSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = FlatBlock

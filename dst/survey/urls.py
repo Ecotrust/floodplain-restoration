@@ -8,6 +8,7 @@ router.register(r'site', views.GravelSiteViewSet)
 router.register(r'pit', views.PitViewSet)
 router.register(r'node', views.InputNodeViewSet)
 router.register(r'questions', views.QuestionViewSet)
+router.register(r'content', views.FlatblockSet)
 
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browseable API.
