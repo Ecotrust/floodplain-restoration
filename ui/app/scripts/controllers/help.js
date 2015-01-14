@@ -13,9 +13,7 @@ if (false) {
 }
 
 angular.module('uiApp')
-  .controller('HelpCtrl', function ($scope, $routeParams, $rootScope, $sce, ContentFactory) {
-
-    $scope.text = $sce.trustAsHtml(ContentFactory.get($routeParams.topic));
+  .controller('HelpCtrl', function ($scope, $routeParams, $rootScope, $sce) {
     $scope.topic = $routeParams.topic;
     $rootScope.activeSiteId = null;
 

@@ -2,7 +2,8 @@
   <h3 ng-bind-html="title">
   </h3>
 
-  <h4 class="padded-box" ng-bind-html="siteEditDirections"></h4>
+  <h4 ng-if="activeSiteId" class="padded-box" ng-bind-html="content.siteEditDirections"></h4>
+  <h4 ng-if="!activeSiteId" class="padded-box" ng-bind-html="content.siteCreateDirections"></h4>
 
   <div>
     <form novalidate name="pitForm" class="form-horizontal" role="form">
@@ -18,5 +19,5 @@
       </div>
     </form>
   </div>
-  <div class="definitions padded-box property-box" ng-bind-html="siteEditDefinitions"></div>
+  <div class="definitions padded-box property-box" ng-bind-html="content.siteEditDefinitions"></div>
 </div>

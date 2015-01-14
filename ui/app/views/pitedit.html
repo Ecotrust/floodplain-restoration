@@ -8,7 +8,8 @@
             Creating new pit for <span class="label label-info">{{site.properties.name}}</span>
         </span>
     </h3>
-    <h4>{{pitEditDirections}}</h4>
+    <h4 ng-if="activePitId" ng-bind="content.pitEditDirections">{{pitEditDirections}}</h4>
+    <h4 ng-if="!activePitId" ng-bind="content.pitCreateDirections">{{pitEditDirections}}</h4>
 
     <div>
       <form novalidate name="pitForm" class="form-horizontal" role="form">

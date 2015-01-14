@@ -31,7 +31,6 @@ angular.module('uiApp')
       'pitCreateDirections': 'Like drawing your location, click once on the map to begin drawing your pit boundaries. Click again to add additional points. Double-click to finish.',
       'pitEditDirections': 'Click and hold anywhere on the pit border to grab it. Drag the section of the border to where it belongs.',
       'previousQuestion': '<< Previous Question',
-      'nextQuestion': 'Next Question >>',
       'attribution': 'This tool is a product of The Nature Conservancy and Ecotrust',
       'documents': '\
         <h3>Before you get started...</h3>\
