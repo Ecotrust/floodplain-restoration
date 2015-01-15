@@ -5,8 +5,8 @@
     "slug": "title",
     "header": "Title in Navbar"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 1
+  "pk": 1,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -14,8 +14,8 @@
     "slug": "about",
     "header": "About"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 2
+  "pk": 2,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -23,8 +23,8 @@
     "slug": "welcome",
     "header": "Title Page Title"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 3
+  "pk": 3,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -32,8 +32,8 @@
     "slug": "hook",
     "header": "Hook"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 4
+  "pk": 4,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -41,8 +41,8 @@
     "slug": "requirements",
     "header": "Homepage Link to Requirements"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 5
+  "pk": 5,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -50,8 +50,8 @@
     "slug": "getStarted",
     "header": "Get Started"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 6
+  "pk": 6,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -59,8 +59,8 @@
     "slug": "siteListHeader",
     "header": "Site List Header"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 7
+  "pk": 7,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -68,8 +68,8 @@
     "slug": "siteCreateDirections",
     "header": "Site: Create Directions"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 8
+  "pk": 8,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -77,17 +77,17 @@
     "slug": "siteEditDirections",
     "header": "Site: Edit Directions"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 9
+  "pk": 9,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
-    "content": "<div class=\"definition-block blue-text\"><p><span class=\"definition-term\">Location</span>: A contiguous plot of land that encompasses one or more pits.</p><p><span class=\"definition-term\">Pit</span>: A single gravel pit mine.</p></div>",
+    "content": "<div class=\"definition-block blue-text\"><p><span class=\"definition-term\">Site</span>: A contiguous plot of land that encompasses one or more pits.</p><p><span class=\"definition-term\">Pit</span>: A single gravel pit mine.</p></div>",
     "slug": "siteEditDefinitions",
     "header": "Site: Definitions"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 10
+  "pk": 10,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -95,8 +95,8 @@
     "slug": "pitCreateDirections",
     "header": "Pit: Create Directions"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 11
+  "pk": 11,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -104,8 +104,8 @@
     "slug": "pitEditDirections",
     "header": "Pit: Edit Directions"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 12
+  "pk": 12,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -113,8 +113,8 @@
     "slug": "attribution",
     "header": "Site Attribution"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 15
+  "pk": 15,
+  "model": "flatblocks.flatblock"
 },
 {
   "fields": {
@@ -122,7 +122,7 @@
     "slug": "documents",
     "header": "Documents Page Content"
   },
-  "model": "flatblocks.flatblock",
-  "pk": 16
+  "pk": 16,
+  "model": "flatblocks.flatblock"
 }
 ]
