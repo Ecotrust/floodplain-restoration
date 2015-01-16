@@ -93,6 +93,10 @@
       command: /usr/bin/psql -d {{ dbname }} -c "CREATE EXTENSION postgis;"
       when: postgres_create_returncode['changed']
 
+    #flatblocks are attached to dst, which is not managed by migrate
+    # - name: create flatblocks migration
+    #   command: "{{ manage }} makemigrations flatblocks"
+
     - name: migrate 
       command: "{{ manage }} migrate --noinput"
 

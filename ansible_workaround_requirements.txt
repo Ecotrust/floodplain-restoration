@@ -1,1 +1,0 @@
-django-flatblocks==0.8
