@@ -10,7 +10,7 @@ django-redis
 django-silk
 django-filter
 # django-flatblocks==0.8
-git+https://github.com/funkybob/django-flatblocks.git@master#egg=flatblocks
+# git+https://github.com/funkybob/django-flatblocks.git@master#egg=flatblocks
 geopy==1.7.1
 
 # Testing

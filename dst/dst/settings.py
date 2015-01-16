@@ -38,9 +38,9 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader'
 )
 
-MIGRATION_MODULES = {
-    'flatblocks': 'flatblocks.db_migrations'
-}
+# MIGRATION_MODULES = {
+#     'flatblocks': 'flatblocks.db_migrations'
+# }
 
 # Application definition
 
@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'survey',
     'dst',
-    'flatblocks',
+    'django-flatblocks',
     'rest_framework',
 
     'django.contrib.sites',
