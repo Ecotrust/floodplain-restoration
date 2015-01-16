@@ -66,6 +66,9 @@
         - deploy
       template: src=templates/settings_local.py dest={{ project_path }}/{{ app_name }}/settings_local.py owner={{ remote_user }} group={{ remote_user }} mode=0755
 
+    - name: Install global python *3* requirements with unicode issues
+      command: "pip install django-flatblocks"
+
     - name: fix annoying ubuntu pip bug
       command: >
         easy_install3 requests<2.4
@@ -109,6 +112,10 @@
     - name: install question fixture
       command: "{{ manage }} loaddata {{ project_path }}/survey/fixtures/questions.json"
       when: postgres_create_returncode['changed']
+
+    # - name: install flatblocks fixture
+    #   command: "{{ manage }} loaddata {{ project_path }}/dst/fixtures/flatblocks.json"
+      # when: postgres_create_returncode['changed']
 
     - name: collect static 
       command: "{{ manage }} collectstatic --noinput"

@@ -6,7 +6,7 @@
     "header": "Title in Navbar"
   },
   "pk": 1,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -15,7 +15,7 @@
     "header": "About"
   },
   "pk": 2,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -24,7 +24,7 @@
     "header": "Title Page Title"
   },
   "pk": 3,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -33,7 +33,7 @@
     "header": "Hook"
   },
   "pk": 4,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -42,7 +42,7 @@
     "header": "Homepage Link to Requirements"
   },
   "pk": 5,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -51,7 +51,7 @@
     "header": "Get Started"
   },
   "pk": 6,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -60,7 +60,7 @@
     "header": "Site List Header"
   },
   "pk": 7,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -69,7 +69,7 @@
     "header": "Site: Create Directions"
   },
   "pk": 8,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -78,7 +78,7 @@
     "header": "Site: Edit Directions"
   },
   "pk": 9,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -87,7 +87,7 @@
     "header": "Site: Definitions"
   },
   "pk": 10,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -96,7 +96,7 @@
     "header": "Pit: Create Directions"
   },
   "pk": 11,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -105,7 +105,7 @@
     "header": "Pit: Edit Directions"
   },
   "pk": 12,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -114,7 +114,7 @@
     "header": "Site Attribution"
   },
   "pk": 15,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 },
 {
   "fields": {
@@ -123,6 +123,6 @@
     "header": "Documents Page Content"
   },
   "pk": 16,
-  "model": "flatblocks.flatblock"
+  "model": "django-flatblocks.flatblock"
 }
 ]
