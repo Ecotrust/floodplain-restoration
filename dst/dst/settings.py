@@ -38,6 +38,9 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader'
 )
 
+MIGRATION_MODULES = {
+    'flatblocks': 'flatblocks.db_migrations'
+}
 
 # Application definition
 
