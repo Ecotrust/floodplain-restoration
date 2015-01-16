@@ -66,9 +66,6 @@
         - deploy
       template: src=templates/settings_local.py dest={{ project_path }}/{{ app_name }}/settings_local.py owner={{ remote_user }} group={{ remote_user }} mode=0755
 
-    - name: Install global python *3* requirements with unicode issues
-      command: "pip install django-flatblocks"
-
     - name: fix annoying ubuntu pip bug
       command: >
         easy_install3 requests<2.4
@@ -96,10 +93,6 @@
       command: /usr/bin/psql -d {{ dbname }} -c "CREATE EXTENSION postgis;"
       when: postgres_create_returncode['changed']
 
-    #flatblocks are attached to dst, which is not managed by migrate
-    # - name: create flatblocks migration
-    #   command: "{{ manage }} makemigrations flatblocks"
-
     - name: migrate 
       command: "{{ manage }} migrate --noinput"
 
@@ -112,10 +105,6 @@
     - name: install question fixture
       command: "{{ manage }} loaddata {{ project_path }}/survey/fixtures/questions.json"
       when: postgres_create_returncode['changed']
-
-    # - name: install flatblocks fixture
-    #   command: "{{ manage }} loaddata {{ project_path }}/dst/fixtures/flatblocks.json"
-      # when: postgres_create_returncode['changed']
 
     - name: collect static 
       command: "{{ manage }} collectstatic --noinput"
@@ -139,6 +128,14 @@
 
     - name: create demo account 
       command: "{{ manage }} dummydata"
+
+    # flatblocks are attached to dst, which is not managed by migrate
+    # - name: create flatblocks migration
+    #   command: "{{ manage }} makemigrations flatblocks"
+
+    - name: install flatblocks fixture
+      command: "{{ manage }} loaddata {{ project_path }}/dst/fixtures/flatblocks.json"
+      when: postgres_create_returncode['changed']
 
     # - name: clear redis cache
     #   redis: command=flush db=5 
