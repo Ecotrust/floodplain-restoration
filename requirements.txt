@@ -9,7 +9,7 @@ django-redis-sessions
 django-redis
 django-silk
 django-filter
-django-flatblocks==0.8
+# django-flatblocks==0.8
 geopy==1.7.1
 
 # Testing
