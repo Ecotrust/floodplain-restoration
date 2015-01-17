@@ -16,7 +16,7 @@ angular.module('uiApp')
     service.contexts = {
       'site': {
         'id': 1,
-        'label': 'Location',
+        'label': 'Site',
         'components': [
           {
             'id': 10,
@@ -25,7 +25,7 @@ angular.module('uiApp')
           },
           {
             'id': 11,
-            'name': 'Practical, location-level restorability',
+            'name': 'Practical, site-level restorability',
             'question_ids': [1,2,3]
           }
         ]

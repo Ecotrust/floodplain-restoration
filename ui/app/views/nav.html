@@ -17,25 +17,25 @@
 
         <li class="dropdown" ng-show="userName">
           <a class="dropdown-toggle" data-toggle="dropdown">
-            Location <span class="caret"></span>
+            Site <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li class="nav-dd" ng-click="href('help/documents')">
               DOCUMENTS
             </li>
             <li class="nav-dd" ng-click="href('site/new')">
-              ADD A LOCATION
+              ADD A SITE
             </li>
             <li ng-repeat="site in sites" class="nav-dd" ng-click="href('site/' + site.id)">
               {{site.properties.name | uppercase}}
             </li>
-            <li class="nav-dd last-dd" ng-click="href('sites')">ALL LOCATIONS</a></li>
+            <li class="nav-dd last-dd" ng-click="href('sites')">ALL SITES</a></li>
           </ul>
         </li>
 
         <li class="dropdown" ng-show="activeSiteId">
           <a class="dropdown-toggle" data-toggle="dropdown">
-            Survey <span class="caret"></span>
+            Questions <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li ng-repeat="context in contexts" ng-if="context.components.length>0" class="dropdown-submenu">

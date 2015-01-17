@@ -43,7 +43,7 @@
                                 <span class="property-box-pit-status"> &middot; {{site.properties.pit_set.length}} pits</span>
                         </div>
                         <div id="collapse-{{site.id}}" class="col-md-11 collapse property-pit-box">
-                            <div ng-if="site.properties.pit_set.length == 0"><p class="no-pits">You have not added any pits to this location.</p></div>
+                            <div ng-if="site.properties.pit_set.length == 0"><p class="no-pits">You have not added any pits to this site.</p></div>
                             <div class="row" ng-repeat="pit in site.properties.pit_set" ng-if="site.properties.pit_set.length > 0">
                                 <div class="col-md-6 prop-list-details">
                                     <p class="property-box-pit-name">{{pit.properties.name}}</p>
@@ -58,7 +58,7 @@
         </div>
 
     <a ng-show="sites.length === 0" class="btn btn-default btn-info" href="#/help/documents">Before Starting</a>
-    <a class="btn btn-default" href="#/site/new">Add New Location</a>
+    <a class="btn btn-default" href="#/site/new">Add New Site</a>
 
     </div>
 </div>

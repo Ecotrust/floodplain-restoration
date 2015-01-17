@@ -21,7 +21,7 @@ angular.module('uiApp')
 
     map.showMap(true);
     
-    $scope.surveyPrompt = 'Begin Survey';
+    $scope.surveyPrompt = 'Begin Questions';
     $scope.sites = [];
     $scope.site = {};
     $scope.firstUnansweredId = 1;
@@ -66,7 +66,7 @@ angular.module('uiApp')
           .then( function() {
             var nodes = NodeFactory.nodes;
             if (nodes.length > 0) {
-              $scope.surveyPrompt = 'Continue Survey';
+              $scope.surveyPrompt = 'Continue Questions';
               for (var i in $scope.questions) {
                 var questionAnswered = false;
                 for (var j in nodes) {

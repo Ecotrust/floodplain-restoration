@@ -39,7 +39,7 @@ angular.module('uiApp')
           <div class="table-row">\
             <div class="table-cell col-md-12">\
               <div class="property-box padded-box">\
-                <p class="blue-text document-list-item">Taxlot, land user, easement, access, infrastructure, and other relevant location information.</p>\
+                <p class="blue-text document-list-item">Taxlot, land user, easement, access, infrastructure, and other relevant site information.</p>\
                 <hr class="document-list-hr">\
                 <p class="blue-text document-list-item">Any information on existing permits or pit reclaimation requirements</p>\
                 <hr class="document-list-hr">\
@@ -51,7 +51,7 @@ angular.module('uiApp')
                 <hr class="document-list-hr">\
                 <p class="blue-text document-list-item">Watershed assessments, sediment budgets, and other available watershed or river research, reports, or data</p>\
                 <hr class="document-list-hr">\
-                <p class="blue-text document-list-item">Ecological assessments, research, reports, or data on species and habitat in the watershed, the reach, or on the location</p>\
+                <p class="blue-text document-list-item">Ecological assessments, research, reports, or data on species and habitat in the watershed, the reach, or on the site</p>\
                 <hr class="document-list-hr">\
                 <p class="blue-text document-list-item">Reasonable estimates of both pit depth and river thalweg</p>\
               </div>\

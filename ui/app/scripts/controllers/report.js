@@ -71,7 +71,7 @@ angular.module('uiApp')
           },
           {
             'id': 11,
-            'name': 'Practical, location-level restorability',
+            'name': 'Practical, site-level restorability',
             'question_ids': [1,2,3]
           }
         ]

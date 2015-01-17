@@ -93,7 +93,7 @@ angular.module('uiApp')
 
       promise.error( function(res) {
         console.log('ERROR', res);
-        $window.alert('Could not create new location. Be sure you have all required fields filled in.');
+        $window.alert('Could not create new site. Be sure you have all required fields filled in.');
       });
 
       return promise;
@@ -123,7 +123,7 @@ angular.module('uiApp')
 
       promise.error( function(res) {
         console.log('ERROR', res);
-        $window.alert('Could not update location. Be sure you have all required fields filled in.');
+        $window.alert('Could not update site. Be sure you have all required fields filled in.');
       });
 
       return promise;
@@ -172,7 +172,7 @@ angular.module('uiApp')
 
       promise.error(
         function(response) {
-          window.alert('Location "' + response.search + '" not found.');
+          window.alert('Site "' + response.search + '" not found.');
         }
       );
 

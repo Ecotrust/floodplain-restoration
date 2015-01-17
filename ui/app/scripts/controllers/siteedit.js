@@ -22,7 +22,7 @@ angular.module('uiApp')
 
     $scope.siteEditDirections = $sce.trustAsHtml(ContentFactory.get('siteCreateDirections'));
     $scope.siteEditDefinitions = $sce.trustAsHtml(ContentFactory.get('siteEditDefinitions'));
-    $scope.title = 'Creating A New Location';
+    $scope.title = 'Creating A New Site';
 
     map.showMap(true);
 
@@ -102,7 +102,7 @@ angular.module('uiApp')
         }
       } catch (error) {
         console.log(error);
-        $window.alert('Please draw the boundaries for your location.');
+        $window.alert('Please draw the boundaries for your site.');
       }
     };
 

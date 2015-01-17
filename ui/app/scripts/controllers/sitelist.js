@@ -50,7 +50,7 @@ angular.module('uiApp')
       });
 
     $scope.deleteSite = function(siteId) {
-      if ($window.confirm('Delete this location? Are you sure?') === true) {
+      if ($window.confirm('Delete this site? Are you sure?') === true) {
         SiteFactory.deleteSite(siteId).then(function() {
 
           // Update new sites
