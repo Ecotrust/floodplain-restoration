@@ -2,6 +2,9 @@
     <div class='left-panel-content'>
         <h3> {{content.siteListHeader}} </h3>
 
+        <a ng-show="sites.length === 0" class="btn btn-default" href="#/help/documents">Before Starting</a>
+        <a class="btn btn-default" href="#/site/new">Add New Site</a>
+
         <div class="properties">
             <div class="row " ng-repeat="site in sites">
                 <div class="col-md-12">
@@ -56,9 +59,5 @@
                 </div>
             </div>
         </div>
-
-    <a ng-show="sites.length === 0" class="btn btn-default btn-info" href="#/help/documents">Before Starting</a>
-    <a class="btn btn-default" href="#/site/new">Add New Site</a>
-
     </div>
 </div>
