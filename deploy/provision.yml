@@ -129,14 +129,6 @@
     - name: create demo account 
       command: "{{ manage }} dummydata"
 
-    # flatblocks are attached to dst, which is not managed by migrate
-    # - name: create flatblocks migration
-    #   command: "{{ manage }} makemigrations flatblocks"
-
-    - name: install flatblocks fixture
-      command: "{{ manage }} loaddata {{ project_path }}/dst/fixtures/flatblocks.json"
-      when: postgres_create_returncode['changed']
-
     # - name: clear redis cache
     #   redis: command=flush db=5 
 
