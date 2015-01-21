@@ -53,7 +53,7 @@ with significant structural changes to the network.
 5. Reload question fixtures with `python manage.py loaddata survey/fixtures/questions.json` (*warning: this will destroy all questions in the database and requires careful thought about data migration*)
 6. Check system integrity with `python manage.py systemcheck`
 
-To **update the BBN**, first become intimately familiar with the file format (required reading) then simply:
+To **update the BBN**, first become intimately familiar with the file format ([required reading](https://github.com/Ecotrust/floodplain-restoration/wiki/Defining-Bayseian-Belief-Networks-using-.bif-files)) then simply:
 
 1. Edit `dst/data/bbn.bif` by hand.
 2. Check system integrity with `python manage.py systemcheck`
