@@ -329,7 +329,7 @@ probability ( conservation_value | biotic_conditions, identified_in_conservation
   (suitable, not_identified, disconnected)   0.50, 0.50;
   (unsuitable, identified, connected)        0.80, 0.20;
   (unsuitable, identified, disconnected)     0.70, 0.30;
-  (unsuitable, not_identified, connected)    0.20, 1.00;
+  (unsuitable, not_identified, connected)    0.00, 1.00;
   (unsuitable, not_identified, disconnected) 0.00, 1.00;
 }
 probability ( biotic_conditions | intact_floodplain_forest, habitat_features, species_of_interest ) {

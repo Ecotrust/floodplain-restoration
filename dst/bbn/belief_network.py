@@ -21,7 +21,7 @@ class BeliefNetwork:
         inputnodes={
             'Smoker': ('smoker', 1.0),
             'Pollution': ('polluted', 1.0)
-        }, 
+        },
         outputnodes=(
             ('Cancer', 'True')
         )
@@ -171,7 +171,7 @@ class BeliefNetwork:
 
     @classmethod
     def from_bif(cls, bif):
-        """ Parts of this method derived from 
+        """ Parts of this method derived from
         https://raw.githubusercontent.com/eBay/bayesian-belief-networks/master/bayesian/examples/bif/bif_parser.py
 
         Copyright 2013 eBay Software Foundation
