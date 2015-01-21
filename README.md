@@ -1,19 +1,19 @@
 floodplain-restoration
 ======================
 
-[![Build Status](https://api.travis-ci.org/Ecotrust/floodplain-restoration.svg)](https://travis-ci.org/Ecotrust/floodplain-restoration) 
+[![Build Status](https://api.travis-ci.org/Ecotrust/floodplain-restoration.svg)](https://travis-ci.org/Ecotrust/floodplain-restoration)
 [![Coverage Status](https://img.shields.io/coveralls/Ecotrust/floodplain-restoration.svg)](https://coveralls.io/r/Ecotrust/floodplain-restoration)
 
 Decision support tool for floodplain gravel mine restoration
 
-This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other versions. 
+This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other versions.
 
 # Quickstart
 
 ### Setup
 	virtualenv --python /usr/bin/python3.4 ~/env/tnc
 	source ~/env/tnc/bin/activate
-	sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev python3-dev 
+	sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev python3-dev
 	sudo apt-get install redis-server
     sudo service redis-server start
 	pip install -r requirements.txt
@@ -31,7 +31,7 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 	python manage.py systemcheck
 
 ### To reset migrations during early development (use with caution)
-	rm survey/migrations/000*.py 
+	rm survey/migrations/000*.py
 	python manage.py makemigrations
 	rm dst/db.sqlite3
 	# follow steps in `Initialize` above
@@ -40,8 +40,11 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 
 The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](http://www.cs.cmu.edu/~fgcozman/Research/InterchangeFormat/Old/xmlbif02.html). By default, the canonical bbn for the project resides at `dst/data/bbn.bif`. Creating or updating this file goes as follows:
 
+This file was **initially created** by the following process. You do not want to do this often, it will blow away all
+previous changes but is probably the easiest way to start again from scratch or to deal
+with significant structural changes to the network.
 0. cd dst
-1. Create or edit `dst/data/definition.json`; this is a json representation of the hierarchical conceptual model. 
+1. Create or edit `dst/data/definition.json`; this is a json representation of the hierarchical conceptual model.
 2. run `python ../scripts/generate_bif.py`; this will create and *overwrite*
 	- `dst/data/bbn.bif`
 	- `survey/fixtures/questions.json`
@@ -50,19 +53,24 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 5. Reload question fixtures with `python manage.py loaddata survey/fixtures/questions.json` (*warning: this will destroy all questions in the database and requires careful thought about data migration*)
 6. Check system integrity with `python manage.py systemcheck`
 
-# Deployment 
+To **update the BBN**, first become intimately familiar with the file format (required reading) then simply:
+
+1. Edit `dst/data/bbn.bif` by hand.
+2. Check system integrity with `python manage.py systemcheck`
+
+# Deployment
 
 The deployment to stage and production is automated through the use of ansible
-playbooks. 
+playbooks.
 
 "Build" the javascript and html app using grunt. Check closely for errors:
-   
+
 ```
 cd ui && grunt build
 ```
 
 Add the newly created js/css/html files, commit them and push to master:
-    
+
 ```
 git add dist/scripts/scripts.cd312094.js
 git commit -a -m "new grunt build"
@@ -70,7 +78,7 @@ git push
 ```
 
 Deploy to "stage", our local virtualbox machine.
-    
+
 ```
 vagrant up
 cd ../deploy
@@ -78,7 +86,7 @@ cd ../deploy
 ```
 
 Test it and fix it if needed. Then deploy to production
-    
+
 ```
 ./deploy <produciton hostname>
 ```
