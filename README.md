@@ -54,10 +54,23 @@ with significant structural changes to the network.
 5. Reload question fixtures with `python manage.py loaddata survey/fixtures/questions.json` (*warning: this will destroy all questions in the database and requires careful thought about data migration*)
 6. Check system integrity with `python manage.py systemcheck`
 
-To **update the BBN**, first become intimately familiar with the file format ([required reading](https://github.com/Ecotrust/floodplain-restoration/wiki/Defining-Bayseian-Belief-Networks-using-.bif-files)) then simply:
+To **re-calibrate the BBN**, first become intimately familiar with the file format ([required reading](https://github.com/Ecotrust/floodplain-restoration/wiki/Defining-Bayseian-Belief-Networks-using-.bif-files)) then simply:
 
 1. Edit `dst/data/bbn.bif` by hand.
 2. Check system integrity with `python manage.py systemcheck`
+
+To **update the BBN**, don't. If you **HAVE** to:
+
+1. Update your source ('canonical') diagram first to be sure you understand how your changes affect the entire model.
+2. Update your definitions JSON: `dst/data/definition.json`
+3. Backup your current, hand-calibrated .BIF to somewhere safe: `dst/data/bbn.bif`
+4. Backup your current survey question data: `manage.py dumpdata --indent=2 survey.question > survey/fixtures/questions_backup.json`
+5. Generate the new bif and questions based on the definitions: `python ../scripts/generate_bif.py`
+6. Manually review the changes between the old and newly generated .bif files. If you have hand-made calibrations in the old version to nodes that haven't changed, copy your old values back in line-by-line.
+7. Run `python manage.py systemcheck` and note which questions were changed (added/removed)
+8. Run `python manage.py runserver` and use the admin to add, remove, or update the changed questions.
+9. Use the systemcheck technique to test that you've made all changes correctly.
+10. When satisfied, dump your new questions fixture: `manage.py dumpddata --indent=2 survey.question > survey/fixtures/questions.json`
 
 # Deployment
 
