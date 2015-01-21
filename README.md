@@ -43,6 +43,7 @@ The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](ht
 This file was **initially created** by the following process. You do not want to do this often, it will blow away all
 previous changes but is probably the easiest way to start again from scratch or to deal
 with significant structural changes to the network.
+
 0. cd dst
 1. Create or edit `dst/data/definition.json`; this is a json representation of the hierarchical conceptual model.
 2. run `python ../scripts/generate_bif.py`; this will create and *overwrite*
