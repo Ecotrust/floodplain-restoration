@@ -73,7 +73,7 @@
     - name: Install global python *3* requirements
       pip: state=latest requirements={{ base_path }}/requirements.txt executable=pip3
 
-    - name: create db user  
+    - name: create db user
       sudo_user: postgres
       # same as dbname
       postgresql_user: name={{ dbname }} password={{ dbname }} role_attr_flags=CREATEDB,NOSUPERUSER
@@ -93,7 +93,7 @@
       command: /usr/bin/psql -d {{ dbname }} -c "CREATE EXTENSION postgis;"
       when: postgres_create_returncode['changed']
 
-    - name: migrate 
+    - name: migrate
       command: "{{ manage }} migrate --noinput"
 
     - name: construct site fixture
@@ -106,10 +106,10 @@
       command: "{{ manage }} loaddata {{ project_path }}/survey/fixtures/questions.json"
       when: postgres_create_returncode['changed']
 
-    - name: collect static 
+    - name: collect static
       command: "{{ manage }} collectstatic --noinput"
 
-    - name: install nginx site 
+    - name: install nginx site
       notify: reload nginx
       template: src=templates/nginx.j2 dest=/etc/nginx/sites-available/{{ app_name }} owner=root group={{ remote_user }} mode=0754
 
@@ -126,11 +126,11 @@
     - name: remove default site
       file: path=/etc/nginx/sites-enabled/default state=absent
 
-    - name: create demo account 
+    - name: create demo account
       command: "{{ manage }} dummydata"
 
     # - name: clear redis cache
-    #   redis: command=flush db=5 
+    #   redis: command=flush db=5
 
     - name: remove all pyc files
       command: >
@@ -139,11 +139,11 @@
     - name: restart
       debug: msg="Restarting services..."  # dummy
       changed_when: True
-      notify: 
+      notify:
         - reload nginx
         - restart uwsgi
 
-  handlers: 
+  handlers:
 
     - name: restart uwsgi
       action: service name=uwsgi state=restarted
