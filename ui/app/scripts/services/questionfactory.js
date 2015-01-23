@@ -90,6 +90,9 @@ angular.module('uiApp')
         promise.success(function(data) {
           // full args
           // data, status, headers, config
+          data.sort(function(a,b) {
+            return a.order - b.order;
+          });
           service.questions = data;
         });
         

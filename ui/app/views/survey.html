@@ -1,7 +1,7 @@
 <div class="survey-content">
   <div class="row survey-row">
     <div class="col-md-1 survey-col survey-nav-col">
-      <a href="#/site/{{activeSiteId}}/{{(question.id == 1)?'':'survey/' +  prevQuestion() }}">
+      <a href="#/site/{{activeSiteId}}/{{(question.displayId == 1)?'':'survey/' +  prevQuestion() }}">
         <p class="survey-nav">
           <span class="glyphicon glyphicon-play survey-nav-icon survey-nav-back"></span>
         </p>
@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-10 survey-col">
       <p class="survey-question-header">
-        <span class="numberCircle">{{question.id|digits}}</span> {{question.category|uppercase}}
+        <span class="numberCircle">{{question.displayId|digits}}</span> {{question.category|uppercase}}
       </p>
       <p class="question">{{question.question}}</p>
 

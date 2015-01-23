@@ -22,21 +22,22 @@ angular.module('uiApp')
 
     map.showMap(true);
     
-    var questionId = parseInt($routeParams.questionId, 10);
+    var questionDisplayId = parseInt($routeParams.questionId, 10);
+    // $scope.questionId = 0;
 
     $rootScope.activeSiteId = $routeParams.siteId;
     
     var questions = [];
     $scope.question = {};
     $scope.numQuestions = questions.length;
-    var maxQuestionId = 999;
+    // var maxQuestionId = 999;
     var minQuestionId = 0;
 
     var nodes = [];
     $scope.node = {
       notes: '',
       site: $rootScope.activeSiteId,
-      question: questionId,
+      question: questionDisplayId,
       value: null
     };
 
@@ -49,36 +50,32 @@ angular.module('uiApp')
       .getQuestions()
       .then( function() {
         questions = QuestionFactory.questions;
-        $scope.numQuestions = questions.length;  //QuestionFactory will likely change substantially
-        maxQuestionId = questions[questions.length-1].id;
-        for (var i = QuestionFactory.questions.length - 1; i >= 0; i--) {
-          var question = QuestionFactory.questions[i];
-          if (question.id === questionId) {
-            $scope.question = question;
-          }
-        }
+        $scope.numQuestions = questions.length;
+        $scope.question = questions[questionDisplayId - 1];
+        // $scope.questionId = 
+        $scope.question.displayId = questionDisplayId;
+        $scope.node.question = $scope.question.id;
         map.showMap(true);
-      });
-
-    NodeFactory
-      .getNodes($rootScope.activeSiteId)
-      .then( function() {
-        nodes = NodeFactory.nodes;
-        $scope.numNodes = nodes.length;
-        for (var i = NodeFactory.nodes.length - 1; i >=0; i--) {
-          var node = NodeFactory.nodes[i];
-          if (node.question === questionId && node.site === parseInt($rootScope.activeSiteId, 10)) {
-            $scope.node = node;
-            $scope.nodeVal = node.value;
-            $scope.nodeNotes = node.notes;
-            $scope.newNode = false;
-          }
-        }
-        map.showMap(true);
+        NodeFactory
+          .getNodes($rootScope.activeSiteId)
+          .then( function() {
+            nodes = NodeFactory.nodes;
+            $scope.numNodes = nodes.length;
+            for (var i = NodeFactory.nodes.length - 1; i >=0; i--) {
+              var node = NodeFactory.nodes[i];
+              if (node.question === $scope.question.id && node.site === parseInt($rootScope.activeSiteId, 10)) {
+                $scope.node = node;
+                $scope.nodeVal = node.value;
+                $scope.nodeNotes = node.notes;
+                $scope.newNode = false;
+              }
+            }
+            map.showMap(true);
+          });
       });
 
 
-    $scope.showPrev = true;
+
     $scope.showPrev = true;
 
     $scope.submitForm = function() {
@@ -113,10 +110,10 @@ angular.module('uiApp')
     };
 
     $scope.nextQuestion = function() {
-      var next = questionId + 1;
+      var next = questionDisplayId + 1;
       $scope.showNext = true;
       if (next > $scope.numQuestions) {
-        next = maxQuestionId;
+        // next = maxQuestionId;
         $scope.showNext = true;
         return 'done';
       }
@@ -124,7 +121,7 @@ angular.module('uiApp')
     };
 
     $scope.prevQuestion = function() {
-      var prev = questionId - 1;
+      var prev = questionDisplayId - 1;
       $scope.showPrev = true;
       if (prev < minQuestionId) {
         prev = minQuestionId;
@@ -140,7 +137,7 @@ angular.module('uiApp')
       } else {
         icon.className = icon.className.replace(/\bglyphicon-minus-sign\b/,'glyphicon-plus-sign');
       }
-    }
+    };
 
     // map.clear();
     // map.loadSites(SiteFactory.getActiveSiteCollection());
