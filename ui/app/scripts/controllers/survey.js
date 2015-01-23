@@ -23,7 +23,6 @@ angular.module('uiApp')
     map.showMap(true);
     
     var questionDisplayId = parseInt($routeParams.questionId, 10);
-    // $scope.questionId = 0;
 
     $rootScope.activeSiteId = $routeParams.siteId;
     
@@ -52,7 +51,6 @@ angular.module('uiApp')
         questions = QuestionFactory.questions;
         $scope.numQuestions = questions.length;
         $scope.question = questions[questionDisplayId - 1];
-        // $scope.questionId = 
         $scope.question.displayId = questionDisplayId;
         $scope.node.question = $scope.question.id;
         map.showMap(true);
@@ -113,7 +111,6 @@ angular.module('uiApp')
       var next = questionDisplayId + 1;
       $scope.showNext = true;
       if (next > $scope.numQuestions) {
-        // next = maxQuestionId;
         $scope.showNext = true;
         return 'done';
       }
@@ -139,7 +136,4 @@ angular.module('uiApp')
       }
     };
 
-    // map.clear();
-    // map.loadSites(SiteFactory.getActiveSiteCollection());
-    // map.loadPits(SiteFactory.getPitsCollection());
   });

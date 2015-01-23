@@ -88,7 +88,7 @@ angular.module('uiApp')
           {
             'id': 13,
             'name': 'Threat to other areas / permitability',
-            'question_ids': [4,5,6,7]
+            'question_ids': [4,6,7]
           }
         ]
       },
@@ -109,17 +109,17 @@ angular.module('uiApp')
           {
             'id': 16,
             'name': 'Abiotic conditions',
-            'question_ids': [19,20,21,22]
+            'question_ids': [19, 28]
           },
           {
             'id': 17,
             'name': 'Geomorphic controls',
-            'question_ids': [11,12,13,14]
+            'question_ids': [11,12,14]
           },
           {
             'id': 18,
             'name': 'Floodplain characteristics',
-            'question_ids': [15,16,17,18]
+            'question_ids': [15,17,18]
           }
         ]
       },
@@ -199,6 +199,7 @@ angular.module('uiApp')
           $scope.answers[questions[i].id].value = false;
           $scope.answers[questions[i].id].notes = false;
           $scope.answers[questions[i].id].answer = false;
+          $scope.answers[questions[i].id].displayId = i + 1;
         }
 
         NodeFactory

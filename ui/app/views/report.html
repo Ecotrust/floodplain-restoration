@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="row report-question-row" ng-repeat="qid in component.question_ids">
                                     <div class="col-md-1">
-                                        <span class="numberCircle">{{qid|digits}}</span>
+                                        <span class="numberCircle">{{answers[qid].displayId|digits}}</span>
                                     </div>
                                     <div class="col-md-10">
                                         <div class="row">
