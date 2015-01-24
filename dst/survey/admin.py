@@ -17,9 +17,9 @@ class CategoryAdmin(admin.ModelAdmin):
 	ordering = ['context__order', 'order', 'name']
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'question', 'order', 'category', 'questionCategory')
-    list_filter = ['title', 'question', 'order', 'category', 'questionCategory']
-    ordering = ['order', 'category', 'title', 'questionCategory']
+    list_display = ('title', 'question', 'order', 'questionCategory')
+    list_filter = ['title', 'question', 'order', 'questionCategory']
+    ordering = ['order', 'title', 'questionCategory']
 
 admin.site.register(Context, ContextAdmin)
 admin.site.register(QuestionCategory, CategoryAdmin)

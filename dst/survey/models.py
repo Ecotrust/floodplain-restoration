@@ -144,7 +144,6 @@ class Question(models.Model):
     question = models.CharField(max_length=250)
     detail = models.TextField()
     order = models.FloatField()
-    category = models.CharField(max_length=80)
     questionCategory = models.ForeignKey(QuestionCategory, blank=True, null=True, default=None)
 
     # contextual info to help use answer the question
