@@ -1,354 +1,472 @@
 [
 {
-  "pk": 1,
+  "model": "survey.context",
+  "fields": {
+    "order": 0.0,
+    "name": "Site"
+  },
+  "pk": 1
+},
+{
+  "model": "survey.context",
+  "fields": {
+    "order": 0.0,
+    "name": "Socio-Economic"
+  },
+  "pk": 2
+},
+{
+  "model": "survey.context",
+  "fields": {
+    "order": 0.0,
+    "name": "Landscape"
+  },
+  "pk": 3
+},
+{
+  "model": "survey.questioncategory",
+  "fields": {
+    "order": 100.0,
+    "name": "Cost benefit",
+    "context": 2
+  },
+  "pk": 1
+},
+{
+  "model": "survey.questioncategory",
+  "fields": {
+    "order": 200.0,
+    "name": "Threat to other areas / permitability",
+    "context": 2
+  },
+  "pk": 2
+},
+{
+  "model": "survey.questioncategory",
+  "fields": {
+    "order": 1100.0,
+    "name": "Conservation value",
+    "context": 3
+  },
+  "pk": 3
+},
+{
+  "model": "survey.questioncategory",
+  "fields": {
+    "order": 1200.0,
+    "name": "Biotic conditions",
+    "context": 3
+  },
+  "pk": 4
+},
+{
+  "model": "survey.questioncategory",
+  "fields": {
+    "order": 1300.0,
+    "name": "Abiotic conditions",
+    "context": 3
+  },
+  "pk": 5
+},
+{
+  "model": "survey.questioncategory",
+  "fields": {
+    "order": 1400.0,
+    "name": "Geomorphic controls",
+    "context": 3
+  },
+  "pk": 6
+},
+{
+  "model": "survey.questioncategory",
+  "fields": {
+    "order": 1500.0,
+    "name": "Floodplain characteristics",
+    "context": 3
+  },
+  "pk": 7
+},
+{
+  "model": "survey.questioncategory",
+  "fields": {
+    "order": 2100.0,
+    "name": "Practical, site-level restorability",
+    "context": 1
+  },
+  "pk": 8
+},
+{
   "model": "survey.question",
   "fields": {
-    "title": "Fill material availability",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "fill_material_availability",
-    "detail": "This should be based on property boundary if the site lies within a single taxlot. Some projects may necessitate considering sites based on an alternative boundary. This should be documented in the notes section.",
-    "image": "",
     "question": "Is fill material available on the site for restoration activity?",
-    "supplement": "",
+    "name": "fill_material_availability",
+    "order": 1900.0,
+    "title": "Fill material availability",
+    "image": "",
+    "questionCategory": 8,
     "layers": [],
-    "category": "Practical, location-level restorability",
-    "order": 1900.0
-  }
+    "detail": "This should be based on property boundary if the site lies within a single taxlot. Some projects may necessitate considering sites based on an alternative boundary. This should be documented in the notes section.",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Practical, location-level restorability"
+  },
+  "pk": 1
 },
 {
-  "pk": 2,
   "model": "survey.question",
   "fields": {
-    "title": "Continuing property access",
-    "choices": "[{\"value\":1.0,\"choice\":\"No.\"},{\"value\":0.0,\"choice\":\"Yes.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "continuing_property_access",
-    "detail": "This should be based on property boundary if the site lies within a single taxlot. Some projects may necessitate considering sites based on an alternative boundary. This should be documented in the notes section.",
-    "image": "",
     "question": "Are there ownership, access, or management rights on or adjacent to the property that could limit restoration activity?",
-    "supplement": "",
+    "name": "continuing_property_access",
+    "order": 2000.0,
+    "title": "Continuing property access",
+    "image": "",
+    "questionCategory": 8,
     "layers": [],
-    "category": "Practical, location-level restorability",
-    "order": 2000.0
-  }
-},
-{
-  "pk": 3,
-  "model": "survey.question",
-  "fields": {
-    "title": "Site accessibility",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "site_accessibility",
     "detail": "This should be based on property boundary if the site lies within a single taxlot. Some projects may necessitate considering sites based on an alternative boundary. This should be documented in the notes section.",
-    "image": "",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"No.\"},{\"value\":0.0,\"choice\":\"Yes.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Practical, location-level restorability"
+  },
+  "pk": 2
+},
+{
+  "model": "survey.question",
+  "fields": {
     "question": "Is the site accessible by road to the construction equipment necessary for restoration?",
-    "supplement": "",
+    "name": "site_accessibility",
+    "order": 2100.0,
+    "title": "Site accessibility",
+    "image": "",
+    "questionCategory": 8,
     "layers": [],
-    "category": "Practical, location-level restorability",
-    "order": 2100.0
-  }
+    "detail": "This should be based on property boundary if the site lies within a single taxlot. Some projects may necessitate considering sites based on an alternative boundary. This should be documented in the notes section.",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Practical, location-level restorability"
+  },
+  "pk": 3
 },
 {
-  "pk": 4,
   "model": "survey.question",
   "fields": {
-    "title": "Surrounding land use",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes, definitely: a professional assessment has informed me of such.\"},{\"value\":0.75,\"choice\":\"Yes, I think so.\"},{\"value\":0.25,\"choice\":\"No, but the damage is insignificant or able to be mitigated.\"},{\"value\":0.0,\"choice\":\"No, and we won't be able to mitigate the damage.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "surrounding_land_use",
-    "detail": "Consider whether the surrounding or adjacent land use is residential, industrial, natural, under public ownership, etc. Is there infrastructure associated with this land use like boat launches, mill races, trails or bike paths or other recreational use that might be affected by restoration?",
-    "image": "",
     "question": "Is the surrounding land use compatible?",
-    "supplement": "",
+    "name": "surrounding_land_use",
+    "order": 300.0,
+    "title": "Surrounding land use",
+    "image": "",
+    "questionCategory": 2,
     "layers": [],
-    "category": "Threat to other areas - permittability",
-    "order": 300.0
-  }
+    "detail": "Consider whether the surrounding or adjacent land use is residential, industrial, natural, under public ownership, etc. Is there infrastructure associated with this land use like boat launches, mill races, trails or bike paths or other recreational use that might be affected by restoration?",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes, definitely: a professional assessment has informed me of such.\"},{\"value\":0.75,\"choice\":\"Yes, I think so.\"},{\"value\":0.25,\"choice\":\"No, but the damage is insignificant or able to be mitigated.\"},{\"value\":0.0,\"choice\":\"No, and we won't be able to mitigate the damage.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Threat to other areas - permittability"
+  },
+  "pk": 4
 },
 {
-  "pk": 6,
   "model": "survey.question",
   "fields": {
-    "title": "Infrastructure",
-    "choices": "[{\"value\":1.0,\"choice\":\"No, definitely not: a professional assessment has informed me as such.\"},{\"value\":0.75,\"choice\":\"No, I don't think so.\"},{\"value\":0.25,\"choice\":\"Yes, but the damage is insignificant or able to be mitigated.\"},{\"value\":0.0,\"choice\":\"Yes, and we won\\u2019t be able to mitigate the damage.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "infrastructure",
-    "detail": "Consider changes to the river and floodplain from the effects of restoration in this reach. How might restoration or river-floodplain interaction influence river dynamics?",
-    "image": "",
     "question": "Are you aware of any downstream structures within the project reach, such as levees, dams, bridges, road crossings that will be structurally damaged or impaired by restoration at the project site?",
-    "supplement": "",
+    "name": "infrastructure",
+    "order": 400.0,
+    "title": "Infrastructure",
+    "image": "",
+    "questionCategory": 2,
     "layers": [],
-    "category": "Threat to other areas - permittability",
-    "order": 400.0
-  }
+    "detail": "Consider changes to the river and floodplain from the effects of restoration in this reach. How might restoration or river-floodplain interaction influence river dynamics?",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"No, definitely not: a professional assessment has informed me as such.\"},{\"value\":0.75,\"choice\":\"No, I don't think so.\"},{\"value\":0.25,\"choice\":\"Yes, but the damage is insignificant or able to be mitigated.\"},{\"value\":0.0,\"choice\":\"Yes, and we won\\u2019t be able to mitigate the damage.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Threat to other areas - permittability"
+  },
+  "pk": 6
 },
 {
-  "pk": 7,
   "model": "survey.question",
   "fields": {
-    "title": "Water rights",
-    "choices": "[{\"value\":1.0,\"choice\":\"No, definitely not: a professional assessment has informed me of such.\"},{\"value\":0.75,\"choice\":\"No, I don't think so.\"},{\"value\":0.45,\"choice\":\"Legally no, but the public perceives there could be an issue.\"},{\"value\":0.25,\"choice\":\"Yes, but the effects are insignificant or can be mitigated.\"},{\"value\":0.0,\"choice\":\"Yes, and we won\\u2019t be able to mitigate the effects.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "water_rights",
-    "detail": "Detail about Water rights",
-    "image": "",
     "question": "Are there water rights in the area that could be impacted by restoration?",
-    "supplement": "",
+    "name": "water_rights",
+    "order": 500.0,
+    "title": "Water rights",
+    "image": "",
+    "questionCategory": 2,
     "layers": [],
-    "category": "Threat to other areas - permittability",
-    "order": 500.0
-  }
+    "detail": "Detail about Water rights",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"No, definitely not: a professional assessment has informed me of such.\"},{\"value\":0.75,\"choice\":\"No, I don't think so.\"},{\"value\":0.45,\"choice\":\"Legally no, but the public perceives there could be an issue.\"},{\"value\":0.25,\"choice\":\"Yes, but the effects are insignificant or can be mitigated.\"},{\"value\":0.0,\"choice\":\"Yes, and we won\\u2019t be able to mitigate the effects.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Threat to other areas - permittability"
+  },
+  "pk": 7
 },
 {
-  "pk": 8,
   "model": "survey.question",
   "fields": {
-    "title": "Public perception",
-    "choices": "[{\"value\":1.0,\"choice\":\"The project has, or is likely to have, a high profile and majority support.\"},{\"value\":0.35,\"choice\":\"The project has, or is likely to have, a high profile, with both opposition and support.\"},{\"value\":0.0,\"choice\":\"The project has, or is likely to have, a high profile and vocal opposition that could slow or stop the project.\"},{\"value\":0.75,\"choice\":\"The project isn't widely known, and doesn't have much support or opposition (and is likely to remain that way).\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "public_perception",
-    "detail": "Consider how the public perceives or could perceive this project in light of existing water rights, current and future or planned public access, and potential landscape-altering engineering (cutting of riparian forest, flooding, river capture, etc.). Will or do members of the public actively challenge the project? Does public perception pose an additional challenge to restoration?",
-    "image": "",
     "question": "How does the public perceive this project?",
-    "supplement": "",
+    "name": "public_perception",
+    "order": 200.0,
+    "title": "Public perception",
+    "image": "",
+    "questionCategory": 1,
     "layers": [],
-    "category": "Cost benefit",
-    "order": 200.0
-  }
+    "detail": "Consider how the public perceives or could perceive this project in light of existing water rights, current and future or planned public access, and potential landscape-altering engineering (cutting of riparian forest, flooding, river capture, etc.). Will or do members of the public actively challenge the project? Does public perception pose an additional challenge to restoration?",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"The project has, or is likely to have, a high profile and majority support.\"},{\"value\":0.35,\"choice\":\"The project has, or is likely to have, a high profile, with both opposition and support.\"},{\"value\":0.0,\"choice\":\"The project has, or is likely to have, a high profile and vocal opposition that could slow or stop the project.\"},{\"value\":0.75,\"choice\":\"The project isn't widely known, and doesn't have much support or opposition (and is likely to remain that way).\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Cost benefit"
+  },
+  "pk": 8
 },
 {
-  "pk": 9,
   "model": "survey.question",
   "fields": {
-    "title": "Property value",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "property_value",
-    "detail": "Detail about Property value",
-    "image": "",
     "question": "Is the property for sale at or below fair market value?",
-    "supplement": "",
+    "name": "property_value",
+    "order": 100.0,
+    "title": "Property value",
+    "image": "",
+    "questionCategory": 1,
     "layers": [],
-    "category": "Cost benefit",
-    "order": 100.0
-  }
+    "detail": "Detail about Property value",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Cost benefit"
+  },
+  "pk": 9
 },
 {
-  "pk": 10,
   "model": "survey.question",
   "fields": {
-    "title": "Contamination or Hazardous Waste",
-    "choices": "[{\"value\":1.0,\"choice\":\"No.\"},{\"value\":0.0,\"choice\":\"Yes.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "contamination_or_hazardous_waste",
-    "detail": "Detail about Contamination or Hazardous waste",
-    "image": "",
     "question": "Are there recent or continuing impacts from contaminated sites upstream or adjacent to your property, within the river reach?",
-    "supplement": "",
+    "name": "contamination_or_hazardous_waste",
+    "order": 250.0,
+    "title": "Contamination or Hazardous Waste",
+    "image": "",
+    "questionCategory": 1,
     "layers": [],
-    "category": "Cost benefit",
-    "order": 250.0
-  }
-},
-{
-  "pk": 11,
-  "model": "survey.question",
-  "fields": {
-    "title": "Infrastructure constraints",
+    "detail": "Detail about Contamination or Hazardous waste",
+    "supplement": "",
     "choices": "[{\"value\":1.0,\"choice\":\"No.\"},{\"value\":0.0,\"choice\":\"Yes.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "infrastructure_constraints",
-    "detail": "Consider whether flow conditions in the river are likely to connect the river to the floodplain. Is the river too entrenched? Do water releases from upstream dams or consumptive water withdrawals from upstream limit flow within the reach such that the floodplain is disconnected? Are there other flow barriers?\r\n\r\nThis question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
-    "image": "",
+    "category": "Cost benefit"
+  },
+  "pk": 10
+},
+{
+  "model": "survey.question",
+  "fields": {
     "question": "Are there water withdrawals, levees or upstream dams that affect the flow conditions or geomorphology of the floodplain in this reach?",
-    "supplement": "",
+    "name": "infrastructure_constraints",
+    "order": 1300.0,
+    "title": "Infrastructure constraints",
+    "image": "",
+    "questionCategory": 6,
     "layers": [],
-    "category": "Geomorphic controls",
-    "order": 1300.0
-  }
+    "detail": "Consider whether flow conditions in the river are likely to connect the river to the floodplain. Is the river too entrenched? Do water releases from upstream dams or consumptive water withdrawals from upstream limit flow within the reach such that the floodplain is disconnected? Are there other flow barriers?\r\n\r\nThis question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"No.\"},{\"value\":0.0,\"choice\":\"Yes.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Geomorphic controls"
+  },
+  "pk": 11
 },
 {
-  "pk": 12,
   "model": "survey.question",
   "fields": {
-    "title": "Channel mobility",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.0,\"choice\":\"I don't know.\"}]",
-    "name": "channel_mobility",
-    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
-    "image": "",
     "question": "Is the river mobile in this reach?",
-    "supplement": "",
+    "name": "channel_mobility",
+    "order": 1400.0,
+    "title": "Channel mobility",
+    "image": "",
+    "questionCategory": 6,
     "layers": [],
-    "category": "Geomorphic controls",
-    "order": 1400.0
-  }
+    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.0,\"choice\":\"I don't know.\"}]",
+    "category": "Geomorphic controls"
+  },
+  "pk": 12
 },
 {
-  "pk": 14,
   "model": "survey.question",
   "fields": {
-    "title": "Material availability",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "material_availability",
-    "detail": "If gravel or larger material is available within the river, is it also being deposited locally, rather than being transported downstream? Upstream dams, ongoing instream or floodplain aggregate extract, and capture of sediment by existing floodplain pits may all limit sediment availability in the river. Channel and watershed characteristics may naturally limit availability of sediment, and bank armoring, straightening, and dredging may limit sediment deposition.\r\n\r\nSuggested methods for answering this include:\r\n Review of a sediment budget for the watershed if one has been produced. \r\n Examination of sequences of aerial photographs, looking for evidence of aggradation and erosion of in-channel features such as gravel bars or islands\r\n Mapping of the existence and impacts of sediment-capturing features or processes such as upstream dams, ongoing aggregate mining, other pits\r\n Simple visual inspection.\r\n\r\nThis question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
-    "image": "",
     "question": "Is gravel or larger sized material available in the river system, and is it being deposited within the channel or floodplain?",
-    "supplement": "",
+    "name": "material_availability",
+    "order": 1500.0,
+    "title": "Material availability",
+    "image": "",
+    "questionCategory": 6,
     "layers": [],
-    "category": "Geomorphic controls",
-    "order": 1500.0
-  }
+    "detail": "If gravel or larger material is available within the river, is it also being deposited locally, rather than being transported downstream? Upstream dams, ongoing instream or floodplain aggregate extract, and capture of sediment by existing floodplain pits may all limit sediment availability in the river. Channel and watershed characteristics may naturally limit availability of sediment, and bank armoring, straightening, and dredging may limit sediment deposition.\r\n\r\nSuggested methods for answering this include:\r\n Review of a sediment budget for the watershed if one has been produced. \r\n Examination of sequences of aerial photographs, looking for evidence of aggradation and erosion of in-channel features such as gravel bars or islands\r\n Mapping of the existence and impacts of sediment-capturing features or processes such as upstream dams, ongoing aggregate mining, other pits\r\n Simple visual inspection.\r\n\r\nThis question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Geomorphic controls"
+  },
+  "pk": 14
 },
 {
-  "pk": 15,
   "model": "survey.question",
   "fields": {
-    "title": "Location in watershed",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "location_in_floodplain",
-    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\r\n\r\nFloodplain characteristics such as channel gradient and valley type are important determinants of floodplain restoration responsiveness and can be used to assess the benefits of restoration within a given reach. Gradient controls the movement of water, materials, and species throughout the river system. Valley type determines river-floodplain interaction, habitat, and species occurrence.\r\n\r\nConsider characteristics such as occurrence at the confluence of two rivers, areas of coldwater upwelling, habitat complexity that supports greater biodiversity, etc...",
-    "image": "",
     "question": "Is the property located in an ecologically/hydrologically rich/important spot in the watershed?",
-    "supplement": "",
+    "name": "location_in_floodplain",
+    "order": 1600.0,
+    "title": "Location in watershed",
+    "image": "",
+    "questionCategory": 7,
     "layers": [],
-    "category": "Floodplain characteristics",
-    "order": 1600.0
-  }
+    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\r\n\r\nFloodplain characteristics such as channel gradient and valley type are important determinants of floodplain restoration responsiveness and can be used to assess the benefits of restoration within a given reach. Gradient controls the movement of water, materials, and species throughout the river system. Valley type determines river-floodplain interaction, habitat, and species occurrence.\r\n\r\nConsider characteristics such as occurrence at the confluence of two rivers, areas of coldwater upwelling, habitat complexity that supports greater biodiversity, etc...",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Floodplain characteristics"
+  },
+  "pk": 15
 },
 {
-  "pk": 17,
   "model": "survey.question",
   "fields": {
-    "title": "Gradient",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "gradient",
-    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\r\n\r\nFloodplain characteristics such as channel gradient and valley type are important determinants of floodplain restoration responsiveness and can be used to assess the benefits of restoration within a given reach. Gradient controls the movement of water, materials, and species throughout the river system. Valley type determines river-floodplain interaction, habitat, and species occurrence.",
-    "image": "",
     "question": "Does the project occur within low gradient (<2%) channels in wide valleys with gentle slopes and/or an extensive natural floodplain?",
-    "supplement": "",
+    "name": "gradient",
+    "order": 1700.0,
+    "title": "Gradient",
+    "image": "",
+    "questionCategory": 7,
     "layers": [],
-    "category": "Floodplain characteristics",
-    "order": 1700.0
-  }
-},
-{
-  "pk": 18,
-  "model": "survey.question",
-  "fields": {
-    "title": "Within 100-year floodplain",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "within_x_year_floodplain",
     "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\r\n\r\nFloodplain characteristics such as channel gradient and valley type are important determinants of floodplain restoration responsiveness and can be used to assess the benefits of restoration within a given reach. Gradient controls the movement of water, materials, and species throughout the river system. Valley type determines river-floodplain interaction, habitat, and species occurrence.",
-    "image": "",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Floodplain characteristics"
+  },
+  "pk": 17
+},
+{
+  "model": "survey.question",
+  "fields": {
     "question": "Is the project within the 100-year floodplain?",
-    "supplement": "",
+    "name": "within_x_year_floodplain",
+    "order": 1800.0,
+    "title": "Within 100-year floodplain",
+    "image": "",
+    "questionCategory": 7,
     "layers": [],
-    "category": "Floodplain characteristics",
-    "order": 1800.0
-  }
+    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\r\n\r\nFloodplain characteristics such as channel gradient and valley type are important determinants of floodplain restoration responsiveness and can be used to assess the benefits of restoration within a given reach. Gradient controls the movement of water, materials, and species throughout the river system. Valley type determines river-floodplain interaction, habitat, and species occurrence.",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Floodplain characteristics"
+  },
+  "pk": 18
 },
 {
-  "pk": 19,
   "model": "survey.question",
   "fields": {
-    "title": "Water quality",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes, definitely: a professional assessment has informed me as such.\"},{\"value\":0.75,\"choice\":\"Yes, I think so.\"},{\"value\":0.25,\"choice\":\"No, but restoration would improve water quality.\"},{\"value\":0.0,\"choice\":\"No, and improving water quality would be exceptionally difficult and/or expensive.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "water_quality",
-    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
-    "image": "",
     "question": "Is the water quality in the river conducive to healthy fish, invertebrate, or amphibian populations?",
-    "supplement": "",
+    "name": "water_quality",
+    "order": 1100.0,
+    "title": "Water quality",
+    "image": "",
+    "questionCategory": 5,
     "layers": [],
-    "category": "Abiotic conditions",
-    "order": 1100.0
-  }
+    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes, definitely: a professional assessment has informed me as such.\"},{\"value\":0.75,\"choice\":\"Yes, I think so.\"},{\"value\":0.25,\"choice\":\"No, but restoration would improve water quality.\"},{\"value\":0.0,\"choice\":\"No, and improving water quality would be exceptionally difficult and/or expensive.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Abiotic conditions"
+  },
+  "pk": 19
 },
 {
-  "pk": 23,
   "model": "survey.question",
   "fields": {
-    "title": "Intact floodplain forest",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "intact_floodplain_forest",
-    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
-    "image": "",
     "question": "Does the project lie within intact floodplain forest at the reach scale?",
-    "supplement": "",
+    "name": "intact_floodplain_forest",
+    "order": 800.0,
+    "title": "Intact floodplain forest",
+    "image": "",
+    "questionCategory": 4,
     "layers": [],
-    "category": "Biotic conditions",
-    "order": 800.0
-  }
+    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Biotic conditions"
+  },
+  "pk": 23
 },
 {
-  "pk": 24,
   "model": "survey.question",
   "fields": {
-    "title": "Habitat features",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "habitat_features",
-    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\r\n\r\nThe potential for habitat to occur on the property in the future is considered elsewhere. Current habitat of interest might include coldwater refugia, breeding or spawning habitat for native species, etc...",
-    "image": "",
     "question": "Are habitat features that support floodplain or riverine species of conservation interest currently present in the reach?",
-    "supplement": "",
+    "name": "habitat_features",
+    "order": 900.0,
+    "title": "Habitat features",
+    "image": "",
+    "questionCategory": 4,
     "layers": [],
-    "category": "Biotic conditions",
-    "order": 900.0
-  }
-},
-{
-  "pk": 25,
-  "model": "survey.question",
-  "fields": {
-    "title": "Species of interest",
+    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\r\n\r\nThe potential for habitat to occur on the property in the future is considered elsewhere. Current habitat of interest might include coldwater refugia, breeding or spawning habitat for native species, etc...",
+    "supplement": "",
     "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "species_of_interest",
-    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\r\n\r\nThe potential for species to occur on the property in the future is considered elsewhere.",
-    "image": "",
+    "category": "Biotic conditions"
+  },
+  "pk": 24
+},
+{
+  "model": "survey.question",
+  "fields": {
     "question": "Are there floodplain or riverine species of conservation interest currently present on or adjacent in the reach?",
-    "supplement": "",
+    "name": "species_of_interest",
+    "order": 1000.0,
+    "title": "Species of interest",
+    "image": "",
+    "questionCategory": 4,
     "layers": [],
-    "category": "Biotic conditions",
-    "order": 1000.0
-  }
+    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\r\n\r\nThe potential for species to occur on the property in the future is considered elsewhere.",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Biotic conditions"
+  },
+  "pk": 25
 },
 {
-  "pk": 26,
   "model": "survey.question",
   "fields": {
-    "title": "Identified in conservation plan",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes. You may list the relevant documents in the notes below.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "identified_in_conservation_plan",
-    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
-    "image": "",
     "question": "Has this property, or the area, been identified as a priority in conservation plans, recovery plans, conservation action plans, prioritizations, watershed assessments, regional priorities, or other ecological assessments?",
-    "supplement": "",
+    "name": "identified_in_conservation_plan",
+    "order": 600.0,
+    "title": "Identified in conservation plan",
+    "image": "",
+    "questionCategory": 3,
     "layers": [],
-    "category": "Conservation value",
-    "order": 600.0
-  }
-},
-{
-  "pk": 27,
-  "model": "survey.question",
-  "fields": {
-    "title": "Relationship to protected areas",
-    "choices": "[{\"value\":1.0,\"choice\":\"Yes. You may list the protected areas in the notes below.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
-    "name": "relationship_to_protected_areas",
     "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
-    "image": "",
-    "question": "Is the property adjacent to or connecting other protected areas",
     "supplement": "",
-    "layers": [],
-    "category": "Conservation value",
-    "order": 700.0
-  }
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes. You may list the relevant documents in the notes below.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Conservation value"
+  },
+  "pk": 26
 },
 {
-  "pk": 28,
   "model": "survey.question",
   "fields": {
-    "title": "Downstream Connectivity Barriers",
-    "choices": "[{\"value\":1.0,\"choice\":\"No\"},{\"value\":0.0,\"choice\":\"Yes\"},{\"value\":0.5,\"choice\":\"I don't know\"}]",
-    "name": "downstream_connectivity_barriers",
-    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \\r\\n\\r\\nA relevant \\u201creach scale\\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\\r\\n\\r\\nFor projects intended to provide or enhance habitat for migratory or anadromous fish, consider whether the site will be accessible to the species following restoration. Are there dams or other impediments beyond the site that will limit access to the site regardless of restoration?",
+    "question": "Is the property adjacent to or connecting other protected areas",
+    "name": "relationship_to_protected_areas",
+    "order": 700.0,
+    "title": "Relationship to protected areas",
     "image": "",
-    "question": "Are there impediments to migratory or anadromous fish passage downstream of the project site?",
-    "supplement": "",
+    "questionCategory": 3,
     "layers": [],
-    "category": "Abiotic conditions",
-    "order": 1200.0
-  }
+    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \r\n\r\nA relevant \u201creach scale\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"Yes. You may list the protected areas in the notes below.\"},{\"value\":0.0,\"choice\":\"No.\"},{\"value\":0.5,\"choice\":\"I don't know.\"}]",
+    "category": "Conservation value"
+  },
+  "pk": 27
+},
+{
+  "model": "survey.question",
+  "fields": {
+    "question": "Are there impediments to migratory or anadromous fish passage downstream of the project site?",
+    "name": "downstream_connectivity_barriers",
+    "order": 1200.0,
+    "title": "Downstream Connectivity Barriers",
+    "image": "",
+    "questionCategory": 5,
+    "layers": [],
+    "detail": "This question should be answered at the reach scale. The reach scale should generally include the length of river consisting of the same or similar gradient and channel confinement. Confluences with large tributaries or changes in sediment materials may also be used to delineate reaches (Skidmore et al. 2011). \\r\\n\\r\\nA relevant \\u201creach scale\\u201d may already be determined for your project area, based on river assessments or known conditions in the area. Consult available watershed assessments or other relevant documents to determine whether a reach has already been determined for your property or project site.\\r\\n\\r\\nFor projects intended to provide or enhance habitat for migratory or anadromous fish, consider whether the site will be accessible to the species following restoration. Are there dams or other impediments beyond the site that will limit access to the site regardless of restoration?",
+    "supplement": "",
+    "choices": "[{\"value\":1.0,\"choice\":\"No\"},{\"value\":0.0,\"choice\":\"Yes\"},{\"value\":0.5,\"choice\":\"I don't know\"}]",
+    "category": "Abiotic conditions"
+  },
+  "pk": 28
 }
 ]

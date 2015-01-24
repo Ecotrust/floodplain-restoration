@@ -122,6 +122,21 @@ class MapLayer(models.Model):
     def __str__(self):
         return "Layer: {}".format(self.name)
 
+class Context(models.Model):
+    name = models.CharField(max_length=250)
+    order = models.FloatField()
+
+    def __str__(self):
+        return self.name
+
+class QuestionCategory(models.Model):
+    name = models.CharField(max_length=250)
+    context = models.ForeignKey(Context)
+    order = models.FloatField()
+
+    def __str__(self):
+        return self.name
+
 
 class Question(models.Model):
     name = models.CharField(max_length=80)
@@ -130,6 +145,7 @@ class Question(models.Model):
     detail = models.TextField()
     order = models.FloatField()
     category = models.CharField(max_length=80)
+    questionCategory = models.ForeignKey(QuestionCategory, blank=True, null=True, default=None)
 
     # contextual info to help use answer the question
     image = models.ImageField(blank=True)
