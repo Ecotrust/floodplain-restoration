@@ -47,15 +47,58 @@ angular.module('uiApp')
     $scope.questions = [];
     $scope.questionsObj = {};
     $scope.contexts = [];
+    $scope.contextsObj = {};
+    var componentQuestions = {};
     QuestionFactory
-      .getQuestions()
+      .getContexts()
       .then( function() {
-        $scope.questions = QuestionFactory.questions;
-        for (var question in $scope.questions) {
-          $scope.questionsObj[$scope.questions[question].id.toString()] = $scope.questions[question];
-        }
         $scope.contexts = QuestionFactory.contexts;
+        QuestionFactory
+        .getCategories()
+        .then( function() {
+          $scope.categories = QuestionFactory.categories;
+          QuestionFactory
+          .getQuestions()
+          .then( function() {
+            $scope.questions = QuestionFactory.questions;
+            for (var question in $scope.questions) {
+              var questionObj = $scope.questions[question];
+              questionObj.surveyNumber = parseInt(question, 10);
+              $scope.questionsObj[questionObj.id.toString()] = questionObj;
+              if (!componentQuestions.hasOwnProperty(questionObj.questionCategory.toString())) {
+                componentQuestions[questionObj.questionCategory.toString()] = [];
+              }
+              componentQuestions[questionObj.questionCategory.toString()].push({
+                'id':questionObj.id,
+                'surveyId':questionObj.surveyNumber + 1
+              });
+            }
+            var collectedComponents = {};
+            for (var componentId in $scope.categories) {
+              var component = $scope.categories[componentId];
+              if (!collectedComponents.hasOwnProperty(component.context.toString())) {
+                collectedComponents[component.context.toString()] = [];
+              }
+              collectedComponents[component.context.toString()].push({
+                'id':component.id,
+                'name':component.name,
+                'question_ids':componentQuestions[component.id.toString()]
+              });
+            }
+            for (var contextId in $scope.contexts) {
+              var context = $scope.contexts[contextId.toString()];
+              $scope.contextsObj[context.name] = {
+                'id' : context.id,
+                'label' : context.name,
+                'order' : context.order,
+                'components' : collectedComponents[context.id.toString()]
+              };
+            }
+          });
+        });
+
       });
+    
 
     $scope.href = function(link) {
       $location.path(link);

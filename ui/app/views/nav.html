@@ -38,12 +38,12 @@
             Questions <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li ng-repeat="context in contexts" ng-if="context.components.length>0" class="dropdown-submenu">
+            <li ng-repeat="context in contextsObj" ng-if="context.components.length>0" class="dropdown-submenu">
               <div ng-repeat="component in context.components" ng-if="component.question_ids.length>0" class="dropdown-submenu nav-dd">
                 {{component.name | uppercase}}
                 <ul class="dropdown-menu survey-question-dd" role="menu">
-                  <li class="nav-dd" ng-repeat="question_id in component.question_ids" ng-click="href('site/' + activeSiteId + '/survey/' + question_id + '/')" ng-class="{ 'last-dd' : $index+1 == component.question_ids.length}">
-                    {{questionsObj[question_id.toString()].title | uppercase}}
+                  <li class="nav-dd" ng-repeat="question_id in component.question_ids" ng-click="href('site/' + activeSiteId + '/survey/' + question_id.surveyId + '/')" ng-class="{ 'last-dd' : $index+1 == component.question_ids.length}">
+                    {{questionsObj[question_id.id.toString()].title | uppercase}}
                   </li>
                 </ul>
               </div>

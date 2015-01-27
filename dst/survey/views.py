@@ -5,7 +5,7 @@ from rest_framework.decorators import link
 from rest_framework.response import Response
 from django.http import HttpResponse, HttpResponseForbidden
 
-from survey.models import GravelSite, Pit, InputNode, Question
+from survey.models import GravelSite, Pit, InputNode, Question, Context, QuestionCategory
 from survey import serializers
 from survey.permissions import IsOwnerOrShared
 from flatblocks.models import FlatBlock
@@ -117,3 +117,18 @@ angular
         content = template.format('', baseurl)
 
     return HttpResponse(content, status=200, content_type="application/javascript")
+
+class ContextSet(viewsets.ReadOnlyModelViewSet):
+    """Contexts (Read only)"""
+    model = Context
+    filter_fields = ('name', 'order')
+    queryset = Context.objects.all().order_by('order')
+    serializer_class = serializers.ContextSerializer
+
+class QuestionCategorySet(viewsets.ReadOnlyModelViewSet):
+    """Question Categories (Read only)"""
+    model = QuestionCategory
+    filter_fields = ('name', 'context', 'order')
+    queryset = QuestionCategory.objects.all().order_by('context__order', 'order')
+    serializer_class = serializers.QuestionCategorySerializer
+

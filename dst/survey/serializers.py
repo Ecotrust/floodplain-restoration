@@ -48,3 +48,13 @@ class FlatBlockSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FlatBlock
+
+class ContextSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Context
+
+class QuestionCategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.QuestionCategory
