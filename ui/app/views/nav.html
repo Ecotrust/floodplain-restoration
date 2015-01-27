@@ -37,7 +37,7 @@
           <a class="dropdown-toggle" data-toggle="dropdown">
             Questions <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu" role="menu" ng-click="$event.stopPropagation()">
             <li ng-repeat="context in contextsObj" ng-if="context.components.length>0" class="dropdown-submenu">
               <div ng-repeat="component in context.components" ng-if="component.question_ids.length>0" class="dropdown-submenu nav-dd">
                 {{component.name | uppercase}}
