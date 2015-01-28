@@ -402,7 +402,7 @@ angular.module('uiApp')
     $scope.save = function () {
       try {
         var pitWkt = map.getActivePitWkt;
-        $scope.setPitArea($scope.pit)
+        $scope.setPitArea($scope.pit);
         if (isNewPit) {
           SiteFactory
             .postSitePit(activeSiteId, $scope.pit, pitWkt())
