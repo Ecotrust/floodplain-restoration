@@ -59,7 +59,7 @@ angular.module('uiApp')
         $scope.questions.sort(function(a,b) {
           return a.order - b.order;
         });
-        $scope.firstUnansweredId = $scope.questions[0].id;
+        $scope.firstUnansweredId = 1;
 
         NodeFactory
           .getNodes($rootScope.activeSiteId)
@@ -76,7 +76,7 @@ angular.module('uiApp')
                   }
                 }
                 if (questionAnswered === false) {
-                  $scope.firstUnansweredId = $scope.questions[i].id;
+                  $scope.firstUnansweredId = parseInt(i,10)+1;
                   break;
                 }
               }
