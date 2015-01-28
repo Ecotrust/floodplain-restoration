@@ -126,9 +126,9 @@ probability ( cost_benefit | public_perception, property_value, contamination_or
   (supportive, good_deal, contaminated)  0.60, 0.40;
   (supportive, costly, clean)            0.50, 0.50;
   (supportive, costly, contaminated)     0.40, 0.60;
-  (unfavorable, good_deal, clean)        0.40, 0.60;
-  (unfavorable, good_deal, contaminated) 0.10, 0.90;
-  (unfavorable, costly, clean)           0.20, 0.80;
+  (unfavorable, good_deal, clean)        0.10, 0.90;
+  (unfavorable, good_deal, contaminated) 0.05, 0.95;
+  (unfavorable, costly, clean)           0.02, 0.98;
   (unfavorable, costly, contaminated)    0.00, 1.00;
 }
 probability ( public_perception ) {
@@ -140,18 +140,18 @@ probability ( contamination_or_hazardous_waste ) {
 probability ( property_value ) {
   table 0.5, 0.5;
 }
-#UPDATE THIS ONE!!!
+
 probability ( threats_to_other_areas_or_permittability | surrounding_land_use, infrastructure, water_rights ) {
   (ammenable, no_threats, no_threats) 1.00, 0.00;
-  (ammenable, no_threats, threatened) 0.67, 0.33;
+  (ammenable, no_threats, threatened) 0.20, 0.80;
   (ammenable, threatened, no_threats) 0.67, 0.33;
-  (ammenable, threatened, threatened) 0.33, 0.67;
+  (ammenable, threatened, threatened) 0.10, 0.90;
   (unfriendly, no_threats, no_threats) 0.67, 0.33;
-  (unfriendly, no_threats, threatened) 0.33, 0.67;
+  (unfriendly, no_threats, threatened) 0.05, 0.95;
   (unfriendly, threatened, no_threats) 0.33, 0.67;
   (unfriendly, threatened, threatened) 0.00, 1.00;
 }
-#END UPDATE!!!
+
 probability ( surrounding_land_use ) {
   table 0.5, 0.5;
 }
@@ -214,18 +214,16 @@ probability ( species_of_interest ) {
 probability ( intact_floodplain_forest ) {
   table 0.5, 0.5;
 }
-#UPDATE THIS ONE!!!
 probability ( floodplain_characteristics | location_in_floodplain, within_x_year_floodplain, gradient ) {
-  (strategic, within, suitable) 1.00, 0.00;
-  (strategic, within, unsuitable) 0.67, 0.33;
-  (strategic, outside, suitable) 0.67, 0.33;
-  (strategic, outside, unsuitable) 0.33, 0.67;
-  (ineffective, within, suitable) 0.67, 0.33;
-  (ineffective, within, unsuitable) 0.33, 0.67;
-  (ineffective, outside, suitable) 0.33, 0.67;
+  (strategic, within, suitable)      1.00, 0.00;
+  (strategic, within, unsuitable)    0.67, 0.33;
+  (strategic, outside, suitable)     0.00, 1.00;
+  (strategic, outside, unsuitable)   0.00, 1.00;
+  (ineffective, within, suitable)    0.30, 0.70;
+  (ineffective, within, unsuitable)  0.20, 0.80;
+  (ineffective, outside, suitable)   0.00, 1.00;
   (ineffective, outside, unsuitable) 0.00, 1.00;
 }
-#END UPDATE
 probability ( location_in_floodplain ) {
   table 0.5, 0.5;
 }
