@@ -26,6 +26,7 @@
         <div class="col-md-2 report-pit-container" ng-class="{'bar-right': $index<pits.length-1}" ng-repeat="pit in pits">
             <p class="report-pit-name">{{pit.properties.name}}</p>
             <p class="report-pit-info">{{pit.properties.notes}}</p>
+            <p class="report-pit-info">{{pit.properties.score.rank}}</p>
         </div>
     </div>
 

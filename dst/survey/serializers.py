@@ -12,7 +12,21 @@ class InputNodeSerializer(serializers.ModelSerializer):
 
 
 class PitSerializer(GeoFeatureModelSerializer):
+
+    def get_score(self, obj):
+        pit_score = obj.score
+        rank = "Highly Suitable"
+        if pit_score < 0.33:
+            rank = "Unsuitable"
+        if pit_score < 0.66:
+            rank = "Moderately Suitable"
+        return {
+            'value': pit_score,
+            'rank': rank
+        }
+
     user = serializers.IntegerField(read_only=True)
+    score = serializers.SerializerMethodField(method_name='get_score')
 
     class Meta:
         model = models.Pit
