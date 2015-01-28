@@ -85,28 +85,30 @@ class Pit(BaseModel):
 
     ## Water Quality Threat
     contamination = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
-    substrate = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
 
     ## Practical Restorability
     adjacent_river_depth = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
     slope_dist = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
     pit_levies = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
-    bedrock = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
 
     ## Pit Geometry
     bank_slope = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
-    pit_depth = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
     surface_area = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
-    complexity = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    
+    ## Depricated
+    bedrock = models.FloatField(blank=True, null=True, default=None, validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    pit_depth = models.FloatField(blank=True, null=True, default=None, validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    substrate = models.FloatField(blank=True, null=True, default=None, validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    complexity = models.FloatField(blank=True, null=True, default=None, validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
 
     objects = models.GeoManager()
 
     @property
     def score(self):
         # TODO
-        attrs = ['contamination', 'substrate', 'adjacent_river_depth', 
-                 'slope_dist', 'pit_levies', 'bedrock', 'bank_slope',
-                 'pit_depth', 'surface_area', 'complexity']
+        attrs = ['contamination', 'adjacent_river_depth', 
+                 'slope_dist', 'pit_levies', 'bank_slope',
+                 'surface_area']
         total = sum(self.__dict__[attr] for attr in attrs)
 
         return total/len(attrs)

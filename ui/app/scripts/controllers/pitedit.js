@@ -73,27 +73,6 @@ angular.module('uiApp')
           ]
         },
         {
-          'question': 'Substrate',
-          'visible': false,
-          'id': 'substrate',
-          'order': 20,
-          'type': 'select',
-          'answers': [
-            {
-              'label': 'Unknown',
-              'value': 0.5
-            },
-            {
-              'label': 'Good',
-              'value': 1
-            },
-            {
-              'label': 'Bad',
-              'value': 0
-            }
-          ]
-        },
-        {
           'question': 'Is the pit deeper than the adjacent river thalweg?',
           'visible': true,
           'id': 'adjacent_river_depth',
@@ -116,7 +95,8 @@ angular.module('uiApp')
               'label': 'Yes',
               'value': 0
             }
-          ]
+          ],
+          'info': 'The thalweg of the river is the line of the lowest points within the channel, spanning the length of the river.'
         },
         {
           'question': 'What is the distance from the river to the pit edge?',
@@ -165,27 +145,6 @@ angular.module('uiApp')
           ]
         },
         {
-          'question': 'Bedrock',
-          'visible': false,
-          'id': 'bedrock',
-          'order': 60,
-          'type': 'select',
-          'answers': [
-            {
-              'label': 'Unknown',
-              'value': 0.5
-            },
-            {
-              'label': 'Yes',
-              'value': 1
-            },
-            {
-              'label': 'No',
-              'value': 0
-            }
-          ]
-        },
-        {
           'question': 'Select the answer that best describes the slope of the pit bank:',
           'visible': true,
           'id': 'bank_slope',
@@ -206,31 +165,6 @@ angular.module('uiApp')
             },
             {
               'label': 'The bank slope is steep around most of the pit.',
-              'value': 0
-            }
-          ]
-        },
-        {
-          'question': 'Pit Depth',
-          'visible': false,
-          'id': 'pit_depth',
-          'order': 80,
-          'type': 'select',
-          'answers': [
-            {
-              'label': 'Unknown',
-              'value': 0.5
-            },
-            {
-              'label': 'Shallower than river',
-              'value': 1
-            },
-            {
-              'label': 'About the same',
-              'value': 0.6
-            },
-            {
-              'label': 'Deeper than river',
               'value': 0
             }
           ]
@@ -265,27 +199,6 @@ angular.module('uiApp')
           ]
         },
         {
-          'question': 'How complex is the perimeter of the pit?',
-          'visible': true,
-          'id': 'complexity',
-          'order': 100,
-          'type': 'select',
-          'answers': [
-            {
-              'label': 'I don\'t know',
-              'value': 0.5
-            },
-            {
-              'label': 'Simple',
-              'value': 1
-            },
-            {
-              'label': 'Complex',
-              'value': 0
-            }
-          ]
-        },
-        {
           'question': 'Notes',
           'visible': true,
           'id': 'notes',
@@ -315,8 +228,7 @@ angular.module('uiApp')
           'bedrock': 0.5,
           'bank_slope': 0.5,
           'pit_depth': 0.5,
-          'surface_area': 0.5,
-          'complexity': 0.5
+          'surface_area': 0.5
         }
       };
     } else {
