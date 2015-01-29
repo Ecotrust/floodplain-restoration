@@ -2,7 +2,8 @@
 
 var map = {
   site: {},
-  pit: {}
+  pit: {},
+  otherPit: {}
 };
 
 
@@ -25,6 +26,18 @@ map.pit.style = function() {
   return [new ol.style.Style({
     stroke: new ol.style.Stroke({
       color: 'white',
+      width: 2
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(255, 255, 100, 0.1)'
+    })
+  })];
+};
+
+map.otherPit.style = function() {
+  return [new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'orange',
       width: 2
     }),
     fill: new ol.style.Fill({
@@ -76,7 +89,7 @@ map.loadSites = function(data) {
 map.loadPits = function(data) {
   
   if (!data || data.type !== 'FeatureCollection') {
-    console.log("ERROR in data supplied to map.loadPits:", data)
+    console.log('ERROR in data supplied to map.loadPits:', data);
     return false;
   }
   map.map.removeLayer(map.pit.layer);
@@ -95,12 +108,34 @@ map.loadPits = function(data) {
   map.map.addLayer(map.pit.layer);
 };
 
+map.loadOtherPits = function(data) {
+  if (!data || data.type !== 'FeatureCollection') {
+    console.log('ERROR in data supplied to map.loadOtherPits:', data);
+    return false;
+  }
+  map.map.removeLayer(map.otherPit.layer);
+
+  map.otherPit.source = new ol.source.GeoJSON(
+    ({
+      object: data
+    })
+  );
+
+  map.otherPit.layer = new ol.layer.Vector({
+    source:map.otherPit.source,
+    style: map.otherPit.style
+  });
+
+  map.map.addLayer(map.otherPit.layer);
+};
+
 map.clear = function() {
   map.map.removeInteraction(map.drawPit);
   map.map.removeInteraction(map.drawSite);
   map.map.removeInteraction(map.modifyPit);
   map.map.removeInteraction(map.modifySite);
   map.map.removeLayer(map.pit.layer);
+  map.map.removeLayer(map.otherPit.layer);
   map.map.removeLayer(map.site.layer);
 };
 

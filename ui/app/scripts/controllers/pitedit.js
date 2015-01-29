@@ -255,6 +255,10 @@ angular.module('uiApp')
         type: 'FeatureCollection',
         features:[$scope.site]
       });
+      map.loadOtherPits({
+        type: 'FeatureCollection',
+        features:$scope.site.properties.pit_set
+      });
 
       if (isNewPit) {
         $scope.pit = blankPit;
