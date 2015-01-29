@@ -29,6 +29,7 @@ angular.module('uiApp')
       'siteEditDirections': 'Click and hold anywhere on the site border to grab it. <br/><br/> Drag the section of border to where it belongs.',
       'siteEditDefinitions': '<div class="definition-block blue-text"><p><span class="definition-term">Site</span>: A contiguous plot of land that encompasses one or more pits.</p><p><span class="definition-term">Pit</span>: A single gravel pit mine.</p></div>',
       'pitCreateDirections': 'Like drawing your site, click once on the map to begin drawing your pit boundaries. Click again to add additional points. Double-click to finish.',
+      'pitDisclaimer': 'ONLY include pits will be part of this restoration.',
       'pitEditDirections': 'Click and hold anywhere on the pit border to grab it. Drag the section of the border to where it belongs.',
       'previousQuestion': '<< Previous Question',
       'attribution': 'This tool is a product of The Nature Conservancy and Ecotrust',

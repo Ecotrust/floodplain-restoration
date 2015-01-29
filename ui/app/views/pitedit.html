@@ -8,6 +8,7 @@
             Creating new pit for <span class="label label-info">{{site.properties.name}}</span>
         </span>
     </h3>
+    <h4 ng-bind="content.pitDisclaimer">{{pitDisclaimer}}</h4>
     <h4 ng-if="activePitId" ng-bind="content.pitEditDirections">{{pitEditDirections}}</h4>
     <h4 ng-if="!activePitId" ng-bind="content.pitCreateDirections">{{pitEditDirections}}</h4>
 
@@ -16,10 +17,11 @@
           <div class="property-box row">
               <div class="form-group col-sm-12">
                 <div ng-repeat="question in pitFormObj.form" ng-show="question.visible">
-                    <div class="row">
-                      <label for="question.id" class="col-sm-10 pit-question-label">
-                          {{question.question}}
+                    <div title="{{question.info}}" >
+                      <label for="question.id" class="pit-question-label" ng-bind-html="question.question">
                       </label>
+                      <span ng-if="question.info!=null" class="glyphicon glyphicon-info-sign pit-question-info" aria-hidden="true" ng-click="$event.stopPropagation()"></span>
+
                     </div>
                     <div class="row">
                       <div class="col-sm-11 col-sm-offset-1">

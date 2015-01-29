@@ -73,7 +73,7 @@ angular.module('uiApp')
           ]
         },
         {
-          'question': 'Is the pit deeper than the adjacent river thalweg?',
+          'question': 'Is the pit deeper than the adjacent river <u><i>thalweg</i></u>?',
           'visible': true,
           'id': 'adjacent_river_depth',
           'order': 30,

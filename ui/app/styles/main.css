@@ -376,6 +376,11 @@ hr {
   margin: 15px auto 6px 15px;
 }
 
+.pit-question-info {
+  font-size: 12px;
+  margin-left: 8px;
+}
+
 .pit-edit-field {
   margin: 2px auto;
 }
