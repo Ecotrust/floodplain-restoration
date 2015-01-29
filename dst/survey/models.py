@@ -151,6 +151,7 @@ class Question(models.Model):
     # contextual info to help use answer the question
     image = models.ImageField(blank=True)
     supplement = models.FileField(blank=True)
+    externalLink = models.CharField(max_length=500, blank=True, null=True, default=None)
     layers = models.ManyToManyField(
         MapLayer, blank=True, related_name="layers")
 
