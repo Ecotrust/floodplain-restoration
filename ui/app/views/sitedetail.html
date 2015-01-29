@@ -6,7 +6,7 @@
 
     <div class="property-box">
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <h4>{{site.properties.name}}</h4>
         </div>
         <!--
@@ -14,6 +14,9 @@
             <a class="prop-action" href="#/site/{{site.id}}/edit">edit</a>
         </div>
         -->
+        <div class="col-md-2 property-survey">
+            <a class="prop-action" href="#/site/{{site.id}}/survey/done" ng-if="showSummary">Go To Summary</a>
+        </div>
         <div class="col-md-2 property-survey">
             <a class="prop-action" href="#/site/{{site.id}}/survey/{{firstUnansweredId}}" ng-bind="surveyPrompt">Begin Survey</a>
         </div>

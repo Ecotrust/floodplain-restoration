@@ -25,6 +25,7 @@ angular.module('uiApp')
     $scope.sites = [];
     $scope.site = {};
     $scope.firstUnansweredId = 1;
+    var minAnswersForSummary = 1;
 
     SiteFactory.getSites().then(
       function() {
@@ -67,6 +68,7 @@ angular.module('uiApp')
             var nodes = NodeFactory.nodes;
             if (nodes.length > 0) {
               $scope.surveyPrompt = 'Continue Questions';
+              $scope.showSummary = (nodes.length >= minAnswersForSummary);
               for (var i in $scope.questions) {
                 var questionAnswered = false;
                 for (var j in nodes) {
