@@ -5,6 +5,8 @@ from survey import views
 from django.conf import settings
 import os
 import geosearch
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 # from dst import views
 
 urlpatterns = patterns('',
@@ -20,4 +22,7 @@ urlpatterns = patterns('',
     url(r'^app/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': os.path.join(settings.APP_DIR, 'app'),'show_indexes': False}),
     url(r'^$', RedirectView.as_view(url="/app/index.html")),
-)
+    
+)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()

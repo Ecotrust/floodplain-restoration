@@ -44,6 +44,9 @@ angular.module('uiApp')
     $scope.nodeVal = null;
     $scope.nodeNotes = null;
     $scope.newNode = true;
+    $scope.hasExternalLink = false;
+    $scope.hasDownload = false;
+    $scope.hasImage = false;
     
     QuestionFactory
       .getQuestions()
@@ -53,6 +56,15 @@ angular.module('uiApp')
         $scope.question = questions[questionDisplayId - 1];
         $scope.question.displayId = questionDisplayId;
         $scope.node.question = $scope.question.id;
+        if ($scope.question.externalLink !== null) {
+          $scope.hasExternalLink = true;
+        }
+        if ($scope.question.supplement !== "") {
+          $scope.hasDownload = true;
+        }
+        if ($scope.question.image !== "") {
+          $scope.hasImage = true;
+        }
         map.showMap(true);
         NodeFactory
           .getNodes($rootScope.activeSiteId)
