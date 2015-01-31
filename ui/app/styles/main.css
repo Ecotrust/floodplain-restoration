@@ -976,3 +976,12 @@ hr {
   padding-right: 55px;
   visibility: hidden;
 }
+
+.layer-switcher {
+  top: 10px;
+  z-index: 2;
+}
+
+.layer-switcher>.panel {
+  margin-bottom: 0;
+}

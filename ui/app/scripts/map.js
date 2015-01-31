@@ -221,8 +221,16 @@ map.getActivePitArea = function() {
 map.map = new ol.Map({
   target: 'map',
   layers: [
-    new ol.layer.Tile({
-      source: new ol.source.MapQuest({layer: 'sat'})
+    new ol.layer.Group({
+      'title': 'Base maps',
+      layers: [
+        new ol.layer.Tile({
+          visible: true,
+          title: 'Satellite',
+          type: 'base',
+          source: new ol.source.MapQuest({layer: 'sat'})
+        })
+      ]
     })
   ],
   view: new ol.View({
@@ -230,6 +238,11 @@ map.map = new ol.Map({
     zoom: 7
   })
 });
+
+var layerSwitcher = new ol.control.LayerSwitcher({
+  // tipLabel: 'Legend'
+});
+map.map.addControl(layerSwitcher);
 
 map.onResize = function (height, width) {
   $('.map-container').height(height - 51);
