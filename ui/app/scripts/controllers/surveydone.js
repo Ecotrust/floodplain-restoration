@@ -112,13 +112,13 @@ angular.module('uiApp')
       .then( function() {
         questions = QuestionFactory.questions;
         $scope.numQuestions = questions.length;  //QuestionFactory will likely change substantially
-        $scope.maxQuestionId = questions[questions.length-1].id;
+        $scope.maxQuestionId = questions.length;
         
         map.showMap(true);
       });
 
     $scope.alert = function (msg) {
       $window.alert(msg);
-    }
+    };
 
   });
