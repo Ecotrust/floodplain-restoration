@@ -1,6 +1,6 @@
 'use strict';
 
-if (false) {var map =  null;}
+if (false) {var map =  null; var jsPDF = null;}
 
 /**
  * @ngdoc function
@@ -235,6 +235,19 @@ angular.module('uiApp')
     $scope.alert = function (msg) {
       $window.alert(msg);
     };
+
+    // $scope.exportReport = function() {
+      // var pdf = new jsPDF('p','pt','a4');
+      // var docClone = document.cloneNode(true);
+      // var mapBit = docClone.getElementById('map-container');
+      // mapBit.parentElement.removeChild(mapBit);
+      // var body = docClone.body;
+      // var left = document.getElementById('left-container');
+      // pdf.fromHTML(left, 15, 15, {
+      //   'width': 170
+      // });
+      // pdf.save('Test_html.pdf');
+    // };
 
     $scope.toggleCircleIconClass = function(iconId) {
       var icon = document.getElementById(iconId);
