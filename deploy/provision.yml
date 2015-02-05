@@ -54,6 +54,7 @@
         - uwsgi
         - postfix
         - vim
+        - wkhtmltopdf
 
     - name: git checkout
       when: manage_with_git

@@ -149,6 +149,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'dst', 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'dst', 'media')
 
+DOWNLOAD_ROOT = os.path.join(STATIC_ROOT, 'download')
+
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = "/"

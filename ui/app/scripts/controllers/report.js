@@ -12,10 +12,10 @@ if (false) {var map =  null; var jsPDF = null;}
 angular.module('uiApp')
   .controller('ReportCtrl', function ($scope, $rootScope, $window, $routeParams, SiteFactory, QuestionFactory, NodeFactory) {
 
-    if (!$rootScope.userName) {
-      $window.alert('You are not logged in. You will now be redirected to the login page.');
-      $window.location = '/accounts/login/';
-    }
+    // if (!$rootScope.userName) {
+    //   $window.alert('You are not logged in. You will now be redirected to the login page.');
+    //   $window.location = '/accounts/login/';
+    // }
 
     map.showMap(false);
 
