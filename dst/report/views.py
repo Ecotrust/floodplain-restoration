@@ -34,96 +34,163 @@ def export_pdf(request, pk):
     return response
 
 def generate_pdf(site, pits, user):
-    # Create pdf
-    packets = []
-    packet = BytesIO()
-
-    # render a new PDF with Reportlab
-    can = canvas.Canvas(packet, pagesize=letter)
-    charLimit = 95
-    yValue = 730
-    xValue = 20
-    indent = [0, 20, 40, 60, 80, 100]
-    indentIndex = 0
-    can.setFont('Helvetica', 30)
-    can.drawString(xValue + indent[1], yValue, "Floodplain Gravel Mine Restoration")
-    yValue -= 35
-    can.drawString(xValue + indent[4], yValue, "Assessment Tool")
-    yValue -= 35
-    can.setFont('Helvetica', 25)
-    can.drawString(xValue + indent[1], yValue, "Site: %s" % site.name)
-
-    yValue -= 45
-
-    nodes = InputNode.objects.filter(site=site)
-    contexts = Context.objects.all().order_by('order')
-    for context in contexts:
-        can.setFont('Helvetica', 22)
-        can.drawString(xValue, yValue, "%s" % context.name)
-        (yValue, can, packet, packets) = new_line(yValue, 30, can, packet, packets)
-        categories = QuestionCategory.objects.filter(context=context).order_by('order')
-        for category in categories:
-            can.setFont('Helvetica', 16)
-            can.drawString(xValue + indent[1], yValue, "%s" % category.name)
-            (yValue, can, packet, packets) = new_line(yValue, 20, can, packet, packets)
-            questions = Question.objects.filter(questionCategory=category)
-            for question in questions:
-                can.setFont('Helvetica', 12)
-                index = 0
-                while index < len(question.question):
-                    if len(question.question) > index+charLimit:
-                        lineText = ' '.join(question.question[index:(index+charLimit)].split(' ')[:-1])
-                    else:
-                        lineText = question.question[index:]
-                    if index == 0:
-                        can.drawString(xValue + indent[2], yValue, "%s" % lineText)
-                    else:
-                        can.drawString(xValue + indent[3], yValue, "%s" % lineText)
-                    index += len(lineText)+1
-                    (yValue, can, packet, packets) = new_line(yValue, 16, can, packet, packets)
-                (yValue, can, packet, packets) = new_line(yValue, 6, can, packet, packets)
-                node = nodes.get(question=question)
-                answer = "No answer given."
-                for choice in question.choices:
-                    if choice['value'] == node.value:
-                        answer = choice['choice']
-                can.setFont('Helvetica', 14)
-                index = 0
-                ansCharLimit = charLimit - indent[2]
-                while index < len(answer):
-                    if len(answer) > index+ansCharLimit:
-                        lineText = ' '.join(answer[index:(index+ansCharLimit)].split(' ')[:-1])
-                    else:
-                        lineText = answer[index:]
-                    if index == 0:
-                        can.drawString(xValue + indent[3], yValue, "%s" % lineText)
-                    else:
-                        can.drawString(xValue + indent[4], yValue, "%s" % lineText)
-                    index += len(lineText)+1
-                    (yValue, can, packet, packets) = new_line(yValue, 18, can, packet, packets)
-                (yValue, can, packet, packets) = new_line(yValue, 4, can, packet, packets)
 
 
-        (yValue, can, packet, packets) = new_line(yValue, 20, can, packet, packets)
+    import xhtml2pdf.pisa as pisa
+
+    html = """
+    <!-- EWWW table based layout (plays nicer with pisa) -->
+    <style>
+      td {text-align: left; vertical-align:top}
+      th {text-align: right; margin-right:20px}
+      .map-frame {height: 255px; width: 255px}
+    </style>
+
+    <table>
+      <tr>
+        <td align="center" colspan="2">
+           <h2> Floodplain Gravel Mine <br />Restoration Assessment Report </h2>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" colspan="2">
+           <h4> Site: %s </h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <iframe class="map-frame" src="http://www.w3schools.com">
+                <p>Your browser does not support iframes.</p>
+            </iframe>
+        </td>
+        <td>
+            <iframe class="map-frame" src="http://www.google.com">
+                <p>Your browser does not support iframes.</p>
+            </iframe>
+        </td>
+      </tr>
+    </table>
+
+    """ % (site.name)
+
+    result = BytesIO()
+    pdf = pisa.CreatePDF(html, result)
+    
+    if pdf.err:
+        raise Exception("Pisa failed to create a pdf for observation")
+    else:
+        new_pdf = PdfFileReader(result)
+        new_page = obs_pdf.getPage(0)
+        return new_page
 
 
-    can.save()
-    packets.append(packet)
+    # outputStream = BytesIO()
+    # new_pdf.write(outputStream)
 
-    #move to the beginning of the StringIO buffer
-    new_pdf = PdfFileMerger()
-    for packet in packets:
-        packet.seek(0)
-        new_pdf.append(packet)
+    # final = outputStream.getvalue()
+    # outputStream.close()
 
-    # finally, return output
-    outputStream = BytesIO()
-    new_pdf.write(outputStream)
+    # return final
 
-    final = outputStream.getvalue()
-    outputStream.close()
 
-    return final
+
+
+
+
+
+
+
+
+    # # Create pdf
+    # packets = []
+    # packet = BytesIO()
+
+    # # render a new PDF with Reportlab
+    # can = canvas.Canvas(packet, pagesize=letter)
+    # charLimit = 95
+    # yValue = 730
+    # xValue = 20
+    # indent = [0, 20, 40, 60, 80, 100]
+    # indentIndex = 0
+    # can.setFont('Helvetica', 30)
+    # can.drawString(xValue + indent[1], yValue, "Floodplain Gravel Mine Restoration")
+    # yValue -= 35
+    # can.drawString(xValue + indent[4], yValue, "Assessment Tool")
+    # yValue -= 35
+    # can.setFont('Helvetica', 25)
+    # can.drawString(xValue + indent[1], yValue, "Site: %s" % site.name)
+
+    # yValue -= 45
+
+    # nodes = InputNode.objects.filter(site=site)
+    # contexts = Context.objects.all().order_by('order')
+    # for context in contexts:
+    #     can.setFont('Helvetica', 22)
+    #     can.drawString(xValue, yValue, "%s" % context.name)
+    #     (yValue, can, packet, packets) = new_line(yValue, 30, can, packet, packets)
+    #     categories = QuestionCategory.objects.filter(context=context).order_by('order')
+    #     for category in categories:
+    #         can.setFont('Helvetica', 16)
+    #         can.drawString(xValue + indent[1], yValue, "%s" % category.name)
+    #         (yValue, can, packet, packets) = new_line(yValue, 20, can, packet, packets)
+    #         questions = Question.objects.filter(questionCategory=category)
+    #         for question in questions:
+    #             can.setFont('Helvetica', 12)
+    #             index = 0
+    #             while index < len(question.question):
+    #                 if len(question.question) > index+charLimit:
+    #                     lineText = ' '.join(question.question[index:(index+charLimit)].split(' ')[:-1])
+    #                 else:
+    #                     lineText = question.question[index:]
+    #                 if index == 0:
+    #                     can.drawString(xValue + indent[2], yValue, "%s" % lineText)
+    #                 else:
+    #                     can.drawString(xValue + indent[3], yValue, "%s" % lineText)
+    #                 index += len(lineText)+1
+    #                 (yValue, can, packet, packets) = new_line(yValue, 16, can, packet, packets)
+    #             (yValue, can, packet, packets) = new_line(yValue, 6, can, packet, packets)
+    #             node = nodes.get(question=question)
+    #             answer = "No answer given."
+    #             for choice in question.choices:
+    #                 if choice['value'] == node.value:
+    #                     answer = choice['choice']
+    #             can.setFont('Helvetica', 14)
+    #             index = 0
+    #             ansCharLimit = charLimit - indent[2]
+    #             while index < len(answer):
+    #                 if len(answer) > index+ansCharLimit:
+    #                     lineText = ' '.join(answer[index:(index+ansCharLimit)].split(' ')[:-1])
+    #                 else:
+    #                     lineText = answer[index:]
+    #                 if index == 0:
+    #                     can.drawString(xValue + indent[3], yValue, "%s" % lineText)
+    #                 else:
+    #                     can.drawString(xValue + indent[4], yValue, "%s" % lineText)
+    #                 index += len(lineText)+1
+    #                 (yValue, can, packet, packets) = new_line(yValue, 18, can, packet, packets)
+    #             (yValue, can, packet, packets) = new_line(yValue, 4, can, packet, packets)
+
+
+    #     (yValue, can, packet, packets) = new_line(yValue, 20, can, packet, packets)
+
+
+    # can.save()
+    # packets.append(packet)
+
+    # #move to the beginning of the StringIO buffer
+    # new_pdf = PdfFileMerger()
+    # for packet in packets:
+    #     packet.seek(0)
+    #     new_pdf.append(packet)
+
+    # # finally, return output
+    # outputStream = BytesIO()
+    # new_pdf.write(outputStream)
+
+    # final = outputStream.getvalue()
+    # outputStream.close()
+
+    # return final
 
 def new_line(y, delta, can, packet, packets):
     y -= delta
