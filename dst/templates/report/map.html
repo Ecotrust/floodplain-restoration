@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+
+    <link rel="stylesheet" href="http://localhost:8000/app/styles/vendor/ol.css" type="text/css">
+    <!-- <link rel="stylesheet" href="http://openlayers.org/en/v3.2.0/resources/bootstrap/css/bootstrap.min.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" href="http://openlayers.org/en/v3.2.0/resources/layout.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" href="http://openlayers.org/en/v3.2.0/resources/bootstrap/css/bootstrap-responsive.min.css" type="text/css"> -->
+    
+    <title>Simple example</title>
+  </head>
+  <body style="padding-top:0">
+
+
+    <div style="width: 500px; height: 500px" id="map" class="map"></div>
+
+    <script src="http://openlayers.org/en/v3.1.1/resources/jquery.min.js" type="text/javascript"></script>
+    <script src="http://openlayers.org/en/v3.2.0/resources/example-behaviour.js" type="text/javascript"></script>
+    <script src="/app/scripts/vendor/ol.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var siteJson = JSON.parse({{site|safe}});
+      var pitsJson = {{pits|safe}};
+      // var pitList = [];
+      // for (var i = 0; i < pitsJson.length; i++) {
+      //   pitList.push(JSON.parse(pitsJson[i]));
+      // }
+      // pitList = pitList.toString();
+      
+    </script>
+    <script src="/media/report_maps.js" type="text/javascript"></script>
+  </body>
+</html>
