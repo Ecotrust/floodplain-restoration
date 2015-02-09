@@ -43,7 +43,7 @@ def view_pdf(request, pk, template_name='report/map.html', extra_context={}):
     context = RequestContext(
         request,{
             'site': json.dumps(site.geometry.geojson),
-            'pits': json.dumps([json.dumps(x.geometry.geojson) for x in pits])
+            'pits': json.dumps([json.dumps({'pk':x.pk,'name':x.name,'score':x.score,'geometry':x.geometry.geojson}) for x in pits])
         }
     )
 
