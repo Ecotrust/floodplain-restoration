@@ -26,10 +26,10 @@ class GravelSiteViewSet(viewsets.ModelViewSet):
         return GravelSite.objects.filter(user=self.request.user)
 
     serializer_class = serializers.GravelSiteSerializer
-    # permission_classes = (
-    #     permissions.IsAuthenticated,
-    #     IsOwnerOrShared,
-    # )
+    permission_classes = (
+        permissions.IsAuthenticated,
+        IsOwnerOrShared,
+    )
 
     @link(renderer_classes=[renderers.JSONRenderer])
     def status(self, request, *args, **kwargs):
