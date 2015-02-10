@@ -12,6 +12,7 @@ Vagrant::Config.run do |config|
 
     # ssh defaults to 2222
     stage.vm.forward_port 80, 8089
+    stage.vm.forward_port 8000, 8009
     
     # In this case, we don't share the folder
     # Treat this machine like a staging environment and deploy with git via ansible

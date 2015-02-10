@@ -1,4 +1,4 @@
-from django.http import HttpResponse #, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseServerError, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseServerError, HttpResponseForbidden
 from django.template import RequestContext, loader
 # from django.shortcuts import get_object_or_404, render_to_response
 # from django.utils import simplejson
@@ -57,7 +57,7 @@ def export_pdf(request, pk):
         site = Site.objects.get(user=user, id=pk)
         pits = Pit.objects.filter(site_id=pk, user_id=user.id)
     except:
-        return False
+        return HttpResponseForbidden("<h1>ERROR 403 - Access Forbidden.</h1> <p>Are you logged in?</p>")
 
     pdf = generate_pdf(request, site)
     response = HttpResponse(pdf, content_type="application/pdf")
