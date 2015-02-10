@@ -16,7 +16,7 @@ reportlab
 PyPDF2
 numpy
 pdfkit
-xhtml2pdf
+django-wkhtmltopdf
 
 # Testing
 ipdb

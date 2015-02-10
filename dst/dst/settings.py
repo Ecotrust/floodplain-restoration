@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'dst',
     'flatblocks',
     'rest_framework',
+    'wkhtmltopdf',
 
     'django.contrib.sites',
     'allauth',

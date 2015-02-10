@@ -54,9 +54,11 @@
         - uwsgi
         - postfix
         - vim
+        - xfonts-75dpi
 
     - name: download wkhtmltox
-      get_url: url="http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb" "dest=/tmp/wkhtmltox.deb"
+      get_url: url="http://labs.ecotrust.org/packages/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb" "dest=/tmp/wkhtmltox.deb"
+      # get_url: url="http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb" "dest=/tmp/wkhtmltox.deb"
 
     - name: install wkhtmltox
       command: "sudo dpkg -i /tmp/wkhtmltox.deb"
