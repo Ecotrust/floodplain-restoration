@@ -2,7 +2,7 @@
 {
   "fields": {
     "name": "Site",
-    "order": 0.0
+    "order": 3.0
   },
   "model": "survey.context",
   "pk": 1
@@ -10,7 +10,7 @@
 {
   "fields": {
     "name": "Socio-Economic",
-    "order": 0.0
+    "order": 1.0
   },
   "model": "survey.context",
   "pk": 2
@@ -18,7 +18,7 @@
 {
   "fields": {
     "name": "Landscape",
-    "order": 0.0
+    "order": 2.0
   },
   "model": "survey.context",
   "pk": 3
