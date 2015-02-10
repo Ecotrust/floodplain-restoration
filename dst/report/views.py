@@ -118,7 +118,8 @@ def generate_pdf(request, site):
     config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdfBinLocationBytes)
 
     pdfkit.from_url(reportPdfUrl, reportPdfFile, configuration=config, options={
-        'javascript-delay': 1500
+        'javascript-delay': 1500,
+        'load-error-handling': 'ignore'
     })
 
     new_pdf = PdfFileMerger()
