@@ -113,8 +113,12 @@ def generate_pdf(request, site):
     outputStream = BytesIO()
     reportPdfFile = '%s/download_%s.pdf' % (settings.DOWNLOAD_ROOT, site.pk)
 
-    pdfkit.from_url(reportPdfUrl, reportPdfFile, options={
-        'javascript-delay': 1000,
+    wkhtmltopdfBinLocationString = '/usr/local/bin/wkhtmltopdf'
+    wkhtmltopdfBinLocationBytes = wkhtmltopdfBinLocationString.encode('utf-8')
+    config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdfBinLocationBytes)
+
+    pdfkit.from_url(reportPdfUrl, reportPdfFile, configuration=config, options={
+        'javascript-delay': 1500
     })
 
     new_pdf = PdfFileMerger()
