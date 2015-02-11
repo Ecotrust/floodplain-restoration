@@ -54,6 +54,7 @@
         - uwsgi
         - postfix
         - vim
+        - xfonts-base
         - xfonts-75dpi
 
     - name: download wkhtmltox
@@ -68,6 +69,9 @@
       git: repo=https://github.com/Ecotrust/floodplain-restoration.git
            dest={{ base_path }}
            version={{ git_branch }}
+
+    - name: set download folder perms
+      command: "sudo chown www-data /usr/local/apps/floodplain-restoration/dst/dst/static/download"
 
     - name: settings local
       tags:
