@@ -6,6 +6,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url('^export/(?P<pk>\d+)/$',
         'report.views.export_pdf'),
-    url('^view/(?P<pk>\d+)/$',
+    url('^view/(?P<filename>\d+)',
+        'report.views.view_pdf'),
+    url('^view/$',
         'report.views.view_pdf'),
 )
