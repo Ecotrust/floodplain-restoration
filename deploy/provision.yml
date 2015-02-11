@@ -70,8 +70,11 @@
            dest={{ base_path }}
            version={{ git_branch }}
 
-    - name: set download folder perms
+    - name: set download folder owner
       command: "sudo chown www-data /usr/local/apps/floodplain-restoration/dst/dst/static/download"
+
+    - name: set download folder perms
+      command: "sudo chmod 777 /usr/local/apps/floodplain-restoration/dst/dst/static/download"
 
     - name: settings local
       tags:
