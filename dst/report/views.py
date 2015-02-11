@@ -69,46 +69,6 @@ def export_pdf(request, pk):
 def generate_pdf(request, site):
 
     reportPdfUrl = 'http://%s/report/view/%s' % (request.META['HTTP_HOST'],str(site.pk))
-    testUrl = 'http://%s/report/view/0' % (request.META['HTTP_HOST'])
-    html = """
-    <!-- EWWW table based layout (plays nicer with pisa) -->
-    <style>
-      td {text-align: left; vertical-align:top}
-      th {text-align: right; margin-right:20px}
-      .map-frame {height: 255px; width: 255px}
-    </style>
-
-    <table>
-      <tr>
-        <td align="center" colspan="2">
-           <h2> Floodplain Gravel Mine <br />Restoration Assessment Report </h2>
-        </td>
-      </tr>
-      <tr>
-        <td align="center" colspan="2">
-           <h4> Site: %s </h2>
-        </td>
-        <td align="center" colspan="2">
-           <h4> Site: %s </h2>
-        </td>
-      </tr>
-      <tr>
-        <td>
-            <iframe class="map-frame" src="%s">
-                <p>Your browser does not support iframes.</p>
-            </iframe>
-        </td>
-        <td>
-            <!--
-            <iframe class="map-frame" src="http://www.google.com">
-                <p>Your browser does not support iframes.</p>
-            </iframe>
-            -->
-        </td>
-      </tr>
-    </table>
-
-    """ % (site.name, testUrl, reportPdfUrl)
 
     outputStream = BytesIO()
     reportPdfFile = '%s/download_%s.pdf' % (settings.DOWNLOAD_ROOT, site.pk)
