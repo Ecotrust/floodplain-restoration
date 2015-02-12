@@ -50,85 +50,110 @@ angular.module('uiApp')
       }
     };
 
-    var suitabilityScoreTypes = {
-      'site': 'Location',
-      'socio_economic': 'Socio-Economic',
-      'landscape': 'Landscape',
-      'suitability': 'Overall'
+    $scope.suitabilityScoreTypes = {
+      'Site': 'Location',
+      'Socio-Economic': 'Socio-Economic',
+      'Landscape': 'Landscape',
+      'Suitability': 'Overall'
     };
 
-    $scope.contextList = ['site', 'socio_economic', 'landscape','suitability'];
-
-    $scope.contexts = {
-      'site': {
-        'id': 1,
-        'label': 'Location',
-        'components': [
-          {
-            'id': 10,
-            'name': 'Pit restorability',
-            'question_ids': []
-          },
-          {
-            'id': 11,
-            'name': 'Practical, site-level restorability',
-            'question_ids': [1,2,3]
-          }
-        ]
-      },
-      'socio_economic': {
-        'id': 2,
-        'label': 'Socio-Economic',
-        'components': [
-          {
-            'id': 12,
-            'name': 'Cost benefit',
-            'question_ids': [8,9,10]
-          },
-          {
-            'id': 13,
-            'name': 'Threat to other areas / permitability',
-            'question_ids': [4,6,7]
-          }
-        ]
-      },
-      'landscape': {
-        'id': 3,
-        'label': 'Landscape',
-        'components': [
-          {
-            'id': 14,
-            'name': 'Conservation value',
-            'question_ids': [26,27]
-          },
-          {
-            'id': 15,
-            'name': 'Biotic conditions',
-            'question_ids': [23,24,25]
-          },
-          {
-            'id': 16,
-            'name': 'Abiotic conditions',
-            'question_ids': [19, 28]
-          },
-          {
-            'id': 17,
-            'name': 'Geomorphic controls',
-            'question_ids': [11,12,14]
-          },
-          {
-            'id': 18,
-            'name': 'Floodplain characteristics',
-            'question_ids': [15,17,18]
-          }
-        ]
-      },
-      'suitability': {
-        'id': 4,
-        'label': 'Overall',
-        'components': []
-      },
+    $scope.contextMap = {
+      'Site':'site',
+      'Socio-Economic':'socio_economic',
+      'Landscape':'landscape',
+      'Suitability':'suitability'
     };
+
+    QuestionFactory
+      .getContexts()
+      .then( function() {
+        $scope.contextResponse = QuestionFactory.contexts;
+        buildContext();
+      });
+    QuestionFactory
+      .getCategories()
+      .then( function() {
+        $scope.categoryResponse = QuestionFactory.categories;
+        buildContext();
+      });
+
+    function buildContext() {
+      if ($scope.contextResponse && $scope.categoryResponse && $scope.questionResponse) {
+
+        $scope.contextList = [];
+        var suitabilityContext = [
+          {
+            'name': 'Suitability',
+            'id': 4,
+            'label': 'Overall',
+            'components': [],
+            'order': 0
+          }
+        ];
+        $scope.contextResponse = suitabilityContext.concat($scope.contextResponse);
+        $scope.contexts = {
+          'Suitability': {
+            'id': 4,
+            'label': 'Overall',
+            'components': []
+          }
+        };
+
+        var contextMap = {};
+
+        for (var i = 0; i < $scope.contextResponse.length; i++){
+          contextMap[$scope.contextResponse[i].id.toString()] = $scope.contextResponse[i].name;
+          $scope.contexts[$scope.contextResponse[i].name] = $scope.contextResponse[i];
+          $scope.contexts[$scope.contextResponse[i].name].components = [];
+          $scope.contexts[$scope.contextResponse[i].name].label = $scope.suitabilityScoreTypes[$scope.contextResponse[i].name];
+          $scope.contextList.push($scope.contextResponse[i].name);
+        }
+
+        var categoryMap = {};
+
+        for (var k = 0; k < $scope.questionResponse.length; k++) {
+          var question = $scope.questionResponse[k];
+          var catId = question.questionCategory.toString();
+          if (!categoryMap.hasOwnProperty(catId)) {
+            categoryMap[catId] = [];
+          }
+          categoryMap[catId].push(question.id);
+        }
+
+        for (var l = 0; l < $scope.categoryResponse.length; l++) {
+          var category = $scope.categoryResponse[l];
+          category.question_ids = categoryMap[category.id.toString()];
+          var context = contextMap[category.context.toString()];
+          $scope.contexts[context].components.push(category);
+        }
+
+        NodeFactory
+          .getNodes($rootScope.activeSiteId)
+          .then( function() {
+            nodes = NodeFactory.nodes;
+            $scope.numNodes = nodes.length;
+            for (var i = 0; i < nodes.length; i++) {
+              $scope.answers[nodes[i].question].value = nodes[i].value;
+              $scope.answers[nodes[i].question].notes = nodes[i].notes;
+              var choices = $scope.answers[nodes[i].question].choices;
+              for (var choiceIndex in choices) {
+                if (choices[choiceIndex].value === nodes[i].value) {
+                  $scope.answers[nodes[i].question].answer = choices[choiceIndex].choice;
+                }
+              }
+            }
+
+            SiteFactory
+              .getSuitabilityScores($rootScope.activeSiteId)
+              .then( function() {
+
+                $rootScope.suitability = SiteFactory.suitability;
+                buildReport();
+            
+              });
+          });
+      }
+    }
 
     SiteFactory
       .getSites()
@@ -170,65 +195,31 @@ angular.module('uiApp')
     }
 
     function buildReport() {
-
-      for (var key in suitabilityScoreTypes) {  //TODO: what if keys do not match?
-        var score = $rootScope.suitability[key] * 100;
+      for (var key in $scope.suitabilityScoreTypes) {  //TODO: what if keys do not match?
+        var score = $rootScope.suitability[$scope.contextMap[key]] * 100;
         $scope.contexts[key].score = score;
         $scope.contexts[key].rank = getRank(score);
         $scope.contexts[key].bgColorClass = getBgColorClass(score);
 
       }
-
     }
 
-    // $scope.questions = QuestionFactory.getQuestions();
-    $scope.maxQuestionId = 2;  //QuestionFactory will likely change substantially
-                                  //We'll hardcode this for now.
-
-    var questions = [];
     var nodes = [];
 
     QuestionFactory
       .getQuestions()
       .then( function() {
-        questions = QuestionFactory.questions;
-        $scope.numQuestions = questions.length;  //QuestionFactory will likely change substantially
-        $scope.maxQuestionId = questions[questions.length-1].id;
-        for (var i = 0; i < questions.length; i++) {
-          $scope.answers[questions[i].id] = questions[i];
-          $scope.answers[questions[i].id].value = false;
-          $scope.answers[questions[i].id].notes = false;
-          $scope.answers[questions[i].id].answer = false;
-          $scope.answers[questions[i].id].displayId = i + 1;
+        $scope.questionResponse = QuestionFactory.questions;
+        $scope.numQuestions = $scope.questionResponse.length;  //QuestionFactory will likely change substantially
+        $scope.maxQuestionId = $scope.questionResponse[$scope.questionResponse.length-1].id;
+        for (var i = 0; i < $scope.questionResponse.length; i++) {
+          $scope.answers[$scope.questionResponse[i].id] = $scope.questionResponse[i];
+          $scope.answers[$scope.questionResponse[i].id].value = false;
+          $scope.answers[$scope.questionResponse[i].id].notes = false;
+          $scope.answers[$scope.questionResponse[i].id].answer = false;
+          $scope.answers[$scope.questionResponse[i].id].displayId = i + 1;
         }
-
-        NodeFactory
-          .getNodes($rootScope.activeSiteId)
-          .then( function() {
-            nodes = NodeFactory.nodes;
-            $scope.numNodes = nodes.length;
-            for (var i = 0; i < nodes.length; i++) {
-              $scope.answers[nodes[i].question].value = nodes[i].value;
-              $scope.answers[nodes[i].question].notes = nodes[i].notes;
-              var choices = $scope.answers[nodes[i].question].choices;
-              for (var choiceIndex in choices) {
-                if (choices[choiceIndex].value === nodes[i].value) {
-                  $scope.answers[nodes[i].question].answer = choices[choiceIndex].choice;
-                }
-              }
-            }
-
-            SiteFactory
-              .getSuitabilityScores($rootScope.activeSiteId)
-              .then( function() {
-
-                $rootScope.suitability = SiteFactory.suitability;
-                buildReport();
-            
-              });
-          });
-
-        
+        buildContext();
         map.showMap(false);
       });
 
