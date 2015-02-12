@@ -710,10 +710,12 @@ hr {
 
 .suitability-label {
   font-weight: bold;
+  font-size: 30px;
 }
 
 .suitability-rank {
   font-family: "Rotis Serif", Georgia;
+  font-size:28px;
 }
 
 .suitability-row {
@@ -835,6 +837,10 @@ hr {
   font-family: "Agenda", Arial;
   margin: 12px auto;
   font-size: 16px;
+}
+
+.report-graphic {
+  margin: -20px;
 }
 
 .report-context-container {
@@ -992,4 +998,17 @@ hr {
 
 .layer-switcher>.panel {
   margin-bottom: 0;
+}
+
+.tachometer-base {
+  height: 100px;
+  width: 100px;
+  margin: -20px -20px -10px -20px;
+
+}
+
+.tachometer-needle {
+  height: 100px;
+  width: 100px;
+  margin-left: -84px;
 }

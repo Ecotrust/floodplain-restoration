@@ -27,16 +27,12 @@
     <div class="report-content">
         <div class="row" ng-repeat="context in contextList">
             <div class="col-md-12">
-                <hr />
                 <div class="row">
-                    <div class="col-md-4 report-score">
                         <span class="suitability-label">{{contexts[context].label}}: </span>
                         <span class="suitability-rank">{{contexts[context].rank}}</span>
-                    </div>
-                    <div class="col-md-8 report-score">
-                        <div class="suitability-bar {{contexts[context].bgColorClass}}" style="width: {{contexts[context].score}}%">
-                        </div>
-                    </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <img class='tachometer-base' src='/app/images/tachometer/tachometer-02.png'/>
+                        <img class='tachometer-needle' src='/app/images/tachometer/tachometer-01a.png' style="transform:rotate({{contexts[context].scoreDeg}}deg)"/>
                 </div>
                 <div class="row" ng-repeat="component in contexts[context].components" id="accordion-{{component.id}}">
                     <div class="col-md-12 report-context-container">
@@ -77,6 +73,7 @@
                         </div>
                     </div>
                 </div>
+                <hr />
             </div>
         </div>
     </div>

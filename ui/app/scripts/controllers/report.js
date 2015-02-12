@@ -198,6 +198,7 @@ angular.module('uiApp')
       for (var key in $scope.suitabilityScoreTypes) {  //TODO: what if keys do not match?
         var score = $rootScope.suitability[$scope.contextMap[key]] * 100;
         $scope.contexts[key].score = score;
+        $scope.contexts[key].scoreDeg = score*2.25;
         $scope.contexts[key].rank = getRank(score);
         $scope.contexts[key].bgColorClass = getBgColorClass(score);
 
