@@ -1,4 +1,21 @@
+
 if (false) {var ol=null;}
+
+var rmap;
+var site = {};
+var pits = {};
+
+var pitsGeoJson = {
+  'type': 'FeatureCollection',
+  'crs': {
+    'type': 'name',
+    'properties':{
+      'name': 'EPSG:3857'
+    }
+  },
+  'features':[]
+};
+
 function buildMap(siteJson, pitsJson) {
 
   var siteGeoJson = {
@@ -17,7 +34,6 @@ function buildMap(siteJson, pitsJson) {
     ]
   };
 
-  var site = {};
 
   site.style = function() {
     return [new ol.style.Style({
@@ -34,17 +50,6 @@ function buildMap(siteJson, pitsJson) {
 
   site.source = new ol.source.GeoJSON(({object:siteGeoJson}));
 
-  var pitsGeoJson = {
-    'type': 'FeatureCollection',
-    'crs': {
-      'type': 'name',
-      'properties':{
-        'name': 'EPSG:3857'
-      }
-    },
-    'features':[]
-  };
-
   for (var i = 0; i < pitsJson.length; i++) {
     var pit = pitsJson[i];
     pitsGeoJson.features.push(
@@ -52,9 +57,10 @@ function buildMap(siteJson, pitsJson) {
         'type': 'Feature',
         'geometry': pit.geometry,
         'properties':{
-          'pk':pit.pk,
+          'pk':pit.id,
+          'id':pit.id,
           'name':pit.properties.name,
-          'score':pit.score
+          'score':pit.properties.score.value
         }
       });
   }
@@ -63,8 +69,6 @@ function buildMap(siteJson, pitsJson) {
     source: site.source,
     style: site.style
   });
-
-  var pits = {};
 
   pits.style = function (feature) {
     return [new ol.style.Style({
@@ -98,7 +102,7 @@ function buildMap(siteJson, pitsJson) {
 
   var extent = site.source.getExtent();
 
-  var map = new ol.Map({
+  rmap = new ol.Map({
     target: 'report-map',
     layers: [
       new ol.layer.Group({
@@ -122,7 +126,7 @@ function buildMap(siteJson, pitsJson) {
   });
 
   // map.getView().fitExtent(site.source.getExtent(), map.getSize());
-  map.getView().fitExtent(extent, map.getSize());
+  rmap.getView().fitExtent(extent, rmap.getSize());
 }
 
 if (false) {buildMap();}
