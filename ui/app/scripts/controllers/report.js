@@ -170,6 +170,7 @@ angular.module('uiApp')
             break;
           }
         }
+        buildMap(site.geometry, site.properties.pit_set);
 
       });
 
