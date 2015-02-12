@@ -275,8 +275,8 @@ probability ( channel_mobility ) {
 }
 probability ( site | practical_property_level_restorability, __overall_pit_restorability ) {
   (suitable, suitable) 1.00, 0.00;
-  (suitable, unsuitable) 0.50, 0.50;
-  (unsuitable, suitable) 0.50, 0.50;
+  (suitable, unsuitable) 0.00, 1.00;
+  (unsuitable, suitable) 0.30, 0.70;
   (unsuitable, unsuitable) 0.00, 1.00;
 }
 
