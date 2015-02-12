@@ -672,6 +672,12 @@ hr {
   /*margin: 3px;*/
 }
 
+.report-toggle-icon {
+  float: right;
+  margin-top:6px;
+  margin-right: 9px;
+}
+
 .padded-box {
   padding: 30px;
 }
@@ -855,6 +861,8 @@ hr {
 .report-component-selected {
   background-color: white;
   margin-bottom: 10px;
+  border-radius: 10px;
+  border: solid 1px gray;
 }
 
 .report-question-row {
