@@ -168,17 +168,17 @@ probability ( water_rights ) {
 }
 probability ( landscape | geomorphic_controls, floodplain_characteristics, abiotic_conditions, conservation_value ) {
   (suitable, suitable, suitable, suitable)         1.00, 0.00;
-  (suitable, suitable, suitable, unsuitable)       0.75, 0.25;
-  (suitable, suitable, unsuitable, suitable)       0.75, 0.25;
-  (suitable, suitable, unsuitable, unsuitable)     0.50, 0.50;
+  (suitable, suitable, suitable, unsuitable)       0.70, 0.30;
+  (suitable, suitable, unsuitable, suitable)       0.60, 0.40;
+  (suitable, suitable, unsuitable, unsuitable)     0.42, 0.58;
   (suitable, unsuitable, suitable, suitable)       0.10, 0.90;
-  (suitable, unsuitable, suitable, unsuitable)     0.10, 0.90;
-  (suitable, unsuitable, unsuitable, suitable)     0.10, 0.90;
-  (suitable, unsuitable, unsuitable, unsuitable)   0.10, 0.90;
-  (unsuitable, suitable, suitable, suitable)       0.75, 0.25;
-  (unsuitable, suitable, suitable, unsuitable)     0.50, 0.50;
-  (unsuitable, suitable, unsuitable, suitable)     0.50, 0.50;
-  (unsuitable, suitable, unsuitable, unsuitable)   0.25, 0.75;
+  (suitable, unsuitable, suitable, unsuitable)     0.05, 0.95;
+  (suitable, unsuitable, unsuitable, suitable)     0.05, 0.95;
+  (suitable, unsuitable, unsuitable, unsuitable)   0.05, 0.95;
+  (unsuitable, suitable, suitable, suitable)       0.90, 0.10;
+  (unsuitable, suitable, suitable, unsuitable)     0.63, 0.37;
+  (unsuitable, suitable, unsuitable, suitable)     0.54, 0.46;
+  (unsuitable, suitable, unsuitable, unsuitable)   0.36, 0.64;
   (unsuitable, unsuitable, suitable, suitable)     0.05, 0.95;
   (unsuitable, unsuitable, suitable, unsuitable)   0.05, 0.95;
   (unsuitable, unsuitable, unsuitable, suitable)   0.05, 0.95;
@@ -202,13 +202,13 @@ probability ( identified_in_conservation_plan ) {
 }
 probability ( biotic_conditions | intact_floodplain_forest, habitat_features, species_of_interest ) {
   (intact, suitable, present)        1.00, 0.00;
-  (intact, suitable, not_present)    0.90, 0.10;
-  (intact, unsuitable, present)      0.80, 0.20;
-  (intact, unsuitable, not_present)  0.70, 0.30;
-  (missing, suitable, present)       0.50, 0.50;
-  (missing, suitable, not_present)   0.40, 0.60;
-  (missing, unsuitable, present)     0.30, 0.70;
-  (missing, unsuitable, not_present) 0.30, 0.70;
+  (intact, suitable, not_present)    0.60, 0.40;
+  (intact, unsuitable, present)      0.60, 0.40;
+  (intact, unsuitable, not_present)  0.36, 0.64;
+  (missing, suitable, present)       0.80, 0.20;
+  (missing, suitable, not_present)   0.48, 0.52;
+  (missing, unsuitable, present)     0.48, 0.52;
+  (missing, unsuitable, not_present) 0.20, 0.80;
 }
 probability ( habitat_features ) {
   table 0.5, 0.5;
@@ -221,10 +221,10 @@ probability ( intact_floodplain_forest ) {
 }
 probability ( floodplain_characteristics | location_in_floodplain, within_x_year_floodplain, gradient ) {
   (strategic, within, suitable)      1.00, 0.00;
-  (strategic, within, unsuitable)    0.67, 0.33;
+  (strategic, within, unsuitable)    0.30, 0.70;
   (strategic, outside, suitable)     0.00, 1.00;
   (strategic, outside, unsuitable)   0.00, 1.00;
-  (ineffective, within, suitable)    0.30, 0.70;
+  (ineffective, within, suitable)    0.67, 0.33;
   (ineffective, within, unsuitable)  0.20, 0.80;
   (ineffective, outside, suitable)   0.00, 1.00;
   (ineffective, outside, unsuitable) 0.00, 1.00;
@@ -238,21 +238,18 @@ probability ( within_x_year_floodplain ) {
 probability ( gradient ) {
   table 0.5, 0.5;
 }
-#UPDATE THIS ONE!!!
 probability ( abiotic_conditions | downstream_connectivity_barriers, water_quality ) {
   (connected, high_quality) 1.00, 0.00;
-  (connected, low_quality) 0.50, 0.50;
-  (disconnected, high_quality) 0.50, 0.50;
+  (connected, low_quality) 0.30, 0.70;
+  (disconnected, high_quality) 0.20, 0.80;
   (disconnected, low_quality) 0.00, 1.00;
 }
-#END UPDATE
 probability ( downstream_connectivity_barriers ) {
   table 0.5, 0.5;
 }
 probability ( water_quality ) {
   table 0.5, 0.5;
 }
-#UPDATE THIS ONE!!!
 probability ( geomorphic_controls | infrastructure_constraints, material_availability, channel_mobility ) {
   (no_restrictions, available, mobile) 1.00, 0.00;
   (no_restrictions, available, not_mobile) 0.67, 0.33;
@@ -263,7 +260,6 @@ probability ( geomorphic_controls | infrastructure_constraints, material_availab
   (unsuitable, unavailable, mobile) 0.33, 0.67;
   (unsuitable, unavailable, not_mobile) 0.00, 1.00;
 }
-#END UPDATE
 probability ( infrastructure_constraints ) {
   table 0.5, 0.5;
 }
