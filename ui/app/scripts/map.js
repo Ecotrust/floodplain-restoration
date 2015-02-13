@@ -214,8 +214,8 @@ map.getActivePitArea = function() {
   var features = map.pit.source.getFeatures();
   var geom = features[0].getGeometry();
   var area = geom.getArea(); //In sq. meters
-  var acres = area*0.00024711;
-  return acres;
+  var acres = area*0.0002471054;
+  return acres*0.65;   //TODO: Currently "getArea" returns bad data in this projection. Fix this for production.
 };
 
 map.map = new ol.Map({
@@ -230,6 +230,10 @@ map.map = new ol.Map({
           type: 'base',
           source: new ol.source.MapQuest({layer: 'sat'})
         })
+        // new ol.source.BingMaps({
+        //   key: 'AvD-cuulbvBqwFDQGNB1gCXDEH4S6sEkS7Yw9r79gOyCvd2hBvQYPaRBem8cpkjv',
+        //   imagerySet: 'AerialWithLabels'
+        // })
       ]
     })
   ],
@@ -239,10 +243,16 @@ map.map = new ol.Map({
   })
 });
 
+
 var layerSwitcher = new ol.control.LayerSwitcher({
   // tipLabel: 'Legend'
 });
+
 map.map.addControl(layerSwitcher);
+
+var scaleLine = new ol.control.ScaleLine();
+map.map.addControl(scaleLine);
+
 
 map.onResize = function (height, width) {
   $('.map-container').height(height - 51);
