@@ -230,10 +230,6 @@ map.map = new ol.Map({
           type: 'base',
           source: new ol.source.MapQuest({layer: 'sat'})
         })
-        // new ol.source.BingMaps({
-        //   key: 'AvD-cuulbvBqwFDQGNB1gCXDEH4S6sEkS7Yw9r79gOyCvd2hBvQYPaRBem8cpkjv',
-        //   imagerySet: 'AerialWithLabels'
-        // })
       ]
     })
   ],
