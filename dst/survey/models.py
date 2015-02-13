@@ -109,9 +109,24 @@ class Pit(BaseModel):
         attrs = ['contamination', 'adjacent_river_depth', 
                  'slope_dist', 'pit_levies', 'bank_slope',
                  'surface_area']
-        total = sum(self.__dict__[attr] for attr in attrs)
 
-        return total/len(attrs)
+
+        scoreMap = {
+        'contamination': 0.1, 
+        'adjacent_river_depth': 0.1, 
+        'slope_dist': 0.3,
+        'pit_levies': 0.1, 
+        'bank_slope': 0.1,
+        'surface_area': 0.3
+        }
+
+        if self.__dict__['slope_dist'] == 0 or self.__dict__['surface_area'] == 0:
+            return 0
+
+        total = sum(self.__dict__[attr]*scoreMap[attr] for attr in attrs)
+
+
+        return total#/len(attrs)
 
     def __str__(self):
         return "Pit: {}".format(self.name)

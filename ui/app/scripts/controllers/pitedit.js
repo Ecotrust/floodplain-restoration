@@ -48,7 +48,7 @@ angular.module('uiApp')
           'answers': [
             {
               'label': 'I don\'t know',
-              'value': 0.5
+              'value': 0.75
             },
             {
               'label': 'No, definitely not.',
@@ -59,16 +59,16 @@ angular.module('uiApp')
               'value': 0.8
             },
             {
-              'label': 'Yes, but I do not know if it can be remediated.',
-              'value': 0.4
+              'label': 'Yes, and the cost and effort to remediate it is acceptable.',
+              'value': 0.7
             },
             {
-              'label': 'Yes, and the cost and effort to remediate it is acceptable.',
-              'value': 0.2
+              'label': 'Yes, but I do not know if it can be remediated.',
+              'value': 0.5
             },
             {
               'label': 'Yes, and it will be expensive and/or very difficult to remediate.',
-              'value': 0
+              'value': 0.2
             }
           ]
         },
@@ -81,7 +81,7 @@ angular.module('uiApp')
           'answers': [
             {
               'label': 'I don\'t know',
-              'value': 0.5
+              'value': 0.75
             },
             {
               'label': 'No',
@@ -89,11 +89,11 @@ angular.module('uiApp')
             },
             {
               'label': 'They are the same depth',
-              'value': 0.51
+              'value': 0.9
             },
             {
               'label': 'Yes',
-              'value': 0
+              'value': 0.5
             }
           ],
           'info': 'The thalweg of the river is the line of the lowest points within the channel, spanning the length of the river.'
@@ -107,7 +107,7 @@ angular.module('uiApp')
           'answers': [
             {
               'label': 'I don\'t know',
-              'value': 0.5
+              'value': 0.9
             },
             {
               'label': 'Short (< 20 ft.)',
@@ -115,7 +115,7 @@ angular.module('uiApp')
             },
             {
               'label': 'Medium (20-80 ft.)',
-              'value': 0.6
+              'value': 0.8
             },
             {
               'label': 'Long (> 80ft.)',
@@ -132,15 +132,15 @@ angular.module('uiApp')
           'answers': [
             {
               'label': 'I don\'t know',
-              'value': 0.5
-            },
-            {
-              'label': 'Yes',
-              'value': 1
+              'value': 0.85
             },
             {
               'label': 'No',
-              'value': 0
+              'value': 1
+            },
+            {
+              'label': 'Yes',
+              'value': 0.7
             }
           ]
         },
@@ -153,7 +153,7 @@ angular.module('uiApp')
           'answers': [
             {
               'label': 'I don\'t know',
-              'value': 0.5
+              'value': 0.75
             },
             {
               'label': 'The bank slope is very shallow around most of the pit.',
@@ -161,11 +161,11 @@ angular.module('uiApp')
             },
             {
               'label': 'The bank slope is a mix of steep and shallow.',
-              'value': 0.51
+              'value': 0.9
             },
             {
               'label': 'The bank slope is steep around most of the pit.',
-              'value': 0
+              'value': 0.5
             }
           ]
         },
@@ -176,10 +176,6 @@ angular.module('uiApp')
           'order': 90,
           'type': 'select',
           'answers': [
-            {
-              'label': 'I don\'t know',
-              'value': 0.5
-            },
             {
               'label': '< 5 acres',
               'value': 1
