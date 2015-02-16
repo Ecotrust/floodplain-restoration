@@ -23,6 +23,48 @@ from django.http import Http404
 from django.conf import settings
 import pdfkit
 
+def printer_friendly(request, pk, template_name='report/print.html'):
+    user = request.user
+    try:
+        site = Site.objects.get(user=user, id=pk)
+        pits = Pit.objects.filter(site_id=pk, user_id=user.id)
+        answers = InputNode.objects.filter(site_id=pk, user_id=user.id)
+    except:
+        return HttpResponseForbidden("<h1>ERROR 403 - Access Forbidden.</h1> <p>Are you logged in?</p>")
+
+    contexts = Context.objects.all().order_by('order')
+    questions = Question.objects.all()
+    question_map = []
+
+    for question in questions:
+        answer = answers.get(question=question)
+        answer_text = 'No answer available'
+        for choice in question.choices:
+            if choice['value'] == answer.value:
+                answer_text = choice['choice']
+                break
+        question_map.append({
+            'question': question,
+            'answer': answer_text
+        })
+
+    # map site.suitability scores to contexts
+    # return only site, contexts and pits
+
+    template = loader.get_template(template_name)
+
+    context = RequestContext(
+        request, {
+            'site': site,
+            'pits': pits,
+            'contexts': contexts.order_by('order'),
+            'questions': question_map
+        }
+    )
+
+    return HttpResponse(template.render(context))
+
+
 def view_pdf(request, pk, template_name='report/map.html', extra_context={}):
 
     if pk == '0':

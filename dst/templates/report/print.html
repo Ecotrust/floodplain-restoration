@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <title>Report: {{site.name}}</title>
+  </head>
+  <body style="padding-top:0">
+
+    <h1>Site: {{site.name}} - {{site.suitability.suitability}}</h1>
+
+    {% for context in contexts %}
+        <h2>{{context.name}}</h2>
+        {% for category in context.questioncategory_set.all %}
+                <h3>{{category.name}}</h3>
+                {% for question in category.question_set.all %}
+                    <p>Q: {{question.text}}</p>
+                    {% for answer in questions %}
+                        {% ifequal answer.question question %}
+                            <p>A: {{answer.answer}}</p>
+                            <br/>
+                        {% endifequal %} <!-- if question == question_map.question -->
+                    {% endfor %} <!-- loop through all question_map items -->
+                {% endfor %} <!-- loop through all questions -->
+        {% endfor %} <!-- loop through all categories -->
+        <hr />
+    {% endfor %} <!-- loop through all contexts -->
+
+
+
+
+  </body>
+</html>

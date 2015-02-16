@@ -186,6 +186,9 @@ class Question(models.Model):
     def __str__(self):
         return "{}: `{}`".format(self.name, self.question)
 
+    def text(self):
+        return self.question
+
 
 class InputNode(BaseModel):
     site = models.ForeignKey(GravelSite)

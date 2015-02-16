@@ -7,5 +7,5 @@ urlpatterns = patterns('',
     url('^export/(?P<pk>\d+)/$',
         'report.views.export_pdf'),
     url('^view/(?P<pk>\d+)/$',
-        'report.views.view_pdf'),
+        'report.views.printer_friendly'),
 )
