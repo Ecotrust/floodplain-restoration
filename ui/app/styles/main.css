@@ -770,7 +770,11 @@ hr {
 }
 
 .report-header {
-  margin: 35px 50px 25px 50px;
+  margin-top: 25px;
+  padding: 10px 50px 25px 50px;
+  border: solid 1px gray;
+  border-radius: 10px;
+  background-color: white;
 }
 
 .report-name {
