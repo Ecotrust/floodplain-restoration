@@ -29,6 +29,15 @@ angular.module('uiApp')
     var blankPit;
     var isNewPit = false;
 
+    var questionDefaults = {
+      'contamination': 0.75,
+      'adjacent_river_depth': 0.75,
+      'slope_dist': 0.9,
+      'pit_levies': 0.85,
+      'bank_slope': 0.75,
+      'surface_area': 0.5
+    };
+
     $scope.pitFormObj = {
       'form': [
         {
@@ -48,7 +57,7 @@ angular.module('uiApp')
           'answers': [
             {
               'label': 'I don\'t know',
-              'value': 0.75
+              'value': questionDefaults.contamination
             },
             {
               'label': 'No, definitely not.',
@@ -81,7 +90,7 @@ angular.module('uiApp')
           'answers': [
             {
               'label': 'I don\'t know',
-              'value': 0.75
+              'value': questionDefaults.adjacent_river_depth
             },
             {
               'label': 'No',
@@ -107,7 +116,7 @@ angular.module('uiApp')
           'answers': [
             {
               'label': 'I don\'t know',
-              'value': 0.9
+              'value': questionDefaults.slope_dist
             },
             {
               'label': 'Short (< 20 ft.)',
@@ -132,7 +141,7 @@ angular.module('uiApp')
           'answers': [
             {
               'label': 'I don\'t know',
-              'value': 0.85
+              'value': questionDefaults.pit_levies
             },
             {
               'label': 'No',
@@ -153,7 +162,7 @@ angular.module('uiApp')
           'answers': [
             {
               'label': 'I don\'t know',
-              'value': 0.75
+              'value': questionDefaults.bank_slope
             },
             {
               'label': 'The bank slope is very shallow around most of the pit.',
@@ -216,15 +225,12 @@ angular.module('uiApp')
           'notes': '',
           'name': '<new pit>',
           'site': activeSiteId,
-          'contamination': 0.5,
-          'substrate': 0.5,
-          'adjacent_river_depth': 0.5,
-          'slope_dist': 0.5,
-          'pit_levies': 0.5,
-          'bedrock': 0.5,
-          'bank_slope': 0.5,
-          'pit_depth': 0.5,
-          'surface_area': 0.5
+          'contamination': questionDefaults.contamination,
+          'adjacent_river_depth': questionDefaults.adjacent_river_depth,
+          'slope_dist': questionDefaults.slope_dist,
+          'pit_levies': questionDefaults.pit_levies,
+          'bank_slope': questionDefaults.bank_slope,
+          'surface_area': questionDefaults.surface_area
         }
       };
     } else {
