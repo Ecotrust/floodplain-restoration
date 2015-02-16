@@ -56,6 +56,202 @@ def printer_friendly(request, pk, template_name='report/print.html'):
         }
     }
 
+    pit_form = {
+        'contamination': {
+          'question': 'Is hazardous waste present?',
+          'id': 'contamination',
+          'answers': [
+            {
+              'label': 'I don\'t know',
+              'value': 0.75
+            },
+            {
+              'label': 'No, definitely not.',
+              'value': 1
+            },
+            {
+              'label': 'No, I don’t think so',
+              'value': 0.8
+            },
+            {
+              'label': 'Yes, and the cost and effort to remediate it is acceptable.',
+              'value': 0.7
+            },
+            {
+              'label': 'Yes, but I do not know if it can be remediated.',
+              'value': 0.5
+            },
+            {
+              'label': 'Yes, and it will be expensive and/or very difficult to remediate.',
+              'value': 0.2
+            }
+          ]
+        },
+        'adjacent_river_depth': {
+          'question': 'Is the pit deeper than the adjacent river <u><i>thalweg</i></u>?',
+          'id': 'adjacent_river_depth',
+          'answers': [
+            {
+              'label': 'I don\'t know',
+              'value': 0.75
+            },
+            {
+              'label': 'No',
+              'value': 1
+            },
+            {
+              'label': 'They are the same depth',
+              'value': 0.9
+            },
+            {
+              'label': 'Yes',
+              'value': 0.5
+            }
+          ],
+          'info': 'The thalweg of the river is the line of the lowest points within the channel, spanning the length of the river.'
+        },
+        'slope_dist': {
+          'question': 'What is the distance from the river to the pit edge?',
+          'id': 'slope_dist',
+          'answers': [
+            {
+              'label': 'I don\'t know',
+              'value': 0.9
+            },
+            {
+              'label': 'Short (< 20 ft.)',
+              'value': 1
+            },
+            {
+              'label': 'Medium (20-80 ft.)',
+              'value': 0.8
+            },
+            {
+              'label': 'Long (> 80ft.)',
+              'value': 0
+            }
+          ]
+        },
+        'pit_levies': {
+          'question': 'Are there any pit-adjacent levees?',
+          'id': 'pit_levies',
+          'answers': [
+            {
+              'label': 'I don\'t know',
+              'value': 0.85
+            },
+            {
+              'label': 'No',
+              'value': 1
+            },
+            {
+              'label': 'Yes',
+              'value': 0.7
+            }
+          ]
+        },
+        'bank_slope': {
+          'question': 'Select the answer that best describes the slope of the pit bank:',
+          'id': 'bank_slope',
+          'answers': [
+            {
+              'label': 'I don\'t know',
+              'value': 0.75
+            },
+            {
+              'label': 'The bank slope is very shallow around most of the pit.',
+              'value': 1
+            },
+            {
+              'label': 'The bank slope is a mix of steep and shallow.',
+              'value': 0.9
+            },
+            {
+              'label': 'The bank slope is steep around most of the pit.',
+              'value': 0.5
+            }
+          ]
+        },
+        'surface_area': {
+          'question': 'What is the surface area of the pit?',
+          'id': 'surface_area',
+          'answers': [
+            {
+              'label': '< 5 acres',
+              'value': 1
+            },
+            {
+              'label': '5-20 acres',
+              'value': 0.6
+            },
+            {
+              'label': '20-30 acres',
+              'value': 0.3
+            },
+            {
+              'label': '> 30 acres',
+              'value': 0
+            }
+          ]
+        },
+        'notes': {
+          'question': 'Notes',
+          'id': 'notes',
+          'answers': []
+        }
+    }
+
+    pit_scores = []
+    for pit in pits:
+        pit_score = {
+            'id': pit.id,
+            'contamination': {
+                'question': pit_form['contamination']['question'],
+                'answer': 'Answer not available',
+                'value': pit.contamination
+            },
+            'adjacent_river_depth': {
+                'question': pit_form['adjacent_river_depth']['question'],
+                'answer': 'Answer not available',
+                'value': pit.adjacent_river_depth
+            },
+            'slope_dist': {
+                'question': pit_form['slope_dist']['question'],
+                'answer': 'Answer not available',
+                'value': pit.slope_dist
+            },
+            'pit_levies': {
+                'question': pit_form['pit_levies']['question'],
+                'answer': 'Answer not available',
+                'value': pit.pit_levies
+            },
+            'bank_slope': {
+                'question': pit_form['bank_slope']['question'],
+                'answer': 'Answer not available',
+                'value': pit.bank_slope
+            },
+            'surface_area': {
+                'question': pit_form['surface_area']['question'],
+                'answer': 'Answer not available',
+                'value': pit.surface_area
+            },
+            'notes': {
+                'question': pit_form['notes']['question'],
+                'answer': pit.notes
+            }
+        }
+        pit_score['score'] = 'Unsuitable'
+        if pit.score > 0.33:
+            pit_score['score'] = 'Moderately Suitable'
+        if pit.score > 0.66:
+            pit_score['score'] = 'Highly Suitable'
+        for key, value in pit_form.items():
+            if value['id'] != 'notes':
+                for answer in value['answers']:
+                    if answer['value'] == pit_score[value['id']]['value']:
+                        pit_score[value['id']]['answer'] = answer['label']
+                        break
+        pit_scores.append(pit_score)
     for key, val in site.suitability.items():
         scores[key]['rank'] = 'Unsuitable'
         if val > 0.33:
@@ -81,6 +277,7 @@ def printer_friendly(request, pk, template_name='report/print.html'):
         request, {
             'site': site,
             'pits': pits,
+            'pit_scores': pit_scores,
             'contexts': contexts.order_by('order'),
             'questions': question_map,
             'scores': scores

@@ -29,15 +29,23 @@
 
         {% ifequal context.name "Site" %}
             {% for pit in pits %}
-                <h3>{{pit.name}}</h3>
-
+                {% for pit_score in pit_scores %}
+                    {% ifequal pit_score.id pit.id %}
+                        <h3>PIT: {{pit.name}} - {{pit_score.score}}</h3>
+                        {% for key, val in pit_score.items %}
+                            {% ifnotequal key 'id' %}
+                                {% ifnotequal key 'score' %}
+                                    <p>Q: {{val.question | safe}}</p>
+                                    <p>A: {{val.answer}}</p>
+                                    <br/>
+                                {% endifnotequal %}
+                            {% endifnotequal %}
+                        {% endfor %}
+                    {% endifequal %}
+                {% endfor %}
             {% endfor %}
         {% endifequal%}
         <hr />
     {% endfor %} <!-- loop through all contexts -->
-
-
-
-
   </body>
 </html>
