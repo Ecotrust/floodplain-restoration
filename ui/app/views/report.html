@@ -73,20 +73,45 @@
                         </div>
                     </div>
                 </div>
-                <hr />
+                <hr ng-if='contexts[context].label != "Location"'/>
             </div>
         </div>
     </div>
 
-    <div class="row pit-row">
-        <div class="col-md-2 report-pit-container" ng-class="{'bar-right': $index<pits.length-1}" ng-repeat="pit in pits">
-            <p class="report-pit-name">{{pit.properties.name}}</p>
-            <p class="report-pit-info">{{pit.properties.score.rank}}</p>
-            <p class="report-pit-info">{{pit.properties.notes}}</p>
+    <div class="row" ng-repeat="pit in pits" id="pit-accordion-{{pit.id}}">
+        <div class="col-md-12 report-context-container">
+            <div class="row">
+                <a data-toggle="collapse" data-parent="#pit-accordion-{{pit.id}}" data-target="#pit-collapse-{{pit.id}}" ng-click="toggleCircleIconClass('pit-circle-icon-{{pit.id}}'); selectComponent('pit-accordion-{{pit.id}}');">
+                    <div class="col-md-11 report-context-title">
+                        {{pit.properties.name}} 
+                        <span class="suitability-rank-pit">{{pit.properties.score.rank}}</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <img class='tachometer-base-pit' src='/app/images/tachometer/tachometer-02.png'/>
+                        <img class='tachometer-needle-pit' src='/app/images/tachometer/tachometer-01a.png' style="transform:rotate({{pit.properties.score.scoreDeg}}deg)"/>
+                        <span id="pit-circle-icon-{{pit.id}}" class="glyphicon glyphicon-chevron-down report-toggle-icon"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="row">
+                <div id="pit-collapse-{{pit.id}}" class="col-md-11 collapse">
+                    <!-- <div class="row report-question-row" ng-repeat="property in pit.properties"> -->
+                    <div class="row report-question-row">
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <p class="report-question">Notes</p>
+                                    <p class="report-answer">{{pit.properties.notes}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <hr />
     </div>
 
-    <div style="width: 700px; height: 600px" id="report-map" class="map"></div>
+    <div class="report-map" id="report-map" class="map"></div>
     
 </div>
 

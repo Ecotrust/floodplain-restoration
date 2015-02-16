@@ -1012,3 +1012,29 @@ hr {
   width: 100px;
   margin-left: -84px;
 }
+
+.tachometer-base-pit {
+  height: 60px;
+  width: 60px;
+  margin: -12px -12px -20px -12px;
+
+}
+
+.tachometer-needle-pit {
+  height: 60px;
+  width: 60px;
+  margin: 0 0 -14px -53px;
+}
+
+.suitability-rank-pit {
+  font-family: "Rotis Serif", Georgia;
+  font-size:20px;
+  margin-left: 15px;
+}
+
+.report-map {
+  width: 80%;
+  height: 450px;
+  margin: 15px auto 0 auto;
+  border: solid 3px gray;
+}

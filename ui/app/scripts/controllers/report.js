@@ -204,6 +204,9 @@ angular.module('uiApp')
         $scope.contexts[key].bgColorClass = getBgColorClass(score);
 
       }
+      for (var pitIdx in $scope.pits){
+        $scope.pits[pitIdx].properties.score.scoreDeg = $scope.pits[pitIdx].properties.score.value*225;
+      }
     }
 
     var nodes = [];

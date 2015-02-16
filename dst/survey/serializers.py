@@ -18,7 +18,7 @@ class PitSerializer(GeoFeatureModelSerializer):
         rank = "Highly Suitable"
         if pit_score < 0.33:
             rank = "Unsuitable"
-        if pit_score < 0.66:
+        elif pit_score < 0.66:
             rank = "Moderately Suitable"
         return {
             'value': pit_score,
