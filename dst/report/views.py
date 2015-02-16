@@ -25,6 +25,7 @@ import pdfkit
 
 def printer_friendly(request, pk, template_name='report/print.html'):
     user = request.user
+
     try:
         site = Site.objects.get(user=user, id=pk)
         pits = Pit.objects.filter(site_id=pk, user_id=user.id)
@@ -35,6 +36,32 @@ def printer_friendly(request, pk, template_name='report/print.html'):
     contexts = Context.objects.all().order_by('order')
     questions = Question.objects.all()
     question_map = []
+
+    scores = {
+        'suitability': {
+            'key': 'Overall',
+            'label': 'Overall'
+        },
+        'socio_economic': {
+            'key': 'Socio-Economic',
+            'label': 'Socio-Economic'
+        },
+        'site': {
+            'key': 'Site',
+            'label': 'Location'
+        },
+        'landscape': {
+            'key': 'Landscape',
+            'label': 'Landscape'
+        }
+    }
+
+    for key, val in site.suitability.items():
+        scores[key]['rank'] = 'Unsuitable'
+        if val > 0.33:
+            scores[key]['rank'] = 'Moderately Suitable'
+        if val > 0.66:
+            scores[key]['rank'] = 'Highly Suitable'
 
     for question in questions:
         answer = answers.get(question=question)
@@ -48,9 +75,6 @@ def printer_friendly(request, pk, template_name='report/print.html'):
             'answer': answer_text
         })
 
-    # map site.suitability scores to contexts
-    # return only site, contexts and pits
-
     template = loader.get_template(template_name)
 
     context = RequestContext(
@@ -58,7 +82,8 @@ def printer_friendly(request, pk, template_name='report/print.html'):
             'site': site,
             'pits': pits,
             'contexts': contexts.order_by('order'),
-            'questions': question_map
+            'questions': question_map,
+            'scores': scores
         }
     )
 
