@@ -533,7 +533,8 @@ hr {
 .progress {
   border: solid #A9A9A9 1px;
   background-color: #FFF;
-  margin-bottom: 5px;
+  margin: 6px 0 0 0;
+  height: 8px;
 }
 
 .progress-bar {
