@@ -44,6 +44,22 @@
                     {% endifequal %}
                 {% endfor %}
             {% endfor %}
+            <table>
+                <tr>
+                    <th>Pits</th>
+                    <th>Property</th>
+                </tr>
+                <tr>
+                    <td><img src="{{map}}"/></td>
+                    <td><img src="{{overview}}"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        {% for item in legend %}
+                            {{item|safe}}
+                        {% endfor %}
+                    </td>
+                </tr>
         {% endifequal%}
         <hr />
     {% endfor %} <!-- loop through all contexts -->

@@ -22,6 +22,7 @@ import datetime
 from django.http import Http404
 from django.conf import settings
 import pdfkit
+import math
 
 def printer_friendly(request, pk, template_name='report/print.html'):
     user = request.user
@@ -271,6 +272,49 @@ def printer_friendly(request, pk, template_name='report/print.html'):
             'answer': answer_text
         })
 
+    zoom = 13
+    map_width = 300
+    map_height = 300
+
+    coords = site.geometry.envelope.coords
+    north = coords[0][2][1]
+    east = coords[0][1][0]
+    south = coords[0][0][1]
+    west = coords[0][0][0]
+    height = math.fabs(north-south)
+    width = math.fabs(west-east)
+    size = math.sqrt((height*height)+(width*width))#in ~ meters... I think?
+
+    if size < 3000:
+        zoom=14
+    elif size > 7000:
+        zoom=12
+
+    site.geometry.transform(4326)
+    center = {
+        'lat': site.geometry.centroid.get_y(),
+        'lng': site.geometry.centroid.get_x()
+    }
+
+    point_str = ''
+    pit_count = 0
+    legend = []
+
+    for pit in pits:
+        pit_count += 1
+        pit.geometry.transform(4326)
+        lat = pit.geometry.centroid.get_y()
+        lng = pit.geometry.centroid.get_x()
+        point_str += '&markers=color:red%%7Clabel:%s%%7C%s,%s' % (str(pit_count), str(lat), str(lng))
+        legend.append('<p>%s - %s</p>' % (pit_count, pit.name))
+
+    overview_pt_str = '&markers=color:red%%7C%s,%s' % (str(center['lat']), str(center['lng']))
+
+    map_template = "http://maps.googleapis.com/maps/api/staticmap?center=" + str(center['lat']) + "," + str(center['lng']) + "&" \
+              "maptype=terrain&sensor=false"
+    detail_map = map_template + point_str + "&zoom=" + str(zoom) + "&size=" + str(map_width) + "x" + str(map_height) #+ "&scale=2"
+    overview_map = map_template + overview_pt_str + "&zoom=" + str(zoom-2) + "&size=" + str(map_width) + "x" + str(map_height) #+ "&scale=2"
+
     template = loader.get_template(template_name)
 
     context = RequestContext(
@@ -280,7 +324,10 @@ def printer_friendly(request, pk, template_name='report/print.html'):
             'pit_scores': pit_scores,
             'contexts': contexts.order_by('order'),
             'questions': question_map,
-            'scores': scores
+            'scores': scores,
+            'map': detail_map,
+            'overview': overview_map,
+            'legend': legend
         }
     )
 
