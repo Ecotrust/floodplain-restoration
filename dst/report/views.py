@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseServerError, HttpResponseForbidden
 from django.template import RequestContext, loader
+from django.core.exceptions import ObjectDoesNotExist
 # from django.shortcuts import get_object_or_404, render_to_response
 # from django.utils import simplejson
 import json
@@ -261,12 +262,15 @@ def printer_friendly(request, pk, template_name='report/print.html'):
             scores[key]['rank'] = 'Highly Suitable'
 
     for question in questions:
-        answer = answers.get(question=question)
         answer_text = 'No answer available'
-        for choice in question.choices:
-            if choice['value'] == answer.value:
-                answer_text = choice['choice']
-                break
+        try:
+            answer = answers.get(question=question)
+            for choice in question.choices:
+                if choice['value'] == answer.value:
+                    answer_text = choice['choice']
+                    break
+        except ObjectDoesNotExist:
+            pass
         question_map.append({
             'question': question,
             'answer': answer_text
