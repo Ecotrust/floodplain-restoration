@@ -1,9 +1,9 @@
 <div class="left-panel"> <div class="left-panel-content"> <!--   <a class="btn btn-default btn-xs" href="#/sites">&lt;&lt;Back</a>
-     --> <h3> Site Details </h3> <div class="property-box"> <div class="row"> <div class="col-md-8"> <h4>{{site.properties.name}}</h4> </div> <!--
+     --> <h3> Site Details </h3> <div class="property-box"> <div class="row"> <div class="col-md-7"> <h4>{{site.properties.name}}</h4> </div> <!--
         <div class="col-md-2 property-edit bar-right">
             <a class="prop-action" href="#/site/{{site.id}}/edit">edit</a>
         </div>
-        --> <div class="col-md-2 property-survey"> <a class="prop-action" href="#/site/{{site.id}}/survey/done" ng-if="showSummary">Go To Summary</a> </div> <div class="col-md-2 property-survey"> <a class="prop-action" href="#/site/{{site.id}}/survey/{{firstUnansweredId}}" ng-bind="surveyPrompt">Begin Survey</a> </div> <!--    
+        --> <div class="col-md-2 property-survey"> <a class="prop-action" href="#/site/{{site.id}}/survey/done" ng-if="showSummary">Go To Summary</a> </div> <div class="col-md-3 property-survey"> <a class="prop-action" href="#/site/{{site.id}}/survey/{{firstUnansweredId}}" ng-bind="surveyPrompt">Begin Survey</a> </div> <!--    
         <div class="col-md-2 property-delete">
             <a class="prop-action" ng-click="deleteSite(site.id)">delete</a>
         </div>
