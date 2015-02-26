@@ -231,6 +231,35 @@ map.map = new ol.Map({
           source: new ol.source.MapQuest({layer: 'sat'})
         })
       ]
+    }),
+    new ol.layer.Group({
+      'title': 'Overlays',
+      layers: [
+        new ol.layer.Tile({
+          title: 'Dams',
+          visible: false,
+          source: new ol.source.XYZ({
+            attributions: [],
+            url: 'http://b.tiles.ecotrust.org/tiles/TNC_gravelpit_dams/{z}/{x}/{y}.png'
+          })
+        }),
+        new ol.layer.Tile({
+          title: 'Barriers',
+          visible: false,
+          source: new ol.source.XYZ({
+            attributions: [],
+            url: 'http://b.tiles.ecotrust.org/tiles/TNC_gravelpit_barriers/{z}/{x}/{y}.png'
+          })
+        }),
+        new ol.layer.Tile({
+          title: 'Protected Areas',
+          visible: false,
+          source: new ol.source.XYZ({
+            attributions: [],
+            url: 'http://b.tiles.ecotrust.org/tiles/TNC_gravelpit_protected/{z}/{x}/{y}.png'
+          })
+        })
+      ]
     })
   ],
   view: new ol.View({
