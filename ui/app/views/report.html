@@ -51,7 +51,7 @@
                                             <div class="col-md-11">
                                                 <p class="report-question">{{answers[qid].question}}</p>
                                                 <p class="report-answer" ng-if="answers[qid].answer">{{answers[qid].answer | uppercase }}</p>
-                                                <p class="report-answer-unanswered" ng-if="!answers[qid].answer">UNANSWERED - <a class="btn btn-default" href="#/site/{{activeSiteId}}/survey/{{qid}}">Answer it now?</a></p>
+                                                <p class="report-answer-unanswered" ng-if="!answers[qid].answer">UNANSWERED - <a class="btn btn-default" href="#/site/{{activeSiteId}}/survey/{{answers[qid].displayId|digits}}">Answer it now?</a></p>
                                             </div>
                                         </div>
                                         <div class="row" ng-if="answers[qid].notes">
