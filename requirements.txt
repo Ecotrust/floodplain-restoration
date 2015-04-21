@@ -1,9 +1,9 @@
 git+https://github.com/Ecotrust/bayesian-belief-networks.git@master#egg=bayesian
 pillow
-django>=1.7,<1.8
+django==1.7.5
 djangorestframework<3.0
 jsonfield
-djangorestframework-gis
+djangorestframework-gis==0.7
 django-allauth
 django-redis-sessions
 django-redis
