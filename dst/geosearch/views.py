@@ -44,9 +44,12 @@ def search(request):
     max_dist = 315  # should be everything in WA and Oregon
 
     searches = [
+        geocoders.GeocoderDotUS(),
+        geocoders.Nominatim(),
         geocoders.GeoNames('ecotrust','ecotrust'),
         geocoders.OpenMapQuest(), 
-        geocoders.Bing(api_key=settings.BING_API_KEY),
+        geocoders.ArcGIS(),
+        # geocoders.Bing(api_key=settings.BING_API_KEY),
         # these are tried in reverse order, fastest first
         # TODO thread them and try them as they come in.
     ]
