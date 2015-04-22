@@ -275,7 +275,10 @@ var layerSwitcher = new ol.control.LayerSwitcher({
 
 map.map.addControl(layerSwitcher);
 
-var scaleLine = new ol.control.ScaleLine();
+var scaleLine = new ol.control.ScaleLine({
+  'units':'us'
+});
+
 map.map.addControl(scaleLine);
 
 
