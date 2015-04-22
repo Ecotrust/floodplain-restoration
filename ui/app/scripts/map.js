@@ -218,6 +218,10 @@ map.getActivePitArea = function() {
   return acres*0.65;   //TODO: Currently "getArea" returns bad data in this projection. Fix this for production.
 };
 
+var mapQuestAttr = new ol.Attribution({
+  html: 'Source: MapQuest'
+});
+
 map.map = new ol.Map({
   target: 'map',
   layers: [
@@ -235,6 +239,14 @@ map.map = new ol.Map({
     new ol.layer.Group({
       'title': 'Overlays',
       layers: [
+        new ol.layer.Tile({
+          title: 'Street/Town Labels',
+          visible: true,
+          source: new ol.source.MapQuest({
+            layer: 'hyb',
+            attributions: [mapQuestAttr]
+          })
+        }),
         new ol.layer.Tile({
           title: 'Dams',
           visible: false,
