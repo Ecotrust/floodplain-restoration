@@ -33,6 +33,7 @@ angular.module('uiApp')
       'pitEditDirections': 'Click and hold anywhere on the pit border to grab it. Drag the section of the border to where it belongs.',
       'previousQuestion': '<< Previous Question',
       'attribution': 'This tool is a product of The Nature Conservancy and Ecotrust',
+      'mainPhotoAttribution': 'Photo © Melissa Olson/TNC',
       'documents': '\
         <h3>Before you get started...</h3>\
         <h4>Please assemble as many of the following resources as possible:</h4>\

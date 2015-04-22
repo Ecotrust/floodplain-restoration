@@ -280,6 +280,21 @@ hr {
   border-radius: 10px;
 }
 
+.main-photo-attribution {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: rgb(100,100,100);
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px 0 0 0;
+  padding: 8px 5px;
+}
+
+.main-photo-attribution p {
+  margin: 0;
+  color: white;
+}
+
 .property-box {
   background-color: #f8f8f8;
   padding: 10px;
