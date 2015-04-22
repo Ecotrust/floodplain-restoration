@@ -94,6 +94,16 @@ angular.module('uiApp')
                 'components' : collectedComponents[context.id.toString()]
               };
             }
+            $scope.contextsList = [];
+            for (var obj in $scope.contextsObj) {
+              var contObj = $scope.contextsObj[obj];
+              $scope.contextsList[contObj.order] = contObj;
+            }
+            for (var i = $scope.contextsList.length-1; i >= 0; i--) {
+              if ($scope.contextsList[i] === undefined) {
+                $scope.contextsList.splice(i,1);
+              }
+            }
           });
         });
 
