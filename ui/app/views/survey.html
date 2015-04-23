@@ -20,7 +20,7 @@
 
               <div class="radio">
                 <label class="survey-choice">
-                  <input type="radio" name="choice" ng-value="choice.value" ng-checked="choice.value == node.value" ng-model="$parent.nodeVal">
+                  <input type="radio" name="choice" ng-value="choice.value" ng-checked="choice.value == node.value" ng-model="$parent.nodeVal" ng-change="submitForm()">
                   <span class="radio-span">&nbsp;</span>
                   {{choice.choice}}
                 </label>
@@ -30,7 +30,7 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <textarea class="notes-box" ng-value="choice.notes" ng-model="nodeNotes" rows="4" cols="40" placeholder="Notes"></textarea>
+            <textarea class="notes-box" ng-value="choice.notes" ng-model="nodeNotes" rows="4" cols="40" placeholder="Notes" ng-change="submitForm()" ng-show="!newNode"></textarea>
           </div>
         </div>
         <div class="row" id="info-row">
@@ -72,7 +72,7 @@
       </div>
     </div>
     <div class="col-md-1 survey-col survey-nav-col">
-      <a ng-click="submitForm()">
+      <a ng-click="nextQuestion()">
         <p class="survey-nav survey-nav-forward">
           <span class="glyphicon glyphicon-play survey-nav-icon"></span>
         </p>

@@ -96,37 +96,30 @@ angular.module('uiApp')
           valueChecked=true;
         }
       }
-      var nextQuestion = $scope.nextQuestion();
-      if ($scope.nodeVal === null || !valueChecked) {
-        //   alert('Please answer the question before moving on. If you are unable to answer the question, select "I don\'t know."');
-        $location.path('site/' + $rootScope.activeSiteId + '/survey/' + nextQuestion);
-      } else {
+      if (valueChecked) {
         $scope.node.value = $scope.nodeVal;
         $scope.node.notes = $scope.nodeNotes;
         if ($scope.newNode){
           NodeFactory
             .postNode($scope.node)
-            .then( function () {
-              $location.path('site/' + $rootScope.activeSiteId + '/survey/' + nextQuestion);
+            .then( function (status) {
+              $scope.newNode = false;
+              $scope.node.id = status.data.id;
+              $scope.numNodes+=1;
             });
         } else {
-          NodeFactory
-            .putNode($scope.node)
-            .then( function () {
-              $location.path('site/' + $rootScope.activeSiteId + '/survey/' + nextQuestion);
-            });
+          NodeFactory.putNode($scope.node);
         }
       }
     };
 
     $scope.nextQuestion = function() {
       var next = questionDisplayId + 1;
-      $scope.showNext = true;
       if (next > $scope.numQuestions) {
-        $scope.showNext = true;
-        return 'done';
+        $location.path('site/' + $rootScope.activeSiteId + '/survey/done');
+      } else {
+        $location.path('site/' + $rootScope.activeSiteId + '/survey/' + next);
       }
-      return next;
     };
 
     $scope.prevQuestion = function() {
