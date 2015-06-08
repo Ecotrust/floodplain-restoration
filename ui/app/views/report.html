@@ -50,7 +50,26 @@
                                         <div class="row">
                                             <div class="col-md-11">
                                                 <p class="report-question">{{answers[qid].question}}</p>
-                                                <p class="report-answer" ng-if="answers[qid].answer != false">{{answers[qid].answer | uppercase }}</p>
+                                                <p class="report-answer" ng-if="answers[qid].answer != false">
+                                                    {{answers[qid].answer | uppercase }}
+                                                </p>
+
+                                                <div class="row" id="accordion-impact-{{answers[qid].displayId}}">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <a class="btn btn-default impact-btn" ng-if="answers[qid].impact" data-toggle="collapse" data-parent="#accordion-impact-{{answers[qid].displayId}}" data-target="#collapse-impact-{{answers[qid].displayId}}" ng-click="toggleImpactIconClass('impact-collapse-icon-{{answers[qid].displayId}}');">
+                                                                    How does this affect my score?
+                                                                    <span id="impact-collapse-icon-{{answers[qid].displayId}}" class="glyphicon glyphicon-chevron-right report-impact-toggle-icon"></span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="well collapse col-md-8" id="collapse-impact-{{answers[qid].displayId}}">
+                                                                {{answers[qid].impact}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+
                                                 <p class="report-answer-unanswered" ng-if="!answers[qid].answer">UNANSWERED - <a class="btn btn-default" href="#/site/{{activeSiteId}}/survey/{{answers[qid].displayId|digits}}">Answer it now?</a></p>
                                             </div>
                                         </div>

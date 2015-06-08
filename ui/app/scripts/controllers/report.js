@@ -241,6 +241,15 @@ angular.module('uiApp')
       }
     };
 
+    $scope.toggleImpactIconClass = function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (icon.classList.contains('glyphicon-chevron-right')) {
+        icon.className = icon.className.replace(/\bglyphicon-chevron-right\b/,'glyphicon-chevron-left');
+      } else {
+        icon.className = icon.className.replace(/\bglyphicon-chevron-left\b/,'glyphicon-chevron-right');
+      }
+    };
+
     $scope.selectComponent = function(componentId) {
       var component = document.getElementById(componentId);
       if (component.classList.contains('report-component-selected')) {
