@@ -169,6 +169,7 @@ class Question(models.Model):
     externalLink = models.CharField(max_length=500, blank=True, null=True, default=None)
     layers = models.ManyToManyField(
         MapLayer, blank=True, related_name="layers")
+    impact = models.TextField(max_length=500, blank=True, null=True, default=None, help_text='Explanation of how this issue impacts the score')
 
     # Many-To-Many with a through table is painful.
     # "The Django Way" for this problem sucks, just use a JSONField instead!
