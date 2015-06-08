@@ -25,6 +25,7 @@
     - name: install base packages
       apt: pkg={{ item }} state=present
       with_items:
+        - python-setuptools
         - postgresql-9.3-postgis-2.1
         - build-essential
         - cython
@@ -82,8 +83,7 @@
       template: src=templates/settings_local.py dest={{ project_path }}/{{ app_name }}/settings_local.py owner={{ remote_user }} group={{ remote_user }} mode=0755
 
     - name: fix annoying ubuntu pip bug
-      command: >
-        easy_install3 requests<2.4
+      command: "pip3.4 install \"requests>=2.3,<2.4\""
 
     - name: Install global python *3* requirements
       pip: state=latest requirements={{ base_path }}/requirements.txt executable=pip3

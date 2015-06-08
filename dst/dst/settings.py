@@ -65,6 +65,8 @@ INSTALLED_APPS = (
 
     'django_nose',
 
+    'redis_cache',
+
     # 'silk'  # TODO remove or make debug=True only
 )
 
