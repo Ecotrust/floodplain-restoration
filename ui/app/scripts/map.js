@@ -270,6 +270,18 @@ map.map = new ol.Map({
             attributions: [],
             url: 'http://b.tiles.ecotrust.org/tiles/TNC_gravelpit_protected/{z}/{x}/{y}.png'
           })
+        }),
+        new ol.layer.Tile({
+          title: '100 Year Floodplain',
+          visible: false,
+          opacity: 0.4,
+          source: new ol.source.TileArcGISRest({
+            attributions: [],
+            url: 'http://maps3.arcgisonline.com/ArcGIS/rest/services/A-16/FEMA_100-Year_Flood_Zones_in_the_USA/MapServer',
+            params: {
+                'layers': 'show:1'
+            }
+          })
         })
       ]
     })
