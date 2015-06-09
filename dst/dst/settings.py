@@ -156,7 +156,7 @@ DOWNLOAD_ROOT = os.path.join(STATIC_ROOT, 'download')
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/app/#/sites"
 
 SESSION_ENGINE = 'redis_sessions.session'
 
