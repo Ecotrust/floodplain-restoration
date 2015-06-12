@@ -1015,6 +1015,10 @@ hr {
   visibility: hidden;
 }
 
+.ol-zoom-out {
+  font-family: arial;
+}
+
 .layer-switcher {
   top: 10px;
   z-index: 2;

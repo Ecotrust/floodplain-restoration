@@ -6,7 +6,7 @@ jsonfield
 djangorestframework-gis==0.7
 django-allauth
 django-redis-sessions
-django-redis
+django-redis<4.0.0
 django-redis-cache
 django-silk
 django-filter
