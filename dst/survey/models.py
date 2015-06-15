@@ -167,8 +167,8 @@ class Question(models.Model):
     image = models.ImageField(blank=True)
     supplement = models.FileField(blank=True)
     externalLink = models.CharField(max_length=500, blank=True, null=True, default=None)
-    layers = models.ManyToManyField(
-        MapLayer, blank=True, related_name="layers")
+    # layers = models.ManyToManyField(
+    #     MapLayer, blank=True, related_name="layers")
     impact = models.TextField(max_length=500, blank=True, null=True, default=None, help_text='Explanation of how this issue impacts the score')
 
     # Many-To-Many with a through table is painful.
