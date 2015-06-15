@@ -56,7 +56,7 @@ angular.module('uiApp')
         $scope.question = questions[questionDisplayId - 1];
         $scope.question.displayId = questionDisplayId;
         $scope.node.question = $scope.question.id;
-        if ($scope.question.externalLink !== null) {
+        if ($scope.question.externalLink !== null && $scope.question.externalLink != '') {
           $scope.hasExternalLink = true;
         }
         if ($scope.question.supplement !== "") {
