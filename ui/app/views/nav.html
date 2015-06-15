@@ -77,6 +77,7 @@
             <span class="glyphicon glyphicon-user"></span> {{userName}} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
+            <li class="nav-dd" ng-if="isAdmin" ng-click="link('/admin/')">SITE ADMINISTRATION</li>
             <li class="nav-dd last-dd" ng-click="link('/accounts/logout')">LOG OUT</li>
           </ul>
         </li>
