@@ -10,7 +10,7 @@ if (false) {var map =  null;}
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('ReportCtrl', function ($scope, $rootScope, $window, $routeParams, SiteFactory, QuestionFactory, NodeFactory) {
+  .controller('ReportCtrl', function ($scope, $rootScope, $window, $location, $routeParams, SiteFactory, QuestionFactory, NodeFactory) {
 
     // if (!$rootScope.userName) {
     //   $window.alert('You are not logged in. You will now be redirected to the login page.');
@@ -28,6 +28,9 @@ angular.module('uiApp')
     $rootScope.activeSiteId = $routeParams.siteId;
     $scope.pits = [];
     $scope.answers = {};
+    $scope.userIsOwner = false;
+    $scope.siteSharedWithPublic = false;
+    $scope.currentUrl = $location.$$absUrl;
 
     var suitabilityCategories = {
       'low': {
@@ -170,6 +173,19 @@ angular.module('uiApp')
             break;
           }
         }
+
+        $scope.userIsOwner = $scope.site.properties.user === $rootScope.userName;
+        $scope.siteSharedWithPublic = $scope.site.properties.shared_with_public;
+
+        if (!$scope.userIsOwner && !$scope.siteSharedWithPublic) {
+          $window.alert('You do not have permission to view this report. Be sure that you are the owner of this site or that the owner has made this report public.');
+          if ($rootScope.userName) {
+            $location.path('sites');        
+          } else {
+            $location.path('/');
+          }
+        }
+
         buildMap(site.geometry, site.properties.pit_set);
 
       });
@@ -207,6 +223,7 @@ angular.module('uiApp')
       for (var pitIdx in $scope.pits){
         $scope.pits[pitIdx].properties.score.scoreDeg = $scope.pits[pitIdx].properties.score.value*225;
       }
+
     }
 
     var nodes = [];
@@ -257,6 +274,15 @@ angular.module('uiApp')
       } else {
         component.className = component.className + ' report-component-selected';
       }
+    };
+
+    $scope.makePublic = function(publicize) {
+      SiteFactory
+        .publicizeSite($scope.site,publicize)
+        .then(function(ret) {
+          $window.location.reload();
+        });
+
     };
 
   });

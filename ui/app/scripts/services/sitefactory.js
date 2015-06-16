@@ -130,6 +130,19 @@ angular.module('uiApp')
       // TODO return a promise
     };
 
+    service.publicizeSite = function(site, publicize) {
+      var url = '/api/site/' + site.id;
+      site.properties.shared_with_public = publicize;
+      var promise = $http.put(url, site);
+      promise.success( function() {});
+      promise.error( function(res) {
+        console.log('ERROR', res);
+        $window.alert('Could not publicize site. Be sure you are logged in and have permission to do so.');
+      });
+
+      return promise;
+    };
+
     service.putSitePit = function(siteId, pit, wkt) {
       var url = '/api/pit/' + pit.id;
       pit.geometry = wkt;  // replace geojson geom with wkt

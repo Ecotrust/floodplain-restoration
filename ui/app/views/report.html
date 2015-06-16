@@ -1,11 +1,19 @@
 <div class="report">
     <div class="row">
-        <div class="col-md-10 col-offset-1 report-buttons">
-            <a class="btn btn-default" href="#/site/{{activeSiteId}}">
+        <div class="col-md-12 report-buttons">
+            <a class="btn btn-default" ng-show='userIsOwner' href="#/site/{{activeSiteId}}">
                 <span class="glyphicon glyphicon-arrow-left green-text"></span>
                 Back
             </a>
             <a class="btn btn-default" href="/report/view/{{activeSiteId}}/" target="_blank"> Printer Friendly <span class="glyphicon glyphicon-print green-text"></span></a>
+            <a class="btn btn-default share-report-btn" ng-show='userIsOwner && !siteSharedWithPublic' ng-click="makePublic(true);"> Make Publicly Accessible <span class="glyphicon glyphicon-eye-open green-text"></span></a>
+            <a class="btn btn-default share-report-btn" ng-show='userIsOwner && siteSharedWithPublic' ng-click='makePublic(false);'> Make Private <span class="glyphicon glyphicon-eye-close green-text"></span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 ">
+            <p class='share-report-btn' ng-show='userIsOwner && !siteSharedWithPublic'>This report is only viewable by you.</p>
+            <p class='share-report-btn' ng-show='userIsOwner && siteSharedWithPublic'>This report can be viewed by anyone with the url:<br />{{currentUrl}}</p>
         </div>
     </div>
     <div class="report-header">
@@ -70,7 +78,7 @@
                                                     </div>
                                                 </div>                                                
 
-                                                <p class="report-answer-unanswered" ng-if="!answers[qid].answer">UNANSWERED - <a class="btn btn-default" href="#/site/{{activeSiteId}}/survey/{{answers[qid].displayId|digits}}">Answer it now?</a></p>
+                                                <p class="report-answer-unanswered" ng-if="!answers[qid].answer">UNANSWERED<span ng-show='userIsOwner'> - <a class="btn btn-default" href="#/site/{{activeSiteId}}/survey/{{answers[qid].displayId|digits}}">Answer it now?</a></span></p>
                                             </div>
                                         </div>
                                         <div class="row" ng-if="answers[qid].notes">

@@ -688,6 +688,10 @@ hr {
   /*margin: 3px;*/
 }
 
+.share-report-btn {
+  float: right;
+}
+
 .report-impact-toggle-icon {
   padding-left: 10px;
 }

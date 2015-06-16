@@ -30,14 +30,13 @@ def printer_friendly(request, pk, template_name='report/print.html'):
 
     try:
         site = Site.objects.get(id=pk)
-        if site.shared_with_public:
+        if site.shared_with_public or site.user == user:
           pits = Pit.objects.filter(site_id=pk)
           answers = InputNode.objects.filter(site_id=pk)
         else:
-          pits = Pit.objects.filter(site_id=pk, user_id=user.id)
-          answers = InputNode.objects.filter(site_id=pk, user_id=user.id)
+          return HttpResponseForbidden("<h1>ERROR 403 - Access Forbidden.</h1> <p>Are you logged in as the owner or is this report shared publicly?</p>")
     except:
-        return HttpResponseForbidden("<h1>ERROR 403 - Access Forbidden.</h1> <p>Are you logged in as the owner or is this site shared publicly?</p>")
+        return HttpResponseForbidden("<h1>ERROR 403 - Access Forbidden.</h1> <p>Are you logged in as the owner or is this report shared publicly?</p>")
 
     contexts = Context.objects.all().order_by('order')
     questions = Question.objects.all()
