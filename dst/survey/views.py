@@ -104,7 +104,7 @@ def auth(request):
     isadmin = False
     if request.user and request.user.is_authenticated():
         username = request.user.username
-        if request.user.is_staff or request.user.is_superuser:
+        if request.user.is_staff:
             isadmin = True
 
     template = """'use strict';
