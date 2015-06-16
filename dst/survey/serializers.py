@@ -53,7 +53,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     def transform_choices(self, obj, value):
         return obj.choices  # represent as json, not string
-    layers = MapLayerSerializer(many=True)
+    # layers = MapLayerSerializer(many=True)
 
     class Meta:
         model = models.Question

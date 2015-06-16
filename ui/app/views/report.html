@@ -58,7 +58,7 @@
                                                     <div class="col-md-12">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <a class="btn btn-default impact-btn" ng-if="answers[qid].impact" data-toggle="collapse" data-parent="#accordion-impact-{{answers[qid].displayId}}" data-target="#collapse-impact-{{answers[qid].displayId}}" ng-click="toggleImpactIconClass('impact-collapse-icon-{{answers[qid].displayId}}');">
+                                                                <a class="btn btn-default impact-btn" ng-if="answers[qid].impact && answers[qid].answer" data-toggle="collapse" data-parent="#accordion-impact-{{answers[qid].displayId}}" data-target="#collapse-impact-{{answers[qid].displayId}}" ng-click="toggleImpactIconClass('impact-collapse-icon-{{answers[qid].displayId}}');">
                                                                     How does this affect my score?
                                                                     <span id="impact-collapse-icon-{{answers[qid].displayId}}" class="glyphicon glyphicon-chevron-right report-impact-toggle-icon"></span>
                                                                 </a>

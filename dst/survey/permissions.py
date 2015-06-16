@@ -15,4 +15,13 @@ class IsOwnerOrShared(permissions.BasePermission):
         # TODO add sharing
 
         # permissions are only allowed to the owner of the snippet.
+
+        if hasattr(obj, "shared_with_public"):
+            if obj.shared_with_public:
+                return True
+        if hasattr(obj, "site"):
+            if obj.site.shared_with_public:
+                return True
+
+
         return obj.user == request.user

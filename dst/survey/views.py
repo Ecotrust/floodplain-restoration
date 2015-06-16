@@ -9,6 +9,7 @@ from survey.models import GravelSite, Pit, InputNode, Question, Context, Questio
 from survey import serializers
 from survey.permissions import IsOwnerOrShared
 from flatblocks.models import FlatBlock
+from django.db.models import Q
 
 
 class GravelSiteViewSet(viewsets.ModelViewSet):
@@ -23,11 +24,13 @@ class GravelSiteViewSet(viewsets.ModelViewSet):
     model = GravelSite
 
     def get_queryset(self):
-        return GravelSite.objects.filter(user=self.request.user)
-
+        if self.request.user.id:
+            return GravelSite.objects.filter(Q(user=self.request.user) | Q(shared_with_public=True))
+        else:
+            return GravelSite.objects.filter(shared_with_public=True)
     serializer_class = serializers.GravelSiteSerializer
     permission_classes = (
-        permissions.IsAuthenticated,
+        permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrShared,
     )
 
@@ -52,11 +55,14 @@ class PitViewSet(viewsets.ModelViewSet):
     model = Pit
 
     def get_queryset(self):
-        return Pit.objects.filter(user=self.request.user)
+        if self.request.user.id:
+            return Pit.objects.filter(Q(user=self.request.user) | Q(site__shared_with_public=True))
+        else:
+            return Pit.objects.filter(site__shared_with_public=True)
 
     serializer_class = serializers.PitSerializer
     permission_classes = (
-        permissions.IsAuthenticated,
+        permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrShared,
     )
 
@@ -70,13 +76,16 @@ class InputNodeViewSet(viewsets.ModelViewSet):
     model = InputNode
     filter_fields = ('site',)
     serializer_class = serializers.InputNodeSerializer
-    # permission_classes = (
-    #     permissions.IsAuthenticated,
-    #     IsOwnerOrShared,
-    # )
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrShared,
+    )
 
     def get_queryset(self):
-        return InputNode.objects.filter(user=self.request.user)
+        if self.request.user.id:
+            return InputNode.objects.filter(Q(user=self.request.user) | Q(site__shared_with_public=True))
+        else:
+            return InputNode.objects.filter(site__shared_with_public=True)
 
     def pre_save(self, obj):
         obj.user = self.request.user
@@ -120,7 +129,7 @@ angular
     if username:
         content = template.format(username, baseurl, isadmin)
     else:
-        content = template.format('', baseurl)
+        content = template.format('', baseurl, isadmin)
 
     return HttpResponse(content, status=200, content_type="application/javascript")
 
