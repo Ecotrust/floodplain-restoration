@@ -121,6 +121,10 @@
       command: "{{ manage }} loaddata {{ project_path }}/survey/fixtures/questions.json"
       when: postgres_create_returncode['changed']
 
+    - name: install flatblocks fixture
+      command: "{{ manage }} loaddata {{ project_path }}/dst/fixtures/flatblocks.json"
+      when: inventory_hostname != '54.186.214.78'
+
     - name: collect static
       command: "{{ manage }} collectstatic --noinput"
 
