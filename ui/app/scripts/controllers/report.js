@@ -174,8 +174,10 @@ angular.module('uiApp')
           }
         }
 
-        $scope.userIsOwner = $scope.site.properties.user === $rootScope.userName;
-        $scope.siteSharedWithPublic = $scope.site.properties.shared_with_public;
+        if ($scope.site) {
+          $scope.userIsOwner = $scope.site.properties.user === $rootScope.userName;
+          $scope.siteSharedWithPublic = $scope.site.properties.shared_with_public;
+        }
 
         if (!$scope.userIsOwner && !$scope.siteSharedWithPublic) {
           $window.alert('You do not have permission to view this report. Be sure that you are the owner of this site or that the owner has made this report public.');
