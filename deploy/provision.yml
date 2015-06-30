@@ -25,38 +25,39 @@
     - name: install base packages
       apt: pkg={{ item }} state=present
       with_items:
-        - python-setuptools
-        - postgresql-9.3-postgis-2.1
         - build-essential
         - cython
-        - git-core
         - gdal-bin
         - gfortran
+        - git-core
         - htop
-        - libopenblas-dev
-        - liblapack-dev
-        - libgeos-dev
         - libgdal1-dev
-        - libpq-dev
-        - mercurial
-        - nginx-full
-        - libtiff5-dev
-        - libjpeg8-dev
-        - zlib1g-dev
         - libfreetype6-dev
+        - libgeos-dev
+        - libjpeg8-dev
+        - liblapack-dev
+        - libopenblas-dev
+        - libpq-dev
+        - libtiff5-dev
+        - mercurial
+        - munin
+        - nginx-full
+        - postfix
+        - postgresql-9.3-postgis-2.1
+        - python-setuptools
         - python3-dev
         - python3-pip
         - python3-psycopg2
         - python-psycopg2  # for ansible
-        - uwsgi-plugin-python3
         - redis-server
         - subversion
         - sysstat
         - uwsgi
-        - postfix
+        - uwsgi-plugin-python3
         - vim
-        - xfonts-base
         - xfonts-75dpi
+        - xfonts-base
+        - zlib1g-dev
 
     - name: download wkhtmltox
       get_url: url="http://labs.ecotrust.org/packages/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb" "dest=/tmp/wkhtmltox.deb"
@@ -108,8 +109,8 @@
       command: /usr/bin/psql -d {{ dbname }} -c "CREATE EXTENSION postgis;"
       when: postgres_create_returncode['changed']
 
-    - name: migrate
-      command: "{{ manage }} migrate --noinput"
+    # - name: migrate
+    #   command: "{{ manage }} migrate --noinput"
 
     - name: construct site fixture
       template: src=templates/sites.json dest={{ project_path }}/{{ app_name }}/data/sites.json owner={{ remote_user }} group={{ remote_user }} mode=0754

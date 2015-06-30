@@ -21,6 +21,20 @@ server {
         alias {{ project_path }}/{{ app_name }}/static/;
     }
 
+    location /munin/static/ {
+        alias /etc/munin/static/;
+        #expires modified +1w;
+    }
+
+    location /munin/ {
+        #auth_basic            "Restricted";
+        # Create the htpasswd file with the htpasswd tool.
+        #auth_basic_user_file  /etc/nginx/htpasswd;
+
+        alias /var/cache/munin/www/;
+        #expires modified +310s;
+    }
+
     # All other URIs get handled by uwsgi
     location / {
         uwsgi_pass unix:///var/run/uwsgi/app/{{ app_name }}/socket;
