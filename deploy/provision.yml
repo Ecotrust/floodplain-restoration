@@ -109,8 +109,8 @@
       command: /usr/bin/psql -d {{ dbname }} -c "CREATE EXTENSION postgis;"
       when: postgres_create_returncode['changed']
 
-    # - name: migrate
-    #   command: "{{ manage }} migrate --noinput"
+    - name: migrate
+      command: "{{ manage }} migrate --noinput"
 
     - name: construct site fixture
       template: src=templates/sites.json dest={{ project_path }}/{{ app_name }}/data/sites.json owner={{ remote_user }} group={{ remote_user }} mode=0754

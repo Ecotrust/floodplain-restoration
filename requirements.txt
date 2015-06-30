@@ -7,7 +7,8 @@ djangorestframework-gis==0.7
 django-allauth
 django-redis-sessions
 django-redis<4.0.0
-django-redis-cache>=1.1.0
+#django-redis-cache>=1.1.0
+git+https://github.com/rhodges/django-redis-cache.git@master#egg=redis_cache
 django-silk
 django-filter
 # django-flatblocks==0.8
