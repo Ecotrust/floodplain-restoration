@@ -1,29 +1,27 @@
 git+https://github.com/Ecotrust/bayesian-belief-networks.git@master#egg=bayesian
-pillow
 django==1.7.5
-djangorestframework<3.0
-jsonfield
+django-allauth==0.20.0
+django-filter==0.10.0
+django-redis==3.8.4
+django-redis-cache==0.13.1
+#git+https://github.com/rhodges/django-redis-cache.git@master#egg=redis_cache
+django-redis-sessions==0.4.0
+django-silk==0.5.5
+django-wkhtmltopdf==2.0.2
+djangorestframework==2.4.5
 djangorestframework-gis==0.7
-django-allauth
-django-redis-sessions
-django-redis<4.0.0
-#django-redis-cache>=1.1.0
-git+https://github.com/rhodges/django-redis-cache.git@master#egg=redis_cache
-django-silk
-django-filter
-# django-flatblocks==0.8
-# git+https://github.com/funkybob/django-flatblocks.git@master#egg=flatblocks
 geopy==1.7.1
-reportlab
-PyPDF2
-numpy
-pdfkit
-django-wkhtmltopdf
+jsonfield==1.0.3
+numpy==1.9.2
+pdfkit==0.5.0
+pillow==2.8.2
+PyPDF2==1.24
+reportlab==3.2.0
 
 # Testing
 ipdb
 ipython
 ipdbplugin
-django-nose
+django-nose==1.4
 coverage
 coveralls
