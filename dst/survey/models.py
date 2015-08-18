@@ -113,11 +113,11 @@ class Pit(BaseModel):
 
         scoreMap = {
         'contamination': 0.8,
-        'adjacent_river_depth': 0.1,
+        'adjacent_river_depth': 0.33,
         'slope_dist': 0.42,
-        'pit_levies': 0.1,
-        'bank_slope': 0.1,
-        'surface_area': 0.8
+        'pit_levies': 0.03,
+        'bank_slope': 0.05,
+        'surface_area': 0.83
         }
 
         total = 1
