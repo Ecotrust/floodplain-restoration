@@ -94,7 +94,7 @@ class Pit(BaseModel):
     ## Pit Geometry
     bank_slope = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
     surface_area = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
-    
+
     ## Depricated
     bedrock = models.FloatField(blank=True, null=True, default=None, validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
     pit_depth = models.FloatField(blank=True, null=True, default=None, validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
@@ -106,27 +106,25 @@ class Pit(BaseModel):
     @property
     def score(self):
         # TODO
-        attrs = ['contamination', 'adjacent_river_depth', 
+        attrs = ['contamination', 'adjacent_river_depth',
                  'slope_dist', 'pit_levies', 'bank_slope',
                  'surface_area']
 
 
         scoreMap = {
-        'contamination': 0.1, 
-        'adjacent_river_depth': 0.1, 
-        'slope_dist': 0.3,
-        'pit_levies': 0.1, 
+        'contamination': 0.8,
+        'adjacent_river_depth': 0.1,
+        'slope_dist': 0.42,
+        'pit_levies': 0.1,
         'bank_slope': 0.1,
-        'surface_area': 0.3
+        'surface_area': 0.8
         }
 
-        if self.__dict__['slope_dist'] == 0 or self.__dict__['surface_area'] == 0:
-            return 0
+        total = 1
+        for attr in attrs:
+            total = total * (( self.__dict__[attr] * scoreMap[attr] ) + ( 1 - scoreMap[attr]))
 
-        total = sum(self.__dict__[attr]*scoreMap[attr] for attr in attrs)
-
-
-        return total#/len(attrs)
+        return total
 
     def __str__(self):
         return "Pit: {}".format(self.name)

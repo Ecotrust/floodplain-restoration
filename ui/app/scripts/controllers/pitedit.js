@@ -77,12 +77,12 @@ angular.module('uiApp')
             },
             {
               'label': 'Yes, and it will be expensive and/or very difficult to remediate.',
-              'value': 0.2
+              'value': 0.0
             }
           ]
         },
         {
-          'question': 'Is the pit deeper than the adjacent river <u><i>thalweg</i></u>?',
+          'question': 'Is the pit more than twice as deep as the adjacent river <u><i>thalweg</i></u>?',
           'visible': true,
           'id': 'adjacent_river_depth',
           'order': 30,
@@ -98,11 +98,11 @@ angular.module('uiApp')
             },
             {
               'label': 'They are the same depth',
-              'value': 0.9
+              'value': 0.7
             },
             {
               'label': 'Yes',
-              'value': 0.5
+              'value': 0.0
             }
           ],
           'info': 'The thalweg of the river is the line of the lowest points within the channel, spanning the length of the river.'
@@ -119,15 +119,15 @@ angular.module('uiApp')
               'value': questionDefaults.slope_dist
             },
             {
-              'label': 'Short (< 20 ft.)',
+              'label': 'Short (< 250 ft.)',
               'value': 1
             },
             {
-              'label': 'Medium (20-80 ft.)',
-              'value': 0.8
+              'label': 'Medium (250-1000 ft.)',
+              'value': 0.6
             },
             {
-              'label': 'Long (> 80ft.)',
+              'label': 'Long (> 1000 ft.)',
               'value': 0
             }
           ]
@@ -149,7 +149,7 @@ angular.module('uiApp')
             },
             {
               'label': 'Yes',
-              'value': 0.7
+              'value': 0.0
             }
           ]
         },
@@ -170,11 +170,11 @@ angular.module('uiApp')
             },
             {
               'label': 'The bank slope is a mix of steep and shallow.',
-              'value': 0.9
+              'value': 0.7
             },
             {
               'label': 'The bank slope is steep around most of the pit.',
-              'value': 0.5
+              'value': 0.0
             }
           ]
         },
@@ -236,7 +236,7 @@ angular.module('uiApp')
     } else {
       $scope.activePitId = parseInt($routeParams.pitId, 10);
     }
-    
+
     $scope.pit = {};
     $scope.site = {};
     $scope.sites = [];
