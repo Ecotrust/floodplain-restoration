@@ -112,18 +112,18 @@ variable continuing_property_access {
 #   Location:       1/3                           0.6
 probability ( suitability | site, socio_economic, landscape ) {
   (suitable, suitable, suitable)       1.00, 0.00;
-  (suitable, suitable, unsuitable)     0.30, 0.70;
-  (suitable, unsuitable, suitable)     0.15, 0.85;
+  (suitable, suitable, unsuitable)     0.25, 0.75;
+  (suitable, unsuitable, suitable)     0.25, 0.75;
   (suitable, unsuitable, unsuitable)   0.05, 0.95;
-  (unsuitable, suitable, suitable)     0.40, 0.60;
-  (unsuitable, suitable, unsuitable)   0.12, 0.88;
-  (unsuitable, unsuitable, suitable)   0.06, 0.94;
+  (unsuitable, suitable, suitable)     0.25, 0.75;
+  (unsuitable, suitable, unsuitable)   0.05, 0.95;
+  (unsuitable, unsuitable, suitable)   0.05, 0.95;
   (unsuitable, unsuitable, unsuitable) 0.00, 1.00;
 }
 probability ( socio_economic | threats_to_other_areas_or_permittability, cost_benefit ) {
   (no_threats, beneficial) 1.00, 0.00;
   (no_threats, costly)     0.50, 0.50;
-  (threatened, beneficial) 0.00, 1.00;
+  (threatened, beneficial) 0.20, 0.80;
   (threatened, costly)     0.00, 1.00;
 }
 probability ( cost_benefit | public_perception, property_value, contamination_or_hazardous_waste ) {
@@ -149,7 +149,7 @@ probability ( property_value ) {
 probability ( threats_to_other_areas_or_permittability | surrounding_land_use, infrastructure, water_rights ) {
   (ammenable, no_threats, no_threats) 1.00, 0.00;
   (ammenable, no_threats, threatened) 0.20, 0.80;
-  (ammenable, threatened, no_threats) 0.00, 1.00;
+  (ammenable, threatened, no_threats) 0.20, 0.80;
   (ammenable, threatened, threatened) 0.00, 1.00;
   (unfriendly, no_threats, no_threats) 0.40, 0.60;
   (unfriendly, no_threats, threatened) 0.05, 0.95;
@@ -168,17 +168,17 @@ probability ( water_rights ) {
 }
 probability ( landscape | geomorphic_controls, floodplain_characteristics, abiotic_conditions, conservation_value ) {
   (suitable, suitable, suitable, suitable)         1.00, 0.00;
-  (suitable, suitable, suitable, unsuitable)       0.70, 0.30;
+  (suitable, suitable, suitable, unsuitable)       0.40, 0.60;
   (suitable, suitable, unsuitable, suitable)       0.60, 0.40;
-  (suitable, suitable, unsuitable, unsuitable)     0.42, 0.58;
-  (suitable, unsuitable, suitable, suitable)       0.10, 0.90;
+  (suitable, suitable, unsuitable, unsuitable)     0.30, 0.70;
+  (suitable, unsuitable, suitable, suitable)       0.20, 0.80;
   (suitable, unsuitable, suitable, unsuitable)     0.05, 0.95;
   (suitable, unsuitable, unsuitable, suitable)     0.05, 0.95;
   (suitable, unsuitable, unsuitable, unsuitable)   0.05, 0.95;
-  (unsuitable, suitable, suitable, suitable)       0.90, 0.10;
-  (unsuitable, suitable, suitable, unsuitable)     0.63, 0.37;
+  (unsuitable, suitable, suitable, suitable)       0.80, 0.20;
+  (unsuitable, suitable, suitable, unsuitable)     0.35, 0.65;
   (unsuitable, suitable, unsuitable, suitable)     0.54, 0.46;
-  (unsuitable, suitable, unsuitable, unsuitable)   0.36, 0.64;
+  (unsuitable, suitable, unsuitable, unsuitable)   0.30, 0.70;
   (unsuitable, unsuitable, suitable, suitable)     0.05, 0.95;
   (unsuitable, unsuitable, suitable, unsuitable)   0.05, 0.95;
   (unsuitable, unsuitable, unsuitable, suitable)   0.05, 0.95;
@@ -187,10 +187,10 @@ probability ( landscape | geomorphic_controls, floodplain_characteristics, abiot
 probability ( conservation_value | biotic_conditions, identified_in_conservation_plan, relationship_to_protected_areas ) {
   (suitable, identified, connected)          1.00, 0.00;
   (suitable, identified, disconnected)       0.90, 0.10;
-  (suitable, not_identified, connected)      0.60, 0.40;
-  (suitable, not_identified, disconnected)   0.50, 0.50;
-  (unsuitable, identified, connected)        0.80, 0.20;
-  (unsuitable, identified, disconnected)     0.70, 0.30;
+  (suitable, not_identified, connected)      0.90, 0.10;
+  (suitable, not_identified, disconnected)   0.75, 0.25;
+  (unsuitable, identified, connected)        0.20, 0.80;
+  (unsuitable, identified, disconnected)     0.10, 0.90;
   (unsuitable, not_identified, connected)    0.00, 1.00;
   (unsuitable, not_identified, disconnected) 0.00, 1.00;
 }
@@ -202,13 +202,13 @@ probability ( identified_in_conservation_plan ) {
 }
 probability ( biotic_conditions | intact_floodplain_forest, habitat_features, species_of_interest ) {
   (intact, suitable, present)        1.00, 0.00;
-  (intact, suitable, not_present)    0.60, 0.40;
-  (intact, unsuitable, present)      0.60, 0.40;
-  (intact, unsuitable, not_present)  0.36, 0.64;
+  (intact, suitable, not_present)    0.00, 1.00;
+  (intact, unsuitable, present)      0.80, 0.20;
+  (intact, unsuitable, not_present)  0.00, 1.00;
   (missing, suitable, present)       0.80, 0.20;
-  (missing, suitable, not_present)   0.48, 0.52;
+  (missing, suitable, not_present)   0.00, 1.00;
   (missing, unsuitable, present)     0.48, 0.52;
-  (missing, unsuitable, not_present) 0.20, 0.80;
+  (missing, unsuitable, not_present) 0.00, 1.00;
 }
 probability ( habitat_features ) {
   table 0.5, 0.5;
@@ -255,9 +255,9 @@ probability ( geomorphic_controls | infrastructure_constraints, material_availab
   (no_restrictions, available, not_mobile) 0.67, 0.33;
   (no_restrictions, unavailable, mobile) 0.67, 0.33;
   (no_restrictions, unavailable, not_mobile) 0.33, 0.67;
-  (unsuitable, available, mobile) 0.67, 0.33;
-  (unsuitable, available, not_mobile) 0.33, 0.67;
-  (unsuitable, unavailable, mobile) 0.33, 0.67;
+  (unsuitable, available, mobile) 0.20, 0.80;
+  (unsuitable, available, not_mobile) 0.15, 0.85;
+  (unsuitable, unavailable, mobile) 0.15, 0.85;
   (unsuitable, unavailable, not_mobile) 0.00, 1.00;
 }
 probability ( infrastructure_constraints ) {
@@ -271,8 +271,8 @@ probability ( channel_mobility ) {
 }
 probability ( site | practical_property_level_restorability, __overall_pit_restorability ) {
   (suitable, suitable) 1.00, 0.00;
-  (suitable, unsuitable) 0.00, 1.00;
-  (unsuitable, suitable) 0.30, 0.70;
+  (suitable, unsuitable) 0.20, 0.80;
+  (unsuitable, suitable) 0.40, 0.60;
   (unsuitable, unsuitable) 0.00, 1.00;
 }
 
