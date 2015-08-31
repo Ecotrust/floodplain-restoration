@@ -124,15 +124,15 @@ def printer_friendly(request, pk, template_name='report/print.html'):
               'value': 0.9
             },
             {
-              'label': 'Short (< 20 ft.)',
+              'label': 'Short (< 250 ft.)',
               'value': 1
             },
             {
-              'label': 'Medium (20-80 ft.)',
+              'label': 'Medium (250-1000 ft.)',
               'value': 0.8
             },
             {
-              'label': 'Long (> 80ft.)',
+              'label': 'Long (> 1000ft.)',
               'value': 0
             }
           ]
@@ -401,7 +401,7 @@ def generate_pdf(request, site):
     })
 
     new_pdf = PdfFileMerger()
-    new_pdf.append('%s/download_%s.pdf' % (settings.DOWNLOAD_ROOT, site.pk))    
+    new_pdf.append('%s/download_%s.pdf' % (settings.DOWNLOAD_ROOT, site.pk))
 
     # finally, return output
     new_pdf.write(outputStream)
@@ -411,4 +411,3 @@ def generate_pdf(request, site):
     os.remove(reportPdfFile)
 
     return final
-
