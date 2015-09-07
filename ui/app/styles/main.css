@@ -6,7 +6,7 @@
 
 /* Space out content a bit */
 body {
-  padding-top: 51px;  /* navbar is 50px by default */ 
+  padding-top: 51px;  /* navbar is 50px by default */
   overflow:hidden;
   font-family: "Agenda", Arial;
   background-color: #e6e7e8;
@@ -78,7 +78,7 @@ hr {
 .header {
   border-bottom: 1px solid #e5e5e5;
 }
-/* Make the masthead heading the same height as the navigation 
+/* Make the masthead heading the same height as the navigation
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
@@ -86,7 +86,7 @@ hr {
 }
 */
 
-.navbar-default .navbar-brand, 
+.navbar-default .navbar-brand,
 .navbar-default .navbar-brand:hover {
     color: #00a551;
 }
@@ -268,6 +268,16 @@ hr {
 .jumbotron .attribution {
   font-size: 14px;
   bottom: 10%;
+}
+
+.attribution a {
+  color: white;
+  font-weight: bold;
+}
+
+.attribution a:hover {
+  color: #00a551;
+  text-decoration: underline;
 }
 
 .homepage-fill {
@@ -634,7 +644,7 @@ hr {
 
 .homepage-content {
   background-image: url('../images/bulldozer.jpg');
-  /* image from dam under CC 3.0: 
+  /* image from dam under CC 3.0:
   http://dam.ecotrust.org/pages/view.php?ref=7263&k=&search=stream&offset=0&order_by=relevance&sort=DESC&archive=0;*/
   background-repeat:no-repeat;
   background-position:0 80%;  /* For bulldozer photo */
@@ -657,7 +667,7 @@ hr {
   overflow:hidden;
   border-left:1px #ccc solid;
   padding-right: 1px;
-  padding-left: 0; 
+  padding-left: 0;
 }
 
 .slide.ng-enter, .slide.ng-leave {
