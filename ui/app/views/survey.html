@@ -44,7 +44,7 @@
                 <div class="col-md-4" ng-if="hasDownload"><a href="/media/{{question.supplement}}" target="_blank"><span class="survey-info-icon glyphicon glyphicon-arrow-down"></span>Download</a></div>
                 <div class="col-md-4" ng-if="hasImage"><a href="/media/{{question.image}}" target="_blank"><span class="survey-info-icon glyphicon glyphicon-picture"></span>View image</a></div><!-- question.image -->
               </div>
-              <p class="question-detail" ng-bind="question.detail">
+              <p class="question-detail" ng-bind-html="question.detail">
               {{question.detail}}
               </p>
             </div>
