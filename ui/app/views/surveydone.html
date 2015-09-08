@@ -13,7 +13,10 @@
           <p class="survey-question-header">
             <span class="numberCircle">
                  <span class="glyphicon glyphicon-ok"></span>
-            </span> VIEW AND SHARE REPORT
+            </span>
+            <span ng-bind-html="content.summaryTitle">
+              Summary
+            </span>
           </p>
           <p class="question">You have completed the questions. The scores below indicate your site's scores in several categories, as well as its overall score.</p>
         </div>
