@@ -20,7 +20,7 @@
 
         <h1 class="report-title"><span class="report-name">Full report:</span> <span class="report-property"  ng-bind="site.properties.name">Site one</span></h1>
 
-        <div class="report-intro">
+        <div class="report-intro" ng-bind-html='content.reportIntro'>
             Short paragraph introducing content on this page.
         </div>
     </div>
@@ -40,7 +40,7 @@
                         <div class="row">
                             <a data-toggle="collapse" data-parent="#accordion-{{component.id}}" data-target="#collapse-{{component.id}}" ng-click="toggleCircleIconClass('circle-icon-{{component.id}}'); selectComponent('accordion-{{component.id}}');">
                                 <div class="col-md-11 report-context-title">
-                                    {{component.name}} 
+                                    {{component.name}}
                                     <span id="circle-icon-{{component.id}}" class="glyphicon glyphicon-chevron-down report-toggle-icon"></span>
                                 </div>
                             </a>
@@ -76,7 +76,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>                                                
+                                                </div>
 
                                                 <p class="report-answer-unanswered" ng-if="!answers[qid].answer">UNANSWERED<span ng-show='userIsOwner'> - <a class="btn btn-default" href="#/site/{{activeSiteId}}/survey/{{answers[qid].displayId|digits}}">Answer it now?</a></span></p>
                                             </div>
@@ -103,7 +103,7 @@
             <div class="row">
                 <a data-toggle="collapse" data-parent="#pit-accordion-{{pit.id}}" data-target="#pit-collapse-{{pit.id}}" ng-click="toggleCircleIconClass('pit-circle-icon-{{pit.id}}'); selectComponent('pit-accordion-{{pit.id}}');">
                     <div class="col-md-11 report-context-title">
-                        {{pit.properties.name}} 
+                        {{pit.properties.name}}
                         <span class="suitability-rank-pit">{{pit.properties.score.rank}}</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <img class='tachometer-base-pit' src='/app/images/tachometer/tachometer-02.png'/>
@@ -132,7 +132,5 @@
     </div>
 
     <div class="report-map" id="report-map" class="map"></div>
-    
+
 </div>
-
-
