@@ -8,7 +8,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from bbn import BeliefNetwork
 BBN = BeliefNetwork.from_bif(settings.BBN_BIF)
 
-
 class BaseModel(models.Model):
     notes = models.TextField(default='', blank=True)
     user = models.ForeignKey(User)
@@ -23,6 +22,12 @@ class BaseModel(models.Model):
                                       self.name,
                                       self.user.username)
 
+class BifSettings(BaseModel):
+    bif = models.TextField(default='', blank=True)
+
+    def __str__(self):
+        return"{} by {}".format(self.__class__.__name__,
+                                      self.user.username)
 
 class GravelSite(BaseModel):
     name = models.CharField(max_length=80)

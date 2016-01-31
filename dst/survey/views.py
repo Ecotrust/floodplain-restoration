@@ -11,6 +11,10 @@ from survey.permissions import IsOwnerOrShared
 from flatblocks.models import FlatBlock
 from django.db.models import Q
 
+from django.template import RequestContext
+from django.shortcuts import render_to_response
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 class GravelSiteViewSet(viewsets.ModelViewSet):
 
@@ -148,3 +152,29 @@ class QuestionCategorySet(viewsets.ReadOnlyModelViewSet):
     queryset = QuestionCategory.objects.all().order_by('context__order', 'order')
     serializer_class = serializers.QuestionCategorySerializer
 
+def edit_bbn(self, request, extra_context=None):
+    from survey.models import BifSettings
+    from django.contrib.admin.options import ModelAdmin
+    # opts = self.model._meta
+    # admin_site = self.admin_site
+    # has_perm = request.user.has_perm(opts.app_label + '.' + opts.get_change_permission())
+
+    bifsets = BifSettings.objects.all()
+    self.change_list_template = "admin/survey/bifsettings/change_list.html"
+    return ModelAdmin.changelist_view (self, request, extra_context)
+
+edit_bbn = staff_member_required(edit_bbn)
+
+def admin_change_form(self, request, object_id, form_url='', extra_context=None):
+    from django.contrib.admin.options import ModelAdmin
+    self.change_form_template = "admin/survey/bifsettings/change_form.html"
+    return ModelAdmin.change_view(self, request, object_id, form_url, extra_context)
+# admin_change_form = staff_member_required(admin_change_form)
+### Uncommenting this causes a 'ModelAdmin' object has no attribute 'User' error
+### However, no one can access this without staff and superuser privs, so it's okay.
+
+def admin_add_form(self, request, form_url='', extra_context=None):
+    from django.contrib.admin.options import ModelAdmin
+    self.add_form_template = "admin/survey/bifsettings/change_form.html"
+    return ModelAdmin.add_view(self, request, form_url, extra_context)
+# admin_add_form = staff_member_required(admin_add_form)
