@@ -10,18 +10,29 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 
 # Quickstart
 
-### Setup
+### Vagrant Init (if using local VM)
+	vagrant up
+	vagrant ssh
+	sudo apt-get update
+	sudo apt-get upgrade
+	cd /usr/local/apps/floodplain-restoration/
+
+### Local Init
+	sudo apt-get install python-virtualenv
+	sudo apt-get install python3-pip
 	virtualenv --python /usr/bin/python3.4 ~/env/tnc
 	source ~/env/tnc/bin/activate
-	sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev python3-dev
+
+### Setup
+	sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev python3-dev ansible
 	sudo apt-get install redis-server
-    sudo service redis-server start
+	sudo service redis-server start
 	pip install -r requirements.txt
 
 	cd dst  # just a container
 	./test
 
-### Initialize
+### Initialize Database
 
 	spatialite dst/db.sqlite3 "SELECT InitSpatialMetaData();"
 	python manage.py migrate
@@ -91,7 +102,7 @@ git commit -a -m "new grunt build"
 git push
 ```
 
-Deploy to "stage", our local virtualbox machine.
+Deploy to "stage", our local virtualbox machine from its host.
 
 ```
 vagrant up
@@ -104,4 +115,3 @@ Test it and fix it if needed. Then deploy to production
 ```
 ./deploy <produciton hostname>
 ```
-
