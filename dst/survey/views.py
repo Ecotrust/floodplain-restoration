@@ -152,6 +152,80 @@ class QuestionCategorySet(viewsets.ReadOnlyModelViewSet):
     queryset = QuestionCategory.objects.all().order_by('context__order', 'order')
     serializer_class = serializers.QuestionCategorySerializer
 
+# create dict where keys are tiers, and each tier has keys of nodes
+def sort_bbn_nodes():
+    from bbn import BeliefNetwork
+    from dst import settings as dst_settings
+    from copy import copy, deepcopy
+    BBN = BeliefNetwork.from_bif(dst_settings.BBN_BIF)
+
+    blank_node = {
+        'cpt': {},
+        'parents': [],
+        'given': [],
+        'tier': None
+    }
+
+    node_dict = {}
+    sorted_dict = {
+        '0': {}
+    }
+    for node_idx in BBN.probabilities:
+        node = BBN.probabilities[node_idx]
+        if not node_idx in node_dict.keys():
+            node_dict[node_idx] = deepcopy(blank_node)
+        node_dict[node_idx]['cpt'] = node['cpt']
+        if node['given']:
+            node_dict[node_idx]['given'] = node['given']
+
+        for given_idx in node_dict[node_idx]['given']:
+            if not given_idx in node_dict.keys():
+                node_dict[given_idx] = deepcopy(blank_node)
+            node_dict[given_idx]['parents'].append(node_idx)
+
+    unsorted_nodes = node_dict.keys()
+    while len(unsorted_nodes) > 0:
+        unsorted_list = [x for x in unsorted_nodes]
+        for node_idx in unsorted_nodes:
+            if len(node_dict[node_idx]['parents']) == 0:
+                node_dict[node_idx]['tier'] = 0
+                unsorted_list.remove(node_idx)
+                sorted_dict['0'][node_idx] = node_dict[node_idx]
+            else:
+                for parent_idx in node_dict[node_idx]['parents']:
+                    if not node_dict[node_idx]['tier']:
+                        if not node_dict[parent_idx]['tier'] == None:
+                            node_tier = node_dict[parent_idx]['tier']+1
+                            node_dict[node_idx]['tier'] = node_tier
+                            unsorted_list.remove(node_idx)
+                            if not str(node_tier) in sorted_dict.keys():
+                                sorted_dict[str(node_tier)] = {}
+                            sorted_dict[str(node_tier)][node_idx] = node_dict[node_idx]
+
+        unsorted_nodes = unsorted_list
+
+    return sorted_dict
+
+# connect nodes with children in a single, recursive dict
+def get_node_dict(tier, node_idx, nodes):
+    node = nodes[tier][node_idx]
+    node['children'] = {}
+    for input_node in node['given']:
+        node['children'][input_node] = get_node_dict(str(int(tier)+1), input_node, nodes)
+
+    return node
+
+# return a dict of all bbn nodes maintaining familial hierarchy
+def get_bbn_nodes():
+    top_tier = '0'
+    sorted_nodes = sort_bbn_nodes()
+    bbn_nodes = {}
+    for node in sorted_nodes[top_tier]:
+        bbn_nodes[node] = get_node_dict(top_tier, node, sorted_nodes)
+
+    return bbn_nodes
+
+
 def edit_bbn(self, request, extra_context=None):
     from survey.models import BifSettings
     from django.contrib.admin.options import ModelAdmin
