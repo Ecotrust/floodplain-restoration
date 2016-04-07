@@ -3,6 +3,9 @@
 
 {% block extrahead %}{{ block.super }}
 <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+<script type="text/javascript">
+  bbn_str = {{ bbn_str|safe }};
+</script>
 {{ media }}
 {% endblock %}
 
@@ -39,6 +42,14 @@
   </li>
   <li>Trigger (somehow) refiguring scores according to new BIF</li>
 </ul>
+
+<h3>BBN Settings:</h3>
+<ul>
+{% for key, settings in bbn_settings.items %}
+  {% include "admin/survey/bifsettings/tree_view_template.html" %}
+{% endfor %}
+</ul>
+
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
   <ul class="object-tools">
@@ -86,7 +97,7 @@
     <script type="text/javascript">
         (function($) {
             $(document).ready(function() {
-                $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus()
+                $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus();
             });
         })(django.jQuery);
     </script>

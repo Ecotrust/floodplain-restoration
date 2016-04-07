@@ -206,10 +206,18 @@ def sort_bbn_nodes():
 
     return sorted_dict
 
+def clean_node_cpt_keys(node):
+    clean_cpt = {}
+    for key in node['cpt'].keys():
+        clean_cpt[str(key)] = node['cpt'][key]
+
+    return clean_cpt
+
 # connect nodes with children in a single, recursive dict
 def get_node_dict(tier, node_idx, nodes):
     node = nodes[tier][node_idx]
     node['children'] = {}
+    node['cpt'] = clean_node_cpt_keys(node)
     for input_node in node['given']:
         node['children'][input_node] = get_node_dict(str(int(tier)+1), input_node, nodes)
 
@@ -239,9 +247,13 @@ def edit_bbn(self, request, extra_context=None):
 
 edit_bbn = staff_member_required(edit_bbn)
 
-def admin_change_form(self, request, object_id, form_url='', extra_context=None):
+def admin_change_form(self, request, object_id, form_url='', extra_context={}):
     from django.contrib.admin.options import ModelAdmin
+    import json
     self.change_form_template = "admin/survey/bifsettings/change_form.html"
+    # import ipdb; ipdb.set_trace()
+    extra_context['bbn_str'] = json.dumps(get_bbn_nodes())
+    extra_context['bbn_settings'] = get_bbn_nodes()
     return ModelAdmin.change_view(self, request, object_id, form_url, extra_context)
 # admin_change_form = staff_member_required(admin_change_form)
 ### Uncommenting this causes a 'ModelAdmin' object has no attribute 'User' error

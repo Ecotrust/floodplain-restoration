@@ -1,0 +1,11 @@
+<li>{{ key }}
+  {% if settings.given|length > 0 %}
+    <ul>
+      {% for c_key, c_settings in settings.children.items %}
+        {% with key=c_key settings=c_settings template_name="admin/survey/bifsettings/tree_view_template.html" %}
+          {% include template_name %}
+        {% endwith %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+</li>
