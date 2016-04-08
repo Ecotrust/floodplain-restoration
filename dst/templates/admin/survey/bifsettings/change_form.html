@@ -6,6 +6,28 @@
 <script type="text/javascript">
   bbn_str = {{ bbn_str|safe }};
 </script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Optional theme -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="/static/admin/third_party/jquery-treegrid/js/jquery.treegrid.min.js"></script>
+<script type="text/javascript" src="/static/admin/third_party/jquery-treegrid/js/jquery.treegrid.bootstrap3.js"></script>
+<link rel="stylesheet" href="/static/admin/third_party/jquery-treegrid/css/jquery.treegrid.css">
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('.tree').treegrid();
+  });
+</script>
+
 {{ media }}
 {% endblock %}
 
@@ -44,11 +66,13 @@
 </ul>
 
 <h3>BBN Settings:</h3>
-<ul>
+<table class="table tree">
+  <tbody>
 {% for key, settings in bbn_settings.items %}
   {% include "admin/survey/bifsettings/tree_view_template.html" %}
 {% endfor %}
-</ul>
+  </tbody>
+</table>
 
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
