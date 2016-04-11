@@ -152,6 +152,38 @@ class QuestionCategorySet(viewsets.ReadOnlyModelViewSet):
     queryset = QuestionCategory.objects.all().order_by('context__order', 'order')
     serializer_class = serializers.QuestionCategorySerializer
 
+def build_cpt_dict(cpt, given, variables):
+    cpt_list = []
+    cond_dict = {}
+    cond_list = []  #this will retain the order
+
+    for cond in cpt:
+        cond_value = cpt[cond]
+        cond_id = ""
+        for idx, val in enumerate(cond[0:len(cond)-1]):
+            cond_id += str(given[idx][1].index(val))
+        if cond_id not in cond_dict.keys():
+            cond_dict[cond_id] = {
+                'condition': [x for x in cond[0:len(cond)-1]],
+                'values':[],
+                'val_dict': {},
+                'cond_id': cond_id
+            }
+            cond_list.append(cond_id)
+        cond_dict[cond_id]['val_dict'][str(variables.index(cond[len(cond)-1]))] = cond_value
+    for cond_id_key in cond_dict.keys():
+        cond_id = cond_dict[cond_id_key]
+        for idx in range(0,len(cond_id['val_dict'])):
+            cond_id['values'].append(cond_id['val_dict'][str(idx)])
+        cond_id.pop("val_dict",None)
+
+    cond_list.sort()
+    for cond_id in cond_list:
+        cpt_list.append(cond_dict[cond_id])
+
+    return cpt_list
+
+
 # create dict where keys are tiers, and each tier has keys of nodes
 def sort_bbn_nodes():
     from bbn import BeliefNetwork
@@ -163,6 +195,7 @@ def sort_bbn_nodes():
         'cpt': {},
         'parents': [],
         'given': [],
+        'variables': [],
         'tier': None
     }
 
@@ -174,7 +207,13 @@ def sort_bbn_nodes():
         node = BBN.probabilities[node_idx]
         if not node_idx in node_dict.keys():
             node_dict[node_idx] = deepcopy(blank_node)
-        node_dict[node_idx]['cpt'] = node['cpt']
+        node_dict[node_idx]['variables'] = BBN.variables[node_idx]
+        if node['given']:
+            node_givens = [(x, BBN.variables[x]) for x in node['given']]
+        else:
+            node_givens = []
+        node_dict[node_idx]['cpt'] = build_cpt_dict(node['cpt'], node_givens, BBN.variables[node_idx])
+
         if node['given']:
             node_dict[node_idx]['given'] = node['given']
 
@@ -206,20 +245,16 @@ def sort_bbn_nodes():
 
     return sorted_dict
 
-def clean_node_cpt_keys(node):
-    clean_cpt = {}
-    for key in node['cpt'].keys():
-        clean_cpt[str(key)] = node['cpt'][key]
-
-    return clean_cpt
-
 # connect nodes with children in a single, recursive dict
 def get_node_dict(tier, node_idx, nodes):
     node = nodes[tier][node_idx]
-    node['children'] = {}
-    node['cpt'] = clean_node_cpt_keys(node)
-    for input_node in node['given']:
-        node['children'][input_node] = get_node_dict(str(int(tier)+1), input_node, nodes)
+    node['children'] = []
+    node['cpt'] = node['cpt']
+    for idx, input_node in enumerate(node['given']):
+        node['children'].append({
+            "name": input_node,
+            "dict": get_node_dict(str(int(tier)+1), input_node, nodes)
+        })
 
     return node
 
@@ -227,9 +262,12 @@ def get_node_dict(tier, node_idx, nodes):
 def get_bbn_nodes():
     top_tier = '0'
     sorted_nodes = sort_bbn_nodes()
-    bbn_nodes = {}
+    bbn_nodes = []
     for node in sorted_nodes[top_tier]:
-        bbn_nodes[node] = get_node_dict(top_tier, node, sorted_nodes)
+        bbn_nodes.append({
+            'name': node,
+            'dict': get_node_dict(top_tier, node, sorted_nodes)
+        })
 
     return bbn_nodes
 

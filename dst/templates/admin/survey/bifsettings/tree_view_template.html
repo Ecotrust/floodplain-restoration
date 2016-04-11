@@ -1,9 +1,32 @@
-<tr class="treegrid-{{key}} {% if settings.parents|length > 0 %}treegrid-parent-{{settings.parents.0}}{% endif %}">
-  <td>{{ key }}</td>
+<tr class="treegrid-{{settings.name}} {% if settings.dict.parents|length > 0 %}treegrid-parent-{{settings.dict.parents.0}}{% endif %}">
+  <td>{{ settings.name }}</td>
+  <td>
+    <table>
+        <tr>
+      <tbody>
+          {% for c_settings in settings.dict.children %}
+          <th>{{ c_settings.name }}</th>
+          {% endfor %}
+
+        </tr>
+        {% for condprob in settings.dict.cpt %}
+        <tr id="{{condprob}}">
+          {% for condition in condprob.condition %}
+          <td>"{{ condition }}"</td>
+          {% endfor %}
+          <td>{{settings.dict.variables.1}}</td>
+          <td><input id="{{settings.name}}-{{condprob.cond_id}}" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="{{condprob.values.0}}"</td>
+          <td><span id="{{settings.name}}-{{condprob.cond_id}}-CurrentSliderValLabel"><span id="{{settings.name}}-{{condprob.cond_id}}-SliderVal">{{condprob.values.0}}</span></span></td>
+          <td>{{settings.dict.variables.0}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </td>
 </tr>
-  {% if settings.given|length > 0 %}
-      {% for c_key, c_settings in settings.children.items %}
-        {% with key=c_key settings=c_settings template_name="admin/survey/bifsettings/tree_view_template.html" %}
+  {% if settings.dict.given|length > 0 %}
+      {% for c_settings in settings.dict.children %}
+        {% with settings=c_settings template_name="admin/survey/bifsettings/tree_view_template.html" %}
           {% include template_name %}
         {% endwith %}
       {% endfor %}

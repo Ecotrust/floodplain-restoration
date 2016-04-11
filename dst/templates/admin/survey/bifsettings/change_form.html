@@ -3,9 +3,7 @@
 
 {% block extrahead %}{{ block.super }}
 <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
-<script type="text/javascript">
-  bbn_str = {{ bbn_str|safe }};
-</script>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -27,6 +25,19 @@
       $('.tree').treegrid();
   });
 </script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.0.0/bootstrap-slider.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.0.0/css/bootstrap-slider.min.css">
+
+<style>
+  td {
+    padding: 5px;
+  }
+
+  .tooltip {
+    display: none;
+  }
+</style>
 
 {{ media }}
 {% endblock %}
@@ -68,7 +79,7 @@
 <h3>BBN Settings:</h3>
 <table class="table tree">
   <tbody>
-{% for key, settings in bbn_settings.items %}
+{% for settings in bbn_settings %}
   {% include "admin/survey/bifsettings/tree_view_template.html" %}
 {% endfor %}
   </tbody>
@@ -132,4 +143,29 @@
 
 </div>
 </form></div>
+<script type="text/javascript">
+  bbn_str = {{ bbn_str|safe }};
+
+  function recurse_slider_logic(node) {
+    var name = node.name;
+    for (var i=0; i<node.dict.cpt.length; i++) {
+      var cond = node.dict.cpt[i];
+      var cond_id = name + '-' + cond.cond_id;
+        $("#"+cond_id).slider();
+        $("#"+cond_id).on("slide", function(slideEvt) {
+          var id_template = slideEvt.target.id;
+          $("#"+id_template+"-SliderVal").text(slideEvt.value);
+        });
+    }
+    for (var i = 0; i<node.dict.children.length; i++){
+      recurse_slider_logic(node.dict.children[i]);
+    }
+  }
+
+  for (var i=0; i<bbn_str.length; i++){
+    var node = bbn_str[i];
+    recurse_slider_logic(node);
+  }
+
+</script>
 {% endblock %}
