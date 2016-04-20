@@ -289,7 +289,6 @@ def admin_change_form(self, request, object_id, form_url='', extra_context={}):
     from django.contrib.admin.options import ModelAdmin
     import json
     self.change_form_template = "admin/survey/bifsettings/change_form.html"
-    # import ipdb; ipdb.set_trace()
     extra_context['bbn_str'] = json.dumps(get_bbn_nodes())
     extra_context['bbn_settings'] = get_bbn_nodes()
     return ModelAdmin.change_view(self, request, object_id, form_url, extra_context)

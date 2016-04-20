@@ -63,8 +63,8 @@
 <h1>Custom Change Form</h1>
 <p>TODO:</p>
 <ul>
-  <li>Create view to grab all nodes in BBN hierarchy</li>
-  <li>Create slider in template for each node</li>
+  <li><s>Create view to grab all nodes in BBN hierarchy</s></li>
+  <li><s>Create slider in template for each node</s></li>
   <li>Create submit button to send back slider form</li>
   <li>Create view to convert sliders into Bif file content</li>
   <li>Either:
@@ -76,14 +76,7 @@
   <li>Trigger (somehow) refiguring scores according to new BIF</li>
 </ul>
 
-<h3>BBN Settings:</h3>
-<table class="table tree">
-  <tbody>
-{% for settings in bbn_settings %}
-  {% include "admin/survey/bifsettings/tree_view_template.html" %}
-{% endfor %}
-  </tbody>
-</table>
+
 
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
@@ -111,8 +104,11 @@
 {% endif %}
 
 {% block field_sets %}
+<h3>BBN Settings:</h3>
+<div style="display:block">
+
 {% for fieldset in adminform %}
-  {% include "admin/includes/fieldset.html" %}
+  {% include "admin/survey/bifsettings/bif_fieldset.html" %}
 {% endfor %}
 {% endblock %}
 

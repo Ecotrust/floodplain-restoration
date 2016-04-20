@@ -15,7 +15,7 @@
           <td>"{{ condition }}"</td>
           {% endfor %}
           <td>{{settings.dict.variables.1}}</td>
-          <td><input id="{{settings.name}}-{{condprob.cond_id}}" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="{{condprob.values.0}}"</td>
+          <td><input id="{{settings.name}}-{{condprob.cond_id}}" name="{{settings.name}}-{{condprob.cond_id}}" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="{{condprob.values.0}}"</td>
           <td><span id="{{settings.name}}-{{condprob.cond_id}}-CurrentSliderValLabel"><span id="{{settings.name}}-{{condprob.cond_id}}-SliderVal">{{condprob.values.0}}</span></span></td>
           <td>{{settings.dict.variables.0}}</td>
         </tr>
