@@ -289,8 +289,8 @@ def admin_change_form(self, request, object_id, form_url='', extra_context={}):
     from django.contrib.admin.options import ModelAdmin
     import json
     self.change_form_template = "admin/survey/bifsettings/change_form.html"
-    extra_context['bbn_str'] = json.dumps(get_bbn_nodes())
     extra_context['bbn_settings'] = get_bbn_nodes()
+    extra_context['bbn_str'] = json.dumps(extra_context['bbn_settings'])
     return ModelAdmin.change_view(self, request, object_id, form_url, extra_context)
 # admin_change_form = staff_member_required(admin_change_form)
 ### Uncommenting this causes a 'ModelAdmin' object has no attribute 'User' error
@@ -301,3 +301,25 @@ def admin_add_form(self, request, form_url='', extra_context=None):
     self.add_form_template = "admin/survey/bifsettings/change_form.html"
     return ModelAdmin.add_view(self, request, form_url, extra_context)
 # admin_add_form = staff_member_required(admin_add_form)
+
+def update_bbn_bif(post):
+    from bbn import BeliefNetwork
+    from dst import settings as dst_settings
+    BBN = BeliefNetwork.from_bif(dst_settings.BBN_BIF)
+
+    for field_key in post.keys():
+        if '-' in field_key:
+            node_key, condition_code = field_key.split('-')
+            if node_key in BBN.probabilities.keys():
+                field_val = post[field_key]
+                tuple_key = ()
+                if len(condition_code) > 0:
+                    for idx, given_key in enumerate(BBN.probabilities[node_key]['given']):
+                        tuple_key += (BBN.variables[given_key][int(condition_code[idx])],)
+                # assumes all variables are binary!!!
+                tuple_key_0 = tuple_key + (BBN.variables[node_key][0],)
+                tuple_key_1 = tuple_key + (BBN.variables[node_key][1],)
+                BBN.probabilities[node_key]['cpt'][tuple_key_0] = float(field_val)
+                ## TODO: Format to two digits after the decimal!!!
+                BBN.probabilities[node_key]['cpt'][tuple_key_1] = 1-float(field_val)
+    BeliefNetwork.to_bif(BBN, dst_settings.BBN_BIF)

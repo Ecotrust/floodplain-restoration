@@ -51,4 +51,10 @@ class BifAdmin(admin.ModelAdmin):
 
         return my_urls + urls
 
+    def save_model(self, request, obj, form, change):
+        from survey.views import update_bbn_bif
+        ## TODO: validate first!
+        update_bbn_bif(request.POST)
+        obj.save()
+
 admin.site.register(BifSettings, BifAdmin)
