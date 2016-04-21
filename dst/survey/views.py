@@ -319,7 +319,6 @@ def update_bbn_bif(post):
                 # assumes all variables are binary!!!
                 tuple_key_0 = tuple_key + (BBN.variables[node_key][0],)
                 tuple_key_1 = tuple_key + (BBN.variables[node_key][1],)
-                BBN.probabilities[node_key]['cpt'][tuple_key_0] = float(field_val)
-                ## TODO: Format to two digits after the decimal!!!
-                BBN.probabilities[node_key]['cpt'][tuple_key_1] = 1-float(field_val)
+                BBN.probabilities[node_key]['cpt'][tuple_key_0] = round(float(field_val), 2)
+                BBN.probabilities[node_key]['cpt'][tuple_key_1] = round(1-float(field_val), 2)
     BeliefNetwork.to_bif(BBN, dst_settings.BBN_BIF)
