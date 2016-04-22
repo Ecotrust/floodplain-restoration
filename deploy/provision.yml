@@ -78,13 +78,16 @@
     - name: set download folder perms
       command: "sudo chmod 777 /usr/local/apps/floodplain-restoration/dst/dst/static/download"
 
+    - name: set bif permissions
+      command: "sudo chmod 666 /usr/local/apps/floodplain-restoration/dst/dst/data/bbn.bif"
+
     - name: settings local
       tags:
         - deploy
       template: src=templates/settings_local.py dest={{ project_path }}/{{ app_name }}/settings_local.py owner={{ remote_user }} group={{ remote_user }} mode=0755
 
-    - name: fix annoying ubuntu pip bug
-      command: "pip3.4 install \"requests>=2.3,<2.4\""
+    # - name: fix annoying ubuntu pip bug
+      # command: "pip3.4 install \"requests>=2.3,<2.4\""
 
     - name: Install global python *3* requirements
       pip: state=latest requirements={{ base_path }}/requirements.txt executable=pip3
