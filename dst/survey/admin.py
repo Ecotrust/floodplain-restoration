@@ -1,5 +1,5 @@
 from django.contrib.gis import admin
-from survey.models import GravelSite, Pit, InputNode, Question, Context, QuestionCategory, BifSettings
+from survey.models import GravelSite, Pit, InputNode, Question, Context, QuestionCategory, BifSettings, PitScoreWeight
 
 admin.site.register(GravelSite, admin.GeoModelAdmin)
 admin.site.register(Pit, admin.GeoModelAdmin)
@@ -26,10 +26,19 @@ admin.site.register(Context, ContextAdmin)
 admin.site.register(QuestionCategory, CategoryAdmin)
 admin.site.register(Question, QuestionAdmin)
 
+class PitScoreAdmin(admin.ModelAdmin):
+    list_display = ('score', 'value')
+    list_filter = ['score','value']
+    ordering = ['score', 'value']
+
+admin.site.register(PitScoreWeight, PitScoreAdmin)
+
 class BifAdmin(admin.ModelAdmin):
 
     # def changelist_view(self, request):
     #     return survey_views.edit_bbn(self, request)
+
+    list_display = ('notes', 'user')
 
     def change_view(self, request, bifid):
         from survey import views as survey_views

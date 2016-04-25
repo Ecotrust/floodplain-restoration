@@ -81,6 +81,19 @@ class GravelSite(BaseModel):
         return dict(zip(nodes_of_interest, vals))
 
 
+class PitScoreWeight(models.Model):
+    PIT_FIELD_CHOICES = (
+        ('contamination', 'Contamination'),
+        ('adjacent_river_depth', 'Adj. River Depth'),
+        ('slope_dist', 'Slope Distance'),
+        ('pit_levies', 'Pit Levies'),
+        ('bank_slope', 'Bank Slope'),
+        ('surface_area', 'Surface Area'),
+    )
+    score = models.CharField(primary_key=True, max_length=30, choices=PIT_FIELD_CHOICES)
+    value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+
+
 class Pit(BaseModel):
     name = models.CharField(max_length=80)
     site = models.ForeignKey(GravelSite)
@@ -115,15 +128,18 @@ class Pit(BaseModel):
                  'slope_dist', 'pit_levies', 'bank_slope',
                  'surface_area']
 
+        scoreMap = {}
+        for score in attrs:
+            scoreMap[score] = PitScoreWeight.objects.get(score=score).value
 
-        scoreMap = {
-        'contamination': 0.8,
-        'adjacent_river_depth': 0.33,
-        'slope_dist': 0.42,
-        'pit_levies': 0.03,
-        'bank_slope': 0.05,
-        'surface_area': 0.83
-        }
+        # scoreMap = {
+        # 'contamination': 0.8,
+        # 'adjacent_river_depth': 0.33,
+        # 'slope_dist': 0.42,
+        # 'pit_levies': 0.03,
+        # 'bank_slope': 0.05,
+        # 'surface_area': 0.83
+        # }
 
         total = 1
         for attr in attrs:
