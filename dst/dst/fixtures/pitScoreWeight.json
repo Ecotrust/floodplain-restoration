@@ -37,7 +37,7 @@
 {
   "model": "survey.pitscoreweight",
   "fields": {
-    "value": 0.0
+    "value": 0.83
   },
   "pk": "surface_area"
 }
