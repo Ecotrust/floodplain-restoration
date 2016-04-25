@@ -1,0 +1,44 @@
+[
+{
+  "model": "survey.pitscoreweight",
+  "fields": {
+    "value": 0.33
+  },
+  "pk": "adjacent_river_depth"
+},
+{
+  "model": "survey.pitscoreweight",
+  "fields": {
+    "value": 0.05
+  },
+  "pk": "bank_slope"
+},
+{
+  "model": "survey.pitscoreweight",
+  "fields": {
+    "value": 0.8
+  },
+  "pk": "contamination"
+},
+{
+  "model": "survey.pitscoreweight",
+  "fields": {
+    "value": 0.03
+  },
+  "pk": "pit_levies"
+},
+{
+  "model": "survey.pitscoreweight",
+  "fields": {
+    "value": 0.42
+  },
+  "pk": "slope_dist"
+},
+{
+  "model": "survey.pitscoreweight",
+  "fields": {
+    "value": 0.0
+  },
+  "pk": "surface_area"
+}
+]
