@@ -72,3 +72,8 @@ class QuestionCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.QuestionCategory
+
+class PitScoreWeightSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.PitScoreWeight

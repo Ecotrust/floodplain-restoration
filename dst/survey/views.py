@@ -5,7 +5,7 @@ from rest_framework.decorators import link
 from rest_framework.response import Response
 from django.http import HttpResponse, HttpResponseForbidden
 
-from survey.models import GravelSite, Pit, InputNode, Question, Context, QuestionCategory
+from survey.models import GravelSite, Pit, InputNode, Question, Context, QuestionCategory, PitScoreWeight
 from survey import serializers
 from survey.permissions import IsOwnerOrShared
 from flatblocks.models import FlatBlock
@@ -152,6 +152,13 @@ class QuestionCategorySet(viewsets.ReadOnlyModelViewSet):
     queryset = QuestionCategory.objects.all().order_by('context__order', 'order')
     serializer_class = serializers.QuestionCategorySerializer
 
+class PitScoreSet(viewsets.ReadOnlyModelViewSet):
+    """PitScoreWeight (Read only)"""
+    model = PitScoreWeight
+    filter_fields = ('score', 'value', 'questionText')
+    queryset = PitScoreWeight.objects.all().order_by('score','questionText')
+    serializer_class = serializers.PitScoreWeightSerializer
+
 def build_cpt_dict(cpt, given, variables):
     cpt_list = []
     cond_dict = {}
@@ -289,7 +296,14 @@ def admin_change_form(self, request, object_id, form_url='', extra_context={}):
     from django.contrib.admin.options import ModelAdmin
     import json
     self.change_form_template = "admin/survey/bifsettings/change_form.html"
-    extra_context['bbn_settings'] = get_bbn_nodes()
+    from survey.models import BifSettings
+    bif = BifSettings.objects.get(id=object_id)
+    if len(bif.bif) == 0:
+        extra_context['bbn_settings'] = get_bbn_nodes()
+        bif.bif = json.dumps(extra_context['bbn_settings'])
+        bif.save()
+    else:
+        extra_context['bbn_settings'] = json.loads(bif.bif)
     extra_context['bbn_str'] = json.dumps(extra_context['bbn_settings'])
     return ModelAdmin.change_view(self, request, object_id, form_url, extra_context)
 # admin_change_form = staff_member_required(admin_change_form)

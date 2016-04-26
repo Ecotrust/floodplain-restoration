@@ -62,7 +62,7 @@ angular
         templateUrl: 'views/pitedit.html',
         controller: 'PiteditCtrl'
       })
-      
+
       /*
        * Survey
        */
@@ -103,12 +103,22 @@ angular
         templateUrl: '404.html'
       });
   })
-  .run(function ($rootScope, ContentFactory) {
+  .run(function ($rootScope, ContentFactory, QuestionFactory) {
 
     $rootScope.content = ContentFactory.initialContent();
     ContentFactory
       .allContent()
       .then( function() {
         $rootScope.content = ContentFactory.content;
+      });
+
+    $rootScope.pitQuestions = QuestionFactory.initialPitQuestions();
+    QuestionFactory
+      .getPitQuestions()
+      .then( function() {
+        var keys = Object.keys(QuestionFactory.pitQuestions);
+        for (var i = 0; i < keys.length; i++) {
+          $rootScope.pitQuestions[keys[i]] = QuestionFactory.pitQuestions[keys[i]];
+        }
       });
   });

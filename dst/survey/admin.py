@@ -27,9 +27,9 @@ admin.site.register(QuestionCategory, CategoryAdmin)
 admin.site.register(Question, QuestionAdmin)
 
 class PitScoreAdmin(admin.ModelAdmin):
-    list_display = ('score', 'value')
-    list_filter = ['score','value']
-    ordering = ['score', 'value']
+    list_display = ('score', 'value','questionText')
+    list_filter = ['score','value','questionText']
+    ordering = ['score', 'value','questionText']
 
 admin.site.register(PitScoreWeight, PitScoreAdmin)
 

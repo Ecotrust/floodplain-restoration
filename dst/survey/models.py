@@ -83,15 +83,32 @@ class GravelSite(BaseModel):
 
 class PitScoreWeight(models.Model):
     PIT_FIELD_CHOICES = (
+        ('name', 'Name'),
         ('contamination', 'Contamination'),
         ('adjacent_river_depth', 'Adj. River Depth'),
         ('slope_dist', 'Slope Distance'),
-        ('pit_levies', 'Pit Levies'),
+        ('pit_levies', 'Pit Levees'),
         ('bank_slope', 'Bank Slope'),
         ('surface_area', 'Surface Area'),
+        ('notes', 'Notes'),
+    )
+    PIT_TYPE_CHOICES = (
+        ('text', 'Text'),
+        ('select', 'Select'),
+        ('textarea', 'Text Area'),
     )
     score = models.CharField(primary_key=True, max_length=30, choices=PIT_FIELD_CHOICES)
     value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    questionText = models.CharField(max_length=255, blank=True, null=True, default='')
+    visible = models.BooleanField(default=True)
+    order = models.IntegerField(default=0)
+    type = models.CharField(max_length=20, choices=PIT_TYPE_CHOICES, default='select')
+    info = models.CharField(max_length=255, blank=True, null=True, default=None)
+
+class PitQuestionAnswer(models.Model):
+    label = models.CharField(max_length=200)
+    value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    pitQuestion = models.ForeignKey(PitScoreWeight)
 
 
 class Pit(BaseModel):

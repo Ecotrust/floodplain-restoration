@@ -12,7 +12,7 @@ if (false) { var map; }
  * Controller of the uiApp
  */
 angular.module('uiApp')
-  .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, $location, $window, $sce, ContentFactory, SiteFactory) {
+  .controller('PiteditCtrl', function ($scope, $routeParams, $rootScope, $location, $window, $sce, ContentFactory, SiteFactory, QuestionFactory) {
 
     if (!$rootScope.userName) {
       $window.alert('You are not logged in. You will now be redirected to the login page.');
@@ -22,6 +22,11 @@ angular.module('uiApp')
     map.showMap(true);
 
     $scope.pitEditDirections = $sce.trustAsHtml(ContentFactory.get('pitEditDirections'));
+    QuestionFactory
+      .getPitQuestions()
+      .then( function() {
+        $scope.pitQuestions = QuestionFactory.pitQuestions;
+      });
 
     var activeSiteId = parseInt($routeParams.siteId, 10);
     $rootScope.activeSiteId = activeSiteId;
@@ -38,6 +43,7 @@ angular.module('uiApp')
       'surface_area': 0.5
     };
 
+
     $scope.pitFormObj = {
       'form': [
         {
@@ -49,6 +55,7 @@ angular.module('uiApp')
           'answers': []
         },
         {
+          // 'question': $scope.pitQuestions?$scope.pitQuestions.contamination.question:'Is hazardous waste present?',
           'question': 'Is hazardous waste present?',
           'visible': true,
           'id': 'contamination',
@@ -214,8 +221,39 @@ angular.module('uiApp')
       ]
     };
 
+
+    // var pitQuestionList = [];
+    // var keys = Object.keys($rootScope.pitQuestions);
+    // for (var i = 0; i < keys.length; i++){
+    //   var key = keys[i];
+    //   pitQuestionList.push($rootScope.pitQuestions[key]);
+    // }
+    //
+    // pitQuestionList.sort(function(a,b) {
+    //   return a.order - b.order;
+    // });
+
+    // $scope.pitFormObj = {
+    //   'form': pitQuestionList
+    // };
+
+    // $scope.pitFormObj = {
+    //   'form': [
+    //     'name',
+    //     'contamination',
+    //     'adjacent_river_depth',
+    //     'slope_dist',
+    //     'pit_levies',
+    //     'bank_slope',
+    //     'surface_area'
+    //   ]
+    // };
+
+
+
     if ($routeParams.pitId === undefined) {
       $scope.pitEditDirections = $sce.trustAsHtml(ContentFactory.get('pitCreateDirections'));
+
       isNewPit = true;
       blankPit = {
         id: '',
