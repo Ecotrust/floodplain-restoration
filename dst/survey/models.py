@@ -98,7 +98,7 @@ class PitScoreWeight(models.Model):
         ('textarea', 'Text Area'),
     )
     score = models.CharField(primary_key=True, max_length=30, choices=PIT_FIELD_CHOICES)
-    value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+    value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)], blank=True, null=True, default=None)
     questionText = models.CharField(max_length=255, blank=True, null=True, default='')
     visible = models.BooleanField(default=True)
     order = models.IntegerField(default=0)

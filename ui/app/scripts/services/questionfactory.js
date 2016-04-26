@@ -226,7 +226,7 @@ angular.module('uiApp')
 
         promise.success(function(data) {
           var ret_val = {};
-          for (var i=0; i<data.len; i++){
+          for (var i=0; i<data.length; i++){
             ret_val[data[i].score] = data[i]
           }
           service.pitQuestions = ret_val;
