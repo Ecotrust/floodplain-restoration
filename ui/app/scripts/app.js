@@ -112,7 +112,20 @@ angular
         $rootScope.content = ContentFactory.content;
       });
 
+    var setPitQuestionList = function() {
+      $rootScope.pitQuestionList = []
+      var keys = Object.keys($rootScope.pitQuestions);
+      for (var i = 0; i < keys.length; i++) {
+        $rootScope.pitQuestionList.push($rootScope.pitQuestions[keys[i]]);
+        $rootScope.pitQuestionList.sort(function(a,b) {
+          return a.order - b.order;
+        });
+      }
+    };
+
     $rootScope.pitQuestions = QuestionFactory.initialPitQuestions();
+    setPitQuestionList();
+
     QuestionFactory
       .getPitQuestions()
       .then( function() {
@@ -120,5 +133,6 @@ angular
         for (var i = 0; i < keys.length; i++) {
           $rootScope.pitQuestions[keys[i]] = QuestionFactory.pitQuestions[keys[i]];
         }
+        setPitQuestionList();
       });
   });

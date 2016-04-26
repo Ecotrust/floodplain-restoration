@@ -43,5 +43,39 @@
       </form>
 
     </div>
+
+    <div>
+      <form novalidate name="pitForm2" class="form-horizontal" role="form">
+          <div class="property-box row">
+              <div class="form-group col-sm-12">
+                <div ng-repeat="question in pitQuestionList" ng-show="question.visible">
+                    <!-- <p ng-bind='question.questionText'>thing.</p> -->
+                    <div title="{{question.info}}" >
+                      <label for="question.score" class="pit-question-label" ng-bind-html="question.questionText">
+                      </label>
+                      <span ng-if="question.info!=null&&question.info!=''" class="glyphicon glyphicon-info-sign pit-question-info" aria-hidden="true" ng-click="$event.stopPropagation()"></span>
+
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-11 col-sm-offset-1">
+                          <input type="text" class="form-control" id="{{question.score}}" ng-model="pit.properties[question.score]" required ng-if="question.type=='text'">
+                          <select class="form-control" id="{{question.score}}" ng-model="pit.properties[question.score]" required ng-if="question.type=='select'">
+                              <option ng-repeat="opt in question.answers" value="{{opt.value}}">  {{opt.label}}
+                              </option>
+                          </select>
+                          <textarea type="text" class="form-control" id="{{question.score}}" ng-model="pit.properties[question.score]" ng-if="question.type=='textarea'"></textarea>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          <div class="pull-left bottom-buttons">
+            <a class="btn btn-default" href="#/site/{{ site.id }}">Cancel</a>
+            <button class="btn btn-default" ng-click="save()">Save</button>
+          </div>
+      </form>
+
+    </div>
+
   </div>
 </div>
