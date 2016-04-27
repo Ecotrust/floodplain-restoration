@@ -1,373 +1,381 @@
 [
 {
-  "model": "survey.pitscoreweight",
   "pk": "adjacent_river_depth",
   "fields": {
-    "visible": true,
-    "value": 0.33,
+    "disabled": false,
     "info": "The thalweg of the river is the line of the lowest points within the channel, spanning the length of the river.",
-    "questionText": "Is the pit more than twice as deep as the adjacent river <u><i>thalweg</i></u>?",
+    "visible": true,
+    "type": "select",
     "order": 30,
-    "type": "select"
-  }
+    "questionText": "Is the pit more than twice as deep as the adjacent river <u><i>thalweg</i></u>?",
+    "value": 0.33
+  },
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "pk": "bank_slope",
   "fields": {
-    "visible": true,
-    "value": 0.05,
+    "disabled": false,
     "info": "",
-    "questionText": "What is the distance from the river to the pit edge?",
+    "visible": true,
+    "type": "select",
     "order": 70,
-    "type": "select"
-  }
+    "questionText": "What is the distance from the river to the pit edge?",
+    "value": 0.05
+  },
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "pk": "contamination",
   "fields": {
-    "visible": true,
-    "value": 0.8,
+    "disabled": false,
     "info": "",
-    "questionText": "Is hazardous waste present?",
+    "visible": true,
+    "type": "select",
     "order": 10,
-    "type": "select"
-  }
+    "questionText": "Is hazardous waste present?",
+    "value": 0.8
+  },
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "pk": "name",
   "fields": {
-    "visible": true,
-    "value": null,
+    "disabled": false,
     "info": "",
-    "questionText": "Name",
+    "visible": true,
+    "type": "text",
     "order": 0,
-    "type": "text"
-  }
+    "questionText": "Name",
+    "value": null
+  },
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "pk": "notes",
   "fields": {
-    "visible": true,
-    "value": null,
+    "disabled": false,
     "info": "",
-    "questionText": "Notes",
+    "visible": true,
+    "type": "textarea",
     "order": 110,
-    "type": "textarea"
-  }
+    "questionText": "Notes",
+    "value": null
+  },
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "pk": "pit_levies",
   "fields": {
-    "visible": true,
-    "value": 0.03,
+    "disabled": false,
     "info": "",
-    "questionText": "Are there any pit-adjacent levees?",
+    "visible": true,
+    "type": "select",
     "order": 50,
-    "type": "select"
-  }
+    "questionText": "Are there any pit-adjacent levees?",
+    "value": 0.03
+  },
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "pk": "slope_dist",
   "fields": {
-    "visible": true,
-    "value": 0.42,
+    "disabled": false,
     "info": "",
-    "questionText": "What is the distance from the river to the pit edge?",
+    "visible": true,
+    "type": "select",
     "order": 40,
-    "type": "select"
-  }
+    "questionText": "What is the distance from the river to the pit edge?",
+    "value": 0.42
+  },
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "pk": "surface_area",
   "fields": {
-    "visible": false,
-    "value": 0.83,
-    "info": "",
-    "questionText": "<Calculated Automatically>",
+    "disabled": true,
+    "info": "This value is calculated automatically based on the size of the polygon you draw. The size directly impacts the restorability of this pit.",
+    "visible": true,
+    "type": "select",
     "order": 90,
-    "type": "select"
-  }
+    "questionText": "Surface Area",
+    "value": 0.83
+  },
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 1,
   "fields": {
     "pitQuestion": "contamination",
+    "order": 0,
     "label": "I don't know.",
-    "default": true,
     "value": 0.75,
-    "order": 0
-  }
+    "default": true
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 2,
   "fields": {
     "pitQuestion": "contamination",
+    "order": 10,
     "label": "No, definitely not.",
-    "default": false,
     "value": 1.0,
-    "order": 10
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 3,
   "fields": {
     "pitQuestion": "contamination",
+    "order": 20,
     "label": "No, I don't think so.",
-    "default": false,
     "value": 0.8,
-    "order": 20
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 4,
   "fields": {
     "pitQuestion": "contamination",
+    "order": 30,
     "label": "Yes, and the cost and effort to remediate it is acceptable.",
-    "default": false,
     "value": 0.7,
-    "order": 30
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 5,
   "fields": {
     "pitQuestion": "contamination",
+    "order": 40,
     "label": "Yes, but I do not know if it can be remediated.",
-    "default": false,
     "value": 0.5,
-    "order": 40
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 6,
   "fields": {
     "pitQuestion": "contamination",
+    "order": 50,
     "label": "Yes, and it will be expensive and/or very difficult to remediate.",
-    "default": false,
     "value": 0.0,
-    "order": 50
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 7,
   "fields": {
     "pitQuestion": "adjacent_river_depth",
+    "order": 0,
     "label": "I don't know.",
-    "default": true,
     "value": 0.75,
-    "order": 0
-  }
+    "default": true
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 8,
   "fields": {
     "pitQuestion": "adjacent_river_depth",
+    "order": 10,
     "label": "No",
-    "default": false,
     "value": 1.0,
-    "order": 10
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 9,
   "fields": {
     "pitQuestion": "adjacent_river_depth",
+    "order": 20,
     "label": "They are the same depth",
-    "default": false,
     "value": 0.7,
-    "order": 20
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 10,
   "fields": {
     "pitQuestion": "adjacent_river_depth",
+    "order": 30,
     "label": "Yes",
-    "default": false,
     "value": 0.0,
-    "order": 30
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 11,
   "fields": {
     "pitQuestion": "slope_dist",
+    "order": 0,
     "label": "I don't know.",
-    "default": true,
     "value": 0.9,
-    "order": 0
-  }
+    "default": true
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 12,
   "fields": {
     "pitQuestion": "slope_dist",
+    "order": 10,
     "label": "Short (< 250 ft.)",
-    "default": false,
     "value": 1.0,
-    "order": 10
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 13,
   "fields": {
     "pitQuestion": "slope_dist",
+    "order": 20,
     "label": "Medium (250-1000 ft.)",
-    "default": false,
     "value": 0.6,
-    "order": 20
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 14,
   "fields": {
     "pitQuestion": "slope_dist",
+    "order": 30,
     "label": "Long (> 1000 ft.)",
-    "default": false,
     "value": 0.0,
-    "order": 30
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 15,
   "fields": {
     "pitQuestion": "pit_levies",
+    "order": 0,
     "label": "I don't know.",
-    "default": true,
     "value": 0.85,
-    "order": 0
-  }
+    "default": true
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 16,
   "fields": {
     "pitQuestion": "pit_levies",
+    "order": 10,
     "label": "No.",
-    "default": false,
     "value": 1.0,
-    "order": 10
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 17,
   "fields": {
     "pitQuestion": "pit_levies",
+    "order": 20,
     "label": "Yes.",
-    "default": false,
     "value": 0.0,
-    "order": 20
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 18,
   "fields": {
     "pitQuestion": "bank_slope",
+    "order": 0,
     "label": "I don't know.",
-    "default": true,
     "value": 0.75,
-    "order": 0
-  }
+    "default": true
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 19,
   "fields": {
     "pitQuestion": "bank_slope",
+    "order": 10,
     "label": "The bank slope is very shallow around most of the pit.",
-    "default": false,
     "value": 1.0,
-    "order": 10
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 20,
   "fields": {
     "pitQuestion": "bank_slope",
+    "order": 20,
     "label": "The bank slope is a mix of steep and shallow.",
-    "default": false,
     "value": 0.7,
-    "order": 20
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 21,
   "fields": {
     "pitQuestion": "bank_slope",
+    "order": 30,
     "label": "The banks slope is steep around most of the pit.",
-    "default": false,
     "value": 0.0,
-    "order": 30
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 22,
   "fields": {
     "pitQuestion": "surface_area",
+    "order": 0,
     "label": "< 5 acres",
-    "default": true,
     "value": 1.0,
-    "order": 0
-  }
+    "default": true
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 23,
   "fields": {
     "pitQuestion": "surface_area",
+    "order": 10,
     "label": "5-20 acres",
-    "default": false,
     "value": 0.6,
-    "order": 10
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 24,
   "fields": {
     "pitQuestion": "surface_area",
+    "order": 20,
     "label": "20-30 acres",
-    "default": false,
     "value": 0.3,
-    "order": 20
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 },
 {
-  "model": "survey.pitquestionanswer",
   "pk": 25,
   "fields": {
     "pitQuestion": "surface_area",
+    "order": 30,
     "label": "> 30 acres",
-    "default": false,
     "value": 0.0,
-    "order": 30
-  }
+    "default": false
+  },
+  "model": "survey.pitquestionanswer"
 }
 ]

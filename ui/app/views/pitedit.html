@@ -17,7 +17,6 @@
           <div class="property-box row">
               <div class="form-group col-sm-12">
                 <div ng-repeat="question in pitQuestionList" ng-show="question.visible">
-                    <!-- <p ng-bind='question.questionText'>thing.</p> -->
                     <div title="{{question.info}}" >
                       <label for="question.score" class="pit-question-label" ng-bind-html="question.questionText">
                       </label>
@@ -27,7 +26,7 @@
                     <div class="row">
                       <div class="col-sm-11 col-sm-offset-1">
                           <input type="text" class="form-control" id="{{question.score}}" ng-model="pit.properties[question.score]" required ng-if="question.type=='text'">
-                          <select class="form-control" id="{{question.score}}" ng-model="pit.properties[question.score]" required ng-if="question.type=='select'">
+                          <select ng-disabled="question.disabled" class="form-control" id="{{question.score}}" ng-model="pit.properties[question.score]" required ng-if="question.type=='select'">
                               <option ng-repeat="opt in question.pitquestionanswer_set" value="{{opt.value}}">  {{opt.label}}
                               </option>
                           </select>

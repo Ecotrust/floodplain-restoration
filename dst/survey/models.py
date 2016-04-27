@@ -104,6 +104,7 @@ class PitScoreWeight(models.Model):
     order = models.IntegerField(default=0)
     type = models.CharField(max_length=20, choices=PIT_TYPE_CHOICES, default='select')
     info = models.CharField(max_length=255, blank=True, null=True, default=None)
+    disabled = models.BooleanField(default=False)
 
 class PitQuestionAnswer(models.Model):
     label = models.CharField(max_length=200)

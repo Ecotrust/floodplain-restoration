@@ -30,8 +30,8 @@ class PitAnswerInline(admin.TabularInline):
     model = PitQuestionAnswer
 
 class PitScoreAdmin(admin.ModelAdmin):
-    list_display = ('score', 'visible','value','questionText','order')
-    list_filter = ['visible','score','value','questionText']
+    list_display = ('score', 'visible','disabled','value','questionText','order')
+    list_filter = ['visible','disabled','score','value','questionText']
     ordering = ['order','score', 'value','questionText']
     inlines = [
         PitAnswerInline,

@@ -86,4 +86,4 @@ class PitScoreWeightSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.PitScoreWeight
-        fields = ('score','value','questionText','visible','order','type','info','pitquestionanswer_set')
+        fields = ('score','value','questionText','visible','disabled','order','type','info','pitquestionanswer_set')

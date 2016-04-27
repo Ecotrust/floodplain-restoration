@@ -53,6 +53,7 @@ angular.module('uiApp')
           'id': 'name',
           'order': 0,
           'type': 'text',
+          'disabled': false,
           'answers': []
         },
         'contamination':{
@@ -61,6 +62,7 @@ angular.module('uiApp')
           'id': 'contamination',
           'order': 10,
           'type': 'select',
+          'disabled': false,
           'answers': [
             {
               'label': 'I don\'t know',
@@ -94,6 +96,7 @@ angular.module('uiApp')
           'id': 'adjacent_river_depth',
           'order': 30,
           'type': 'select',
+          'disabled': false,
           'answers': [
             {
               'label': 'I don\'t know',
@@ -120,6 +123,7 @@ angular.module('uiApp')
           'id': 'slope_dist',
           'order': 40,
           'type': 'select',
+          'disabled': false,
           'answers': [
             {
               'label': 'I don\'t know',
@@ -145,6 +149,7 @@ angular.module('uiApp')
           'id': 'pit_levies',
           'order': 50,
           'type': 'select',
+          'disabled': false,
           'answers': [
             {
               'label': 'I don\'t know',
@@ -166,6 +171,7 @@ angular.module('uiApp')
           'id': 'bank_slope',
           'order': 70,
           'type': 'select',
+          'disabled': false,
           'answers': [
             {
               'label': 'I don\'t know',
@@ -191,6 +197,7 @@ angular.module('uiApp')
           'id': 'surface_area',
           'order': 90,
           'type': 'select',
+          'disabled': true,
           'answers': [
             {
               'label': '< 5 acres',
@@ -216,6 +223,7 @@ angular.module('uiApp')
           'id': 'notes',
           'order': 110,
           'type': 'textarea',
+          'disabled': false,
           'answers': []
         }
       }
