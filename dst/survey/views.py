@@ -5,7 +5,7 @@ from rest_framework.decorators import link
 from rest_framework.response import Response
 from django.http import HttpResponse, HttpResponseForbidden
 
-from survey.models import GravelSite, Pit, InputNode, Question, Context, QuestionCategory, PitScoreWeight
+from survey.models import GravelSite, Pit, InputNode, Question, Context, QuestionCategory, PitScoreWeight, BifSettings
 from survey import serializers
 from survey.permissions import IsOwnerOrShared
 from flatblocks.models import FlatBlock
@@ -280,7 +280,6 @@ def get_bbn_nodes():
 
 
 def edit_bbn(self, request, extra_context=None):
-    from survey.models import BifSettings
     from django.contrib.admin.options import ModelAdmin
     # opts = self.model._meta
     # admin_site = self.admin_site
@@ -296,14 +295,14 @@ def admin_change_form(self, request, object_id, form_url='', extra_context={}):
     from django.contrib.admin.options import ModelAdmin
     import json
     self.change_form_template = "admin/survey/bifsettings/change_form.html"
-    from survey.models import BifSettings
     bif = BifSettings.objects.get(id=object_id)
     if len(bif.bif) == 0:
         extra_context['bbn_settings'] = get_bbn_nodes()
         bif.bif = json.dumps(extra_context['bbn_settings'])
         bif.save()
     else:
-        extra_context['bbn_settings'] = json.loads(bif.bif)
+        import ast
+        extra_context["bbn_settings"] = ast.literal_eval(bif.bif)
     extra_context['bbn_str'] = json.dumps(extra_context['bbn_settings'])
     return ModelAdmin.change_view(self, request, object_id, form_url, extra_context)
 # admin_change_form = staff_member_required(admin_change_form)
@@ -316,7 +315,7 @@ def admin_add_form(self, request, form_url='', extra_context=None):
     return ModelAdmin.add_view(self, request, form_url, extra_context)
 # admin_add_form = staff_member_required(admin_add_form)
 
-def update_bbn_bif(post):
+def update_bbn_bif(obj, post):
     from bbn import BeliefNetwork
     from dst import settings as dst_settings
     BBN = BeliefNetwork.from_bif(dst_settings.BBN_BIF)
@@ -336,3 +335,6 @@ def update_bbn_bif(post):
                 BBN.probabilities[node_key]['cpt'][tuple_key_0] = round(float(field_val), 2)
                 BBN.probabilities[node_key]['cpt'][tuple_key_1] = round(1-float(field_val), 2)
     BeliefNetwork.to_bif(BBN, dst_settings.BBN_BIF)
+
+    obj.bif = get_bbn_nodes()
+    obj.save()

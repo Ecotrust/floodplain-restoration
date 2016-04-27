@@ -70,7 +70,7 @@ class BifAdmin(admin.ModelAdmin):
         try:
             obj.save()
             from survey.views import update_bbn_bif
-            update_bbn_bif(request.POST)
+            update_bbn_bif(obj, request.POST)
         except:
             pass
 
