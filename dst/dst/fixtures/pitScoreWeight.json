@@ -1,44 +1,373 @@
 [
 {
-  "model": "survey.pitscoreweight",
   "fields": {
-    "value": 0.33
+    "order": 30,
+    "type": "select",
+    "value": 0.33,
+    "info": "The thalweg of the river is the line of the lowest points within the channel, spanning the length of the river.",
+    "questionText": "Is the pit more than twice as deep as the adjacent river <u><i>thalweg</i></u>?",
+    "visible": true
   },
-  "pk": "adjacent_river_depth"
+  "pk": "adjacent_river_depth",
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "fields": {
-    "value": 0.05
+    "order": 70,
+    "type": "select",
+    "value": 0.05,
+    "info": "",
+    "questionText": "What is the distance from the river to the pit edge?",
+    "visible": true
   },
-  "pk": "bank_slope"
+  "pk": "bank_slope",
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "fields": {
-    "value": 0.8
+    "order": 10,
+    "type": "select",
+    "value": 0.8,
+    "info": "",
+    "questionText": "Is hazardous waste present? Donks.",
+    "visible": true
   },
-  "pk": "contamination"
+  "pk": "contamination",
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "fields": {
-    "value": 0.03
+    "order": 0,
+    "type": "text",
+    "value": null,
+    "info": "",
+    "questionText": "Name",
+    "visible": true
   },
-  "pk": "pit_levies"
+  "pk": "name",
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "fields": {
-    "value": 0.42
+    "order": 110,
+    "type": "textarea",
+    "value": null,
+    "info": "",
+    "questionText": "Notes",
+    "visible": true
   },
-  "pk": "slope_dist"
+  "pk": "notes",
+  "model": "survey.pitscoreweight"
 },
 {
-  "model": "survey.pitscoreweight",
   "fields": {
-    "value": 0.83
+    "order": 50,
+    "type": "select",
+    "value": 0.03,
+    "info": "",
+    "questionText": "Are there any pit-adjacent levees?",
+    "visible": true
   },
-  "pk": "surface_area"
+  "pk": "pit_levies",
+  "model": "survey.pitscoreweight"
+},
+{
+  "fields": {
+    "order": 40,
+    "type": "select",
+    "value": 0.42,
+    "info": "",
+    "questionText": "What is the distance from the river to the pit edge?",
+    "visible": true
+  },
+  "pk": "slope_dist",
+  "model": "survey.pitscoreweight"
+},
+{
+  "fields": {
+    "order": 90,
+    "type": "select",
+    "value": 0.83,
+    "info": "",
+    "questionText": "<Calculated Automatically>",
+    "visible": false
+  },
+  "pk": "surface_area",
+  "model": "survey.pitscoreweight"
+},
+{
+  "fields": {
+    "order": 0,
+    "default": true,
+    "value": 0.75,
+    "label": "I don't know.",
+    "pitQuestion": "contamination"
+  },
+  "pk": 1,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 10,
+    "default": false,
+    "value": 1.0,
+    "label": "No, definitely not.",
+    "pitQuestion": "contamination"
+  },
+  "pk": 2,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 20,
+    "default": false,
+    "value": 0.8,
+    "label": "No, I don't think so.",
+    "pitQuestion": "contamination"
+  },
+  "pk": 3,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 30,
+    "default": false,
+    "value": 0.7,
+    "label": "Yes, and the cost and effort to remediate it is acceptable.",
+    "pitQuestion": "contamination"
+  },
+  "pk": 4,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 40,
+    "default": false,
+    "value": 0.5,
+    "label": "Yes, but I do not know if it can be remediated.",
+    "pitQuestion": "contamination"
+  },
+  "pk": 5,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 50,
+    "default": false,
+    "value": 0.0,
+    "label": "Yes, and it will be expensive and/or very difficult to remediate.",
+    "pitQuestion": "contamination"
+  },
+  "pk": 6,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 0,
+    "default": true,
+    "value": 0.75,
+    "label": "I don't know.",
+    "pitQuestion": "adjacent_river_depth"
+  },
+  "pk": 7,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 10,
+    "default": false,
+    "value": 1.0,
+    "label": "No",
+    "pitQuestion": "adjacent_river_depth"
+  },
+  "pk": 8,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 20,
+    "default": false,
+    "value": 0.7,
+    "label": "They are the same depth",
+    "pitQuestion": "adjacent_river_depth"
+  },
+  "pk": 9,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 30,
+    "default": false,
+    "value": 0.0,
+    "label": "Yes",
+    "pitQuestion": "adjacent_river_depth"
+  },
+  "pk": 10,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 0,
+    "default": true,
+    "value": 0.9,
+    "label": "I don't know.",
+    "pitQuestion": "slope_dist"
+  },
+  "pk": 11,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 10,
+    "default": false,
+    "value": 1.0,
+    "label": "Short (< 250 ft.)",
+    "pitQuestion": "slope_dist"
+  },
+  "pk": 12,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 20,
+    "default": false,
+    "value": 0.6,
+    "label": "Medium (250-1000 ft.)",
+    "pitQuestion": "slope_dist"
+  },
+  "pk": 13,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 30,
+    "default": false,
+    "value": 0.0,
+    "label": "Long (> 1000 ft.)",
+    "pitQuestion": "slope_dist"
+  },
+  "pk": 14,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 0,
+    "default": true,
+    "value": 0.85,
+    "label": "I don't know.",
+    "pitQuestion": "pit_levies"
+  },
+  "pk": 15,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 10,
+    "default": false,
+    "value": 1.0,
+    "label": "No.",
+    "pitQuestion": "pit_levies"
+  },
+  "pk": 16,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 20,
+    "default": false,
+    "value": 0.0,
+    "label": "Yes.",
+    "pitQuestion": "pit_levies"
+  },
+  "pk": 17,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 0,
+    "default": true,
+    "value": 0.75,
+    "label": "I don't know.",
+    "pitQuestion": "bank_slope"
+  },
+  "pk": 18,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 10,
+    "default": false,
+    "value": 1.0,
+    "label": "The bank slope is very shallow around most of the pit.",
+    "pitQuestion": "bank_slope"
+  },
+  "pk": 19,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 20,
+    "default": false,
+    "value": 0.7,
+    "label": "The bank slope is a mix of steep and shallow.",
+    "pitQuestion": "bank_slope"
+  },
+  "pk": 20,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 30,
+    "default": false,
+    "value": 0.0,
+    "label": "The banks slope is steep around most of the pit.",
+    "pitQuestion": "bank_slope"
+  },
+  "pk": 21,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 0,
+    "default": true,
+    "value": 1.0,
+    "label": "< 5 acres",
+    "pitQuestion": "surface_area"
+  },
+  "pk": 22,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 10,
+    "default": false,
+    "value": 0.6,
+    "label": "5-20 acres",
+    "pitQuestion": "surface_area"
+  },
+  "pk": 23,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 20,
+    "default": false,
+    "value": 0.3,
+    "label": "20-30 acres",
+    "pitQuestion": "surface_area"
+  },
+  "pk": 24,
+  "model": "survey.pitquestionanswer"
+},
+{
+  "fields": {
+    "order": 30,
+    "default": false,
+    "value": 0.0,
+    "label": "> 30 acres",
+    "pitQuestion": "surface_area"
+  },
+  "pk": 25,
+  "model": "survey.pitquestionanswer"
 }
 ]

@@ -109,6 +109,8 @@ class PitQuestionAnswer(models.Model):
     label = models.CharField(max_length=200)
     value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
     pitQuestion = models.ForeignKey(PitScoreWeight)
+    default = models.BooleanField(default=False)
+    order = models.IntegerField(default=0)
 
 
 class Pit(BaseModel):

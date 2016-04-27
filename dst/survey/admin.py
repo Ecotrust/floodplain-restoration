@@ -1,5 +1,5 @@
 from django.contrib.gis import admin
-from survey.models import GravelSite, Pit, InputNode, Question, Context, QuestionCategory, BifSettings, PitScoreWeight
+from survey.models import GravelSite, Pit, InputNode, Question, Context, QuestionCategory, BifSettings, PitScoreWeight, PitQuestionAnswer
 
 admin.site.register(GravelSite, admin.GeoModelAdmin)
 admin.site.register(Pit, admin.GeoModelAdmin)
@@ -26,10 +26,16 @@ admin.site.register(Context, ContextAdmin)
 admin.site.register(QuestionCategory, CategoryAdmin)
 admin.site.register(Question, QuestionAdmin)
 
+class PitAnswerInline(admin.TabularInline):
+    model = PitQuestionAnswer
+
 class PitScoreAdmin(admin.ModelAdmin):
     list_display = ('score', 'visible','value','questionText','order')
     list_filter = ['visible','score','value','questionText']
     ordering = ['order','score', 'value','questionText']
+    inlines = [
+        PitAnswerInline,
+    ]
 
 admin.site.register(PitScoreWeight, PitScoreAdmin)
 

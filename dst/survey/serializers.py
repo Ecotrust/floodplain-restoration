@@ -73,7 +73,15 @@ class QuestionCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.QuestionCategory
 
+class PitQuestionAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+            model = models.PitQuestionAnswer
+            fields = ('label', 'value', 'default', 'order')
+
 class PitScoreWeightSerializer(serializers.ModelSerializer):
+
+    pitquestionanswer_set = PitQuestionAnswerSerializer(many=True)
 
     class Meta:
         model = models.PitScoreWeight
+        fields = ('score','value','questionText','visible','order','type','info','pitquestionanswer_set')
