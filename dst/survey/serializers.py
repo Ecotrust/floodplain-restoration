@@ -81,6 +81,9 @@ class PitQuestionAnswerSerializer(serializers.ModelSerializer):
 class PitScoreWeightSerializer(serializers.ModelSerializer):
 
     pitquestionanswer_set = PitQuestionAnswerSerializer(many=True)
+    pitquestionanswer_set.sort(function(a,b) {
+        return a.order - b.order;
+    });
 
     class Meta:
         model = models.PitScoreWeight
