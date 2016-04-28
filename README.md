@@ -16,6 +16,7 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 	sudo apt-get update
 	sudo apt-get upgrade
 	cd /usr/local/apps/floodplain-restoration/
+	cp /usr/local/apps/floodplain-restoration/dst/dst/data/bbn.bif /usr/local/apps/floodplain-restoration/dst/dst/data/bbn_local.bif
 
 ### Local Init
 	sudo apt-get install python-virtualenv
@@ -48,6 +49,8 @@ This has been tested with `Python 3.4` and `Django 1.7`; YMMV when trying other 
 	# follow steps in `Initialize` above
 
 # Process for Creating/Updating the Bayesian Belief Network
+
+## Depricated - now use BifSettings and PitScoreWeights in the tool's admin
 
 The Bayesian Belief Network (BBN) is defined in the [.BIF interchange format](http://www.cs.cmu.edu/~fgcozman/Research/InterchangeFormat/Old/xmlbif02.html). By default, the canonical bbn for the project resides at `dst/data/bbn.bif`. Creating or updating this file goes as follows:
 
