@@ -103,11 +103,11 @@
             <div class="row">
                 <a data-toggle="collapse" data-parent="#pit-accordion-{{pit.id}}" data-target="#pit-collapse-{{pit.id}}" ng-click="toggleCircleIconClass('pit-circle-icon-{{pit.id}}'); selectComponent('pit-accordion-{{pit.id}}');">
                     <div class="col-md-11 report-context-title">
-                        {{pit.properties.name}}
-                        <span class="suitability-rank-pit">{{pit.properties.score.rank}}</span>
+                        {{pit.properties.name.value}}
+                        <span class="suitability-rank-pit">{{pit.properties.score.value.rank}}</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <img class='tachometer-base-pit' src='/app/images/tachometer/tachometer-02.png'/>
-                        <img class='tachometer-needle-pit' src='/app/images/tachometer/tachometer-01a.png' style="transform:rotate({{pit.properties.score.scoreDeg}}deg)"/>
+                        <img class='tachometer-needle-pit' src='/app/images/tachometer/tachometer-01a.png' style="transform:rotate({{pit.properties.score.value.scoreDeg}}deg)"/>
                         <span id="pit-circle-icon-{{pit.id}}" class="glyphicon glyphicon-chevron-down report-toggle-icon"></span>
                     </div>
                 </a>
@@ -119,8 +119,45 @@
                         <div class="col-md-10">
                             <div class="row">
                                 <div class="col-md-11">
-                                    <p class="report-question">Notes</p>
-                                    <p class="report-answer">{{pit.properties.notes}}</p>
+
+                                  <div title="{{pit.properties.contamination.info}}" class="report-question">
+                                    <label ng-bind-html="pit.properties.contamination.question">Is hazardous waste present?</label>
+                                    <span ng-if="pit.properties.contamination.info!=null&&pit.properties.contamination.info!=''" class="glyphicon glyphicon-info-sign pit-question-info" aria-hidden="true" ng-click="$event.stopPropagation()"></span>
+                                  </div>
+                                  <p class="report-answer">{{pit.properties.contamination.label}}</p>
+
+                                  <div title="{{pit.properties.adjacent_river_depth.info}}" class="report-question">
+                                    <label ng-bind-html="pit.properties.adjacent_river_depth.question">Is the pit more than twice as deep as the adjacent river thalweg?</label>
+                                    <span ng-if="pit.properties.adjacent_river_depth.info!=null&&pit.properties.adjacent_river_depth.info!=''" class="glyphicon glyphicon-info-sign pit-question-info" aria-hidden="true" ng-click="$event.stopPropagation()"></span>
+                                  </div>
+                                  <p class="report-answer">{{pit.properties.adjacent_river_depth.label}}</p>
+
+                                  <div title="{{pit.properties.slope_dist.info}}" class="report-question">
+                                    <label ng-bind-html="pit.properties.slope_dist.question">What is the distance from the river to the pit edge?</label>
+                                    <span ng-if="pit.properties.slope_dist.info!=null&&pit.properties.slope_dist.info!=''" class="glyphicon glyphicon-info-sign pit-question-info" aria-hidden="true" ng-click="$event.stopPropagation()"></span>
+                                  </div>
+                                  <p class="report-answer">{{pit.properties.slope_dist.label}}</p>
+
+                                  <div title="{{pit.properties.pit_levies.info}}" class="report-question">
+                                    <label ng-bind-html="pit.properties.pit_levies.question">Are there any pit-adjacent levees?</label>
+                                    <span ng-if="pit.properties.pit_levies.info!=null&&pit.properties.pit_levies.info!=''" class="glyphicon glyphicon-info-sign pit-question-info" aria-hidden="true" ng-click="$event.stopPropagation()"></span>
+                                  </div>
+                                  <p class="report-answer">{{pit.properties.pit_levies.label}}</p>
+
+                                  <div title="{{pit.properties.bank_slope.info}}" class="report-question">
+                                    <label ng-bind-html="pit.properties.bank_slope.question">Are there any pit-adjacent levees?</label>
+                                    <span ng-if="pit.properties.bank_slope.info!=null&&pit.properties.bank_slope.info!=''" class="glyphicon glyphicon-info-sign pit-question-info" aria-hidden="true" ng-click="$event.stopPropagation()"></span>
+                                  </div>
+                                  <p class="report-answer">{{pit.properties.bank_slope.label}}</p>
+
+                                  <div title="{{pit.properties.surface_area.info}}" class="report-question">
+                                    <label ng-bind-html="pit.properties.surface_area.question">Are there any pit-adjacent levees?</label>
+                                    <span ng-if="pit.properties.surface_area.info!=null&&pit.properties.surface_area.info!=''" class="glyphicon glyphicon-info-sign pit-question-info" aria-hidden="true" ng-click="$event.stopPropagation()"></span>
+                                  </div>
+                                  <p class="report-answer">{{pit.properties.surface_area.label}}</p>
+
+                                  <p class="report-question">Notes</p>
+                                  <p class="report-answer">{{pit.properties.notes.value}}</p>
                                 </div>
                             </div>
                         </div>

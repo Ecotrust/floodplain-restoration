@@ -152,7 +152,7 @@ angular.module('uiApp')
 
                 $rootScope.suitability = SiteFactory.suitability;
                 buildReport();
-            
+
               });
           });
       }
@@ -182,7 +182,7 @@ angular.module('uiApp')
         if (!$scope.userIsOwner && !$scope.siteSharedWithPublic) {
           $window.alert('You do not have permission to view this report. Be sure that you are the owner of this site or that the owner has made this report public.');
           if ($rootScope.userName) {
-            $location.path('sites');        
+            $location.path('sites');
           } else {
             $location.path('/');
           }
@@ -213,6 +213,26 @@ angular.module('uiApp')
       return 'transparent';
     }
 
+    function getPitQuestionLabel(question, val) {
+      for (var idx in question.pitquestionanswer_set){
+        var answer = question.pitquestionanswer_set[idx];
+        if (answer.value == val){
+          return {
+            'value': val,
+            'label': answer.label,
+            'question': question.questionText,
+            'info': question.info
+          }
+        }
+      }
+      return {
+        'value': val,
+        'label': null,
+        'question': question.questionText,
+        'info': null
+      };
+    }
+
     function buildReport() {
       for (var key in $scope.suitabilityScoreTypes) {  //TODO: what if keys do not match?
         var score = $rootScope.suitability[$scope.contextMap[key]] * 100;
@@ -220,12 +240,22 @@ angular.module('uiApp')
         $scope.contexts[key].scoreDeg = score*2.25;
         $scope.contexts[key].rank = getRank(score);
         $scope.contexts[key].bgColorClass = getBgColorClass(score);
-
       }
       for (var pitIdx in $scope.pits){
         $scope.pits[pitIdx].properties.score.scoreDeg = $scope.pits[pitIdx].properties.score.value*225;
+        for (var propIdx in Object.keys($scope.pits[pitIdx].properties)){
+          var key = Object.keys($scope.pits[pitIdx].properties)[propIdx];
+          var val = $scope.pits[pitIdx].properties[key];
+          if ($rootScope.pitQuestions.hasOwnProperty(key)){
+            $scope.pits[pitIdx].properties[key] =  getPitQuestionLabel($rootScope.pitQuestions[key], val)
+          } else {
+            $scope.pits[pitIdx].properties[key] = {
+              'value': val,
+              'label': null
+            }
+          }
+        }
       }
-
     }
 
     var nodes = [];
