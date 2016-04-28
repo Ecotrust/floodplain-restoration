@@ -44,7 +44,7 @@ class BifAdmin(admin.ModelAdmin):
     # def changelist_view(self, request):
     #     return survey_views.edit_bbn(self, request)
 
-    list_display = ('notes', 'user')
+    list_display = ('notes', 'user', 'date_modified')
 
     def change_view(self, request, bifid):
         from survey import views as survey_views
