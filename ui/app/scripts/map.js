@@ -87,7 +87,7 @@ map.loadSites = function(data) {
 };
 
 map.loadPits = function(data) {
-  
+
   if (!data || data.type !== 'FeatureCollection') {
     console.log('ERROR in data supplied to map.loadPits:', data);
     return false;
@@ -218,8 +218,8 @@ map.getActivePitArea = function() {
   return acres*0.65;   //TODO: Currently "getArea" returns bad data in this projection. Fix this for production.
 };
 
-var mapQuestAttr = new ol.Attribution({
-  html: 'Source: MapQuest'
+var bingAttr = new ol.Attribution({
+  html: 'Source: Bing'
 });
 
 map.map = new ol.Map({
@@ -232,7 +232,10 @@ map.map = new ol.Map({
           visible: true,
           title: 'Satellite',
           type: 'base',
-          source: new ol.source.MapQuest({layer: 'sat'})
+          source: new ol.source.BingMaps({
+            imagerySet: 'Aerial',
+            key: 'AiZzz-MNNbxbe-2x2CguYma0s-Ego0Zw2umaYTFH8_8_OK6hQ_r397sHA5pK7xS6'
+          })
         })
       ]
     }),
@@ -242,9 +245,10 @@ map.map = new ol.Map({
         new ol.layer.Tile({
           title: 'Street/Town Labels',
           visible: true,
-          source: new ol.source.MapQuest({
-            layer: 'hyb',
-            attributions: [mapQuestAttr]
+          source: new ol.source.BingMaps({
+            layer: 'AerialWithLabels',
+            attributions: [bingAttr],
+            key: 'AiZzz-MNNbxbe-2x2CguYma0s-Ego0Zw2umaYTFH8_8_OK6hQ_r397sHA5pK7xS6'
           })
         }),
         new ol.layer.Tile({
@@ -316,11 +320,11 @@ function resize() {
   var width = $(window).width();
   var screen_width = $( window ).width();
   map.onResize(height, width);
-    
+
   if (screen_width > 991) {
     leftPanelResize(height, width);
     bodyResize(height, width);
-  } else if (!$('#map-container').is(":visible") ) { 
+  } else if (!$('#map-container').is(":visible") ) {
     leftPanelResize(height, width);
   }
 };
@@ -329,7 +333,7 @@ function bodyResize(height, width){
   $('body').css('padding-top', parseInt($('#main-navbar').css("height")));
 };
 
-function leftPanelResize(height, width) { 
+function leftPanelResize(height, width) {
   $('.left-panel-column').height(height - 53);
 };
 
