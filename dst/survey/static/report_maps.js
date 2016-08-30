@@ -107,7 +107,10 @@ var map = new ol.Map({
           visible: true,
           title: 'Satellite',
           type: 'base',
-          source: new ol.source.MapQuest({layer: 'sat'})
+          source: new ol.source.BingMaps({
+            imagerySet: 'Aerial',
+            key: 'AiZzz-MNNbxbe-2x2CguYma0s-Ego0Zw2umaYTFH8_8_OK6hQ_r397sHA5pK7xS6'
+          })
         }),
         site.layer,
         pits.layer
